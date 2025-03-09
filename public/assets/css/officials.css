@@ -1,0 +1,33 @@
+.button__box {
+  display: flex;
+  gap: 2rem;
+}
+.card {
+  box-shadow: 0px 10px 20px 0px rgba(0, 3, 42, 0.2);
+  padding: 3rem;
+  border-radius: 1rem;
+  position: relative;
+  max-height: 70rem;
+  /* min-height: 56rem; */
+  min-height: 70rem;
+  margin-top: 3rem;
+}
+.img__box {
+  padding: 6rem;
+  background-color: gray;
+  border-radius: 0.6rem;
+  display: flex;
+  align-items: center;
+}
+.row {
+  flex-wrap: unset;
+}
+
+.modal {
+  max-width: 60rem;
+  min-width: 60rem;
+}
+
+.input__box__container {
+  width: 100%;
+}

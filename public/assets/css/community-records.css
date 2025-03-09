@@ -1,0 +1,80 @@
+.tab__container {
+  border-bottom: 1px solid #e8e7e7;
+  padding: 0 0 2rem 0;
+  position: relative;
+  display: flex;
+  gap: 1rem;
+}
+
+.tab__btn {
+  background-color: #fff;
+  border: none;
+  padding: 1.5rem 0.5rem;
+  font-size: 1.8rem;
+  font-family: "Roboto", sans-serif;
+  font-weight: 600;
+  color: var(--text-color);
+  cursor: pointer;
+}
+.active__tab {
+  position: absolute;
+  bottom: -2rem;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background-color: var(--main-color);
+  visibility: hidden;
+  opacity: 0;
+}
+
+.btn__container {
+  position: relative;
+}
+
+.visible .active__tab {
+  visibility: visible;
+  opacity: 1;
+}
+.visible .tab__btn {
+  color: var(--main-color);
+}
+
+.heading__container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 3rem;
+}
+
+.btn__secondary {
+  padding: 1rem 1.2rem;
+  border-radius: 0.5rem;
+  border: 1px solid #828282;
+  background-color: #fff;
+  font-family: "Roboto", sans-serif;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+.btn__secondary .icon__link {
+  width: 2.2rem;
+  height: 2.2rem;
+}
+
+.button__box {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.card {
+  box-shadow: 0px 10px 20px 0px rgba(0, 3, 42, 0.2);
+  padding: 3rem;
+  border-radius: 1rem;
+  position: relative;
+  max-height: 70rem;
+  /* min-height: 56rem; */
+  min-height: 70rem;
+  margin-top: 3rem;
+}

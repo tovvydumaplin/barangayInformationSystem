@@ -1,0 +1,74 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 200rem;
+  width: 100%;
+  padding: 0 3rem 3rem 0;
+  margin-bottom: 4.5rem;
+}
+
+.section__title__container {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+}
+
+.menu__icon {
+  width: 4rem;
+  height: 4rem;
+  color: var(--main-color);
+  transition: all 0.3s ease;
+}
+.menu__icon:hover {
+  cursor: pointer;
+}
+
+.user__box {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  position: relative;
+}
+.user__box:hover {
+  cursor: pointer;
+}
+.user__image {
+  height: 5.9rem;
+  width: 5.9rem;
+  border-radius: 50%;
+  background-color: var(--gray-color);
+}
+
+.user__name__menu {
+  padding: 2rem;
+  font-weight: 600;
+}
+
+.dropdown__menu {
+  position: absolute;
+  max-width: 30rem;
+  white-space: nowrap;
+  bottom: -18rem;
+  background-color: #fff;
+  z-index: 1;
+  box-shadow: 0px 10px 20px 0px rgba(0, 3, 42, 0.2);
+  border-radius: 1rem;
+  transition: all 0.3s ease;
+  visibility: hidden;
+  opacity: 0;
+}
+.dropdown__menu .link:link,
+.dropdown__menu .link:visited {
+  font-size: 1.7rem;
+}
+.dropdown__menu .link:hover,
+.dropdown__menu .link:active {
+  background-color: #fff;
+}
+
+.dropdown__menu.show {
+  visibility: visible;
+  opacity: 1;
+  bottom: -20rem;
+}

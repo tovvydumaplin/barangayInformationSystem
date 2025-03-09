@@ -1,0 +1,49 @@
+.card {
+  height: auto;
+  max-height: unset;
+}
+.heading__container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 3rem;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.profile__photo__container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.profile__photo {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.img__profile__box {
+  background-color: #d9d9d9;
+  border-radius: 50%;
+  padding: 4rem;
+  width: 15.4rem;
+  height: 15.4rem;
+}
+
+.action__btn__box {
+  display: flex;
+  gap: 2rem;
+}
+
+.modal__content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+.modal__heading {
+  font-size: 2.4rem;
+  font-weight: 500;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 0;
+}

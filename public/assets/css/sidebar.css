@@ -1,0 +1,81 @@
+.sidebar {
+  padding: 2rem 3rem;
+  height: auto;
+  background-color: var(--sidebar-color);
+  min-width: 30.4rem;
+  max-width: 34rem;
+  flex-shrink: 0;
+}
+
+.link:link,
+.link:visited {
+  text-decoration: none;
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  border-radius: 0.6rem;
+  transition: all 0.3s ease;
+}
+.link:hover,
+.link:active {
+  background-color: var(--link-bg-color);
+  color: var(--main-color);
+}
+
+.nav__list {
+  list-style: none;
+}
+
+.icon__link {
+  width: 3rem;
+  height: 3rem;
+}
+
+.nav__heading {
+  font-size: 2rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 1.5rem;
+}
+
+.logo__box {
+  padding-left: 1.5rem;
+  margin-bottom: 2rem;
+}
+.list {
+  border-radius: 0.6rem;
+}
+.list.active {
+  color: var(--main-color);
+  background-color: var(--link-bg-color);
+}
+.active .link {
+  color: var(--main-color);
+  font-weight: 600;
+}
+body.hide__sidebar {
+  display: grid;
+  grid-template-columns: 0.1fr 1.9fr;
+}
+
+.hide__sidebar .sidebar {
+  padding: 2rem 0;
+  min-width: 0;
+}
+.hide__sidebar .link__title {
+  display: none;
+}
+.hide__sidebar .link:link,
+.hide__sidebar .link:visited {
+  justify-content: center;
+}
+
+.hide__sidebar .logo__img {
+  width: 5rem;
+}
+.sidebar {
+  transition: all 0.2s ease-in-out;
+}
