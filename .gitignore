@@ -1,5 +1,4 @@
 # CI4 specific
-writable/*
 !writable/.gitkeep
 .env
 vendor/*
