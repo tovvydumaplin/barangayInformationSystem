@@ -1,6 +1,5 @@
 # CI4 specific
 !writable/.gitkeep
-.env
 vendor/*
 node_modules/*
 public/uploads/*
