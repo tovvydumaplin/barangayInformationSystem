@@ -5,16 +5,21 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-// $routes->get('/', 'Home::index');
-// Login
+
+// Auth Routes
 $routes->get('/', 'AuthController::login');
-// Admin 
-$routes->get('admin/dashboard', 'AdminController::dashboard');
-$routes->get('admin/community-records', 'AdminController::communityRecords');
-$routes->get('admin/lending-assets', 'AdminController::lendingAssets');
-$routes->get('admin/events', 'AdminController::events');
-$routes->get('admin/services','AdminController::services');
-$routes->get('admin/officials','AdminController::officials');
-$routes->get('admin/incident-reports', 'AdminController::incidentReports');
-$routes->get('admin/manage-users', 'AdminController::manageUsers');
-$routes->get('admin/account-settings', 'AdminController::accountSettings');
+$routes->post('/auth/processLogin', 'AuthController::processLogin');
+$routes->get('/auth/logout', 'AuthController::logout');
+
+// Protect Admin Routes with Auth Filter
+$routes->group('admin', ['filter' => 'auth'], function ($routes) {
+    $routes->get('dashboard', 'AdminController::dashboard');
+    $routes->get('community-records', 'AdminController::communityRecords');
+    $routes->get('lending-assets', 'AdminController::lendingAssets');
+    $routes->get('events', 'AdminController::events');
+    $routes->get('services', 'AdminController::services');
+    $routes->get('officials', 'AdminController::officials');
+    $routes->get('incident-reports', 'AdminController::incidentReports');
+    $routes->get('manage-users', 'AdminController::manageUsers');
+    $routes->get('account-settings', 'AdminController::accountSettings');
+});

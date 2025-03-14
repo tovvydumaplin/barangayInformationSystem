@@ -22,7 +22,9 @@
             alt="profile image of user" 
         />
         <p class="user__name">John Doe</p>
-        <ion-icon class="chev__down" name="chevron-down-outline"></ion-icon>
+        <div class="menu__icon__chev__down">
+            <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M112 184l144 144 144-144"/></svg>
+        </div>
         
         <div class="dropdown__menu hide">
             <p class="user__name__menu">Welcome, <span>John!</span></p>
@@ -44,7 +46,7 @@
                 Account Settings
             </a>
             
-            <a href="#" class="link">
+            <a href="<?= base_url('/auth/logout')?>" class="link">
                 <div class="icon__link">
                     <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512">
                         <path 

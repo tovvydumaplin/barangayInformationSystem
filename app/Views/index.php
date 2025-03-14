@@ -134,6 +134,9 @@
         <div class="img__wrapper">
           <img src="<?= base_url('assets/images/logo_barangay.png')?>" alt="logo of barangay" />
         </div>
+        <?php if (session()->getFlashdata('error')) : ?>
+        <p style="color: red;"><?= session()->getFlashdata('error') ?></p>
+    <?php endif; ?>
         <div class="card">
           <div class="heading__card">
             <p class="sign__in__heading text__align__center">Sign In</p>
@@ -142,7 +145,7 @@
             </p>
           </div>
           <div class="body__card">
-            <form action="<?=base_url('admin/dashboard')?>" class="mg__top__3">
+            <form action="<?=base_url('/auth/processLogin')?>" method="POST" class="mg__top__3">
               <div class="input__box">
                 <label for="Email" class="label__input">Email</label>
                 <input
@@ -150,6 +153,7 @@
                   class="mg__top__1"
                   placeholder="Enter Email"
                   id="usernameInput"
+                  name="username"
                 />
               </div>
 
@@ -161,6 +165,7 @@
                   class="mg__top__1"
                   placeholder="Your Password"
                   id="passwordInput"
+                  name="password"
                 />
                 <div class="icon__wrapper" id="iconBtn">
                   <ion-icon id="toggleIcon" name="eye-off-outline"></ion-icon>

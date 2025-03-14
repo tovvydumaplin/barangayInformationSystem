@@ -20,6 +20,12 @@
   color: var(--main-color);
   transition: all 0.3s ease;
 }
+.menu__icon__chev__down {
+  width: 2rem;
+  height: 2rem;
+  color: var(--black-color);
+  transition: all 0.3s ease;
+}
 .menu__icon:hover {
   cursor: pointer;
 }
