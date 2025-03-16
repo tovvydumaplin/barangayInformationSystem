@@ -417,7 +417,7 @@ $(document).on("click", ".viewUserBtn", function () {
                 $(".information__input[name='view_suffix']").val(response.data.suffix);
                 $(".information__input[name='view_position']").val(response.data.position);
                 $(".information__input[name='view_role']").val(response.data.role);
-                $(".information__input[name='view_email']").val(response.data.email);
+                $(".information__input[name='view_email']").val(response.data.username);
                 $("#viewImagePreview").attr("src", response.data.image);
 
                 // Disable fields initially
@@ -631,14 +631,14 @@ $("#dataTable").DataTable({
               return `<img src="${data}" width="50" height="50" style="border-radius: 50%;">`;
           }
         },
-        { "data": "account_id" },  // ✅ Display account_id in table
-        { "data": "full_name" },   // Full Name
-        { "data": "username" },    // ✅ Keep username
-        { "data": "role" },        // Role
-        { "data": "status" },      // Status (Active/Inactive)
-        { "data": "action" }       // ✅ Button still uses token
+        { "data": "account_id" },  
+        { "data": "full_name" },  
+        { "data": "username" },    
+        { "data": "role" },        
+        { "data": "status" },      
+        { "data": "action" }      
     ],
-    "order": [[0, "desc"]]  // Sorting by account_id (column index 0) in DESCENDING ORDER
+    "order": [[0, "desc"]] 
 });
 
 
@@ -655,9 +655,9 @@ $("#dataTable").DataTable({
 <script>
 $(document).ready(function () {
     $("#createUserForm").submit(function (e) {
-        e.preventDefault(); // Prevent default form submission
+        e.preventDefault(); 
 
-        let formData = new FormData(this); // Capture form data including file
+        let formData = new FormData(this); 
 
         $.ajax({
             url: "<?= site_url('/admin/create-user') ?>",
@@ -667,7 +667,7 @@ $(document).ready(function () {
             contentType: false, // Required for file uploads
             processData: false, // Prevent jQuery from processing data
             beforeSend: function () {
-                $(".text-danger").text(""); // Clear error messages
+                $(".text-danger").text(""); 
             },
             success: function (response) {
                 if (response.status == "success") {
@@ -688,7 +688,7 @@ $(document).ready(function () {
                 }
             },
             error: function (xhr, status, error) {
-                console.error(xhr.responseText); // Debugging
+                console.error(xhr.responseText);
                 alert("Something went wrong. Please try again.");
             }
         });

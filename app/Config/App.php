@@ -19,6 +19,7 @@ class App extends BaseConfig
     // public string $baseURL = 'http://localhost/BarangayInformationSystem/';
     public string $baseURL = 'http://localhost:8080/';
 
+
     /**
      * Allowed Hostnames in the Site URL other than the hostname in the baseURL.
      * If you want to accept multiple Hostnames, set this.
@@ -134,8 +135,8 @@ class App extends BaseConfig
      * @see https://www.php.net/manual/en/timezones.php for list of timezones
      *      supported by PHP.
      */
-    public string $appTimezone = 'UTC';
-
+    // public string $appTimezone = 'UTC';
+    public string $appTimezone = 'Asia/Manila';
     /**
      * --------------------------------------------------------------------------
      * Default Character Set

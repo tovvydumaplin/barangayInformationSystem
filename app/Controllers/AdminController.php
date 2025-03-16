@@ -105,7 +105,7 @@ class AdminController extends BaseController
     }
     
     
-    public function updateUser()
+public function updateUser()
 {
     $token = $this->request->getPost('token');
     
@@ -121,6 +121,7 @@ class AdminController extends BaseController
         'position'   => $this->request->getPost('position'),
         'role'       => $this->request->getPost('role'),
         'email'      => $this->request->getPost('email'),
+        'updated_at' => date('Y-m-d H:i:s') 
     ];
 
     // Handle image upload
