@@ -23,3 +23,13 @@ $routes->group('admin', ['filter' => 'auth'], function ($routes) {
     $routes->get('manage-users', 'AdminController::manageUsers');
     $routes->get('account-settings', 'AdminController::accountSettings');
 });
+
+// Update User
+$routes->post('/admin/update-user', 'AdminController::updateUser');
+
+// Retrieval of data to show on tables
+$routes->get('/admin/get-users', 'AdminController::getUsers');
+// Retrieval of data to show on modal
+$routes->get('/admin/get-user', 'AdminController::getUser');
+// Saving
+$routes->post('admin/create-user', 'AdminController::createUser');

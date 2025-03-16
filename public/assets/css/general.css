@@ -344,3 +344,53 @@ textarea {
 }
 
 /* Modal */
+
+select {
+  appearance: none; /* Removes default select styles */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: none; /* Removes dropdown arrow */
+}
+
+.grid {
+  display: grid;
+}
+
+/* Success Indicator */
+.success__indicator.hide {
+  visibility: none;
+  opacity: 0;
+  top: 3rem;
+}
+.success__indicator {
+  position: absolute;
+  width: 100%;
+  top: 5rem;
+  display: flex;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+.indicator__container {
+  padding: 2rem 4rem;
+  background-color: #d4edda;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  max-width: 40rem;
+  min-width: 30rem;
+  border: 1px solid #1c8515;
+}
+.indicator__text {
+  color: #1c8515;
+  font-weight: 600;
+}
+.indicator__container .icon__link {
+  fill: #1c8515;
+}
+
+.error-email {
+  color: #d14e4e;
+  margin-top: 1rem;
+}

@@ -1,257 +1,147 @@
 <aside class="sidebar">
-      <div class="logo__box">
-        <img class="logo__img" src="<?= base_url ('assets/images/logo.png') ?>" alt="logo of the barangay" />
-      </div>
-      <nav class="navigation">
+    <div class="logo__box">
+        <img class="logo__img" src="<?= base_url('assets/images/logo.png') ?>" alt="logo of the barangay" />
+    </div>
+    <nav class="navigation">
         <ul class="nav__list">
-          <p class="nav__heading">Menu</p>
-          <li class="list">
-            <a href="<?= base_url('admin/dashboard') ?>" class="link">
-              <!-- Home Outline Icon -->
-              <div class="icon__link">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 512 512"
-                  width="24"
-                  height="24"
-                >
-                  <path
-                    d="M80 212v236a16 16 0 0016 16h96V328a24 24 0 0124-24h80a24 24 0 0124 24v136h96a16 16 0 0016-16V212"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="32"
-                  />
-                  <path
-                    d="M480 256L266.89 52c-5-5.28-16.69-5.34-21.78 0L32 256M400 179V64h-48v69"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="32"
-                  />
-                </svg>
-              </div>
-              <span class="link__title">Dashboard</span>
-            </a>
-          </li>
-          <li class="list active">
-            <a href="<?= base_url('admin/community-records') ?>" class="link">
-              <!-- People Outline Icon -->
-              <div class="icon__link">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class=""
-                  viewBox="0 0 512 512"
-                >
-                  <path
-                    d="M402 168c-2.93 40.67-33.1 72-66 72s-63.12-31.32-66-72c-3-42.31 26.37-72 66-72s69 30.46 66 72z"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="32"
-                  />
-                  <path
-                    d="M336 304c-65.17 0-127.84 32.37-143.54 95.41-2.08 8.34 3.15 16.59 11.72 16.59h263.65c8.57 0 13.77-8.25 11.72-16.59C463.85 335.36 401.18 304 336 304z"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-miterlimit="10"
-                    stroke-width="32"
-                  />
-                  <path
-                    d="M200 185.94c-2.34 32.48-26.72 58.06-53 58.06s-50.7-25.57-53-58.06C91.61 152.15 115.34 128 147 128s55.39 24.77 53 57.94z"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="32"
-                  />
-                  <path
-                    d="M206 306c-18.05-8.27-37.93-11.45-59-11.45-52 0-102.1 25.85-114.65 76.2-1.65 6.66 2.53 13.25 9.37 13.25H154"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-miterlimit="10"
-                    stroke-width="32"
-                  />
-                </svg>
-              </div>
-              <span class="link__title">Community Records</span>
-            </a>
-          </li>
-          <li class="list">
-            <a href="<?= base_url('admin/lending-assets') ?>" class="link">
-              <!-- Cardboard outline icon -->
-              <div class="icon__link">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class=""
-                  viewBox="0 0 512 512"
-                >
-                  <path
-                    d="M336 64h32a48 48 0 0148 48v320a48 48 0 01-48 48H144a48 48 0 01-48-48V112a48 48 0 0148-48h32"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-linejoin="round"
-                    stroke-width="32"
-                  />
-                  <rect
-                    x="176"
-                    y="32"
-                    width="160"
-                    height="64"
-                    rx="26.13"
-                    ry="26.13"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-linejoin="round"
-                    stroke-width="32"
-                  />
-                </svg>
-              </div>
-              <span class="link__title"> Lending & Asset Records</span>
-            </a>
-          </li>
-          <li class="list">
-            <a href="<?= base_url ('admin/events') ?>" class="link">
-              <!-- Date outline icon -->
-              <div class="icon__link">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class=""
-                  viewBox="0 0 512 512"
-                >
-                  <rect
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-linejoin="round"
-                    stroke-width="32"
-                    x="48"
-                    y="80"
-                    width="416"
-                    height="384"
-                    rx="48"
-                  />
-                  <circle cx="296" cy="232" r="24" />
-                  <circle cx="376" cy="232" r="24" />
-                  <circle cx="296" cy="312" r="24" />
-                  <circle cx="376" cy="312" r="24" />
-                  <circle cx="136" cy="312" r="24" />
-                  <circle cx="216" cy="312" r="24" />
-                  <circle cx="136" cy="392" r="24" />
-                  <circle cx="216" cy="392" r="24" />
-                  <circle cx="296" cy="392" r="24" />
-                  <path
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-linejoin="round"
-                    stroke-width="32"
-                    stroke-linecap="round"
-                    d="M128 48v32M384 48v32"
-                  />
-                  <path
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-linejoin="round"
-                    stroke-width="32"
-                    d="M464 160H48"
-                  />
-                </svg>
-              </div>
-              <span class="link__title"> Events</span></a
-            >
-          </li>
-
-          <li class="list">
-            <a href="<?= base_url ('admin/services') ?>" class="link">
-              <!-- Medal outline icon -->
-              <div class="icon__link">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class=""
-                  viewBox="0 0 512 512"
-                >
-                  <circle
-                    cx="256"
-                    cy="352"
-                    r="112"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="32"
-                  />
-                  <circle
-                    cx="256"
-                    cy="352"
-                    r="48"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="32"
-                  />
-                  <path
-                    d="M147 323L41.84 159.32a32 32 0 01-1.7-31.61l31-62A32 32 0 0199.78 48h312.44a32 32 0 0128.62 17.69l31 62a32 32 0 01-1.7 31.61L365 323M371 144H37M428.74 52.6L305 250M140.55 144L207 250"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="32"
-                  />
-                </svg>
-              </div>
-              <span class="link__title"> List of Services</span></a
-            >
-          </li>
-          <li class="list">
-            <a href="<?= base_url('admin/officials')?>" class="link">
-              <!-- People Outline Icon -->
-              <div class="icon__link">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class=""
-                  viewBox="0 0 512 512"
-                >
-                  <path
-                    d="M402 168c-2.93 40.67-33.1 72-66 72s-63.12-31.32-66-72c-3-42.31 26.37-72 66-72s69 30.46 66 72z"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="32"
-                  />
-                  <path
-                    d="M336 304c-65.17 0-127.84 32.37-143.54 95.41-2.08 8.34 3.15 16.59 11.72 16.59h263.65c8.57 0 13.77-8.25 11.72-16.59C463.85 335.36 401.18 304 336 304z"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-miterlimit="10"
-                    stroke-width="32"
-                  />
-                  <path
-                    d="M200 185.94c-2.34 32.48-26.72 58.06-53 58.06s-50.7-25.57-53-58.06C91.61 152.15 115.34 128 147 128s55.39 24.77 53 57.94z"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="32"
-                  />
-                  <path
-                    d="M206 306c-18.05-8.27-37.93-11.45-59-11.45-52 0-102.1 25.85-114.65 76.2-1.65 6.66 2.53 13.25 9.37 13.25H154"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-miterlimit="10"
-                    stroke-width="32"
-                  />
-                </svg>
-              </div>
-              <span class="link__title"> Officials</span></a
-            >
-          </li>
-          <li class="list">
+            <p class="nav__heading">Menu</p>
+            <?php 
+                $segment = service('uri')->getSegment(2); // Get second segment
+            ?>
+            <li class="list <?= ($segment == 'dashboard' || $segment == '') ? 'active' : '' ?>">
+                <a href="<?= base_url('admin/dashboard') ?>" class="link">
+                    <div class="icon__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="24" height="24">
+                            <path d="M80 212v236a16 16 0 0016 16h96V328a24 24 0 0124-24h80a24 24 0 0124 24v136h96a16 16 0 0016-16V212" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/>
+                            <path d="M480 256L266.89 52c-5-5.28-16.69-5.34-21.78 0L32 256M400 179V64h-48v69" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/>
+                        </svg>
+                    </div>
+                    <span class="link__title">Dashboard</span>
+                </a>
+            </li>
+            <li class="list <?= ($segment == 'community-records') ? 'active' : '' ?>">
+                <a href="<?= base_url('admin/community-records') ?>" class="link">
+                  <div class="icon__link">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class=""
+                    viewBox="0 0 512 512"
+                  >
+                    <path
+                      d="M402 168c-2.93 40.67-33.1 72-66 72s-63.12-31.32-66-72c-3-42.31 26.37-72 66-72s69 30.46 66 72z"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="32"
+                    />
+                    <path
+                      d="M336 304c-65.17 0-127.84 32.37-143.54 95.41-2.08 8.34 3.15 16.59 11.72 16.59h263.65c8.57 0 13.77-8.25 11.72-16.59C463.85 335.36 401.18 304 336 304z"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-miterlimit="10"
+                      stroke-width="32"
+                    />
+                    <path
+                      d="M200 185.94c-2.34 32.48-26.72 58.06-53 58.06s-50.7-25.57-53-58.06C91.61 152.15 115.34 128 147 128s55.39 24.77 53 57.94z"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="32"
+                    />
+                    <path
+                      d="M206 306c-18.05-8.27-37.93-11.45-59-11.45-52 0-102.1 25.85-114.65 76.2-1.65 6.66 2.53 13.25 9.37 13.25H154"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-miterlimit="10"
+                      stroke-width="32"
+                    />
+                  </svg>
+                </div>
+                <span class="link__title">Community Records</span>
+                </a>
+            </li>
+            <li class="list <?= ($segment == 'lending-assets') ? 'active' : '' ?>">
+                <a href="<?= base_url('admin/lending-assets') ?>" class="link">
+                    <div class="icon__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                            <path d="M336 64h32a48 48 0 0148 48v320a48 48 0 01-48 48H144a48 48 0 01-48-48V112a48 48 0 0148-48h32" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="32"/>
+                            <rect x="176" y="32" width="160" height="64" rx="26.13" ry="26.13" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="32"/>
+                        </svg>
+                    </div>
+                    <span class="link__title">Lending & Asset Records</span>
+                </a>
+            </li>
+            <li class="list <?= ($segment == 'events') ? 'active' : '' ?>">
+                <a href="<?= base_url('admin/events') ?>" class="link">
+                    <div class="icon__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                            <rect fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="32" x="48" y="80" width="416" height="384" rx="48"/>
+                            <path fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="32" stroke-linecap="round" d="M128 48v32M384 48v32"/>
+                            <path fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="32" d="M464 160H48"/>
+                        </svg>
+                    </div>
+                    <span class="link__title">Events</span>
+                </a>
+            </li>
+            <li class="list <?= ($segment == 'services') ? 'active' : '' ?>">
+                <a href="<?= base_url('admin/services') ?>" class="link">
+                    <div class="icon__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                            <circle cx="256" cy="352" r="112" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/>
+                            <path d="M147 323L41.84 159.32a32 32 0 01-1.7-31.61l31-62A32 32 0 0199.78 48h312.44a32 32 0 0128.62 17.69l31 62a32 32 0 01-1.7 31.61L365 323M371 144H37M428.74 52.6L305 250M140.55 144L207 250" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/>
+                        </svg>
+                    </div>
+                    <span class="link__title">List of Services</span>
+                </a>
+            </li>
+            <li class="list <?= ($segment == 'officials') ? 'active' : '' ?>">
+                <a href="<?= base_url('admin/officials') ?>" class="link">
+                      <div class="icon__link">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class=""
+                        viewBox="0 0 512 512"
+                      >
+                        <path
+                          d="M402 168c-2.93 40.67-33.1 72-66 72s-63.12-31.32-66-72c-3-42.31 26.37-72 66-72s69 30.46 66 72z"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="32"
+                        />
+                        <path
+                          d="M336 304c-65.17 0-127.84 32.37-143.54 95.41-2.08 8.34 3.15 16.59 11.72 16.59h263.65c8.57 0 13.77-8.25 11.72-16.59C463.85 335.36 401.18 304 336 304z"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-miterlimit="10"
+                          stroke-width="32"
+                        />
+                        <path
+                          d="M200 185.94c-2.34 32.48-26.72 58.06-53 58.06s-50.7-25.57-53-58.06C91.61 152.15 115.34 128 147 128s55.39 24.77 53 57.94z"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="32"
+                        />
+                        <path
+                          d="M206 306c-18.05-8.27-37.93-11.45-59-11.45-52 0-102.1 25.85-114.65 76.2-1.65 6.66 2.53 13.25 9.37 13.25H154"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-miterlimit="10"
+                          stroke-width="32"
+                        />
+                      </svg>
+                    </div>
+                    <span class="link__title">Officials</span>
+                </a>
+            </li>
+            <li class="list <?= ($segment == 'incident-reports') ? 'active' : '' ?>">
             <a href="<?= base_url ('admin/incident-reports') ?>" class="link">
               <!-- Exclamation Outline Icon -->
               <div class="icon__link">
@@ -281,7 +171,7 @@
               <span class="link__title"> Incident Reports</span></a
             >
           </li>
-          <li class="list">
+          <li class="list <?= ($segment == 'manage-users') ? 'active' : '' ?>">
             <a href="<?= base_url('admin/manage-users')?>" class="link">
               <!-- New user icon -->
               <div class="icon__link">
@@ -318,7 +208,7 @@
               <span class="link__title"> Manage Users</span></a
             >
           </li>
-          <li class="list">
+          <li class="list <?= ($segment == 'account-settings') ? 'active' : '' ?>">
             <a href="<?= base_url ('admin/account-settings') ?>" class="link">
               <!-- Settings outline icon -->
               <div class="icon__link">
@@ -341,5 +231,12 @@
             >
           </li>
         </ul>
-      </nav>
-    </aside>
+    </nav>
+</aside>
+
+
+
+
+
+
+<!--  -->

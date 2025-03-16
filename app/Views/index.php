@@ -136,7 +136,7 @@
         </div>
         <?php if (session()->getFlashdata('error')) : ?>
         <p style="color: red;"><?= session()->getFlashdata('error') ?></p>
-    <?php endif; ?>
+        <?php endif; ?>
         <div class="card">
           <div class="heading__card">
             <p class="sign__in__heading text__align__center">Sign In</p>

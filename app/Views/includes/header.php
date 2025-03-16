@@ -1,3 +1,10 @@
+<?php 
+    $session = session();
+    $username = $session->get('username'); 
+    $firstName = $session->get('firstname');
+    $fullName = $session->get('firstname') . ' ' . $session->get('lastname');
+    $image = $session->get('image') ? base_url($session->get('image')) : base_url('assets/images/img__default.png');
+?>
 <header class="header">
     <div class="section__title__container">
         <div class="menu__icon">
@@ -17,17 +24,17 @@
     
     <div class="user__box">
         <img 
-            src="<?= base_url('assets/images/circle.png') ?>" 
+            src="<?= esc($image) ?>"
             class="user__image" 
             alt="profile image of user" 
         />
-        <p class="user__name">John Doe</p>
+        <p class="user__name"><?= esc($fullName) ?></p>
         <div class="menu__icon__chev__down">
             <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M112 184l144 144 144-144"/></svg>
         </div>
         
         <div class="dropdown__menu hide">
-            <p class="user__name__menu">Welcome, <span>John!</span></p>
+            <p class="user__name__menu">Welcome, <span><?= $firstName ?></span></p>
             <hr />
             
             <a href="#" class="link">

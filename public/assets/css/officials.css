@@ -13,8 +13,8 @@
   margin-top: 3rem;
 }
 .img__box {
-  padding: 6rem;
-  background-color: gray;
+  padding: 2rem;
+  background-color: #d9d9d9;
   border-radius: 0.6rem;
   display: flex;
   align-items: center;
