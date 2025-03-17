@@ -66,6 +66,44 @@
           text-align: center;
           justify-content: center;
         }
+        .btn__secondary__deactivate {
+            padding: 1rem 1.2rem;
+            border-radius: 0.5rem;
+            border: 1px solid #828282;
+            background-color: #de2828;
+            font-family: "Roboto", sans-serif;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            font-size: 1.8rem;
+            cursor: pointer;
+            border-color: #de2828;
+            color: var(--white-color);
+            text-align: center;
+            justify-content: center;
+        }
+        .btn__secondary__deactivate.hide {
+          display: none;
+        }
+        .btn__secondary__reactivate.hide {
+          display: none;
+        }
+        .btn__secondary__reactivate {
+          padding: 1rem 1.2rem;
+          border-radius: 0.5rem;
+          border: 1px solid #828282;
+          background-color: var(--main-color);
+          font-family: "Roboto", sans-serif;
+          display: flex;
+          gap: 1rem;
+          align-items: center;
+          font-size: 1.8rem;
+          cursor: pointer;
+          border-color: var(--main-color);
+          color: var(--white-color);
+          text-align: center;
+          justify-content: center;
+        }
         .btn__secondary__close {
           padding: 1rem 1.2rem;
           border-radius: 0.5rem;
@@ -82,6 +120,23 @@
           text-align: center;
           justify-content: center;
         }
+        .modal__btn__container {
+          display: flex;
+          gap: 2rem;
+        }
+        /* 1536 px */
+          @media (max-width: 96em) {
+            html {
+              font-size: 55%;
+            }
+            .sidebar {
+              padding: 2rem 1rem;
+            }
+            .card {
+              padding: 2rem;
+            }
+          }
+
     </style>
     </head>
   <body>
@@ -153,7 +208,6 @@
                       <p class="text-danger"></p>
                   </div>
               </div>
-
               <div class="row">
                   <div class="input__box">
                       <span class="input__title">Position<span class="red__dot">*</span></span>
@@ -167,9 +221,6 @@
                       </select>
                       <p class="text-danger"></p>
                   </div>
-              </div>
-
-              <div class="row">
                   <div class="input__box">
                       <span class="input__title">Role<span class="red__dot">*</span></span>
                       <select name="role" class="information__input" required>
@@ -180,7 +231,6 @@
                       <p class="text-danger"></p>
                   </div>
               </div>
-
               <div class="row">
                   <div class="input__box">
                       <input class="information__input" placeholder="Enter Email" name="email" type="email" required />
@@ -188,32 +238,33 @@
                       <p class="text-danger"></p>
                       <p class="text-danger error-email"></p>
                   </div>
-              </div>
-
-              <div class="row">
                   <div class="input__box">
                       <input class="information__input" placeholder="Enter Password" name="password" type="password" required />
                       <span class="input__title">Password<span class="red__dot">*</span></span>
                       <p class="text-danger"></p>
                   </div>
               </div>
-
               <div class="btn__box__modal">
                   <button type="submit" class="btn__primary active">Create Account</button>
               </div>
           </div>
       </form>
 
-      <div id="responseMessage"></div>
+       <div id="responseMessage"></div>
 
       </div>
       <div id="viewEventModal" class="modal">
         <div class="modal__header">
             <p class="modal__heading">View Official</p>
-            <button class="btn__secondary__edit">Edit</button>
+            <div class="modal__btn__container">
+              <button class="btn__secondary__edit">Edit</button>
+              <button id="" class="btn__secondary__deactivate" onClick="deactivateUser()">Deactivate</button>
+              <button id="" class="btn__secondary__reactivate" onClick="reactivateUser()">Reactivate</button>
+            </div>
         </div>
         <form class="modal__body community__modal">
             <div class="row flex__d__col">
+
                 <div class="row grid grid__2__cols__modified">
                   <div class="img__box" style="position: relative; cursor: pointer;" onclick="document.getElementById('viewImageInput').click()">
                       <img class="img__profile" id="viewImagePreview" 
@@ -224,7 +275,6 @@
                       <!-- Hidden File Input -->
                       <input type="file" id="viewImageInput" name="view_profile_image" accept="image/*" style="display: none;">
                   </div>
-
                     <div class="input__box__container">
                         <div class="input__box margin__bottom__2">
                             <input class="information__input" name="view_firstname"  />
@@ -266,9 +316,6 @@
                             <option value="Barangay Officer 3">Barangay Officer 3</option>
                         </select>
                     </div>
-                </div>
-
-                <div class="row">
                     <div class="input__box">
                         <span class="input__title">Role</span>
                         <select name="view_role" class="information__input" disabled>
@@ -277,29 +324,22 @@
                         </select>
                     </div>
                 </div>
-
                 <div class="row">
                     <div class="input__box">
                         <input class="information__input" name="view_email" type="email"  />
                         <span class="input__title">Email</span>
                     </div>
-                </div>
-
-                <div class="row">
                     <div class="input__box">
                         <input class="information__input" name="view_password" type="password" value="********"  />
                         <span class="input__title">Password</span>
                     </div>
                 </div>
-
                 <div class="btn__box__modal">
                     <button type="button" class="btn__secondary__close active closeModalBtn">Close</button>
                 </div>
             </div>
         </form>
     </div>
-
-
       <div class="container">
         <div class="card">
           <div class="heading__container">
@@ -378,13 +418,13 @@
 
     <script>
 
-$('.information__input').on('focus', function() {
-    $(this).closest('.input__box').find('.red__dot').hide();
-}).on('blur', function() {
-    if ($(this).val().trim() === '') {
-        $(this).closest('.input__box').find('.red__dot').show();
-    }
-});
+    $('.information__input').on('focus', function() {
+        $(this).closest('.input__box').find('.red__dot').hide();
+    }).on('blur', function() {
+        if ($(this).val().trim() === '') {
+            $(this).closest('.input__box').find('.red__dot').show();
+        }
+    });
 
 
 // view
@@ -423,6 +463,16 @@ $(document).on("click", ".viewUserBtn", function () {
                 // Disable fields initially
                 $(".information__input").prop("disabled", true);
                 $(".btn__secondary__edit").text("Edit");
+                console.log(response.data.status + " " + "STATUS ")
+                if (response.data.status == 1) {
+                      $('.btn__secondary__deactivate').removeClass('hide');
+                      $('.btn__secondary__reactivate').addClass('hide');
+                  } else {
+                      $('.btn__secondary__reactivate').removeClass('hide');
+                      $('.btn__secondary__deactivate').addClass('hide');
+                  }
+                
+
             } else {
                 alert(response.message);
             }
@@ -434,10 +484,96 @@ $(document).on("click", ".viewUserBtn", function () {
     });
 });
 
+function reactivateUser() {
+    let status = 1; // Assuming 1 means active
 
-//Update
-$(document).on("click", ".btn__secondary__edit", function () {
-    let button = $(this);
+    let token = $("#viewEventModal").data("token");
+
+    console.log(status);
+    console.log(token);
+    if (!token) {
+        alert("Error: Token is missing!");
+        return;
+    }
+
+    $.ajax({
+        url: "<?= site_url('/admin/reactivate-user') ?>", // Using the same API
+        type: "POST",
+        data: {
+            status: status,
+            token: token
+        },
+        dataType: "json", 
+        success: function(response) {
+            if (response.success) {
+                loadData(); 
+                $(".success__indicator").removeClass("hide");
+                $(".indicator__text").html('Account Reactivated!');
+                setTimeout(function () {
+                    $(".success__indicator").addClass("hide");
+                    $(".indicator__text").html('');
+                }, 3000);
+                hideModal(); 
+            } else {
+                alert("Error: " + response.message);
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error("Reactivation Error:", error);
+            alert("Failed to reactivate user.");
+        }
+    });
+}
+
+
+function deactivateUser() {
+    let status = 0; // Assuming 0 means deactivated
+
+    let token = $("#viewEventModal").data("token");
+
+    console.log(status);
+    console.log(token);
+    if (!token) {
+        alert("Error: Token is missing!");
+        return;
+    }
+
+    $.ajax({
+        url: "<?= site_url('/admin/deactivate-user') ?>",
+        type: "POST",
+        data: {
+            status: status,
+            token: token
+        },
+        dataType: "json", 
+        success: function(response) {
+            if (response.success) {
+                loadData(); 
+                $(".success__indicator").removeClass("hide");
+                $(".indicator__text").html('Account Deactivated!');
+                setTimeout(function () {
+                    $(".success__indicator").addClass("hide");
+                    $(".indicator__text").html('');
+                }, 3000);
+                hideModal(); 
+            } else {
+                alert("Error: " + response.message);
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error("Deactivation Error:", error);
+            alert("Failed to deactivate user.");
+        }
+    });
+}
+
+
+// $('.btn__secondary__deactivate').on('click', function(){
+//   deactivateUser();
+// })
+
+function updateUser() {
+    let button = $(".btn__secondary__edit");
 
     if (button.text() === "Edit") {
         $(".information__input").prop("disabled", false);
@@ -466,9 +602,9 @@ $(document).on("click", ".btn__secondary__edit", function () {
 
         // Append file if selected
         let file = $("#viewImageInput")[0].files[0];
-          if (file) {
-              formData.append("view_profile_image", file); // Update key here
-          }
+        if (file) {
+            formData.append("view_profile_image", file); // Update key here
+        }
 
         $.ajax({
             url: "<?= site_url('/admin/update-user') ?>",
@@ -500,6 +636,10 @@ $(document).on("click", ".btn__secondary__edit", function () {
             },
         });
     }
+}
+
+$(document).on("click", ".btn__secondary__edit", function () {
+    updateUser();
 });
 
 

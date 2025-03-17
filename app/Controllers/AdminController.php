@@ -96,6 +96,7 @@ class AdminController extends BaseController
                     "position"    => $user["position"],
                     "role"        => $user["role"],
                     "username"    => $user["username"], 
+                    "status"      => $user["status"],
                     "image"       => base_url($user["image"] ?: "uploads/default-profile.png")
                 ]
             ]);
@@ -104,7 +105,36 @@ class AdminController extends BaseController
         }
     }
     
+    public function deactivateUser() 
+    {
+        $status = $this->request->getPost('status');
+        $token = $this->request->getPost('token');
     
+        $userModel = new UserModel();
+        $update = $userModel->where('token', $token)->set('status', $status)->update();
+        if ($update) {
+            return $this->response->setStatusCode(200)->setJSON(['success' => true, 'message' => 'Account Deactivated!']);
+        } else {
+            return $this->response->setStatusCode(500)->setJSON(['error' => 'Failed to update user status']);
+        }
+    }
+    public function reactivateUser() 
+    {
+        $status = $this->request->getPost('status');
+        $token = $this->request->getPost('token');
+    
+        $userModel = new UserModel();
+        $update = $userModel->where('token', $token)->set('status', $status)->update();
+        if ($update) {
+            return $this->response->setStatusCode(200)->setJSON(['success' => true, 'message' => 'Account Reactivated!']);
+        } else {
+            return $this->response->setStatusCode(500)->setJSON(['error' => 'Failed to update user status']);
+        }
+    }
+    
+    
+
+
 public function updateUser()
 {
     $token = $this->request->getPost('token');

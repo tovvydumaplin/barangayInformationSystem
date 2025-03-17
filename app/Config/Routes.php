@@ -26,7 +26,9 @@ $routes->group('admin', ['filter' => 'auth'], function ($routes) {
 
 // Update User
 $routes->post('/admin/update-user', 'AdminController::updateUser');
-
+// Deactivate User
+$routes->post('/admin/deactivate-user','AdminController::deactivateUser');
+$routes->post('/admin/reactivate-user','AdminController::reactivateUser');
 // Retrieval of data to show on tables
 $routes->get('/admin/get-users', 'AdminController::getUsers');
 // Retrieval of data to show on modal
