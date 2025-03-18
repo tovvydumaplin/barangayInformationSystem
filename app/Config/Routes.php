@@ -28,10 +28,19 @@ $routes->group('admin', ['filter' => 'auth'], function ($routes) {
 $routes->post('/admin/update-user', 'AdminController::updateUser');
 // Deactivate User
 $routes->post('/admin/deactivate-user','AdminController::deactivateUser');
+// Reactive User
 $routes->post('/admin/reactivate-user','AdminController::reactivateUser');
 // Retrieval of data to show on tables
 $routes->get('/admin/get-users', 'AdminController::getUsers');
 // Retrieval of data to show on modal
 $routes->get('/admin/get-user', 'AdminController::getUser');
-// Saving
+// Create user
 $routes->post('admin/create-user', 'AdminController::createUser');
+// Create event
+$routes->post('admin/create-event','AdminController::createEvent');
+// View event
+$routes->get('admin/get-events','AdminController::viewEvents');
+// View event details 
+$routes->get('admin/get-event-details','AdminController::viewEventDetails');
+// Update event detailss 
+$routes->post('admin/update-event', 'AdminController::updateEventDetails');

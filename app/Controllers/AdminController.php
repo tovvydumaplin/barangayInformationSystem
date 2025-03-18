@@ -1,6 +1,7 @@
 <?php
 namespace App\Controllers;
 use App\Models\UserModel; 
+use App\Models\EventModel; 
 class AdminController extends BaseController
 {
     public function dashboard()
@@ -60,7 +61,7 @@ class AdminController extends BaseController
                 "role" => $user['role'],
                 "status" => $user['status'] == 1 
                     ? '<span class="text-success">Active</span>' 
-                    : '<span class="text-danger">Inactive</span>',
+                    : '<span class="text-inactive">Inactive</span>',
                 "profile_image" => $profile_image,
                 "action" => '<button class="btn__primary table__button viewUserBtn" data-token="'.$user['token'].'">View</button>'
             ];
@@ -250,4 +251,109 @@ public function updateUser()
         }
     }
     
+    public function createEvent() 
+    {
+        $request = $this->request->getPost();
+
+        $eventModel = new EventModel();
+        $eventData = [
+            'event_title'       => $request['event_title'],
+            'event_description' => $request['event_description'],
+            'start_date'        => $request['date_start'],
+            'end_date'          => $request['date_end'],
+            'status'            => 1
+        ];
+
+        if ($eventModel->insert($eventData)) {
+            return $this->response->setJSON(['success' => true]);
+        } else {
+            return $this->response->setJSON(['success' => false, 'message' => 'Failed to save event.']);
+        }
+    }
+
+    public function viewEvents()
+    {
+        $eventModel = new EventModel();
+        $events = $eventModel->findAll();
+
+        if ($events) {
+            return $this->response->setJSON([
+                'success' => true,
+                'data'    => $events
+            ]);
+        } else {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'No events found.'
+            ]);
+        }
+    }
+
+    public function viewEventDetails()
+    {
+        $eventId = $this->request->getGet('event_id'); // Get the event ID from AJAX request
+
+        if (!$eventId) {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Invalid event ID.',
+            ]);
+        }
+
+        $eventModel = new EventModel(); // Load the model
+        $event = $eventModel->where('event_id', $eventId)->first();
+
+        if (!$event) {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Event not found.',
+            ]);
+        }
+
+        return $this->response->setJSON([
+            'success' => true,
+            'data' => $event,
+        ]);
+    }
+    public function updateEventDetails()
+    {
+        if ($this->request->getMethod() !== 'POST') {
+            return $this->response->setJSON(['success' => false, 'message' => 'Invalid request method']);
+        }
+    
+        $eventModel = new EventModel();
+        $eventId = trim($this->request->getPost('event_id'));
+        
+        if (empty($eventId)) {
+            return $this->response->setJSON(['success' => false, 'message' => 'Event ID is required']);
+        }
+
+        $data = [
+            'event_title'       => trim($this->request->getPost('event_title')),
+            'event_description' => trim($this->request->getPost('event_description')),
+            'start_date'        => trim($this->request->getPost('start_date')),
+            'end_date'          => trim($this->request->getPost('end_date'))
+        ];
+    
+        // Remove empty values
+        $data = array_filter($data);
+    
+        if (empty($data)) {
+            return $this->response->setJSON(['success' => false, 'message' => 'No changes detected']);
+        }
+    
+        if ($eventModel->update($eventId, $data)) {
+            return $this->response->setJSON(['success' => true, 'message' => 'Event updated successfully']);
+        } else {
+            return $this->response->setJSON(['success' => false, 'message' => 'Failed to update event']);
+        }
+    }
+    
+    
+    
+    
+
+
+
 }
+

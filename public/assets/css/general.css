@@ -394,3 +394,31 @@ select {
   color: #d14e4e;
   margin-top: 1rem;
 }
+
+.text-success {
+  background-color: #e1f4e7;
+  color: #5ab87b;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+}
+
+.text-inactive {
+  background-color: #f0f0f0;
+  color: #858585;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+}
+
+input[type="datetime-local"] {
+  position: relative;
+}
+
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
