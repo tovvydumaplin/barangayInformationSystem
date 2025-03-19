@@ -2,6 +2,7 @@
 namespace App\Controllers;
 use App\Models\UserModel; 
 use App\Models\EventModel; 
+use App\Models\ResidentModel; 
 class AdminController extends BaseController
 {
     public function dashboard()
@@ -372,5 +373,29 @@ public function createUser()
             return $this->response->setJSON(['success' => false, 'message' => 'Failed to update event']);
         }
     }
+
+    public function createResident()
+    {
+        if ($this->request->isAJAX()) {
+            $data = $this->request->getPost();
+            log_message('debug', 'Received Data: ' . print_r($data, true));
+    
+            $residentModel = new \App\Models\ResidentModel();
+    
+            if ($residentModel->insert($data)) {
+                return $this->response->setJSON([
+                    'status' => 'success',
+                    'message' => 'Resident created successfully!'
+                ]);
+            }
+    
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'Failed to create resident.'
+            ]);
+        }
+    }
+    
+
 }
 

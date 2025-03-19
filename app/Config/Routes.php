@@ -46,3 +46,6 @@ $routes->get('admin/get-event-details','AdminController::viewEventDetails');
 $routes->post('admin/update-event', 'AdminController::updateEventDetails');
 // Deactivate Event
 $routes->post('/admin/deactivate-event', 'AdminController::deactivateEvent');
+
+// Create Resident
+$routes->post('/admin/create-resident','AdminController::createResident');

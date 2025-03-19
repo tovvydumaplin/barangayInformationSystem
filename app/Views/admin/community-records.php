@@ -21,300 +21,32 @@
 
   </head>
   <body>
+  <div class="success__indicator hide">
+    <div class="indicator__container">
+      <div class="icon__link">
+        <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-check-circle" viewBox="0 0 16 16">
+          <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+          <path d="m10.97 4.97-.02.022-3.473 4.425-2.093-2.094a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05"/>
+        </svg>
+      </div>
+      <p class="indicator__text">New Account Created!</p>
+    </div>
+  </div>
     <?= view('includes/sidebar') ?>
     <main>
     <?= view('includes/header.php') ?>
       <div class="wrapper"></div>
-      <div id="viewResidentProfileModal" class="modal">
-        <div class="modal__header">
-          <p class="modal__heading">Resident Profile Info</p>
-          <button class="btn__secondary active">Edit Info</button>
-        </div>
-        <form class="modal__body community__modal">
-          <div class="row">
-            <!-- 1 -->
-            <div class="input__box">
-              <input
-                class="information__input"
-                value=""
-                placeholder="Enter fullname"
-                name="firstname"
-                readonly
-              />
-              <span class="input__title"
-                >Firstname<span class="red__dot">*</span></span
-              >
-              <p class="text-danger"></p>
-            </div>
-            <!-- 1 -->
-            <div class="input__box">
-              <input
-                class="information__input"
-                value=""
-                placeholder="Enter lastname"
-                name="lastname"
-                readonly
-              />
-              <span class="input__title"
-                >Lastname<span class="red__dot">*</span></span
-              >
-              <p class="text-danger"></p>
-            </div>
-            <!-- 1 -->
-            <div class="input__box">
-              <input
-                class="information__input"
-                value=""
-                placeholder="Enter middlename"
-                name="middlename"
-                readonly
-              />
-              <span class="input__title"
-                >Middlename<span class="red__dot">*</span></span
-              >
-              <p class="text-danger"></p>
-            </div>
-            <div class="input__box">
-              <input
-                class="information__input"
-                value=""
-                placeholder="Enter suffix"
-                name="suffix"
-                readonly
-              />
-              <span class="input__title"
-                >suffix<span class="red__dot">*</span></span
-              >
-              <p class="text-danger"></p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input__box">
-              <input
-                class="information__input"
-                value=""
-                placeholder="Enter contact-no"
-                name="contact-no"
-                readonly
-              />
-              <span class="input__title"
-                >Contact No.<span class="red__dot">*</span></span
-              >
-              <p class="text-danger"></p>
-            </div>
-            <div class="input__box">
-              <input
-                type="date"
-                class="information__input"
-                value=""
-                placeholder="Enter Birthdate"
-                name="birthdate"
-                readonly
-              />
-              <span class="input__title"
-                >Birthdate<span class="red__dot">*</span></span
-              >
-              <p class="text-danger"></p>
-            </div>
-            <div class="input__box">
-              <input
-                class="information__input"
-                value=""
-                placeholder="Enter Age"
-                name="age"
-                readonly
-              />
-              <span class="input__title"
-                >Age<span class="red__dot">*</span></span
-              >
-              <p class="text-danger"></p>
-            </div>
-            <div class="input__box">
-              <input
-                class="information__input"
-                value=""
-                placeholder="Enter Birthplace"
-                name="birthplace"
-                readonly
-              />
-              <span class="input__title"
-                >Birthplace<span class="red__dot">*</span></span
-              >
-              <p class="text-danger"></p>
-            </div>
-            <div class="input__box">
-              <input
-                class="information__input"
-                value=""
-                placeholder="Enter Citizenship"
-                name="citizenship"
-                readonly
-              />
-              <span class="input__title"
-                >Citizenship<span class="red__dot">*</span></span
-              >
-              <p class="text-danger"></p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input__box">
-              <input
-                class="information__input"
-                value=""
-                placeholder="Enter Gender"
-                name="gender"
-                readonly
-              />
-              <span class="input__title"
-                >Gender<span class="red__dot">*</span></span
-              >
-              <p class="text-danger"></p>
-            </div>
-            <div class="input__box">
-              <input
-                class="information__input"
-                value=""
-                placeholder="Enter Civil Status"
-                name="civil-status"
-                readonly
-              />
-              <span class="input__title"
-                >Civil Status<span class="red__dot">*</span></span
-              >
-              <p class="text-danger"></p>
-            </div>
-            <div class="input__box">
-              <input
-                class="information__input"
-                value=""
-                placeholder="Enter Occupation"
-                name="occupation"
-                readonly
-              />
-              <span class="input__title"
-                >Occupation<span class="red__dot">*</span></span
-              >
-              <p class="text-danger"></p>
-            </div>
-            <div class="input__box">
-              <input
-                class="information__input"
-                value=""
-                placeholder="Enter Religion"
-                name="religion"
-                readonly
-              />
-              <span class="input__title"
-                >Religion<span class="red__dot">*</span></span
-              >
-              <p class="text-danger"></p>
-            </div>
-          </div>
-          <div class="row margin__bottom__2">
-            <div class="radio__box">
-              <p class="radio__heading">
-                Person with Disablity<span class="red__dot">*</span>
-              </p>
+      <!-- VIEW RESIDENT MODAL -->
 
-              <div class="radio__buttons">
-                <div class="radio__btn__container">
-                  <input type="radio" class="radio__btn" value="yes" />
-                  <span class="yes">Yes</span>
-                </div>
-                <div class="radio__btn__container">
-                  <input type="radio" class="radio__btn" value="no" />
-                  <span class="no">No</span>
-                </div>
-              </div>
-            </div>
-            <div class="radio__box">
-              <p class="radio__heading">
-                Voters of Barangay<span class="red__dot">*</span>
-              </p>
+      <!-- VIEW RESIDENT MODAL -->
 
-              <div class="radio__buttons">
-                <div class="radio__btn__container">
-                  <input type="radio" class="radio__btn" value="yes" />
-                  <span class="yes">Yes</span>
-                </div>
-                <div class="radio__btn__container">
-                  <input type="radio" class="radio__btn" value="no" />
-                  <span class="no">No</span>
-                </div>
-              </div>
-            </div>
-            <div class="radio__box">
-              <p class="radio__heading">
-                Head of the Family<span class="red__dot">*</span>
-              </p>
-
-              <div class="radio__buttons">
-                <div class="radio__btn__container">
-                  <input type="radio" class="radio__btn" value="yes" />
-                  <span class="yes">Yes</span>
-                </div>
-                <div class="radio__btn__container">
-                  <input type="radio" class="radio__btn" value="no" />
-                  <span class="no">No</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row flex__d__col">
-            <p class="modal__subheading">Household Information</p>
-            <div class="row">
-              <div class="input__box">
-                <input
-                  class="information__input"
-                  value=""
-                  placeholder="Enter Household Ownership"
-                  name="household-ownership"
-                  readonly
-                />
-                <span class="input__title"
-                  >Household Ownership<span class="red__dot">*</span></span
-                >
-                <p class="text-danger"></p>
-              </div>
-              <div class="input__box">
-                <input
-                  class="information__input"
-                  value=""
-                  placeholder="Enter House No."
-                  name="house-no"
-                  readonly
-                />
-                <span class="input__title"
-                  >House No.<span class="red__dot">*</span></span
-                >
-                <p class="text-danger"></p>
-              </div>
-              <div class="input__box">
-                <input
-                  class="information__input"
-                  value=""
-                  placeholder="Enter Street"
-                  name="street"
-                  readonly
-                />
-                <span class="input__title"
-                  >Street<span class="red__dot">*</span></span
-                >
-                <p class="text-danger"></p>
-              </div>
-            </div>
-          </div>
-          <div class="btn__box__modal">
-            <span class="btn__secondary active btn__close">Close</span>
-          </div>
-        </form>
-      </div>
+      <!-- CREATE NEW RESIDENT MODAL -->
       <div id="addResidentModal" class="modal">
         <div class="modal__header">
           <p class="modal__heading">Add Resident Information</p>
           <button class="btn__secondary active">Edit Info</button>
         </div>
-        <form class="modal__body community__modal">
+        <form method="POST" class="modal__body community__modal">
           <div class="row">
             <!-- 1 -->
             <div class="input__box">
@@ -323,7 +55,6 @@
                 value=""
                 placeholder="Enter fullname"
                 name="firstname"
-                readonly
               />
               <span class="input__title"
                 >Firstname<span class="red__dot">*</span></span
@@ -337,7 +68,6 @@
                 value=""
                 placeholder="Enter lastname"
                 name="lastname"
-                readonly
               />
               <span class="input__title"
                 >Lastname<span class="red__dot">*</span></span
@@ -351,7 +81,7 @@
                 value=""
                 placeholder="Enter middlename"
                 name="middlename"
-                readonly
+                
               />
               <span class="input__title"
                 >Middlename<span class="red__dot">*</span></span
@@ -364,7 +94,7 @@
                 value=""
                 placeholder="Enter suffix"
                 name="suffix"
-                readonly
+                
               />
               <span class="input__title"
                 >suffix<span class="red__dot">*</span></span
@@ -378,8 +108,8 @@
                 class="information__input"
                 value=""
                 placeholder="Enter contact-no"
-                name="contact-no"
-                readonly
+                name="contact_no"
+                
               />
               <span class="input__title"
                 >Contact No.<span class="red__dot">*</span></span
@@ -393,7 +123,7 @@
                 value=""
                 placeholder="Enter Birthdate"
                 name="birthdate"
-                readonly
+                
               />
               <span class="input__title"
                 >Birthdate<span class="red__dot">*</span></span
@@ -406,7 +136,7 @@
                 value=""
                 placeholder="Enter Age"
                 name="age"
-                readonly
+                
               />
               <span class="input__title"
                 >Age<span class="red__dot">*</span></span
@@ -419,7 +149,7 @@
                 value=""
                 placeholder="Enter Birthplace"
                 name="birthplace"
-                readonly
+                
               />
               <span class="input__title"
                 >Birthplace<span class="red__dot">*</span></span
@@ -432,7 +162,7 @@
                 value=""
                 placeholder="Enter Citizenship"
                 name="citizenship"
-                readonly
+                
               />
               <span class="input__title"
                 >Citizenship<span class="red__dot">*</span></span
@@ -447,7 +177,7 @@
                 value=""
                 placeholder="Enter Gender"
                 name="gender"
-                readonly
+                
               />
               <span class="input__title"
                 >Gender<span class="red__dot">*</span></span
@@ -459,8 +189,8 @@
                 class="information__input"
                 value=""
                 placeholder="Enter Civil Status"
-                name="civil-status"
-                readonly
+                name="civil_status"
+                
               />
               <span class="input__title"
                 >Civil Status<span class="red__dot">*</span></span
@@ -473,7 +203,7 @@
                 value=""
                 placeholder="Enter Occupation"
                 name="occupation"
-                readonly
+                
               />
               <span class="input__title"
                 >Occupation<span class="red__dot">*</span></span
@@ -486,7 +216,7 @@
                 value=""
                 placeholder="Enter Religion"
                 name="religion"
-                readonly
+                
               />
               <span class="input__title"
                 >Religion<span class="red__dot">*</span></span
@@ -495,38 +225,39 @@
             </div>
           </div>
           <div class="row margin__bottom__2">
+            <!-- Disabled Radio -->
             <div class="radio__box">
               <p class="radio__heading">
                 Person with Disablity<span class="red__dot">*</span>
               </p>
-
               <div class="radio__buttons">
                 <div class="radio__btn__container">
-                  <input type="radio" class="radio__btn" value="yes" />
+                  <input type="radio" class="radio__btn" name="is_pwd" value="1" />
                   <span class="yes">Yes</span>
                 </div>
                 <div class="radio__btn__container">
-                  <input type="radio" class="radio__btn" value="no" />
+                  <input type="radio" class="radio__btn" name="is_pwd" value="0" />
                   <span class="no">No</span>
                 </div>
               </div>
             </div>
+            <!-- Voters Radio -->
             <div class="radio__box">
               <p class="radio__heading">
                 Voters of Barangay<span class="red__dot">*</span>
               </p>
-
               <div class="radio__buttons">
                 <div class="radio__btn__container">
-                  <input type="radio" class="radio__btn" value="yes" />
+                  <input type="radio" class="radio__btn" name="is_voter_of_barangay" value="1" />
                   <span class="yes">Yes</span>
                 </div>
                 <div class="radio__btn__container">
-                  <input type="radio" class="radio__btn" value="no" />
+                  <input type="radio" class="radio__btn" name="is_voter_of_barangay" value="0" />
                   <span class="no">No</span>
                 </div>
               </div>
             </div>
+            <!-- Head Radio -->
             <div class="radio__box">
               <p class="radio__heading">
                 Head of the Family<span class="red__dot">*</span>
@@ -534,17 +265,19 @@
 
               <div class="radio__buttons">
                 <div class="radio__btn__container">
-                  <input type="radio" class="radio__btn" value="yes" />
+                  <input type="radio" name="is_family_head" class="radio__btn" value="1" />
                   <span class="yes">Yes</span>
                 </div>
                 <div class="radio__btn__container">
-                  <input type="radio" class="radio__btn" value="no" />
+                  <input type="radio" name="is_family_head" class="radio__btn" value="0" />
                   <span class="no">No</span>
                 </div>
               </div>
             </div>
           </div>
-          <div class="row flex__d__col">
+          <!-- Household info | Show only when head of family is no/0 -->
+
+          <div class="row flex__d__col d__none house__info">
             <p class="modal__subheading">Household Information</p>
             <div class="row">
               <div class="input__box">
@@ -552,12 +285,9 @@
                   class="information__input"
                   value=""
                   placeholder="Enter Household Ownership"
-                  name="household-ownership"
-                  readonly
+                  name="household_name"  
                 />
-                <span class="input__title"
-                  >Household Ownership<span class="red__dot">*</span></span
-                >
+                <span class="input__title">Household Ownership<span class="red__dot">*</span></span>
                 <p class="text-danger"></p>
               </div>
               <div class="input__box">
@@ -565,8 +295,7 @@
                   class="information__input"
                   value=""
                   placeholder="Enter House No."
-                  name="house-no"
-                  readonly
+                  name="house_no"
                 />
                 <span class="input__title"
                   >House No.<span class="red__dot">*</span></span
@@ -579,7 +308,7 @@
                   value=""
                   placeholder="Enter Street"
                   name="street"
-                  readonly
+                  
                 />
                 <span class="input__title"
                   >Street<span class="red__dot">*</span></span
@@ -588,8 +317,54 @@
               </div>
             </div>
           </div>
+          <!-- Household Info End -->
+
+          <!-- Emergency Contact -->
+          <div class="row flex__d__col ">
+            <p class="modal__subheading">Emergency Contact Information</p>
+            <div class="row">
+              <div class="input__box">
+                <input
+                  class="information__input"
+                  value=""
+                  placeholder="Enter fullname"
+                  name="contact_name"  
+                />
+                <span class="input__title">Fullname<span class="red__dot">*</span></span>
+                <p class="text-danger"></p>
+              </div>
+              <div class="input__box">
+                <input
+                  class="information__input"
+                  value=""
+                  placeholder="Enter Contact No."
+                  name="emergency_contact_no"
+                  
+                />
+                <span class="input__title"
+                  >Contact No.<span class="red__dot">*</span></span
+                >
+                <p class="text-danger"></p>
+              </div>
+              <div class="input__box">
+                <input
+                  class="information__input"
+                  value=""
+                  placeholder="Enter relationship"
+                  name="contact_relationship"
+                  
+                />
+                <span class="input__title"
+                  >Relationship<span class="red__dot">*</span></span
+                >
+                <p class="text-danger"></p>
+              </div>
+            </div>
+          </div>
+        <!-- Emergency Contact END -->
           <div class="btn__box__modal">
             <span class="btn__secondary active btn__close">Close</span>
+            <button class="button__submit">Submit</submit>
           </div>
         </form>
       </div>
@@ -739,174 +514,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>Tiger Nixon</td>
-                  <td>1961-04-25</td>
-                  <td>61</td>
-                  <td>Married</td>
-                  <td>Male</td>
-                  <td>Yes</td>
-                  <td>No</td>
-                  <td>09123456789</td>
-                  <td>
-                    <button class="btn__primary table__button">View</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>Tiger Nixon</td>
-                  <td>1961-04-25</td>
-                  <td>61</td>
-                  <td>Married</td>
-                  <td>Male</td>
-                  <td>Yes</td>
-                  <td>No</td>
-                  <td>09123456789</td>
-                  <td>
-                    <button class="btn__primary table__button">View</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>Tiger Nixon</td>
-                  <td>1961-04-25</td>
-                  <td>61</td>
-                  <td>Married</td>
-                  <td>Male</td>
-                  <td>Yes</td>
-                  <td>No</td>
-                  <td>09123456789</td>
-                  <td>
-                    <button class="btn__primary table__button">View</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>Tiger Nixon</td>
-                  <td>1961-04-25</td>
-                  <td>61</td>
-                  <td>Married</td>
-                  <td>Male</td>
-                  <td>Yes</td>
-                  <td>No</td>
-                  <td>09123456789</td>
-                  <td>
-                    <button class="btn__primary table__button">View</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>Tiger Nixon</td>
-                  <td>1961-04-25</td>
-                  <td>61</td>
-                  <td>Married</td>
-                  <td>Male</td>
-                  <td>Yes</td>
-                  <td>No</td>
-                  <td>09123456789</td>
-                  <td>
-                    <button class="btn__primary table__button">View</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>Tiger Nixon</td>
-                  <td>1961-04-25</td>
-                  <td>61</td>
-                  <td>Married</td>
-                  <td>Male</td>
-                  <td>Yes</td>
-                  <td>No</td>
-                  <td>09123456789</td>
-                  <td>
-                    <button class="btn__primary table__button">View</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>Tiger Nixon</td>
-                  <td>1961-04-25</td>
-                  <td>61</td>
-                  <td>Married</td>
-                  <td>Male</td>
-                  <td>Yes</td>
-                  <td>No</td>
-                  <td>09123456789</td>
-                  <td>
-                    <button class="btn__primary table__button">View</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>Tiger Nixon</td>
-                  <td>1961-04-25</td>
-                  <td>61</td>
-                  <td>Married</td>
-                  <td>Male</td>
-                  <td>Yes</td>
-                  <td>No</td>
-                  <td>09123456789</td>
-                  <td>
-                    <button class="btn__primary table__button">View</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>Garrett Winters</td>
-                  <td>1958-07-25</td>
-                  <td>63</td>
-                  <td>Single</td>
-                  <td>Male</td>
-                  <td>No</td>
-                  <td>Yes</td>
-                  <td>09234567890</td>
-                  <td>
-                    <button class="btn__primary table__button">View</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>Ashton Cox</td>
-                  <td>1989-01-12</td>
-                  <td>33</td>
-                  <td>Married</td>
-                  <td>Male</td>
-                  <td>Yes</td>
-                  <td>No</td>
-                  <td>09345678901</td>
-                  <td>
-                    <button class="btn__primary table__button">View</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>4</td>
-                  <td>Cedric Kelly</td>
-                  <td>1977-03-29</td>
-                  <td>45</td>
-                  <td>Divorced</td>
-                  <td>Male</td>
-                  <td>Yes</td>
-                  <td>No</td>
-                  <td>09456789012</td>
-                  <td>
-                    <button class="btn__primary table__button">View</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>5</td>
-                  <td>Airi Satou</td>
-                  <td>1980-11-28</td>
-                  <td>42</td>
-                  <td>Married</td>
-                  <td>Female</td>
-                  <td>Yes</td>
-                  <td>Yes</td>
-                  <td>09567890123</td>
-                  <td>
-                    <button class="btn__primary table__button">View</button>
-                  </td>
-                </tr>
+
               </tbody>
             </table>
           </div>
@@ -928,72 +536,119 @@
     ></script>
 
     <script>
-      document.querySelectorAll(".table__button").forEach((button) => {
-        button.addEventListener("click", () => {
-          document.querySelector(".wrapper").classList.add("open");
-          document
-            .getElementById("viewResidentProfileModal")
-            .classList.add("open");
-        });
-      });
+  $(".table__button").on("click", function () {
+    $(".wrapper").addClass("open");
+    $("#viewResidentProfileModal").addClass("open");
+  });
 
-      document
-        .querySelector(".btn__add__resident")
-        .addEventListener("click", function () {
-          document.querySelector(".wrapper").classList.add("open");
-          document.getElementById("addResidentModal").classList.add("open");
-        });
+  $(".btn__add__resident").on("click", function () {
+    $(".wrapper").addClass("open");
+    $("#addResidentModal").addClass("open");
+  });
 
-      document.querySelector(".wrapper").addEventListener("click", function () {
-        document.querySelector(".wrapper").classList.remove("open");
-        document
-          .getElementById("viewResidentProfileModal")
-          .classList.remove("open");
-        document.getElementById("addResidentModal").classList.remove("open");
-      });
+  $(".wrapper").on("click", function () {
+    $(".wrapper, #viewResidentProfileModal, #addResidentModal").removeClass("open");
+  });
 
-      document
-        .querySelector(".btn__close")
-        .addEventListener("click", function () {
-          document.querySelector(".wrapper").classList.remove("open");
-          document
-            .getElementById("viewResidentProfileModal")
-            .classList.remove("open");
-          document.getElementById("addResidentModal").classList.remove("open");
-        });
-      document.addEventListener("keydown", (event) => {
-        if (event.key === "Escape") {
-          document.querySelector(".wrapper").classList.remove("open");
-          document
-            .getElementById("viewResidentProfileModal")
-            .classList.remove("open");
-          document.getElementById("addResidentModal").classList.remove("open");
-        }
-      });
+  $(".btn__close").on("click", function () {
+    $(".wrapper, #viewResidentProfileModal, #addResidentModal").removeClass("open");
+  });
 
-      document
-        .querySelector(".menu__icon")
-        .addEventListener("click", function () {
-          document.querySelector("body").classList.toggle("hide__sidebar");
-          document.querySelector(".nav__heading").classList.toggle("d__none");
-        });
+  $(document).on("keydown", function (event) {
+    if (event.key === "Escape") {
+      $(".wrapper, #viewResidentProfileModal, #addResidentModal").removeClass("open");
+    }
+  });
 
-      document
-        .querySelector(".user__box")
-        .addEventListener("click", function () {
-          document.querySelector(".dropdown__menu").classList.toggle("show");
-        });
-      document.querySelector(".tab__1").addEventListener("click", function () {
-        document.querySelector(".tab__1").classList.add("visible");
-        document.querySelector(".tab__2").classList.remove("visible");
-      });
-      document.querySelector(".tab__2").addEventListener("click", function () {
-        document.querySelector(".tab__2").classList.add("visible");
-        document.querySelector(".tab__1").classList.remove("visible");
-      });
+  $(".menu__icon").on("click", function () {
+    $("body").toggleClass("hide__sidebar");
+    $(".nav__heading").toggleClass("d__none");
+  });
+
+  $(".user__box").on("click", function () {
+    $(".dropdown__menu").toggleClass("show");
+  });
+
+  $(".tab__1").on("click", function () {
+    $(".tab__1").addClass("visible");
+    $(".tab__2").removeClass("visible");
+  });
+
+  $(".tab__2").on("click", function () {
+    $(".tab__2").addClass("visible");
+    $(".tab__1").removeClass("visible");
+  });
       $(document).ready(function () {
         $("#example").DataTable();
       });
+    </script>
+
+    <script>
+    const closeModal = function() {
+      $("#addResidentModal").removeClass("open");
+      $(".wrapper").removeClass("open");
+    }
+
+    $('.btn__close').on('click', function(){
+      closeModal();
+    })
+    $("input[name='is_family_head']").on("change", function () {
+      if ($(this).val() === "1") {
+        $(".house__info").removeClass("d__none"); // Show content
+      } else {
+        $(".house__info").addClass("d__none"); // Hide content
+      }
+    });
+    $(document).ready(function () {
+      $(".community__modal").on("submit", function (e) {
+    e.preventDefault();
+
+    let formData = $(this).serialize();
+
+    $.ajax({
+        url: "<?= site_url('/admin/create-resident') ?>",
+        type: "POST",
+        data: formData,
+        dataType: "json",
+        beforeSend: function () {
+            $(".btn__secondary").prop("disabled", true).text("Submitting...");
+        },
+        success: function (response) {
+            if (response.status === "success") { 
+                $(".success__indicator").removeClass("hide");
+                $(".indicator__text").html('Resident Created!');
+
+                setTimeout(function () {
+                    $(".success__indicator").addClass("hide");
+                }, 3000);
+
+                // ✅ Properly close the modal
+                closeModal();
+            } else {
+                $(".text-danger").text(""); // Clear previous errors
+                $.each(response.errors, function (key, value) {
+                    $("input[name='" + key + "']").siblings(".text-danger").text(value);
+                });
+            }
+        },
+        error: function () {
+            alert("Something went wrong. Please try again.");
+        },
+        complete: function () {
+            $(".btn__secondary").prop("disabled", false).text("Submit");
+        }
+    });
+});
+
+});
+
+
+
+
+
+
+
+
     </script>
   </body>
 </html>
