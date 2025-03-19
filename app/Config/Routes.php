@@ -44,3 +44,5 @@ $routes->get('admin/get-events','AdminController::viewEvents');
 $routes->get('admin/get-event-details','AdminController::viewEventDetails');
 // Update event detailss 
 $routes->post('admin/update-event', 'AdminController::updateEventDetails');
+// Deactivate Event
+$routes->post('/admin/deactivate-event', 'AdminController::deactivateEvent');

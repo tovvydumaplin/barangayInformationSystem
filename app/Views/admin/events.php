@@ -38,9 +38,43 @@
         right: 2rem;
         transform: translateY(-50%);
       }
+      .event__title {
+        max-width: 10rem;  
+        white-space: nowrap; 
+        overflow: hidden; 
+        text-overflow: ellipsis; 
+      }
+      table.dataTable {
+        table-layout: fixed;
+        width: 100% !important;
+      }
+      .icon__close {
+        cursor: pointer;
+      }
+
+      .btn__box__modal {
+        display: flex;
+        gap: 1rem;
+      }
+      .event__disable {
+        background-color: #fff;
+        border: 1px solid #e72121;
+        color: #e72121;
+      }
     </style>
   </head>
   <body>
+  <div class="success__indicator hide">
+    <div class="indicator__container">
+      <div class="icon__link">
+        <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-check-circle" viewBox="0 0 16 16">
+          <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+          <path d="m10.97 4.97-.02.022-3.473 4.425-2.093-2.094a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05"/>
+        </svg>
+      </div>
+      <p class="indicator__text">New Account Created!</p>
+    </div>
+  </div>
    <?= view ('includes/sidebar') ?>
     <main>
     <?= view('includes/header.php') ?>
@@ -112,12 +146,15 @@
           </div>
         </form>
       </div>
-      <div id="viewEventModal" class="modal">
+      <div id="viewEventModal" data-id="" class="modal">
         <div class="modal__header">
           <p class="modal__heading">View Event</p>
+          <div class="icon__link icon__close">
+            <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M368 368L144 144M368 144L144 368"/></svg>
+          </div>
         </div>
         <form method="POST" class="modal__body community__modal">
-        <input  name="view_event_id" id="event_id">
+        <input type="hidden" name="view_event_id" id="event_id">
           <div class="row flex__d__col">
             <div class="row">
               <div class="input__box">
@@ -182,6 +219,7 @@
           </div>
           <div class="btn__box__modal">
             <span class="btn__primary event__edit active">Edit Event</span>
+            <span class="btn__primary event__disable">Archive this event</span>
           </div>
         </form>
       </div>
@@ -260,243 +298,265 @@
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
     ></script>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-      document
-        .querySelector(".btn__add__item")
-        .addEventListener("click", function () {
-          document.querySelector(".wrapper").classList.add("open");
-          document.getElementById("createEventModal").classList.add("open");
-        });
+<script>
+$(document).ready(function () {
+// ~~~~~~~~~~~~~~~~~~~~~~~~ ⚡ Functions ⚡ ~~~~~~~~~~~~~~~~~~~~~~~~ //
 
-      document.querySelector(".wrapper").addEventListener("click", function () {
-        document.querySelector(".wrapper").classList.remove("open");
-        document.getElementById("createEventModal").classList.remove("open");
-        document.getElementById("viewEventModal").classList.remove("open");
-      });
-
-      document.addEventListener("keydown", (event) => {
-        if (event.key === "Escape") {
-          document.querySelector(".wrapper").classList.remove("open");
-          document.getElementById("createEventModal").classList.remove("open");
-          document.getElementById("viewEventModal").classList.remove("open");
-        }
-      });
-
-      function closeModal() {
-        document.querySelector(".wrapper").classList.remove("open");
-        document.getElementById("createEventModal").classList.remove("open");
-        document.getElementById("viewEventModal").classList.remove("open");
-      }
-
-      document
-        .querySelector(".menu__icon")
-        .addEventListener("click", function () {
-          document.querySelector("body").classList.toggle("hide__sidebar");
-          document.querySelector(".nav__heading").classList.toggle("d__none");
-        });
-
-      document
-        .querySelector(".user__box")
-        .addEventListener("click", function () {
-          document.querySelector(".dropdown__menu").classList.toggle("show");
-        });
-
-      $(document).ready(function () {
-        $("#example").DataTable();
-      });
-
-      
-    });
-    </script>
-
-    <script>
-      function closeModal() {
-        document.querySelector(".wrapper").classList.remove("open");
-        document.getElementById("createEventModal").classList.remove("open");
-        document.getElementById("viewEventModal").classList.remove("open");
-      }
-      $(document).ready(function () {
-          loadEventData();
-          // Using event delegation for table button since button is added dynamically thru script.
-          $(document).on("click", ".table__button", function () {
-              let eventId = $(this).data("id");
-              viewEventDetails(eventId);
-          });
-          // event edit
-          $(document).on("click", ".event__edit", function () {
-              let editBtn = $(this);
-
-              $(".modal__body input, .modal__body textarea").prop("readonly", false);
-              editBtn.removeClass("event__edit").addClass("event__save").text("Save Changes");
-          });
-          // Event save
-          $(document).on("click", ".event__save", function () {
-              updateEvent($(this)); // Call the function when saving changes
-          });
-
-      });
-      $('.create__event__btn').on('click', function(){
-        createEvent();
-      })
-
-      function viewEventDetails(eventId) {
-          $.ajax({
-              url: "<?= base_url('admin/get-event-details') ?>", // Adjust to your CI4 route
-              type: "GET",
-              data: { event_id: eventId }, // Send event ID
-              dataType: "json",
-              success: function (response) {
-                  if (response.success) {
-                      // Populate modal fields
-                      $("input[name='view_event_title']").val(response.data.event_title);
-                      $("textarea[name='view_event_description']").val(response.data.event_description);
-                      $("input[name='view_event_start_date']").val(response.data.start_date);
-                      $("input[name='view_event_end_date']").val(response.data.end_date);
-                      $("input[name='view_event_id']").val(response.data.event_id);
-                      // Open modal
-                      $(".wrapper").addClass("open");
-                      $("#viewEventModal").addClass("open");
-                  } else {
-                      alert("Failed to fetch event details.");
-                  }
-              },
-              error: function () {
-                  alert("An error occurred while fetching event details.");
-              }
-          });
-      }
-
-      function updateEvent(saveBtn) {
-        let formData = {
-            event_id: $.trim($("input[name='view_event_id']").val()), // Get the event ID
-            event_title: $.trim($("input[name='view_event_title']").val()),
-            event_description: $.trim($("textarea[name='view_event_description']").val()),
-            start_date: $.trim($("input[name='view_event_start_date']").val()),
-            end_date: $.trim($("input[name='view_event_end_date']").val())
-        };
-
-        // Disable the button and show loading state
-        saveBtn.prop("disabled", true).text("Saving...");
-            $.ajax({
-                url: "<?= base_url('admin/update-event'); ?>",
-                type: "POST",
-                data: formData,
-                dataType: "json",
-                success: function (response) {
-                    if (response.success) {
-                        alert("Event updated successfully!");
-                        loadEventData(); // Reload event list
-                        $(".modal__body input, .modal__body textarea").prop("readonly", true);
-                        saveBtn.removeClass("event__save").addClass("event__edit").text("Edit Event");
-                        closeModal();
-                        console.log(response); // Debugging
-                    } else {
-                        $(".text-danger").text(""); // Clear previous errors
-                        if (response.errors) {
-                            $.each(response.errors, function (key, value) {
-                                $("input[name='" + key + "'], textarea[name='" + key + "']")
-                                    .closest(".input__box")
-                                    .find(".text-danger")
-                                    .text(value);
-                            });
-                        } else {
-                            alert(response.message || "Failed to update event.");
-                        }
-                    }
-                },
-                error: function () {
-                    alert("An error occurred.");
-                    console.log(xhr.responseText); // Debugging
-                },
-                complete: function () {
-                    saveBtn.prop("disabled", false).text("Save Event"); // Re-enable button
-                }
-            });
-        }
-
-
-      function loadEventData() {
-        $.ajax({
-            url: "<?= base_url('admin/get-events') ?>",
-            type: "GET",
-            dataType: "json",
-            success: function (response) {
-                if (response.success) {
-                    let eventTable = $("#eventTable");
-
-                    // Destroy existing DataTable instance if it exists
-                    if ($.fn.DataTable.isDataTable(eventTable)) {
-                        eventTable.DataTable().destroy();
-                    }
-
-                    let tbody = eventTable.find("tbody");
-                    tbody.empty(); // Clear existing rows
-
-                    // Use map() to generate all rows at once
-                    let rows = response.data.map((event, index) => `
-                        <tr>
-                            <td>${index + 1}</td>
-                            <td>${event.event_title}</td>
-                            <td>${event.event_description}</td>
-                            <td>${event.start_date}</td>
-                            <td>${event.end_date}</td>
-                            <td>
-                                <button class="btn__primary table__button" data-id="${event.event_id}">View</button>
-                            </td>
-                        </tr>
-                    `).join("");
-
-                    tbody.append(rows); // Append all rows at once (better performance)
-                    // Reinitialize DataTable with descending order
-                    eventTable.DataTable({
-                        order: [[0, "desc"]] // Sort by first column (event ID) in descending order
-                    });
-                    // Reinitialize DataTable
-                    eventTable.DataTable();
-                } else {
-                    console.log("Failed to load events: ", response.message);
-                }
-            },
-            error: function (xhr, status, error) {
-                console.error("AJAX Error: ", error);
+const closeModal = function() {                               // Close modal Function
+      $(".wrapper, #createEventModal, #viewEventModal").removeClass("open");
+}
+const viewEventDetails = function(eventId) {                  // View Event Details on button click        
+    $.ajax({
+        url: "<?= base_url('admin/get-event-details') ?>", 
+        type: "GET",
+        data: { event_id: eventId }, 
+        dataType: "json",
+        success: function (response) {
+            if (response.success) {
+                // Populate modal fields
+                $("input[name='view_event_title']").val(response.data.event_title);
+                $("textarea[name='view_event_description']").val(response.data.event_description);
+                $("input[name='view_event_start_date']").val(response.data.start_date);
+                $("input[name='view_event_end_date']").val(response.data.end_date);
+                $("input[name='view_event_id']").val(response.data.event_id);
+                // Open modal
+                $(".wrapper").addClass("open");
+                $("#viewEventModal").addClass("open");
+            } else {
+                alert("Failed to fetch event details.");
             }
-        });
-    }
+        },
+        error: function () {
+            alert("An error occurred while fetching event details.");
+        }
+    });
+}
+const updateEvent = function(saveBtn) {                       // Update Event Function
+  let formData = {
+      event_id: $.trim($("input[name='view_event_id']").val()), // Get the event ID
+      event_title: $.trim($("input[name='view_event_title']").val()),
+      event_description: $.trim($("textarea[name='view_event_description']").val()),
+      start_date: $.trim($("input[name='view_event_start_date']").val()),
+      end_date: $.trim($("input[name='view_event_end_date']").val())
+  };
 
-      function createEvent() {
-        let formData = {
-            event_title: $("input[name='event_title']").val(),
-            event_description: $("textarea[name='event_description']").val(),
-            date_start: $("input[name='date_start']").val(),
-            date_end: $("input[name='date_end']").val()
-        };
+  // Disable the button and show loading state
+  saveBtn.prop("disabled", true).text("Saving...");
+      $.ajax({
+          url: "<?= base_url('admin/update-event'); ?>",
+          type: "POST",
+          data: formData,
+          dataType: "json",
+          success: function (response) {
+              if (response.success) {
+                  alert("Event updated successfully!");
+                  loadEventData(); // Reload event list
+                  $(".modal__body input, .modal__body textarea").prop("readonly", true);
+                  saveBtn.removeClass("event__save").addClass("event__edit").text("Edit Event");
+                  $(".indicator__text").html('Event Details Updated!');
+                    $('.success__indicator').removeClass('hide');
+                    setTimeout(function () {
+                        $(".success__indicator").addClass("hide");
+                    }, 3000);
+                  closeModal();
+              } else {
+                  $(".text-danger").text(""); // Clear previous errors
+                  if (response.errors) {
+                      $.each(response.errors, function (key, value) {
+                          $("input[name='" + key + "'], textarea[name='" + key + "']")
+                              .closest(".input__box")
+                              .find(".text-danger")
+                              .text(value);
+                      });
+                  } else {
+                      alert(response.message || "Failed to update event.");
+                  }
+              }
+          },
+          error: function () {
+              alert("An error occurred.");
+              console.log(xhr.responseText); // Debugging
+          },
+          complete: function () {
+              saveBtn.prop("disabled", false).text("Save Event"); // Re-enable button
+          }
+      });
+}
+const loadEventData = function() {                            
+  $.ajax({
+      url: "<?= base_url('admin/get-events') ?>",
+      type: "GET",
+      dataType: "json",
+      success: function (response) {
+          if (response.success) {
+              let eventTable = $("#eventTable");
+              
+              // Destroy existing DataTable if initialized
+              if ($.fn.DataTable.isDataTable(eventTable)) {
+                  eventTable.DataTable().destroy();
+              }
 
-        $.ajax({
-            url: "<?= base_url('admin/create-event'); ?>", // Adjust this to match your CI4 route
-            type: "POST",
-            data: formData,
-            dataType: "json",
-            success: function (response) {
-                if (response.success) {
-                    alert("Event created successfully!");
-                    loadEventData();
-                    closeModal();
-                } else {
-                    $(".text-danger").text(""); // Clear previous errors
-                    $.each(response.errors, function (key, value) {
-                        $("input[name='" + key + "'], textarea[name='" + key + "']")
-                            .closest(".input__box")
-                            .find(".text-danger")
-                            .text(value);
-                    });
-                }
-            },
-            error: function () {
-                alert("An error occurred. Please try again.");
-            },
-        });
+              let tbody = eventTable.find("tbody");
+              tbody.empty();
+
+              // Generate rows dynamically
+              let rows = response.data.map((event, index) => `
+                  <tr>
+                      <td>${index + 1}</td>
+                      <td class="event__title" title="${event.event_title}">${event.event_title}</td>
+                      <td>${event.event_description}</td>
+                      <td>${event.start_date}</td>
+                      <td>${event.end_date}</td>
+                      <td>
+                          <button class="btn__primary table__button" data-id="${event.event_id}">View</button>
+                      </td>
+                  </tr>
+              `).join("");
+
+              tbody.append(rows); 
+
+              // Initialize DataTable with custom column sizing
+              eventTable.DataTable({
+                  "order": [[0, "desc"]],
+                  "autoWidth": false, // Disable automatic column sizing
+                  "columnDefs": [
+                      { "width": "50px", "targets": 0 },  // ID column fits content
+                      { "width": "200px", "targets": 1 }, // Event title
+                      { "width": "300px", "targets": 2 }, // Description
+                      { "width": "200px", "targets": 3 }, // Start Date
+                      { "width": "200px", "targets": 4 }, // End Date
+                      { "width": "100px", "targets": 5, "orderable": false } // Action buttons
+                  ]
+              });
+          } else {
+              console.log("Failed to load events: ", response.message);
+          }
+      },
+      error: function (xhr, status, error) {
+          console.error("AJAX Error: ", error);
+      }
+  });
+}
+
+const createEvent = function() {                              // Create Events
+  let formData = {
+      event_title: $("input[name='event_title']").val(),
+      event_description: $("textarea[name='event_description']").val(),
+      date_start: $("input[name='date_start']").val(),
+      date_end: $("input[name='date_end']").val()
+  };
+
+  $.ajax({
+      url: "<?= base_url('admin/create-event'); ?>", // Adjust this to match your CI4 route
+      type: "POST",
+      data: formData,
+      dataType: "json",
+      success: function (response) {
+          if (response.success) {
+            loadEventData(); // Reload event list
+            $(".indicator__text").html('Event Created!');
+              $('.success__indicator').removeClass('hide');
+              setTimeout(function () {
+                  $(".success__indicator").addClass("hide");
+              }, 3000);
+            closeModal();
+    
+          } else {
+              $(".text-danger").text(""); // Clear previous errors
+              $.each(response.errors, function (key, value) {
+                  $("input[name='" + key + "'], textarea[name='" + key + "']")
+                      .closest(".input__box")
+                      .find(".text-danger")
+                      .text(value);
+              });
+          }
+      },
+      error: function () {
+          alert("An error occurred. Please try again.");
+      },
+  });
+}
+
+const deactivateEvent = function() {
+    let status = 0;
+    let id = $("#viewEventModal").data("id");
+  console.log(id);
+    $.ajax({
+        url: "<?= site_url('/admin/deactivate-event') ?>",
+        type: "POST",
+        data: {
+            status: status,
+            id: id
+        },
+        dataType: "json", 
+        success: function(response) {
+            if (response.success) {
+              loadEventData(); 
+                $(".success__indicator").removeClass("hide");
+                $(".indicator__text").html('Event archived!');
+                setTimeout(function () {
+                    $(".success__indicator").addClass("hide");
+                }, 2000);
+                closeModal(); 
+            } else {
+                alert("Error: " + response.message);
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error("Deactivation Error:", error);
+            alert("Failed to deactivate user.");
+        }
+    });
+}
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~ ⚡ Event Listeners ⚡ ~~~~~~~~~~~~~~~~~~~~~~~~ //
+$('.event__disable').on('click', function(){
+  deactivateEvent();
+});
+$('.create__event__btn').on('click', function(){                // Event Creation
+    createEvent();
+})
+$(document).on("click", ".table__button", function () {         // Show Event Details on click. Also, Using event delegation for table button since button is added dynamically thru script. 
+  //Event ID is stored here when the view button is clicked. IMPORTANT for updating, etc.
+  let eventId = $(this).data("id");
+  $("#viewEventModal").data("id", eventId); 
+    $(".modal__body input, .modal__body textarea").prop("readonly", true);
+    viewEventDetails(eventId);
+});
+$(document).on("click", ".event__edit", function () {           // Event edit
+    let editBtn = $(this);
+    $(".modal__body input, .modal__body textarea").prop("readonly", false);
+    editBtn.removeClass("event__edit").addClass("event__save").text("Save Changes");
+});
+$(document).on("click", ".event__save", function () {           // Event save
+    updateEvent($(this)); // Call the function when saving changes
+});
+$(".btn__add__item").on("click", function () {                  // Toggle create modal
+    $(".wrapper, #createEventModal").addClass("open");
+    $(".modal__body input, .modal__body textarea").prop("readonly", false);
+});
+$(".wrapper").on("click", function () {                         // Close modal on background click
+    closeModal();
+});
+$(document).on("keydown", function (event) {                    // Close modal on esc key
+    if (event.key === "Escape") {
+        closeModal();
     }
-    </script>
+});
+$(".menu__icon").on("click", function () {                      // Side bar Functionality
+    $("body").toggleClass("hide__sidebar");
+    $(".nav__heading").toggleClass("d__none");
+});
+$(".user__box").on("click", function () {                       // User menu functionality
+    $(".dropdown__menu").toggleClass("show");
+});
+$(".icon__close").on("click", function(){                       //Closing of modal using X button
+  closeModal();
+})
+// ~~~~~~~~~~~~~~~~~~~~~~~~ ⚡ On Load Functions ⚡ ~~~~~~~~~~~~~~~~~~~~~~~~ //
+loadEventData();                                                // Load Event Data on page load
+});
+
+</script>
   </body>
 </html>

@@ -417,81 +417,65 @@
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
     ></script>
 
-    <script>
+<script>
+// ~~~~~~~~~~~~~~~~~~~~~~~~ ⚡ Functions ⚡ ~~~~~~~~~~~~~~~~~~~~~~~~ //
 
-    $('.information__input').on('focus', function() {
-        $(this).closest('.input__box').find('.red__dot').hide();
-    }).on('blur', function() {
-        if ($(this).val().trim() === '') {
-            $(this).closest('.input__box').find('.red__dot').show();
-        }
-    });
+const viewUser = function(token) {
+  if (!token) {
+      console.error("Token is missing!");
+      return;
+  }
 
+  $.ajax({
+      url: "<?= site_url('/admin/get-user') ?>",
+      type: "GET",
+      data: { token: token }, 
+      dataType: "json",
+      success: function (response) {
+          console.log("Server Response:", response);
 
-// view
-$(document).on("click", ".viewUserBtn", function () {
-    let token = $(this).data("token"); // Get user token
-    if (!token) {
-        console.error("Token is missing!");
-        return;
-    }
+          if (response.success) {
+              document.querySelector(".wrapper").classList.add("open");
+              document.getElementById("viewEventModal").classList.add("open");
 
-    $.ajax({
-        url: "<?= site_url('/admin/get-user') ?>",
-        type: "GET",
-        data: { token: token },  // Send token instead of user_id
-        dataType: "json",
-        success: function (response) {
-            console.log("Server Response:", response);
+              // Store token inside the modal for updates
+              $("#viewEventModal").data("token", token);
 
-            if (response.success) {
-                document.querySelector(".wrapper").classList.add("open");
-                document.getElementById("viewEventModal").classList.add("open");
+              // Populate fields
+              $(".information__input[name='view_firstname']").val(response.data.firstname);
+              $(".information__input[name='view_lastname']").val(response.data.lastname);
+              $(".information__input[name='view_middlename']").val(response.data.middlename);
+              $(".information__input[name='view_suffix']").val(response.data.suffix);
+              $(".information__input[name='view_position']").val(response.data.position);
+              $(".information__input[name='view_role']").val(response.data.role);
+              $(".information__input[name='view_email']").val(response.data.username);
+              $("#viewImagePreview").attr("src", response.data.image);
 
-                // Store token inside the modal for updates
-                $("#viewEventModal").data("token", token);
-
-                // Populate fields
-                $(".information__input[name='view_firstname']").val(response.data.firstname);
-                $(".information__input[name='view_lastname']").val(response.data.lastname);
-                $(".information__input[name='view_middlename']").val(response.data.middlename);
-                $(".information__input[name='view_suffix']").val(response.data.suffix);
-                $(".information__input[name='view_position']").val(response.data.position);
-                $(".information__input[name='view_role']").val(response.data.role);
-                $(".information__input[name='view_email']").val(response.data.username);
-                $("#viewImagePreview").attr("src", response.data.image);
-
-                // Disable fields initially
-                $(".information__input").prop("disabled", true);
-                $(".btn__secondary__edit").text("Edit");
-                console.log(response.data.status + " " + "STATUS ")
-                if (response.data.status == 1) {
-                      $('.btn__secondary__deactivate').removeClass('hide');
-                      $('.btn__secondary__reactivate').addClass('hide');
-                  } else {
-                      $('.btn__secondary__reactivate').removeClass('hide');
-                      $('.btn__secondary__deactivate').addClass('hide');
-                  }
-                
-
-            } else {
-                alert(response.message);
-            }
-        },
-        error: function (xhr, status, error) {
-            console.error("AJAX Error:", error);
-            alert("Error fetching user details.");
-        },
-    });
-});
-
-function reactivateUser() {
-    let status = 1; // Assuming 1 means active
-
+              // Disable fields
+              $(".information__input").prop("disabled", true);
+              $(".btn__secondary__edit").text("Edit");
+              console.log(response.data.status + " " + "STATUS ");
+              if (response.data.status == 1) {
+                  $('.btn__secondary__deactivate').removeClass('hide');
+                  $('.btn__secondary__reactivate').addClass('hide');
+              } else {
+                  $('.btn__secondary__reactivate').removeClass('hide');
+                  $('.btn__secondary__deactivate').addClass('hide');
+              }
+          } else {
+              alert(response.message);
+          }
+      },
+      error: function (xhr, status, error) {
+          console.error("AJAX Error:", error);
+          alert("Error fetching user details.");
+      },
+  });
+}
+const reactivateUser = function() {
+    let status = 1; 
     let token = $("#viewEventModal").data("token");
 
-    console.log(status);
-    console.log(token);
     if (!token) {
         alert("Error: Token is missing!");
         return;
@@ -512,7 +496,6 @@ function reactivateUser() {
                 $(".indicator__text").html('Account Reactivated!');
                 setTimeout(function () {
                     $(".success__indicator").addClass("hide");
-                    $(".indicator__text").html('');
                 }, 3000);
                 hideModal(); 
             } else {
@@ -525,15 +508,10 @@ function reactivateUser() {
         }
     });
 }
-
-
-function deactivateUser() {
-    let status = 0; // Assuming 0 means deactivated
-
+const deactivateUser = function() {
+    let status = 0;
     let token = $("#viewEventModal").data("token");
 
-    console.log(status);
-    console.log(token);
     if (!token) {
         alert("Error: Token is missing!");
         return;
@@ -554,7 +532,6 @@ function deactivateUser() {
                 $(".indicator__text").html('Account Deactivated!');
                 setTimeout(function () {
                     $(".success__indicator").addClass("hide");
-                    $(".indicator__text").html('');
                 }, 3000);
                 hideModal(); 
             } else {
@@ -567,132 +544,76 @@ function deactivateUser() {
         }
     });
 }
+const updateUser = function() {
+  let button = $(".btn__secondary__edit");
 
+  if (button.text() === "Edit") {
+      $(".information__input").prop("disabled", false);
+      $("#viewImageInput").prop("disabled", false);
+      button.text("Save");
+  } else {
+      $(".information__input").prop("disabled", true);
+      $("#viewImageInput").prop("disabled", true);
+      button.text("Edit");
 
-// $('.btn__secondary__deactivate').on('click', function(){
-//   deactivateUser();
-// })
+      let token = $("#viewEventModal").data("token");
+      if (!token) {
+          alert("Error: Token is missing!");
+          return;
+      }
 
-function updateUser() {
-    let button = $(".btn__secondary__edit");
+      let formData = new FormData();
+      formData.append("token", token);
+      formData.append("firstname", $(".information__input[name='view_firstname']").val());
+      formData.append("lastname", $(".information__input[name='view_lastname']").val());
+      formData.append("middlename", $(".information__input[name='view_middlename']").val());
+      formData.append("suffix", $(".information__input[name='view_suffix']").val());
+      formData.append("position", $(".information__input[name='view_position']").val());
+      formData.append("role", $(".information__input[name='view_role']").val());
+      formData.append("email", $(".information__input[name='view_email']").val());
 
-    if (button.text() === "Edit") {
-        $(".information__input").prop("disabled", false);
-        $("#viewImageInput").prop("disabled", false);
-        button.text("Save");
-    } else {
-        $(".information__input").prop("disabled", true);
-        $("#viewImageInput").prop("disabled", true);
-        button.text("Edit");
+      // Append file if selected
+      let file = $("#viewImageInput")[0].files[0];
+      if (file) {
+          formData.append("view_profile_image", file); // Update key here
+      }
 
-        let token = $("#viewEventModal").data("token");
-        if (!token) {
-            alert("Error: Token is missing!");
-            return;
-        }
-
-        let formData = new FormData();
-        formData.append("token", token);
-        formData.append("firstname", $(".information__input[name='view_firstname']").val());
-        formData.append("lastname", $(".information__input[name='view_lastname']").val());
-        formData.append("middlename", $(".information__input[name='view_middlename']").val());
-        formData.append("suffix", $(".information__input[name='view_suffix']").val());
-        formData.append("position", $(".information__input[name='view_position']").val());
-        formData.append("role", $(".information__input[name='view_role']").val());
-        formData.append("email", $(".information__input[name='view_email']").val());
-
-        // Append file if selected
-        let file = $("#viewImageInput")[0].files[0];
-        if (file) {
-            formData.append("view_profile_image", file); // Update key here
-        }
-
-        $.ajax({
-            url: "<?= site_url('/admin/update-user') ?>",
-            type: "POST",
-            data: formData,
-            processData: false,
-            contentType: false,
-            dataType: "json",
-            success: function (response) {
-                if (response.success) {
-                    if (response.image_url) {
-                        $("#viewImagePreview").attr("src", response.image_url);
-                    }
-                    loadData();
-                    $(".success__indicator").removeClass("hide");
-                    $(".indicator__text").html('Account Updated!');
-                    setTimeout(function () {
-                        $(".success__indicator").addClass("hide");
-                        $(".indicator__text").html('');
-                    }, 3000);
-                    hideModal();
-                } else {
-                    alert("Error updating user.");
-                }
-            },
-            error: function (xhr, status, error) {
-                console.error("Update Error:", error);
-                alert("Failed to update user.");
-            },
-        });
-    }
+      $.ajax({
+          url: "<?= site_url('/admin/update-user') ?>",
+          type: "POST",
+          data: formData,
+          processData: false,
+          contentType: false,
+          dataType: "json",
+          success: function (response) {
+              if (response.success) {
+                  if (response.image_url) {
+                      $("#viewImagePreview").attr("src", response.image_url);
+                  }
+                  loadData();
+                  $(".success__indicator").removeClass("hide");
+                  $(".indicator__text").html('Account Updated!');
+                  setTimeout(function () {
+                      $(".success__indicator").addClass("hide");
+                  }, 3000);
+                  hideModal();
+              } else {
+                  alert("Error updating user.");
+              }
+          },
+          error: function (xhr, status, error) {
+              console.error("Update Error:", error);
+              alert("Failed to update user.");
+          },
+      });
+  }
 }
-
-$(document).on("click", ".btn__secondary__edit", function () {
-    updateUser();
-});
-
-
-
-// IMG update
-document.getElementById("viewImageInput").addEventListener("change", function(event) {
-    let file = event.target.files[0];
-    if (file) {
-        let reader = new FileReader();
-        reader.onload = function (e) {
-            document.getElementById("viewImagePreview").src = e.target.result;
-        };
-        reader.readAsDataURL(file);
-    }
-});
-
-
-
-// When user selects an image
-$("#viewImageUpload").on("change", function (event) {
-    let file = event.target.files[0];
-    if (file) {
-        let reader = new FileReader();
-        reader.onload = function (e) {
-            $("#viewImagePreview").attr("src", e.target.result); // Update the preview
-        };
-        reader.readAsDataURL(file);
-    }
-});
-
-
-// Close modal event
-$(document).on("click", ".closeModalBtn", function () {
-    document.querySelector(".wrapper").classList.remove("open");
-    document.getElementById("viewEventModal").classList.remove("open");
-});
-
-
-// Close modal (optional)
-$(".modal__close").on("click", function () {
-    $("#viewEventModal").fadeOut();
-});
-
-
-
 const clearRedDot = function() {
   $('.information__input').each(function() {
     $(this).siblings('.input__title').find('.red__dot').hide();
   });
 }
-
-function previewImage(event) {
+const previewImage = function(event) {
     let reader = new FileReader();
     reader.onload = function () {
         let preview = document.getElementById("imagePreview");
@@ -700,72 +621,23 @@ function previewImage(event) {
     };
     reader.readAsDataURL(event.target.files[0]);
 }
-
-
-      document.querySelectorAll(".table__button").forEach((button) => {
-        button.addEventListener("click", () => {
-          document.querySelector(".wrapper").classList.add("open");
-          document.getElementById("viewEventModal").classList.add("open");
-        });
-      });
-
-      document
-        .querySelector(".btn__add__resident")
-        .addEventListener("click", function () {
-          document.querySelector(".wrapper").classList.add("open");
-          document.getElementById("createEventModal").classList.add("open");
-          $(".information__input").prop("disabled", false);
-        });
-
-      document.querySelector(".wrapper").addEventListener("click", function () {
-        document.querySelector(".wrapper").classList.remove("open");
-        document.getElementById("viewEventModal").classList.remove("open");
-        document.getElementById("createEventModal").classList.remove("open");
-      });
-
-      document.addEventListener("keydown", (event) => {
-        if (event.key === "Escape") {
-          document.querySelector(".wrapper").classList.remove("open");
-          document.getElementById("viewEventModal").classList.remove("open");
-          document.getElementById("createEventModal").classList.remove("open");
-        }
-      });
-
-      const hideModal = function() {
-        document.querySelector(".wrapper").classList.remove("open");
-        document.getElementById("viewEventModal").classList.remove("open");
-        document.getElementById("createEventModal").classList.remove("open");
-      }
-      document
-        .querySelector(".menu__icon")
-        .addEventListener("click", function () {
-          document.querySelector("body").classList.toggle("hide__sidebar");
-          document.querySelector(".nav__heading").classList.toggle("d__none");
-        });
-
-      document
-        .querySelector(".user__box")
-        .addEventListener("click", function () {
-          document.querySelector(".dropdown__menu").classList.toggle("show");
-        });
-
-        const loadData = function() {
-    // Destroy existing DataTable instance if already initialized
-    if ($.fn.DataTable.isDataTable("#dataTable")) {
-        $("#dataTable").DataTable().destroy();
-    }
-    // console.log($.fn.DataTable.version);
-
-// Reinitialize DataTable
-$("#dataTable").DataTable({
-    "processing": true,
-    "serverSide": false,
-    "ajax": {
-        "url": "<?= site_url('/admin/get-users') ?>",
-        "type": "GET",
-        "dataSrc": "data"
-    },
-    "columns": [
+const hideModal = function() {
+    $(".wrapper").removeClass("open");
+    $("#viewEventModal, #createEventModal").removeClass("open");
+}
+const loadData = function() {
+  if ($.fn.DataTable.isDataTable("#dataTable")) {
+      $("#dataTable").DataTable().destroy();
+  }
+    $("#dataTable").DataTable({
+        "processing": true,
+        "serverSide": false,
+        "ajax": {
+            "url": "<?= site_url('/admin/get-users') ?>",
+            "type": "GET",
+            "dataSrc": "data"
+        },
+        "columns": [
             { 
                 "data": "profile_image", 
                 "render": function(data, type, row) {
@@ -779,62 +651,129 @@ $("#dataTable").DataTable({
               { "data": "status" },      
               { "data": "action" }      
           ],
-          "order": [[0, "desc"]] 
-      });
-    };
-        $(document).ready(function () {
-          loadData();
-        });
-
-
-    </script>
-
-<script>
-$(document).ready(function () {
-    $("#createUserForm").submit(function (e) {
-        e.preventDefault(); 
-
-        let formData = new FormData(this); 
-
-        $.ajax({
-            url: "<?= site_url('/admin/create-user') ?>",
-            type: "POST",
-            data: formData,
-            dataType: "json",
-            contentType: false, // Required for file uploads
-            processData: false, // Prevent jQuery from processing data
-            beforeSend: function () {
-                $(".text-danger").text(""); 
-            },
-            success: function (response) {
-                if (response.status == "success") {
-                    loadData();
-                    $(".indicator__text").html('New Account Created!');
-                    $('.success__indicator').removeClass('hide');
-                    setTimeout(function () {
-                        $(".success__indicator").addClass("hide");
-                        $(".indicator__text").html('');
-                    }, 3000);
-                    hideModal();
-                } else if (response.status == "validation_error") {
-                    $.each(response.errors, function (key, value) {
-                        $(".error-" + key).text(value);
-                    });
-                } else {
-                    alert(response.message);
-                }
-            },
-            error: function (xhr, status, error) {
-                console.error(xhr.responseText);
-                alert("Something went wrong. Please try again.");
-            }
-        });
+          
+        "order": [[0, "desc"]] 
     });
+};
+const createUser = function(e) {
+    e.preventDefault(); 
+
+    let formData = new FormData($("#createUserForm")[0]); 
+
+    $.ajax({
+        url: "<?= site_url('/admin/create-user') ?>",
+        type: "POST",
+        data: formData,
+        dataType: "json",
+        contentType: false, // Required for file uploads
+        processData: false, // Prevent jQuery from processing data
+        beforeSend: function () {
+            $(".text-danger").text(""); 
+        },
+        success: function (response) {
+            if (response.status == "success") {
+                loadData();
+                $(".indicator__text").html('New Account Created!');
+                $('.success__indicator').removeClass('hide');
+                setTimeout(function () {
+                    $(".success__indicator").addClass("hide");
+                }, 3000);
+                hideModal();
+            } else if (response.status == "validation_error") {
+                $.each(response.errors, function (key, value) {
+                    $(".error-" + key).text(value);
+                });
+            } else {
+                alert(response.message);
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error("AJAX Error:", xhr.responseText);
+            alert("Something went wrong. Please try again.");
+        }
+    });
+};
+
+$(document).ready(function () {
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~ ⚡ Event Listeners ⚡ ~~~~~~~~~~~~~~~~~~~~~~~~ //
+
+$("#createUserForm").submit(function (e) {                            // Create User
+    createUser(e); 
+});
+$(document).on("click", ".btn__secondary__edit", function () {        // Update User
+    updateUser();
+});
+$(document).on("click", ".viewUserBtn", function () {                 // View User
+    let token = $(this).data("token");
+    viewUser(token);
+});
+$(".menu__icon").on("click", function () {                            // Toggle sidebar 
+    $("body").toggleClass("hide__sidebar");
+    $(".nav__heading").toggleClass("d__none");
+});
+$(".user__box").on("click", function () {                             // Toggle user dropdown menu
+    $(".dropdown__menu").toggleClass("show");
+});
+$(".table__button").on("click", function () {                         // Open viewEventModal when clicking a table button
+    $(".wrapper").addClass("open");
+    $("#viewEventModal").addClass("open");
+});
+$(".btn__add__resident").on("click", function () {                    // Open createEventModal when clicking the add resident button
+    $(".wrapper").addClass("open");
+    $("#createEventModal").addClass("open");
+    $(".information__input").prop("disabled", false);
+});
+$(".wrapper").on("click", function () {                               // Hide modals when clicking outside (wrapper)
+    hideModal();
+});
+$(document).on("keydown", function (event) {                          // Hide modals when pressing Escape key       
+    if (event.key === "Escape") {
+        hideModal();
+    }
+});
+// Close modal event
+$(document).on("click", ".closeModalBtn", function () {                  
+    document.querySelector(".wrapper").classList.remove("open");
+    document.getElementById("viewEventModal").classList.remove("open");
+});
+// Remove red dots on focus
+$('.information__input').on('focus', function() {                         
+    $(this).closest('.input__box').find('.red__dot').hide();
+}).on('blur', function() {
+    if ($(this).val().trim() === '') {
+        $(this).closest('.input__box').find('.red__dot').show();
+    }
+});
+// ~~~~~~~~~~~~~~~~~~~~~~~~ ⚡ Image Event Handling ⚡ ~~~~~~~~~~~~~~~~~~~~~~~~ //
+
+// IMG Update
+$("#viewImageInput").on("change", function(event) {
+    let file = event.target.files[0];
+    if (file) {
+        let reader = new FileReader();
+        reader.onload = function(e) {
+            $("#viewImagePreview").attr("src", e.target.result);
+        };
+        reader.readAsDataURL(file);
+    }
+});
+// WIMG Create
+$("#viewImageUpload").on("change", function (event) {
+  let file = event.target.files[0];
+  if (file) {
+      let reader = new FileReader();
+      reader.onload = function (e) {
+          $("#viewImagePreview").attr("src", e.target.result); // Update the preview
+      };
+      reader.readAsDataURL(file);
+  }
 });
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~ ⚡ On Load Functions ⚡ ~~~~~~~~~~~~~~~~~~~~~~~~ //
 
-
-
+  loadData();
+});
 </script>
   </body>
 </html>

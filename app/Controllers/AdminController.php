@@ -177,79 +177,88 @@ public function updateUser()
     
     
     
-    public function createUser() 
-    {
-        $validation = \Config\Services::validation();
-        $session = session();
-        $model = new UserModel();
-    
-        $file = $this->request->getFile('profile_image');
-        if (!$file) {
-            return $this->response->setJSON([
-                'status' => 'error',
-                'message' => 'No file uploaded.'
-            ]);
-        }
-    
-        if ($file->isValid() && !$file->hasMoved()) {
-            $newName = $file->getRandomName();
-            $file->move(FCPATH . 'uploads/', $newName);
-    
-            $imagePath = 'uploads/' . $newName;
-        } else {
-            $imagePath = null;
-        }
-    
-        if (!$imagePath) {
-            return $this->response->setJSON([
-                'status' => 'error',
-                'message' => 'Please select an image.'
-            ]);
-        }
-    
-        $validationRules = [
-            'email'    => 'required|valid_email|is_unique[tbl_account.username]', 
-            'password' => 'required|min_length[4]',
-            'role'     => 'required|in_list[user,administrator]'
-        ];
-    
-        if (!$this->validate($validationRules)) {
-            return $this->response->setJSON([
-                'status' => 'validation_error',
-                'errors' => $validation->getErrors()
-            ]);
-        }
-    
-        // Hash password
-        $hashedPassword = password_hash($this->request->getPost('password'), PASSWORD_DEFAULT);
-    
-        // Data to save
-        $data = [
-            'username'   => $this->request->getPost('email'), 
-            'firstname'  => $this->request->getPost('firstname'),
-            'middlename' => $this->request->getPost('middlename'),
-            'lastname'   => $this->request->getPost('lastname'),
-            'position'   => $this->request->getPost('position'),
-            'suffix'     => $this->request->getPost('suffix'),
-            'password'   => $hashedPassword,
-            'role'       => $this->request->getPost('role'),
-            'status'     => 1,
-            'token'      => bin2hex(random_bytes(32)),
-            'image'      => $imagePath, 
-        ];
-    
-        if ($model->insert($data)) {
-            return $this->response->setJSON([
-                'status' => 'success',
-                'message' => 'User Created Successfully!'
-            ]);
-        } else {
-            return $this->response->setJSON([
-                'status' => 'error',
-                'message' => 'Failed to create user.'
-            ]);
-        }
+public function createUser() 
+{
+    $validation = \Config\Services::validation();
+    $session = session();
+    $model = new UserModel();
+
+    // Define the upload path
+    $uploadPath = FCPATH . 'uploads/';
+
+    // Ensure the uploads directory exists
+    if (!is_dir($uploadPath)) {
+        mkdir($uploadPath, 0777, true); 
     }
+
+    $file = $this->request->getFile('profile_image');
+    if (!$file) {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'No file uploaded.'
+        ]);
+    }
+
+    if ($file->isValid() && !$file->hasMoved()) {
+        $newName = $file->getRandomName();
+        $file->move($uploadPath, $newName);
+
+        $imagePath = 'uploads/' . $newName;
+    } else {
+        $imagePath = null;
+    }
+
+    if (!$imagePath) {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Please select an image.'
+        ]);
+    }
+
+    $validationRules = [
+        'email'    => 'required|valid_email|is_unique[tbl_account.username]', 
+        'password' => 'required|min_length[4]',
+        'role'     => 'required|in_list[user,administrator]'
+    ];
+
+    if (!$this->validate($validationRules)) {
+        return $this->response->setJSON([
+            'status' => 'validation_error',
+            'errors' => $validation->getErrors()
+        ]);
+    }
+
+    // Hash password
+    $hashedPassword = password_hash($this->request->getPost('password'), PASSWORD_DEFAULT);
+
+    // Data to save
+    $data = [
+        'username'   => $this->request->getPost('email'), 
+        'firstname'  => $this->request->getPost('firstname'),
+        'middlename' => $this->request->getPost('middlename'),
+        'lastname'   => $this->request->getPost('lastname'),
+        'position'   => $this->request->getPost('position'),
+        'suffix'     => $this->request->getPost('suffix'),
+        'password'   => $hashedPassword,
+        'role'       => $this->request->getPost('role'),
+        'status'     => 1,
+        'token'      => bin2hex(random_bytes(32)),
+        'image'      => $imagePath, 
+    ];
+
+    if ($model->insert($data)) {
+        return $this->response->setJSON([
+            'status' => 'success',
+            'message' => 'User Created Successfully!'
+        ]);
+    } else {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Failed to create user.'
+        ]);
+    }
+}
+
     
     public function createEvent() 
     {
@@ -271,10 +280,25 @@ public function updateUser()
         }
     }
 
+    public function deactivateEvent()
+    {
+        $status = $this->request->getPost('status');
+        $id = $this->request->getPost('id');
+    
+        $eventModel = new EventModel();
+        $update = $eventModel->where('event_id', $id)->set('status', $status)->update();
+        if ($update) {
+            return $this->response->setStatusCode(200)->setJSON(['success' => true, 'message' => 'Event Deactivated!']);
+        } else {
+            return $this->response->setStatusCode(500)->setJSON(['error' => 'Failed to update user status']);
+        }
+
+    }
+
     public function viewEvents()
     {
         $eventModel = new EventModel();
-        $events = $eventModel->findAll();
+        $events = $eventModel->where('status', 1)->findAll();
 
         if ($events) {
             return $this->response->setJSON([
@@ -348,12 +372,5 @@ public function updateUser()
             return $this->response->setJSON(['success' => false, 'message' => 'Failed to update event']);
         }
     }
-    
-    
-    
-    
-
-
-
 }
 
