@@ -18,7 +18,11 @@
 
     <script src="<?= base_url('assets/DataTables/datatables.min.js') ?>"></script>
     <script src="<?= base_url('assets/js/apexcharts.min.js') ?>"></script>
-
+  <style>
+    .modal {
+      min-width: 150rem;
+    }
+  </style>
   </head>
   <body>
   <div class="success__indicator hide">
@@ -61,6 +65,7 @@
               >
               <p class="text-danger"></p>
             </div>
+
             <!-- 1 -->
             <div class="input__box">
               <input
@@ -88,14 +93,25 @@
               >
               <p class="text-danger"></p>
             </div>
-            <div class="input__box">
-              <input
+            <div class="input__box pos__rel">
+              <div class="select__chev__down">
+                <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M112 184l144 144 144-144"></path></svg>
+              </div>
+              <select                 
                 class="information__input"
                 value=""
                 placeholder="Enter suffix"
-                name="suffix"
-                
-              />
+                name="suffix">
+                <option disabled selected>Select one</option>
+                <option value="">None</option>
+                <option value="Jr.">Jr.</option>
+                <option value="Sr.">Sr.</option>
+                <option value="II">II</option>
+                <option value="III">III</option>
+                <option value="IV">IV</option>
+                <option value="V">V</option>
+                <option value="">Others</option>
+              </select>
               <span class="input__title"
                 >suffix<span class="red__dot">*</span></span
               >
@@ -171,27 +187,42 @@
             </div>
           </div>
           <div class="row">
-            <div class="input__box">
-              <input
+            <div class="input__box pos__rel">
+              <div class="select__chev__down">
+                <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M112 184l144 144 144-144"></path></svg>
+              </div>
+              <select
                 class="information__input"
                 value=""
                 placeholder="Enter Gender"
                 name="gender"
-                
-              />
+                >
+                <option disabled selected>Select one</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
               <span class="input__title"
                 >Gender<span class="red__dot">*</span></span
               >
               <p class="text-danger"></p>
             </div>
-            <div class="input__box">
-              <input
+            <div class="input__box pos__rel">
+              <div class="select__chev__down">
+                <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M112 184l144 144 144-144"></path></svg>
+              </div>
+              <select
                 class="information__input"
                 value=""
                 placeholder="Enter Civil Status"
                 name="civil_status"
-                
-              />
+                >
+                <option disabled selected>Select one</option>
+                <option value="Single">Single</option>
+                <option value="Married">Married</option>
+                <option value="Divorced">Divorced</option>
+                <option value="Separated">Separated</option>
+                <option value="Widowed">Widowed</option>
+              </select>
               <span class="input__title"
                 >Civil Status<span class="red__dot">*</span></span
               >
@@ -360,6 +391,15 @@
                 <p class="text-danger"></p>
               </div>
             </div>
+            <!-- STATUS -->
+            <div class="input__box">
+              <input
+                type="hidden"
+                class="information__input"
+                value="1"
+                name="status"
+              />
+            </div>
           </div>
         <!-- Emergency Contact END -->
           <div class="btn__box__modal">
@@ -498,7 +538,7 @@
             </div>
           </div>
           <div class="container">
-            <table id="example" class="display">
+            <table id="residentsTable" class="display">
               <thead class="thead">
                 <tr>
                   <th>#</th>
@@ -611,7 +651,7 @@
         data: formData,
         dataType: "json",
         beforeSend: function () {
-            $(".btn__secondary").prop("disabled", true).text("Submitting...");
+            $(".button__submit").prop("disabled", true).text("Submitting...");
         },
         success: function (response) {
             if (response.status === "success") { 
@@ -635,10 +675,108 @@
             alert("Something went wrong. Please try again.");
         },
         complete: function () {
-            $(".btn__secondary").prop("disabled", false).text("Submit");
+            $(".button__submit").prop("disabled", false).text("Submit");
         }
     });
 });
+const loadResidents = function() {
+    // Cache jQuery selectors
+    const $residentsTable = $("#residentsTable");
+    const $tableBody = $residentsTable.find("tbody");
+    
+    // Destroy existing DataTable instance if it exists
+    if ($.fn.DataTable.isDataTable($residentsTable)) {
+        $residentsTable.DataTable().destroy();
+    }
+    
+    // Show loading indicator
+    $tableBody.html('<tr><td colspan="10" class="text-center">Loading...</td></tr>');
+    
+    $.ajax({
+        url: "/admin/get-residents",
+        type: "GET",
+        dataType: "json",
+        cache: true,  // Enable caching if appropriate
+        success: function(response) {
+            if (response.success && response.data && response.data.length) {
+                const residents = response.data;
+                
+                // Build HTML in a single operation
+                let html = '';
+                for (let i = 0; i < residents.length; i++) {
+                    const resident = residents[i];
+                    html += `
+                        <tr>
+                            <td>${resident.resident_id}</td>
+                            <td>${resident.firstname} ${resident.middlename || ''} ${resident.lastname} ${resident.suffix || ''}</td>
+                            <td>${resident.birthdate || 'N/A'}</td>
+                            <td>${calculateAge(resident.birthdate)}</td>
+                            <td>${resident.civil_status || 'N/A'}</td>
+                            <td>${resident.gender || 'N/A'}</td>
+                            <td>${resident.voter_status ? 'Yes' : 'No'}</td>
+                            <td>${resident.family_head ? 'Yes' : 'No'}</td>
+                            <td>${resident.contact_no || 'N/A'}</td>
+                            <td>
+                                <button class="btn btn-primary action-btn" data-id="${resident.resident_id}">
+                                    View
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                }
+                
+                $tableBody.html(html);
+            } else {
+                $tableBody.html('<tr><td colspan="10" class="text-center">No residents found.</td></tr>');
+                console.log("No residents found.");
+            }
+            
+            // Initialize DataTable with optimal settings
+            $residentsTable.DataTable({
+                "processing": true,
+                "serverSide": false,
+                "order": [[0, "desc"]],
+                "language": {
+                    "emptyTable": "No residents found"
+                },
+                "pagingType": "simple_numbers"
+            });
+        },
+        error: function(xhr, status, error) {
+            $tableBody.html('<tr><td colspan="10" class="text-center">Error loading data</td></tr>');
+            console.error("AJAX Error:", error);
+        }
+    });
+};
+
+// Handle button click event
+$(document).on("click", ".action-btn", function() {
+    let residentId = $(this).data("id");
+    console.log("Resident ID Clicked:", residentId);
+    // Perform action based on resident_id
+});
+
+// Function to calculate age from birthdate
+function calculateAge(birthdate) {
+    if (!birthdate || birthdate === "N/A") return "N/A";
+    let birthDate = new Date(birthdate);
+    let today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    let monthDiff = today.getMonth() - birthDate.getMonth();
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+    return age;
+}
+
+// Load residents on document ready
+$(document).ready(function() {
+    loadResidents();
+});
+
+
+
+
 
 });
 

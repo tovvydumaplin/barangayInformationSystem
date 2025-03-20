@@ -380,7 +380,7 @@ public function createUser()
             $data = $this->request->getPost();
             log_message('debug', 'Received Data: ' . print_r($data, true));
     
-            $residentModel = new \App\Models\ResidentModel();
+            $residentModel = new ResidentModel();
     
             if ($residentModel->insert($data)) {
                 return $this->response->setJSON([
@@ -395,7 +395,18 @@ public function createUser()
             ]);
         }
     }
-    
+    public function loadResidents()
+    {
+        $residentModel = new ResidentModel();
+
+        $residents = $residentModel->where('status', '1')->findAll();
+
+        return $this->response->setJSON([
+            'success' => count($residents) > 0,
+            'data' => $residents
+        ]);
+    }
+
 
 }
 

@@ -426,3 +426,17 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
 .d__none {
   display: none;
 }
+.pos__rel {
+  position: relative;
+}
+
+.select__chev__down {
+  width: 2rem;
+  height: 2rem;
+  color: var(--black-color);
+  transition: all 0.3s ease;
+  position: absolute;
+  top: 50%;
+  right: 2rem;
+  transform: translateY(-50%);
+}
