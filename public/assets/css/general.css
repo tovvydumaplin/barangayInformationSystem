@@ -363,12 +363,13 @@ select {
   top: 3rem;
 }
 .success__indicator {
-  position: absolute;
+  position: fixed;
   width: 100%;
   top: 5rem;
   display: flex;
   justify-content: center;
   transition: all 0.3s ease;
+  z-index: 20;
 }
 .indicator__container {
   padding: 2rem 4rem;

@@ -22,6 +22,10 @@
     .modal {
       min-width: 150rem;
     }
+    .submit__box {
+      display: flex;
+      gap: 2rem;
+    }
   </style>
   </head>
   <body>
@@ -392,19 +396,17 @@
               </div>
             </div>
             <!-- STATUS -->
-            <div class="input__box">
               <input
                 type="hidden"
                 class="information__input"
                 value="1"
                 name="status"
               />
-            </div>
           </div>
         <!-- Emergency Contact END -->
-          <div class="btn__box__modal">
+          <div class="btn__box__modal submit__box">
             <span class="btn__secondary active btn__close">Close</span>
-            <button class="button__submit">Submit</submit>
+            <button class="button__submit btn__primary">Submit</submit>
           </div>
         </form>
       </div>
@@ -683,64 +685,86 @@ const loadResidents = function() {
     // Cache jQuery selectors
     const $residentsTable = $("#residentsTable");
     const $tableBody = $residentsTable.find("tbody");
-    
+
     // Destroy existing DataTable instance if it exists
     if ($.fn.DataTable.isDataTable($residentsTable)) {
         $residentsTable.DataTable().destroy();
     }
-    
+
     // Show loading indicator
     $tableBody.html('<tr><td colspan="10" class="text-center">Loading...</td></tr>');
-    
+
     $.ajax({
         url: "/admin/get-residents",
         type: "GET",
         dataType: "json",
-        cache: true,  // Enable caching if appropriate
+        cache: true,
         success: function(response) {
-            if (response.success && response.data && response.data.length) {
+            if (response.success && Array.isArray(response.data) && response.data.length) {
                 const residents = response.data;
                 
-                // Build HTML in a single operation
-                let html = '';
-                for (let i = 0; i < residents.length; i++) {
-                    const resident = residents[i];
-                    html += `
-                        <tr>
-                            <td>${resident.resident_id}</td>
-                            <td>${resident.firstname} ${resident.middlename || ''} ${resident.lastname} ${resident.suffix || ''}</td>
-                            <td>${resident.birthdate || 'N/A'}</td>
-                            <td>${calculateAge(resident.birthdate)}</td>
-                            <td>${resident.civil_status || 'N/A'}</td>
-                            <td>${resident.gender || 'N/A'}</td>
-                            <td>${resident.voter_status ? 'Yes' : 'No'}</td>
-                            <td>${resident.family_head ? 'Yes' : 'No'}</td>
-                            <td>${resident.contact_no || 'N/A'}</td>
-                            <td>
-                                <button class="btn btn-primary action-btn" data-id="${resident.resident_id}">
-                                    View
-                                </button>
-                            </td>
-                        </tr>
-                    `;
-                }
-                
-                $tableBody.html(html);
+                // Build data array for DataTables
+                const tableData = residents.map(resident => [
+                    resident.resident_id,
+                    `${resident.firstname} ${resident.middlename || ''} ${resident.lastname} ${resident.suffix || ''}`,
+                    resident.birthdate || 'N/A',
+                    resident.birthdate ? calculateAge(resident.birthdate) : 'N/A',
+                    resident.civil_status || 'N/A',
+                    resident.gender || 'N/A',
+                    resident.voter_status ? 'Yes' : 'No',
+                    resident.family_head ? 'Yes' : 'No',
+                    resident.contact_no || 'N/A',
+                    `<button class="btn btn-primary action-btn" data-id="${resident.resident_id}">View</button>`
+                ]);
+
+                // Initialize DataTable
+                $residentsTable.DataTable({
+                    "processing": true,
+                    "serverSide": false,
+                    "data": tableData,
+                    "columns": [
+                        { "title": "ID" },
+                        { "title": "Name" },
+                        { "title": "Birthdate" },
+                        { "title": "Age" },
+                        { "title": "Civil Status" },
+                        { "title": "Gender" },
+                        { "title": "Voter Status" },
+                        { "title": "Family Head" },
+                        { "title": "Contact No" },
+                        { "title": "Action", "orderable": false }
+                    ],
+                    "order": [[0, "desc"]],
+                    "language": {
+                        "emptyTable": "No residents found"
+                    },
+                    "pagingType": "simple_numbers"
+                });
+
             } else {
-                $tableBody.html('<tr><td colspan="10" class="text-center">No residents found.</td></tr>');
-                console.log("No residents found.");
+                // Initialize DataTable with empty data to prevent error
+                $residentsTable.DataTable({
+                    "processing": true,
+                    "serverSide": false,
+                    "data": [],
+                    "columns": [
+                        { "title": "ID" },
+                        { "title": "Name" },
+                        { "title": "Birthdate" },
+                        { "title": "Age" },
+                        { "title": "Civil Status" },
+                        { "title": "Gender" },
+                        { "title": "Voter Status" },
+                        { "title": "Family Head" },
+                        { "title": "Contact No" },
+                        { "title": "Action", "orderable": false }
+                    ],
+                    "language": {
+                        "emptyTable": "No residents found"
+                    },
+                    "pagingType": "simple_numbers"
+                });
             }
-            
-            // Initialize DataTable with optimal settings
-            $residentsTable.DataTable({
-                "processing": true,
-                "serverSide": false,
-                "order": [[0, "desc"]],
-                "language": {
-                    "emptyTable": "No residents found"
-                },
-                "pagingType": "simple_numbers"
-            });
         },
         error: function(xhr, status, error) {
             $tableBody.html('<tr><td colspan="10" class="text-center">Error loading data</td></tr>');
@@ -749,25 +773,25 @@ const loadResidents = function() {
     });
 };
 
-// Handle button click event
-$(document).on("click", ".action-btn", function() {
-    let residentId = $(this).data("id");
-    console.log("Resident ID Clicked:", residentId);
-    // Perform action based on resident_id
-});
-
-// Function to calculate age from birthdate
+// Function to calculate age safely
 function calculateAge(birthdate) {
-    if (!birthdate || birthdate === "N/A") return "N/A";
-    let birthDate = new Date(birthdate);
-    let today = new Date();
-    let age = today.getFullYear() - birthDate.getFullYear();
-    let monthDiff = today.getMonth() - birthDate.getMonth();
-    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+    if (!birthdate) return 'N/A';
+
+    const birthDateObj = new Date(birthdate);
+    if (isNaN(birthDateObj.getTime())) return 'N/A'; // Invalid date handling
+
+    const today = new Date();
+    let age = today.getFullYear() - birthDateObj.getFullYear();
+    const monthDiff = today.getMonth() - birthDateObj.getMonth();
+    
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDateObj.getDate())) {
         age--;
     }
+
     return age;
 }
+
+
 
 // Load residents on document ready
 $(document).ready(function() {
