@@ -52,7 +52,7 @@
       <div id="addResidentModal" class="modal">
         <div class="modal__header">
           <p class="modal__heading">Add Resident Information</p>
-          <button class="btn__secondary active">Edit Info</button>
+          <!-- <button class="btn__secondary active">Edit Info</button> -->
         </div>
         <form method="POST" class="modal__body community__modal">
           <div class="row">
@@ -410,6 +410,370 @@
           </div>
         </form>
       </div>
+      <!-- End of create modal -->
+      <!-- View/Update RESIDENT MODAL -->
+      <div id="viewResidentModal" class="modal">
+        <div class="modal__header">
+          <p class="modal__heading">View Resident Information</p>
+          <!-- <button class="btn__secondary active">Edit Info</button> -->
+        </div>
+        <form method="POST" class="modal__body community__modal">
+          <div class="row">
+            <!-- 1 -->
+            <div class="input__box">
+              <input
+                class="information__input"
+                value=""
+                placeholder="Enter fullname"
+                name="view_firstname"
+              />
+              <span class="input__title"
+                >Firstname<span class="red__dot">*</span></span
+              >
+              <p class="text-danger"></p>
+            </div>
+
+            <!-- 1 -->
+            <div class="input__box">
+              <input
+                class="information__input"
+                value=""
+                placeholder="Enter lastname"
+                name="view_lastname"
+              />
+              <span class="input__title"
+                >Lastname<span class="red__dot">*</span></span
+              >
+              <p class="text-danger"></p>
+            </div>
+            <!-- 1 -->
+            <div class="input__box">
+              <input
+                class="information__input"
+                value=""
+                placeholder="Enter middlename"
+                name="view_middlename"
+                
+              />
+              <span class="input__title"
+                >Middlename<span class="red__dot">*</span></span
+              >
+              <p class="text-danger"></p>
+            </div>
+            <div class="input__box pos__rel">
+              <div class="select__chev__down">
+                <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M112 184l144 144 144-144"></path></svg>
+              </div>
+              <select                 
+                class="information__input"
+                value=""
+                placeholder="Enter suffix"
+                name="view_suffix">
+                <option disabled selected>Select one</option>
+                <option value="">None</option>
+                <option value="Jr.">Jr.</option>
+                <option value="Sr.">Sr.</option>
+                <option value="II">II</option>
+                <option value="III">III</option>
+                <option value="IV">IV</option>
+                <option value="V">V</option>
+                <option value="">Others</option>
+              </select>
+              <span class="input__title"
+                >suffix<span class="red__dot">*</span></span
+              >
+              <p class="text-danger"></p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input__box">
+              <input
+                class="information__input"
+                value=""
+                placeholder="Enter contact-no"
+                name="view_contact_no"
+                
+              />
+              <span class="input__title"
+                >Contact No.<span class="red__dot">*</span></span
+              >
+              <p class="text-danger"></p>
+            </div>
+            <div class="input__box">
+              <input
+                type="date"
+                class="information__input"
+                value=""
+                placeholder="Enter Birthdate"
+                name="view_birthdate"
+                
+              />
+              <span class="input__title"
+                >Birthdate<span class="red__dot">*</span></span
+              >
+              <p class="text-danger"></p>
+            </div>
+            <div class="input__box">
+              <input
+                class="information__input"
+                value=""
+                placeholder="Enter Age"
+                name="view_age"
+                
+              />
+              <span class="input__title"
+                >Age<span class="red__dot">*</span></span
+              >
+              <p class="text-danger"></p>
+            </div>
+            <div class="input__box">
+              <input
+                class="information__input"
+                value=""
+                placeholder="Enter Birthplace"
+                name="view_birthplace"
+                
+              />
+              <span class="input__title"
+                >Birthplace<span class="red__dot">*</span></span
+              >
+              <p class="text-danger"></p>
+            </div>
+            <div class="input__box">
+              <input
+                class="information__input"
+                value=""
+                placeholder="Enter Citizenship"
+                name="view_citizenship"
+                
+              />
+              <span class="input__title"
+                >Citizenship<span class="red__dot">*</span></span
+              >
+              <p class="text-danger"></p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input__box pos__rel">
+              <div class="select__chev__down">
+                <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M112 184l144 144 144-144"></path></svg>
+              </div>
+              <select
+                class="information__input"
+                value=""
+                placeholder="Enter Gender"
+                name="view_gender"
+                >
+                <option disabled selected>Select one</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+              <span class="input__title"
+                >Gender<span class="red__dot">*</span></span
+              >
+              <p class="text-danger"></p>
+            </div>
+            <div class="input__box pos__rel">
+              <div class="select__chev__down">
+                <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M112 184l144 144 144-144"></path></svg>
+              </div>
+              <select
+                class="information__input"
+                value=""
+                placeholder="Enter Civil Status"
+                name="view_civil_status"
+                >
+                <option disabled selected>Select one</option>
+                <option value="Single">Single</option>
+                <option value="Married">Married</option>
+                <option value="Divorced">Divorced</option>
+                <option value="Separated">Separated</option>
+                <option value="Widowed">Widowed</option>
+              </select>
+              <span class="input__title"
+                >Civil Status<span class="red__dot">*</span></span
+              >
+              <p class="text-danger"></p>
+            </div>
+            <div class="input__box">
+              <input
+                class="information__input"
+                value=""
+                placeholder="Enter Occupation"
+                name="view_occupation"
+                
+              />
+              <span class="input__title"
+                >Occupation<span class="red__dot">*</span></span
+              >
+              <p class="text-danger"></p>
+            </div>
+            <div class="input__box">
+              <input
+                class="information__input"
+                value=""
+                placeholder="Enter Religion"
+                name="view_religion"
+                
+              />
+              <span class="input__title"
+                >Religion<span class="red__dot">*</span></span
+              >
+              <p class="text-danger"></p>
+            </div>
+          </div>
+          <div class="row margin__bottom__2">
+            <!-- Disabled Radio -->
+            <div class="radio__box">
+              <p class="radio__heading">
+                Person with Disablity<span class="red__dot">*</span>
+              </p>
+              <div class="radio__buttons">
+                <div class="radio__btn__container">
+                  <input type="radio" class="radio__btn" name="view_is_pwd" value="1" />
+                  <span class="yes">Yes</span>
+                </div>
+                <div class="radio__btn__container">
+                  <input type="radio" class="radio__btn" name="view_is_pwd" value="0" />
+                  <span class="no">No</span>
+                </div>
+              </div>
+            </div>
+            <!-- Voters Radio -->
+            <div class="radio__box">
+              <p class="radio__heading">
+                Voters of Barangay<span class="red__dot">*</span>
+              </p>
+              <div class="radio__buttons">
+                <div class="radio__btn__container">
+                  <input type="radio" class="radio__btn" name="view_is_voter_of_barangay" value="1" />
+                  <span class="yes">Yes</span>
+                </div>
+                <div class="radio__btn__container">
+                  <input type="radio" class="radio__btn" name="view_is_voter_of_barangay" value="0" />
+                  <span class="no">No</span>
+                </div>
+              </div>
+            </div>
+            <!-- Head Radio -->
+            <div class="radio__box">
+              <p class="radio__heading">
+                Head of the Family<span class="red__dot">*</span>
+              </p>
+
+              <div class="radio__buttons">
+                <div class="radio__btn__container">
+                  <input type="radio" name="view_is_family_head" class="radio__btn" value="1" />
+                  <span class="yes">Yes</span>
+                </div>
+                <div class="radio__btn__container">
+                  <input type="radio" name="view_is_family_head" class="radio__btn" value="0" />
+                  <span class="no">No</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Household info | Show only when head of family is no/0 -->
+
+          <div class="row flex__d__col house__info">
+            <p class="modal__subheading">Household Information</p>
+            <div class="row">
+              <div class="input__box">
+                <input
+                  class="information__input"
+                  value=""
+                  placeholder="Enter Household Ownership"
+                  name="view_household_name"  
+                />
+                <span class="input__title">Household Ownership<span class="red__dot">*</span></span>
+                <p class="text-danger"></p>
+              </div>
+              <div class="input__box">
+                <input
+                  class="information__input"
+                  value=""
+                  placeholder="Enter House No."
+                  name="view_house_no"
+                />
+                <span class="input__title"
+                  >House No.<span class="red__dot">*</span></span
+                >
+                <p class="text-danger"></p>
+              </div>
+              <div class="input__box">
+                <input
+                  class="information__input"
+                  value=""
+                  placeholder="Enter Street"
+                  name="view_street"
+                  
+                />
+                <span class="input__title"
+                  >Street<span class="red__dot">*</span></span
+                >
+                <p class="text-danger"></p>
+              </div>
+            </div>
+          </div>
+          <!-- Household Info End -->
+
+          <!-- Emergency Contact -->
+          <div class="row flex__d__col ">
+            <p class="modal__subheading">Emergency Contact Information</p>
+            <div class="row">
+              <div class="input__box">
+                <input
+                  class="information__input"
+                  value=""
+                  placeholder="Enter fullname"
+                  name="view_contact_name"  
+                />
+                <span class="input__title">Fullname<span class="red__dot">*</span></span>
+                <p class="text-danger"></p>
+              </div>
+              <div class="input__box">
+                <input
+                  class="information__input"
+                  value=""
+                  placeholder="Enter Contact No."
+                  name="view_emergency_contact_no"
+                  
+                />
+                <span class="input__title"
+                  >Contact No.<span class="red__dot">*</span></span
+                >
+                <p class="text-danger"></p>
+              </div>
+              <div class="input__box">
+                <input
+                  class="information__input"
+                  value=""
+                  placeholder="Enter relationship"
+                  name="view_contact_relationship"
+                  
+                />
+                <span class="input__title"
+                  >Relationship<span class="red__dot">*</span></span
+                >
+                <p class="text-danger"></p>
+              </div>
+            </div>
+            <!-- STATUS -->
+              <input
+                type="hidden"
+                class="information__input"
+                value="1"
+                name="view_status"
+              />
+          </div>
+        <!-- Emergency Contact END -->
+          <div class="btn__box__modal submit__box">
+            <span class="btn__secondary active btn__close">Close</span>
+            <!-- <button class="button__submit btn__primary">Edit</submit> -->
+          </div>
+        </form>
+      </div>
+      <!-- End of view/update modal -->
       <div class="container">
         <div class="heading__box">
           <div class="tab__container">
@@ -545,13 +909,13 @@
                 <tr>
                   <th>#</th>
                   <th>Name</th>
-                  <th>Birthdate</th>
+                  <!-- <th>Birthdate</th> -->
                   <th>Age</th>
                   <th>Civil Status</th>
                   <th>Gender</th>
-                  <th>Voter</th>
+                  <!-- <th>Voter</th>
                   <th>Family Head</th>
-                  <th>Contact No.</th>
+                  <th>Contact No.</th> -->
                   <th>Action</th>
                 </tr>
               </thead>
@@ -578,10 +942,10 @@
     ></script>
 
     <script>
-  $(".table__button").on("click", function () {
+  const openModal = function() {
     $(".wrapper").addClass("open");
-    $("#viewResidentProfileModal").addClass("open");
-  });
+    $("#viewResidentModal").addClass("open");
+  }
 
   $(".btn__add__resident").on("click", function () {
     $(".wrapper").addClass("open");
@@ -589,16 +953,16 @@
   });
 
   $(".wrapper").on("click", function () {
-    $(".wrapper, #viewResidentProfileModal, #addResidentModal").removeClass("open");
+    $(".wrapper, #viewResidentModal, #addResidentModal").removeClass("open");
   });
 
   $(".btn__close").on("click", function () {
-    $(".wrapper, #viewResidentProfileModal, #addResidentModal").removeClass("open");
+    $(".wrapper, #viewResidentModal, #addResidentModal").removeClass("open");
   });
 
   $(document).on("keydown", function (event) {
     if (event.key === "Escape") {
-      $(".wrapper, #viewResidentProfileModal, #addResidentModal").removeClass("open");
+      $(".wrapper, #viewResidentModal, #addResidentModal").removeClass("open");
     }
   });
 
@@ -642,7 +1006,98 @@
       }
     });
     $(document).ready(function () {
-      $(".community__modal").on("submit", function (e) {
+
+const loadResidents = function() {
+
+    const $residentsTable = $("#residentsTable");
+    const $tableBody = $residentsTable.find("tbody");
+
+    // Destroy existing DataTable instance if it exists
+    if ($.fn.DataTable.isDataTable($residentsTable)) {
+        $residentsTable.DataTable().destroy();
+    }
+
+    // Loading
+    $tableBody.html('<tr><td colspan="10" class="text-center">Loading...</td></tr>');
+
+    $.ajax({
+        url: "/admin/get-residents",
+        type: "GET",
+        dataType: "json",
+        cache: true,
+        success: function(response) {
+            if (response.success && Array.isArray(response.data) && response.data.length) {
+                const residents = response.data;
+                const tableData = residents.map(resident => [
+                    resident.resident_id,
+                    `${resident.firstname} ${resident.middlename || ''} ${resident.lastname} ${resident.suffix || ''}`,
+                    // resident.birthdate || 'N/A',
+                    resident.birthdate ? calculateAge(resident.birthdate) : 'N/A',
+                    resident.civil_status || 'N/A',
+                    resident.gender || 'N/A',
+                    // resident.voter_status ? 'Yes' : 'No',
+                    // resident.family_head ? 'Yes' : 'No',
+                    // resident.contact_no || 'N/A',
+                    `<button class="btn__primary view__resident__btn action-btn" data-id="${resident.resident_id}">View</button>`
+                ]);
+
+                // Initialize DataTable
+                $residentsTable.DataTable({
+                    "processing": true,
+                    "serverSide": false,
+                    "data": tableData,
+                    "columns": [
+                        { "title": "ID" },
+                        { "title": "Name" },
+                        // { "title": "Birthdate" },
+                        { "title": "Age" },
+                        { "title": "Civil Status" },
+                        { "title": "Gender" },
+                        // { "title": "Voter Status" },
+                        // { "title": "Family Head" },
+                        // { "title": "Contact No" },
+                        { "title": "Action", "orderable": false }
+                    ],
+                    "order": [[0, "desc"]],
+                    "language": {
+                        "emptyTable": "No residents found"
+                    },
+                    "pagingType": "simple_numbers"
+                });
+
+            } else {
+                // Initialize DataTable with empty data to prevent error
+                $residentsTable.DataTable({
+                    "processing": true,
+                    "serverSide": false,
+                    "data": [],
+                    "columns": [
+                        { "title": "ID" },
+                        { "title": "Name" },
+                        // { "title": "Birthdate" },
+                        { "title": "Age" },
+                        { "title": "Civil Status" },
+                        { "title": "Gender" },
+                        // { "title": "Voter" },
+                        // { "title": "Family Head" },
+                        // { "title": "Contact No" },
+                        { "title": "Action", "orderable": false }
+                    ],
+                    "language": {
+                        "emptyTable": "No residents found"
+                    },
+                    "pagingType": "simple_numbers"
+                });
+            }
+        },
+        error: function(xhr, status, error) {
+            $tableBody.html('<tr><td colspan="10" class="text-center">Error loading data</td></tr>');
+            console.error("AJAX Error:", error);
+        }
+    });
+};
+
+$(".community__modal").on("submit", function (e) {
     e.preventDefault();
 
     let formData = $(this).serialize();
@@ -663,11 +1118,10 @@
                 setTimeout(function () {
                     $(".success__indicator").addClass("hide");
                 }, 3000);
-
-                // ✅ Properly close the modal
+                loadResidents();
                 closeModal();
             } else {
-                $(".text-danger").text(""); // Clear previous errors
+                $(".text-danger").text(""); 
                 $.each(response.errors, function (key, value) {
                     $("input[name='" + key + "']").siblings(".text-danger").text(value);
                 });
@@ -681,99 +1135,7 @@
         }
     });
 });
-const loadResidents = function() {
-    // Cache jQuery selectors
-    const $residentsTable = $("#residentsTable");
-    const $tableBody = $residentsTable.find("tbody");
 
-    // Destroy existing DataTable instance if it exists
-    if ($.fn.DataTable.isDataTable($residentsTable)) {
-        $residentsTable.DataTable().destroy();
-    }
-
-    // Show loading indicator
-    $tableBody.html('<tr><td colspan="10" class="text-center">Loading...</td></tr>');
-
-    $.ajax({
-        url: "/admin/get-residents",
-        type: "GET",
-        dataType: "json",
-        cache: true,
-        success: function(response) {
-            if (response.success && Array.isArray(response.data) && response.data.length) {
-                const residents = response.data;
-                
-                // Build data array for DataTables
-                const tableData = residents.map(resident => [
-                    resident.resident_id,
-                    `${resident.firstname} ${resident.middlename || ''} ${resident.lastname} ${resident.suffix || ''}`,
-                    resident.birthdate || 'N/A',
-                    resident.birthdate ? calculateAge(resident.birthdate) : 'N/A',
-                    resident.civil_status || 'N/A',
-                    resident.gender || 'N/A',
-                    resident.voter_status ? 'Yes' : 'No',
-                    resident.family_head ? 'Yes' : 'No',
-                    resident.contact_no || 'N/A',
-                    `<button class="btn btn-primary action-btn" data-id="${resident.resident_id}">View</button>`
-                ]);
-
-                // Initialize DataTable
-                $residentsTable.DataTable({
-                    "processing": true,
-                    "serverSide": false,
-                    "data": tableData,
-                    "columns": [
-                        { "title": "ID" },
-                        { "title": "Name" },
-                        { "title": "Birthdate" },
-                        { "title": "Age" },
-                        { "title": "Civil Status" },
-                        { "title": "Gender" },
-                        { "title": "Voter Status" },
-                        { "title": "Family Head" },
-                        { "title": "Contact No" },
-                        { "title": "Action", "orderable": false }
-                    ],
-                    "order": [[0, "desc"]],
-                    "language": {
-                        "emptyTable": "No residents found"
-                    },
-                    "pagingType": "simple_numbers"
-                });
-
-            } else {
-                // Initialize DataTable with empty data to prevent error
-                $residentsTable.DataTable({
-                    "processing": true,
-                    "serverSide": false,
-                    "data": [],
-                    "columns": [
-                        { "title": "ID" },
-                        { "title": "Name" },
-                        { "title": "Birthdate" },
-                        { "title": "Age" },
-                        { "title": "Civil Status" },
-                        { "title": "Gender" },
-                        { "title": "Voter Status" },
-                        { "title": "Family Head" },
-                        { "title": "Contact No" },
-                        { "title": "Action", "orderable": false }
-                    ],
-                    "language": {
-                        "emptyTable": "No residents found"
-                    },
-                    "pagingType": "simple_numbers"
-                });
-            }
-        },
-        error: function(xhr, status, error) {
-            $tableBody.html('<tr><td colspan="10" class="text-center">Error loading data</td></tr>');
-            console.error("AJAX Error:", error);
-        }
-    });
-};
-
-// Function to calculate age safely
 function calculateAge(birthdate) {
     if (!birthdate) return 'N/A';
 
@@ -791,6 +1153,58 @@ function calculateAge(birthdate) {
     return age;
 }
 
+$(document).on("click", ".view__resident__btn", function () {          
+  let residentId = $(this).data("id"); 
+  $("#viewResidentModal").data("id", residentId); 
+  viewResidentData(residentId); 
+  openModal();
+});
+
+
+const viewResidentData = function(residentId) {                  // Resident Details on button click        
+    $.ajax({
+        url: "<?= base_url('admin/get-resident-details') ?>", 
+        type: "GET",
+        data: { resident_id: residentId }, 
+        dataType: "json",
+        success: function (response) {
+            if (response.success) {
+                // Populate modal fields
+                $("input[name='view_firstname']").val(response.data.firstname);
+                $("textarea[name='view_lastname']").val(response.data.lastname);
+                $("input[name='view_middlename']").val(response.data.middlename);
+                $("input[name='view_suffix']").val(response.data.suffix);
+                $("input[name='view_contact_no']").val(response.data.contact_no);
+                $("input[name='view_birthdate']").val(response.data.birthdate);
+                $("input[name='view_age']").val(response.data.age);
+                $("input[name='view_birthplace']").val(response.data.birthplace);
+                $("input[name='view_citizenship']").val(response.data.citizenship);
+                $("input[name='view_gender']").val(response.data.gender);
+                $("input[name='view_civil_status']").val(response.data.civil_status);
+                $("input[name='view_occupation']").val(response.data.occupation);
+                $("input[name='view_religion']").val(response.data.religion);
+                // Set the respective radio button as selected
+                $("input[name='view_is_pwd'][value='" + response.data.is_pwd + "']").prop("checked", true);
+                $("input[name='view_is_voter_of_barangay'][value='" + response.data.is_voter_of_barangay + "']").prop("checked", true);
+                $("input[name='view_is_family_head'][value='" + response.data.is_family_head + "']").prop("checked", true);
+                $("input[name='view_household_name']").val(response.data.household_name);
+                $("input[name='view_house_no']").val(response.data.house_no);
+                $("input[name='view_street']").val(response.data.street);
+                $("input[name='view_contact_name']").val(response.data.contact_name);
+                $("input[name='view_emergency_contact_no']").val(response.data.emergency_contact_no);
+                $("input[name='view_contact_relationship']").val(response.data.contact_relationship);
+                // Open modal
+                // $(".wrapper").addClass("open");
+                // $("#viewEventModal").addClass("open");
+            } else {
+                alert("Failed to fetch resident details.");
+            }
+        },
+        error: function () {
+            alert("An error occurred while fetching resident details.");
+        }
+    });
+}
 
 
 // Load residents on document ready

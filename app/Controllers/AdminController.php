@@ -407,6 +407,32 @@ public function createUser()
         ]);
     }
 
-
+    public function getResidentDetails()
+    {
+        $residentModel = new ResidentModel();
+        $residentId = $this->request->getGet('resident_id');
+    
+        if (!$residentId) {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Resident ID is required'
+            ]);
+        }
+    
+        $resident = $residentModel->where('resident_id', $residentId)->first();
+    
+        if ($resident) {
+            return $this->response->setJSON([
+                'success' => true,
+                'data' => $resident
+            ]);
+        } else {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Resident not found'
+            ]);
+        }
+    }
+    
 }
 

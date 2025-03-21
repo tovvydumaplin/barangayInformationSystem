@@ -382,61 +382,82 @@ const updateEvent = function(saveBtn) {                       // Update Event Fu
           }
       });
 }
-const loadEventData = function() {                            
-  $.ajax({
-      url: "<?= base_url('admin/get-events') ?>",
-      type: "GET",
-      dataType: "json",
-      success: function (response) {
-          if (response.success) {
-              let eventTable = $("#eventTable");
-              
-              // Destroy existing DataTable if initialized
-              if ($.fn.DataTable.isDataTable(eventTable)) {
-                  eventTable.DataTable().destroy();
-              }
+const loadEventData = function () {
+    const $eventTable = $("#eventTable");
+    const $tableBody = $eventTable.find("tbody");
 
-              let tbody = eventTable.find("tbody");
-              tbody.empty();
+    // Destroy DataTable if it exists
+    if ($.fn.DataTable.isDataTable($eventTable)) {
+        $eventTable.DataTable().destroy();
+    }
 
-              // Generate rows dynamically
-              let rows = response.data.map((event, index) => `
-                  <tr>
-                      <td>${index + 1}</td>
-                      <td class="event__title" title="${event.event_title}">${event.event_title}</td>
-                      <td>${event.event_description}</td>
-                      <td>${event.start_date}</td>
-                      <td>${event.end_date}</td>
-                      <td>
-                          <button class="btn__primary table__button" data-id="${event.event_id}">View</button>
-                      </td>
-                  </tr>
-              `).join("");
+    // Show loading message
+    $tableBody.html('<tr><td colspan="6" class="text-center">Loading...</td></tr>');
 
-              tbody.append(rows); 
+    $.ajax({
+        url: "<?= base_url('admin/get-events') ?>",
+        type: "GET",
+        dataType: "json",
+        cache: false,
+        success: function (response) {
+            if (response.success && Array.isArray(response.data) && response.data.length) {
+                const tableData = response.data.map((event, index) => [
+                    index + 1,
+                    event.event_title,
+                    event.event_description,
+                    event.start_date,
+                    event.end_date,
+                    `<button class="btn__primary table__button" data-id="${event.event_id}">View</button>`
+                ]);
 
-              // Initialize DataTable with custom column sizing
-              eventTable.DataTable({
-                  "order": [[0, "desc"]],
-                  "autoWidth": false, // Disable automatic column sizing
-                  "columnDefs": [
-                      { "width": "50px", "targets": 0 },  // ID column fits content
-                      { "width": "200px", "targets": 1 }, // Event title
-                      { "width": "300px", "targets": 2 }, // Description
-                      { "width": "200px", "targets": 3 }, // Start Date
-                      { "width": "200px", "targets": 4 }, // End Date
-                      { "width": "100px", "targets": 5, "orderable": false } // Action buttons
-                  ]
-              });
-          } else {
-              console.log("Failed to load events: ", response.message);
-          }
-      },
-      error: function (xhr, status, error) {
-          console.error("AJAX Error: ", error);
-      }
-  });
-}
+                // Initialize DataTable with data
+                $eventTable.DataTable({
+                    "processing": true,
+                    "serverSide": false,
+                    "data": tableData,
+                    "columns": [
+                        { "title": "#" },
+                        { "title": "Title" },
+                        { "title": "Description" },
+                        { "title": "Start Date" },
+                        { "title": "End Date" },
+                        { "title": "Action", "orderable": false }
+                    ],
+                    "order": [[0, "desc"]],
+                    "language": {
+                        "emptyTable": "No events available"
+                    },
+                    "pagingType": "simple_numbers"
+                });
+
+            } else {
+                // Initialize empty DataTable if no data
+                $eventTable.DataTable({
+                    "processing": true,
+                    "serverSide": false,
+                    "data": [],
+                    "columns": [
+                        { "title": "#" },
+                        { "title": "Title" },
+                        { "title": "Description" },
+                        { "title": "Start Date" },
+                        { "title": "End Date" },
+                        { "title": "Action", "orderable": false }
+                    ],
+                    "language": {
+                        "emptyTable": "No events available"
+                    },
+                    "pagingType": "simple_numbers"
+                });
+            }
+        },
+        error: function (xhr, status, error) {
+            $tableBody.html('<tr><td colspan="6" class="text-center">Error loading events</td></tr>');
+            console.error("AJAX Error:", error);
+        }
+    });
+};
+
 
 const createEvent = function() {                              // Create Events
   let formData = {

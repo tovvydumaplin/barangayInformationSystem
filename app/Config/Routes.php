@@ -51,3 +51,5 @@ $routes->post('/admin/deactivate-event', 'AdminController::deactivateEvent');
 $routes->post('/admin/create-resident','AdminController::createResident');
 // View all residents
 $routes->get('admin/get-residents', 'AdminController::loadResidents');
+// View resident
+$routes->get('admin/get-resident-details','AdminController::getResidentDetails');

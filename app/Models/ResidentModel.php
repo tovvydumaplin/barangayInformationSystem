@@ -13,7 +13,8 @@ class ResidentModel extends Model
         'firstname', 'middlename', 'lastname', 'suffix', 'contact_no',
         'birthdate', 'birthplace', 'citizenship', 'gender', 'civil_status',
         'occupation', 'religion', 'is_pwd', 'is_voter_of_barangay', 
-        'is_family_head', 'household_name', 'house_no', 'street', 'status'
+        'is_family_head', 'household_name', 'house_no', 'street', 'status', 'contact_name'
+        ,'emergency_contact_no','contact_relationship'
     ];
 
     protected $useTimestamps = true;
