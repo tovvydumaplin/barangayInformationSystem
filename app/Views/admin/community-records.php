@@ -26,9 +26,20 @@
       display: flex;
       gap: 2rem;
     }
+    .icon__close {
+      cursor: pointer;
+    }
   </style>
   </head>
   <body>
+  <div class="custom__loader hide">
+    <svg class="pl" width="240" height="240" viewBox="0 0 240 240">
+      <circle class="pl__ring pl__ring--a" cx="120" cy="120" r="105" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 660" stroke-dashoffset="-330" stroke-linecap="round"></circle>
+      <circle class="pl__ring pl__ring--b" cx="120" cy="120" r="35" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 220" stroke-dashoffset="-110" stroke-linecap="round"></circle>
+      <circle class="pl__ring pl__ring--c" cx="85" cy="120" r="70" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 440" stroke-linecap="round"></circle>
+      <circle class="pl__ring pl__ring--d" cx="155" cy="120" r="70" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 440" stroke-linecap="round"></circle>
+    </svg>
+  </div>
   <div class="success__indicator hide">
     <div class="indicator__container">
       <div class="icon__link">
@@ -52,6 +63,9 @@
       <div id="addResidentModal" class="modal">
         <div class="modal__header">
           <p class="modal__heading">Add Resident Information</p>
+          <div class="icon__link icon__close">
+            <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M368 368L144 144M368 144L144 368"/></svg>
+          </div>
           <!-- <button class="btn__secondary active">Edit Info</button> -->
         </div>
         <form method="POST" class="modal__body community__modal">
@@ -416,6 +430,9 @@
         <div class="modal__header">
           <p class="modal__heading">View Resident Information</p>
           <!-- <button class="btn__secondary active">Edit Info</button> -->
+          <div class="icon__link icon__close">
+            <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M368 368L144 144M368 144L144 368"/></svg>
+          </div>
         </div>
         <form method="POST" class="modal__body community__modal">
           <div class="row">
@@ -992,6 +1009,7 @@
     <script>
     const closeModal = function() {
       $("#addResidentModal").removeClass("open");
+      $("#viewResidentModal").removeClass("open");
       $(".wrapper").removeClass("open");
     }
 
@@ -1007,8 +1025,16 @@
     });
     $(document).ready(function () {
 
-const loadResidents = function() {
+const customLoaderOn = function() {
+  $('.custom__loader').removeClass('hide');
+}
+const customLoaderOff = function() {
+  $('.custom__loader').addClass('hide');
+}
 
+
+const loadResidents = function() {
+  customLoaderOn();
     const $residentsTable = $("#residentsTable");
     const $tableBody = $residentsTable.find("tbody");
 
@@ -1089,6 +1115,7 @@ const loadResidents = function() {
                     "pagingType": "simple_numbers"
                 });
             }
+            customLoaderOff();
         },
         error: function(xhr, status, error) {
             $tableBody.html('<tr><td colspan="10" class="text-center">Error loading data</td></tr>');
@@ -1159,6 +1186,10 @@ $(document).on("click", ".view__resident__btn", function () {
   viewResidentData(residentId); 
   openModal();
 });
+
+$('.icon__close').on("click", function(){
+  closeModal();
+})
 
 
 const viewResidentData = function(residentId) {                  // Resident Details on button click        

@@ -1,0 +1,237 @@
+DEBUG - 2025-03-22 01:58:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-22 02:06:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-22 02:06:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-22 02:06:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-22 02:07:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-22 02:54:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-22 02:54:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-22 02:55:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-22 02:56:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-22 02:56:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-22 02:57:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-22 02:57:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-22 03:02:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-22 03:05:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-22 03:06:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-22 03:07:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-22 03:07:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-22 03:08:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-22 03:08:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-22 03:08:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-22 03:11:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-22 03:11:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-22 03:11:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-22 03:11:13 --> Received Data: Array
+(
+    [firstname] => 
+    [lastname] => 
+    [middlename] => 
+    [contact_no] => 
+    [birthdate] => 
+    [age] => 
+    [birthplace] => 
+    [citizenship] => 
+    [occupation] => 
+    [religion] => 
+    [household_name] => 
+    [house_no] => 
+    [street] => 
+    [contact_name] => 
+    [emergency_contact_no] => 
+    [contact_relationship] => 
+    [status] => 1
+)
+
+ERROR - 2025-03-22 03:11:13 --> mysqli_sql_exception: Unknown column 'contact_name' in 'field list' in C:\BarangayInformationSystem\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\BarangayInformationSystem\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `tb...', 0)
+#1 C:\BarangayInformationSystem\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tb...')
+#2 C:\BarangayInformationSystem\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tb...')
+#3 C:\BarangayInformationSystem\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tb...', Array, false)
+#4 C:\BarangayInformationSystem\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\BarangayInformationSystem\system\BaseModel.php(839): CodeIgniter\Model->doInsert(Array)
+#6 C:\BarangayInformationSystem\system\Model.php(800): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\BarangayInformationSystem\app\Controllers\AdminController.php(385): CodeIgniter\Model->insert(Array)
+#8 C:\BarangayInformationSystem\system\CodeIgniter.php(933): App\Controllers\AdminController->createResident()
+#9 C:\BarangayInformationSystem\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#10 C:\BarangayInformationSystem\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\BarangayInformationSystem\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#12 C:\BarangayInformationSystem\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\BarangayInformationSystem\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 C:\BarangayInformationSystem\system\rewrite.php(44): require_once('C:\\BarangayInfo...')
+#15 {main}
+CRITICAL - 2025-03-22 03:11:14 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'contact_name' in 'field list'
+[Method: POST, Route: admin/create-resident]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_residents` (`firstname`, `lastname`, `middlename`, `contact_no`, `birthdate`, `birthplace`, `citizenship`, `occupation`, `religion`, `household_name`, `house_no`, `street`, `contact_name`, `emergency_contact_no`, `contact_relationship`, `status`, `created_at`, `updated_at`) VALUES (:firstname:, :lastname:, :middlename:, :contact_no:, :birthdate:, :birthplace:, :citizenship:, :occupation:, :religion:, :household_name:, :house_no:, :street:, :contact_name:, :emergency_contact_no:, :contact_relationship:, :status:, :created_at:, :updated_at:)', [...], false)
+ 2 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 5 APPPATH\Controllers\AdminController.php(385): CodeIgniter\Model->insert([...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->createResident()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-03-22 03:11:14 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'contact_name' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tbl_residents` (`firstname`, `lastname`, `middlename`, `contact_no`, `birthdate`, `birthplace`, `citizenship`, `occupation`, `religion`, `household_name`, `house_no`, `street`, `contact_name`, `emergency_contact_no`, `contact_relationship`, `status`, `created_at`, `updated_at`) VALUES (\'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'1\', \'2025-03-22 03:11:13\', \'2025-03-22 03:11:13\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tbl_residents` (`firstname`, `lastname`, `middlename`, `contact_no`, `birthdate`, `birthplace`, `citizenship`, `occupation`, `religion`, `household_name`, `house_no`, `street`, `contact_name`, `emergency_contact_no`, `contact_relationship`, `status`, `created_at`, `updated_at`) VALUES (\'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'1\', \'2025-03-22 03:11:13\', \'2025-03-22 03:11:13\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_residents` (`firstname`, `lastname`, `middlename`, `contact_no`, `birthdate`, `birthplace`, `citizenship`, `occupation`, `religion`, `household_name`, `house_no`, `street`, `contact_name`, `emergency_contact_no`, `contact_relationship`, `status`, `created_at`, `updated_at`) VALUES (:firstname:, :lastname:, :middlename:, :contact_no:, :birthdate:, :birthplace:, :citizenship:, :occupation:, :religion:, :household_name:, :house_no:, :street:, :contact_name:, :emergency_contact_no:, :contact_relationship:, :status:, :created_at:, :updated_at:)', [...], false)
+ 4 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 7 APPPATH\Controllers\AdminController.php(385): CodeIgniter\Model->insert([...])
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->createResident()
+ 9 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-03-22 03:11:14 --> [Caused by] mysqli_sql_exception: Unknown column 'contact_name' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `tbl_residents` (`firstname`, `lastname`, `middlename`, `contact_no`, `birthdate`, `birthplace`, `citizenship`, `occupation`, `religion`, `household_name`, `house_no`, `street`, `contact_name`, `emergency_contact_no`, `contact_relationship`, `status`, `created_at`, `updated_at`) VALUES (\'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'1\', \'2025-03-22 03:11:13\', \'2025-03-22 03:11:13\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tbl_residents` (`firstname`, `lastname`, `middlename`, `contact_no`, `birthdate`, `birthplace`, `citizenship`, `occupation`, `religion`, `household_name`, `house_no`, `street`, `contact_name`, `emergency_contact_no`, `contact_relationship`, `status`, `created_at`, `updated_at`) VALUES (\'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'1\', \'2025-03-22 03:11:13\', \'2025-03-22 03:11:13\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tbl_residents` (`firstname`, `lastname`, `middlename`, `contact_no`, `birthdate`, `birthplace`, `citizenship`, `occupation`, `religion`, `household_name`, `house_no`, `street`, `contact_name`, `emergency_contact_no`, `contact_relationship`, `status`, `created_at`, `updated_at`) VALUES (\'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'1\', \'2025-03-22 03:11:13\', \'2025-03-22 03:11:13\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_residents` (`firstname`, `lastname`, `middlename`, `contact_no`, `birthdate`, `birthplace`, `citizenship`, `occupation`, `religion`, `household_name`, `house_no`, `street`, `contact_name`, `emergency_contact_no`, `contact_relationship`, `status`, `created_at`, `updated_at`) VALUES (:firstname:, :lastname:, :middlename:, :contact_no:, :birthdate:, :birthplace:, :citizenship:, :occupation:, :religion:, :household_name:, :house_no:, :street:, :contact_name:, :emergency_contact_no:, :contact_relationship:, :status:, :created_at:, :updated_at:)', [...], false)
+ 5 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 8 APPPATH\Controllers\AdminController.php(385): CodeIgniter\Model->insert([...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->createResident()
+10 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+11 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+15 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+DEBUG - 2025-03-22 03:11:24 --> Received Data: Array
+(
+    [firstname] => 
+    [lastname] => 
+    [middlename] => 
+    [contact_no] => 
+    [birthdate] => 
+    [age] => 
+    [birthplace] => 
+    [citizenship] => 
+    [occupation] => 
+    [religion] => 
+    [household_name] => 
+    [house_no] => 
+    [street] => 
+    [contact_name] => 
+    [emergency_contact_no] => 
+    [contact_relationship] => 
+    [status] => 1
+)
+
+ERROR - 2025-03-22 03:11:24 --> mysqli_sql_exception: Unknown column 'contact_name' in 'field list' in C:\BarangayInformationSystem\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\BarangayInformationSystem\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `tb...', 0)
+#1 C:\BarangayInformationSystem\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tb...')
+#2 C:\BarangayInformationSystem\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tb...')
+#3 C:\BarangayInformationSystem\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tb...', Array, false)
+#4 C:\BarangayInformationSystem\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\BarangayInformationSystem\system\BaseModel.php(839): CodeIgniter\Model->doInsert(Array)
+#6 C:\BarangayInformationSystem\system\Model.php(800): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\BarangayInformationSystem\app\Controllers\AdminController.php(385): CodeIgniter\Model->insert(Array)
+#8 C:\BarangayInformationSystem\system\CodeIgniter.php(933): App\Controllers\AdminController->createResident()
+#9 C:\BarangayInformationSystem\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#10 C:\BarangayInformationSystem\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\BarangayInformationSystem\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#12 C:\BarangayInformationSystem\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\BarangayInformationSystem\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 C:\BarangayInformationSystem\system\rewrite.php(44): require_once('C:\\BarangayInfo...')
+#15 {main}
+CRITICAL - 2025-03-22 03:11:24 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'contact_name' in 'field list'
+[Method: POST, Route: admin/create-resident]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_residents` (`firstname`, `lastname`, `middlename`, `contact_no`, `birthdate`, `birthplace`, `citizenship`, `occupation`, `religion`, `household_name`, `house_no`, `street`, `contact_name`, `emergency_contact_no`, `contact_relationship`, `status`, `created_at`, `updated_at`) VALUES (:firstname:, :lastname:, :middlename:, :contact_no:, :birthdate:, :birthplace:, :citizenship:, :occupation:, :religion:, :household_name:, :house_no:, :street:, :contact_name:, :emergency_contact_no:, :contact_relationship:, :status:, :created_at:, :updated_at:)', [...], false)
+ 2 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 5 APPPATH\Controllers\AdminController.php(385): CodeIgniter\Model->insert([...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->createResident()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-03-22 03:11:24 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'contact_name' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tbl_residents` (`firstname`, `lastname`, `middlename`, `contact_no`, `birthdate`, `birthplace`, `citizenship`, `occupation`, `religion`, `household_name`, `house_no`, `street`, `contact_name`, `emergency_contact_no`, `contact_relationship`, `status`, `created_at`, `updated_at`) VALUES (\'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'1\', \'2025-03-22 03:11:24\', \'2025-03-22 03:11:24\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tbl_residents` (`firstname`, `lastname`, `middlename`, `contact_no`, `birthdate`, `birthplace`, `citizenship`, `occupation`, `religion`, `household_name`, `house_no`, `street`, `contact_name`, `emergency_contact_no`, `contact_relationship`, `status`, `created_at`, `updated_at`) VALUES (\'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'1\', \'2025-03-22 03:11:24\', \'2025-03-22 03:11:24\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_residents` (`firstname`, `lastname`, `middlename`, `contact_no`, `birthdate`, `birthplace`, `citizenship`, `occupation`, `religion`, `household_name`, `house_no`, `street`, `contact_name`, `emergency_contact_no`, `contact_relationship`, `status`, `created_at`, `updated_at`) VALUES (:firstname:, :lastname:, :middlename:, :contact_no:, :birthdate:, :birthplace:, :citizenship:, :occupation:, :religion:, :household_name:, :house_no:, :street:, :contact_name:, :emergency_contact_no:, :contact_relationship:, :status:, :created_at:, :updated_at:)', [...], false)
+ 4 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 7 APPPATH\Controllers\AdminController.php(385): CodeIgniter\Model->insert([...])
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->createResident()
+ 9 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-03-22 03:11:24 --> [Caused by] mysqli_sql_exception: Unknown column 'contact_name' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `tbl_residents` (`firstname`, `lastname`, `middlename`, `contact_no`, `birthdate`, `birthplace`, `citizenship`, `occupation`, `religion`, `household_name`, `house_no`, `street`, `contact_name`, `emergency_contact_no`, `contact_relationship`, `status`, `created_at`, `updated_at`) VALUES (\'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'1\', \'2025-03-22 03:11:24\', \'2025-03-22 03:11:24\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tbl_residents` (`firstname`, `lastname`, `middlename`, `contact_no`, `birthdate`, `birthplace`, `citizenship`, `occupation`, `religion`, `household_name`, `house_no`, `street`, `contact_name`, `emergency_contact_no`, `contact_relationship`, `status`, `created_at`, `updated_at`) VALUES (\'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'1\', \'2025-03-22 03:11:24\', \'2025-03-22 03:11:24\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tbl_residents` (`firstname`, `lastname`, `middlename`, `contact_no`, `birthdate`, `birthplace`, `citizenship`, `occupation`, `religion`, `household_name`, `house_no`, `street`, `contact_name`, `emergency_contact_no`, `contact_relationship`, `status`, `created_at`, `updated_at`) VALUES (\'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'1\', \'2025-03-22 03:11:24\', \'2025-03-22 03:11:24\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_residents` (`firstname`, `lastname`, `middlename`, `contact_no`, `birthdate`, `birthplace`, `citizenship`, `occupation`, `religion`, `household_name`, `house_no`, `street`, `contact_name`, `emergency_contact_no`, `contact_relationship`, `status`, `created_at`, `updated_at`) VALUES (:firstname:, :lastname:, :middlename:, :contact_no:, :birthdate:, :birthplace:, :citizenship:, :occupation:, :religion:, :household_name:, :house_no:, :street:, :contact_name:, :emergency_contact_no:, :contact_relationship:, :status:, :created_at:, :updated_at:)', [...], false)
+ 5 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 8 APPPATH\Controllers\AdminController.php(385): CodeIgniter\Model->insert([...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->createResident()
+10 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+11 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+15 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+DEBUG - 2025-03-22 03:12:42 --> Received Data: Array
+(
+    [firstname] => 
+    [lastname] => 
+    [middlename] => 
+    [contact_no] => 
+    [birthdate] => 
+    [age] => 
+    [birthplace] => 
+    [citizenship] => 
+    [occupation] => 
+    [religion] => 
+    [household_name] => 
+    [house_no] => 
+    [street] => 
+    [contact_name] => 
+    [emergency_contact_no] => 
+    [contact_relationship] => 
+    [status] => 1
+)
+
+DEBUG - 2025-03-22 03:12:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-22 03:12:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-22 03:12:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-22 03:12:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-22 03:14:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-22 03:14:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-22 03:14:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-22 03:14:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-22 03:14:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-22 03:14:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-22 03:14:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-22 03:15:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-22 03:15:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-22 03:15:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-22 03:16:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-22 03:16:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-22 03:16:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-22 03:16:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-22 03:16:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
