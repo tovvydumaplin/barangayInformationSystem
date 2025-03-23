@@ -126,6 +126,40 @@
         color: #0d9275;
         text-decoration: none;
       }
+      .error__handler {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 2rem 2rem;
+        gap: 3rem;
+        /* max-width: 20rem; */
+        background-color: #ffdfdf;
+        border-radius: 1rem;
+        font-size: 1.6rem;
+        font-weight: 600;
+      }
+
+      .icon__close {
+        width: 2rem;
+        height: 2rem
+      }
+
+      .icon__2rem {
+        width: 2rem;
+        height: 2rem;
+      }
+      .error__text {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        font-weight: 400;
+      }
+
+      .error__handler.hide {
+        visibility: hidden;
+        opacity: 0;
+        position: absolute;
+      }
     </style>
   </head>
   <body>
@@ -135,7 +169,10 @@
           <img src="<?= base_url('assets/images/logo_barangay.png')?>" alt="logo of barangay" />
         </div>
         <?php if (session()->getFlashdata('error')) : ?>
-        <p style="color: red;"><?= session()->getFlashdata('error') ?></p>
+        <div class="error__handler">
+         <p class="error__text" style="color: red;"><ion-icon class="icon__2rem" name="alert-circle-outline"></ion-icon><?= session()->getFlashdata('error') ?></p>
+         <ion-icon class="icon__close" name="close-outline"></ion-icon>
+        </div>
         <?php endif; ?>
         <div class="card">
           <div class="heading__card">
@@ -189,6 +226,10 @@
     </main>
 
     <script>
+      document.querySelector('.icon__close').addEventListener("click", function() {
+          document.querySelector('.error__handler').classList.add("hide");
+      });
+
       const iconBtn = document.getElementById("iconBtn");
       const togglePassword = function () {
         const passwordInput = document.getElementById("passwordInput");

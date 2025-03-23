@@ -678,3 +678,114 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
     stroke-dashoffset: -440;
   }
 }
+
+/* ERROR HANDLER */
+.error__handler {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 2rem;
+  gap: 3rem;
+  /* max-width: 20rem; */
+  background-color: #ffdfdf;
+  border-radius: 1rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+/* ERROR DISPLAY */
+.error__display.hide {
+  visibility: hidden;
+  opacity: 0;
+  top: 0;
+}
+.error__display {
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  top: 4rem;
+  left: 50%;
+  gap: 4rem;
+  transform: translateX(-50%);
+  z-index: 99;
+  padding: 2rem;
+  background-color: #fff4f4;
+  border-radius: 1rem;
+  max-width: 60rem;
+  min-width: 40rem;
+  /* box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); */
+  visibility: visible;
+  opacity: 1;
+  transition: all 0.3s ease;
+  border: 1px solid #e63131;
+  color: #e63131;
+}
+
+.error__text::first-letter {
+  text-transform: uppercase;
+}
+/* ERROR DISPLAY */
+
+/* VALIDATOR */
+.validator.hide {
+  visibility: hidden;
+  opacity: 0;
+  top: 0;
+}
+.validator {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  position: fixed;
+  top: 4rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 99;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 1rem;
+  max-width: 60rem;
+  min-width: 40rem;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+  visibility: visible;
+  opacity: 1;
+  transition: all 0.3s ease;
+}
+.validator__head {
+  font-size: 2rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid gray;
+}
+.validator__footer {
+  text-align: right;
+  margin-top: 2rem;
+  padding: 1rem 0;
+  border-top: 1px solid gray;
+}
+.validator__icon {
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+}
+.validator__header {
+  padding: 1rem 0;
+}
+.validator__btn {
+  border: none;
+  background-color: #fff;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.6rem;
+  padding: 1.5rem 3rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+.validator__cancel {
+  border: 1px solid rgb(160, 160, 160);
+}
+.validator__proceed {
+  background-color: var(--main-color);
+  color: #fff;
+}

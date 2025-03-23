@@ -155,12 +155,31 @@
     <?= view('includes/sidebar.php') ?>
     <main>
     <?= view('includes/header.php') ?>
+    <!-- Error Display -->
+    <div class="error__display hide">
+        <p class="error__text"></p>
+        <ion-icon class="validator__icon error__close" name="close-outline"></ion-icon>
+     </div>
+     <!-- Error Display ENDS -->
+    <!-- Validation -->
+     <div class="validator hide">
+        <div class="validator__head">
+            <p class="validator__header">Confirmation</p>
+            <ion-icon class="validator__icon" name="close-outline"></ion-icon>
+        </div>
+        <div class="validator__body">
+            <p class="validator__text__desc">Are you sure you want to proceed?</p></div>
+        <div class="validator__footer">
+            <button class="validator__btn validator__cancel">Cancel</button>
+            <button class="validator__btn validator__proceed">Proceed</button>
+        </div>
+     </div>
+     <!-- Validation ENDS -->
       <div class="wrapper"></div>
       <div id="createEventModal" class="modal">
         <div class="modal__header">
           <p class="modal__heading">Add Official</p>
         </div>
-                <!-- Display Flash Messages -->
         <?php if (session()->getFlashdata('success')): ?>
             <p style="color: green;"><?= session()->getFlashdata('success') ?></p>
         <?php endif; ?>
@@ -240,13 +259,13 @@
                       <p class="text-danger error-email"></p>
                   </div>
                   <div class="input__box">
-                      <input class="information__input" placeholder="Enter Password" name="password" type="password" required />
+                      <input class="information__input error-password" placeholder="Enter Password" name="password" type="password" required />
                       <span class="input__title">Password<span class="red__dot">*</span></span>
-                      <p class="text-danger"></p>
+                      <!-- <p class="text-danger error-password"></p> -->
                   </div>
               </div>
               <div class="btn__box__modal">
-                  <button type="submit" class="btn__primary active">Create Account</button>
+                  <button type="button" class="btn__primary active btn__create__account">Create Account</button>
               </div>
           </div>
       </form>
@@ -419,7 +438,20 @@
 
 <script>
 // ~~~~~~~~~~~~~~~~~~~~~~~~ ⚡ Functions ⚡ ~~~~~~~~~~~~~~~~~~~~~~~~ //
+const openErrorDisplay = function(message) {
+    $('.error__text').html(message);
+    $('.error__display').removeClass('hide');
+}
+const closeErrorDisplay = function() {
+    $('.error__display').addClass('hide');
+}
 
+const openValidator = function() {
+    $('.validator').removeClass('hide');
+}
+const closeValidator = function() {
+    $('.validator').addClass('hide');
+}
 const viewUser = function(token) {
   if (!token) {
       console.error("Token is missing!");
@@ -673,18 +705,34 @@ const createUser = function(e) {
         success: function (response) {
             if (response.status == "success") {
                 loadData();
+                hideModal();
+                closeErrorDisplay();
+                closeValidator();
                 $(".indicator__text").html('New Account Created!');
                 $('.success__indicator').removeClass('hide');
                 setTimeout(function () {
                     $(".success__indicator").addClass("hide");
                 }, 3000);
-                hideModal();
+
             } else if (response.status == "validation_error") {
+                let firstErrorMessage = ""; // Store the first error message
+
                 $.each(response.errors, function (key, value) {
-                    $(".error-" + key).text(value);
+                    // $(".error-" + key).css("border", "1px solid red");
+
+                    if (!firstErrorMessage) {
+                        firstErrorMessage = value; // Get the first error message
+                    }
+
+                if (firstErrorMessage) {
+                    openErrorDisplay(firstErrorMessage); // Show first validation error
+                }
+                    closeValidator();
                 });
             } else {
-                alert(response.message);
+                openErrorDisplay(response.message);
+                closeValidator();
+                
             }
         },
         error: function (xhr, status, error) {
@@ -697,8 +745,14 @@ const createUser = function(e) {
 $(document).ready(function () {
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~ ⚡ Event Listeners ⚡ ~~~~~~~~~~~~~~~~~~~~~~~~ //
-
-$("#createUserForm").submit(function (e) {                            // Create User
+$('.btn__create__account').on('click', function(){
+    openValidator();
+});
+$('.error__close').on('click', function(){
+    closeErrorDisplay();
+})
+$(".validator__proceed").on('click', function (e) {      
+    e.preventDefault();                      // Create User
     createUser(e); 
 });
 $(document).on("click", ".btn__secondary__edit", function () {        // Update User
@@ -726,10 +780,13 @@ $(".btn__add__resident").on("click", function () {                    // Open cr
 });
 $(".wrapper").on("click", function () {                               // Hide modals when clicking outside (wrapper)
     hideModal();
+    closeErrorDisplay();
+
 });
 $(document).on("keydown", function (event) {                          // Hide modals when pressing Escape key       
     if (event.key === "Escape") {
         hideModal();
+        closeErrorDisplay();
     }
 });
 // Close modal event

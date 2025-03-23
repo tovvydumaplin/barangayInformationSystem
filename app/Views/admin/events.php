@@ -38,7 +38,7 @@
         right: 2rem;
         transform: translateY(-50%);
       }
-      .event__title {
+      .event__title__table {
         max-width: 10rem;  
         white-space: nowrap; 
         overflow: hidden; 
@@ -78,6 +78,26 @@
    <?= view ('includes/sidebar') ?>
     <main>
     <?= view('includes/header.php') ?>
+    <!-- Error Display -->
+    <div class="error__display hide">
+        <p class="error__text"></p>
+        <ion-icon class="validator__icon error__close" name="close-outline"></ion-icon>
+     </div>
+     <!-- Error Display ENDS -->
+    <!-- Validation -->
+     <div class="validator hide">
+        <div class="validator__head">
+            <p class="validator__header">Confirmation</p>
+            <ion-icon class="validator__icon" name="close-outline"></ion-icon>
+        </div>
+        <div class="validator__body">
+            <p class="validator__text__desc">Are you sure you want to proceed?</p></div>
+        <div class="validator__footer">
+            <button class="validator__btn validator__cancel">Cancel</button>
+            <button class="validator__btn validator__proceed">Proceed</button>
+        </div>
+     </div>
+     <!-- Validation ENDS -->
       <div class="wrapper"></div>
       <!-- EVENT CREATION -->
       <div id="createEventModal" class="modal">
@@ -89,10 +109,11 @@
             <div class="row">
               <div class="input__box">
                 <input
-                  class="information__input"
+                  class="information__input event__title"
                   value=""
                   placeholder="Input event title"
                   name="event_title"
+                  required
                 />
                 <span class="input__title"
                   >Event Title<span class="red__dot">*</span></span
@@ -103,10 +124,11 @@
             <div class="row">
               <div class="input__box">
                 <textarea
-                  class="information__input"
+                  class="information__input event__description"
                   value=""
                   placeholder="Enter event description"
                   name="event_description"
+                  required
                 ></textarea>
                 <span class="input__title"
                   >Event Description<span class="red__dot">*</span></span>
@@ -115,7 +137,7 @@
             </div>
             <div class="row">
               <div class="input__box">
-                <input class="information__input" value="" name="date_start" type="datetime-local" />
+                <input class="information__input" value="" name="date_start" type="datetime-local" required />
                 <div class="icon__link icon__date">
                   <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><rect fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="32" x="48" y="80" width="416" height="384" rx="48"/><circle cx="296" cy="232" r="24"/><circle cx="376" cy="232" r="24"/><circle cx="296" cy="312" r="24"/><circle cx="376" cy="312" r="24"/><circle cx="136" cy="312" r="24"/><circle cx="216" cy="312" r="24"/><circle cx="136" cy="392" r="24"/><circle cx="216" cy="392" r="24"/><circle cx="296" cy="392" r="24"/><path fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="32" stroke-linecap="round" d="M128 48v32M384 48v32"/><path fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="32" d="M464 160H48"/></svg>
                 </div>
@@ -302,6 +324,21 @@
 $(document).ready(function () {
 // ~~~~~~~~~~~~~~~~~~~~~~~~ ⚡ Functions ⚡ ~~~~~~~~~~~~~~~~~~~~~~~~ //
 
+const openErrorDisplay = function(message) {
+    $('.error__text').html(message);
+    $('.error__display').removeClass('hide');
+}
+const closeErrorDisplay = function() {
+    $('.error__display').addClass('hide');
+}
+
+const openValidator = function() {
+    $('.validator').removeClass('hide');
+}
+const closeValidator = function() {
+    $('.validator').addClass('hide');
+}
+
 const closeModal = function() {                               // Close modal Function
       $(".wrapper, #createEventModal, #viewEventModal").removeClass("open");
 }
@@ -427,7 +464,11 @@ const loadEventData = function () {
                     "language": {
                         "emptyTable": "No events available"
                     },
-                    "pagingType": "simple_numbers"
+                    "pagingType": "simple_numbers",
+                    "createdRow": function (row, data, dataIndex) {
+                      $(row).find("td:eq(1)").addClass("event__title__table").attr("title", data[1]); // Title Column
+                      $(row).find("td:eq(2)").addClass("event__title__table").attr("title", data[2]); // Description Column
+                    }
                 });
 
             } else {
@@ -458,44 +499,69 @@ const loadEventData = function () {
     });
 };
 
+const checkForms = function() {
+  let firstMissingField = null;
+
+  $('.modal.open .information__input').each(function() {
+    if (!$(this).val().trim()) {
+      firstMissingField = $(this).attr('name').replace(/_/g, ' ') + ' is required';
+      return false; 
+    }
+  });
+
+  if (firstMissingField) {
+    closeValidator();
+    openErrorDisplay(firstMissingField);
+    return false;
+  }
+  
+  return true;
+};
+
 
 const createEvent = function() {                              // Create Events
-  let formData = {
-      event_title: $("input[name='event_title']").val(),
-      event_description: $("textarea[name='event_description']").val(),
-      date_start: $("input[name='date_start']").val(),
-      date_end: $("input[name='date_end']").val()
-  };
+  if(checkForms()) {
+    let formData = {
+        event_title: $("input[name='event_title']").val(),
+        event_description: $("textarea[name='event_description']").val(),
+        date_start: $("input[name='date_start']").val(),
+        date_end: $("input[name='date_end']").val()
+    };
 
-  $.ajax({
-      url: "<?= base_url('admin/create-event'); ?>", // Adjust this to match your CI4 route
-      type: "POST",
-      data: formData,
-      dataType: "json",
-      success: function (response) {
-          if (response.success) {
-            loadEventData(); // Reload event list
-            $(".indicator__text").html('Event Created!');
-              $('.success__indicator').removeClass('hide');
-              setTimeout(function () {
-                  $(".success__indicator").addClass("hide");
-              }, 3000);
-            closeModal();
-    
-          } else {
-              $(".text-danger").text(""); // Clear previous errors
-              $.each(response.errors, function (key, value) {
-                  $("input[name='" + key + "'], textarea[name='" + key + "']")
-                      .closest(".input__box")
-                      .find(".text-danger")
-                      .text(value);
-              });
-          }
-      },
-      error: function () {
-          alert("An error occurred. Please try again.");
-      },
-  });
+    $.ajax({
+        url: "<?= base_url('admin/create-event'); ?>", // Adjust this to match your CI4 route
+        type: "POST",
+        data: formData,
+        dataType: "json",
+        success: function (response) {
+            if (response.success) {
+              loadEventData(); // Reload event list
+              $(".indicator__text").html('Event Created!');
+                $('.success__indicator').removeClass('hide');
+                setTimeout(function () {
+                    $(".success__indicator").addClass("hide");
+                }, 3000);
+              closeModal();
+              closeValidator();
+              closeErrorDisplay();
+      
+            } else {
+                $(".text-danger").text(""); // Clear previous errors
+                $.each(response.errors, function (key, value) {
+                    $("input[name='" + key + "'], textarea[name='" + key + "']")
+                        .closest(".input__box")
+                        .find(".text-danger")
+                        .text(value);
+                });
+            }
+        },
+        error: function () {
+            alert("An error occurred. Please try again.");
+        },
+    });
+  } else {
+      return;
+  }
 }
 
 const deactivateEvent = function() {
@@ -531,10 +597,16 @@ const deactivateEvent = function() {
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~ ⚡ Event Listeners ⚡ ~~~~~~~~~~~~~~~~~~~~~~~~ //
+$('.error__close').on('click', function(){
+    closeErrorDisplay();
+})
 $('.event__disable').on('click', function(){
   deactivateEvent();
 });
-$('.create__event__btn').on('click', function(){                // Event Creation
+$('.create__event__btn').on('click', function(){                // Event Creation Validation
+    openValidator();
+})
+$('.validator__proceed').on('click', function(){                // Event Creation
     createEvent();
 })
 $(document).on("click", ".table__button", function () {         // Show Event Details on click. Also, Using event delegation for table button since button is added dynamically thru script. 
@@ -558,10 +630,12 @@ $(".btn__add__item").on("click", function () {                  // Toggle create
 });
 $(".wrapper").on("click", function () {                         // Close modal on background click
     closeModal();
+    closeErrorDisplay();
 });
 $(document).on("keydown", function (event) {                    // Close modal on esc key
     if (event.key === "Escape") {
         closeModal();
+        closeErrorDisplay();
     }
 });
 $(".menu__icon").on("click", function () {                      // Side bar Functionality
