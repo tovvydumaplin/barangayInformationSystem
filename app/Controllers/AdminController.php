@@ -3,6 +3,8 @@ namespace App\Controllers;
 use App\Models\UserModel; 
 use App\Models\EventModel; 
 use App\Models\ResidentModel; 
+use App\Models\HouseDetails; 
+
 class AdminController extends BaseController
 {
     public function dashboard()
@@ -444,6 +446,36 @@ public function createUser()
             ]);
         }
     }
+
+    public function createPin()
+    {
+        $request = $this->request->getPost();
+    
+        $houseModel = new HouseDetails(); // Use HouseDetails model
+        $pinData = [
+            'house_no'  => $request['house_number'], // Match DB column name
+            'latitude'  => $request['latitude'],
+            'longitude' => $request['longitude']
+        ];
+    
+        if ($houseModel->insert($pinData)) {
+            return $this->response->setJSON(['success' => true]);
+        } else {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Failed to save pin.'
+            ]);
+        }
+    }
+    
+    public function getHouseDetails()
+    {
+        $houseModel = new HouseDetails();
+        $houses = $houseModel->findAll(); // Get all records from tbl_house
+    
+        return $this->response->setJSON($houses); // Return data as JSON
+    }
+    
     
 }
 
