@@ -298,8 +298,9 @@ public function createUser()
 
     public function viewEvents()
     {
+        $status = $this->request->getGet('status');
         $eventModel = new EventModel();
-        $events = $eventModel->where('status', 1)->findAll();
+        $events = $eventModel->where('status', $status)->findAll();
 
         if ($events) {
             return $this->response->setJSON([
@@ -377,24 +378,34 @@ public function createUser()
     public function createResident()
     {
         if ($this->request->isAJAX()) {
-            $data = $this->request->getPost();
+            $data = $this->request->getPost('members'); // Get the array of members
+    
             log_message('debug', 'Received Data: ' . print_r($data, true));
+    
+            if (empty($data) || !is_array($data)) {
+                return $this->response->setJSON([
+                    'status' => 'error',
+                    'message' => 'No valid data received.'
+                ]);
+            }
     
             $residentModel = new ResidentModel();
     
-            if ($residentModel->insert($data)) {
+            // Insert all members at once
+            if ($residentModel->insertBatch($data)) {
                 return $this->response->setJSON([
                     'status' => 'success',
-                    'message' => 'Resident created successfully!'
+                    'message' => 'Residents created successfully!'
                 ]);
             }
     
             return $this->response->setJSON([
                 'status' => 'error',
-                'message' => 'Failed to create resident.'
+                'message' => 'Failed to create residents.'
             ]);
         }
     }
+    
     public function loadResidents()
     {
         $residentModel = new ResidentModel();

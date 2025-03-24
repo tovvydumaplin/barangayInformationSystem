@@ -29,6 +29,11 @@
     .icon__close {
       cursor: pointer;
     }
+    /* New Resident Table */
+    div.dt-container {
+
+    width: 100%;
+    }
   </style>
   </head>
   <body>
@@ -325,9 +330,10 @@
             </div>
           </div>
           <!-- Household info | Show only when head of family is no/0 -->
-
           <div class="row flex__d__col d__none house__info">
             <p class="modal__subheading">Household Information</p>
+            <div class="btn__box"><button id="saveMember" class="btn__primary">Save Member</button></div>
+
             <div class="row">
               <div class="input__box">
                 <input
@@ -367,7 +373,26 @@
             </div>
           </div>
           <!-- Household Info End -->
-
+          <!-- Household members table -->
+          <div class="row flex__d__col d__none house__info">
+            <p class="modal__subheading">Household Members</p>
+            <div class="row">
+              <table id="newResidentsTable" class="display">
+                <thead class="thead">
+                  <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Birthdate</th>
+                    <th>Age</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- Household members table end -->
           <!-- Emergency Contact -->
           <div class="row flex__d__col ">
             <p class="modal__subheading">Emergency Contact Information</p>
@@ -802,6 +827,10 @@
               <button class="tab__btn">Household Records</button>
               <div class="active__tab"></div>
             </div>
+            <div class="btn__container tab__3">
+              <button class="tab__btn">Archived Resident</button>
+              <div class="active__tab"></div>
+            </div>
           </div>
         </div>
         <div class="card">
@@ -959,6 +988,90 @@
     ></script>
 
     <script>
+
+// SAVING IN LOCAL STORAGE
+    let table = $("#newResidentsTable").DataTable(); // Initialize DataTables
+    // Initialize members from localStorage or set an empty array
+    let members = JSON.parse(localStorage.getItem("members")) || [];
+    
+    function displayTable() {
+        table.clear().draw(); // Clear the table properly using DataTables API
+
+        if (members.length > 0) {
+            $(".house__info").removeClass("d__none"); // Show the table section
+        } else {
+            $(".house__info").addClass("d__none"); // Hide if no data
+        }
+
+        members.forEach((member, index) => {
+            table.row.add([
+                index + 1,
+                `${member.firstname} ${member.middlename} ${member.lastname} ${member.suffix || ''}`,
+                member.birthdate,
+                member.age,
+                `<button class="btn btn-danger btn-sm deleteMember" data-index="${index}">Delete</button>`
+            ]).draw(false); // Add rows and redraw the table
+        });
+
+        console.log("Table Updated:", members);
+    }
+
+    // Call displayTable() whenever data updates
+    $("#saveMember").click(function (e) {
+        e.preventDefault();
+
+        let formData = {
+            firstname: $("input[name='firstname']").val(),
+            lastname: $("input[name='lastname']").val(),
+            middlename: $("input[name='middlename']").val(),
+            suffix: $("select[name='suffix']").val(),
+            contact_no: $("input[name='contact_no']").val(),
+            birthdate: $("input[name='birthdate']").val(),
+            age: $("input[name='age']").val(),
+            birthplace: $("input[name='birthplace']").val(),
+            citizenship: $("input[name='citizenship']").val(),
+            gender: $("select[name='gender']").val(),
+            civil_status: $("select[name='civil_status']").val(),
+            occupation: $("input[name='occupation']").val(),
+            religion: $("input[name='religion']").val(),
+            is_pwd: $("input[name='is_pwd']:checked").val(),
+            is_voter_of_barangay: $("input[name='is_voter_of_barangay']:checked").val(),
+            is_family_head: $("input[name='is_family_head']:checked").val(),
+            household_name: $("input[name='household_name']").val(),
+            house_no: $("input[name='house_no']").val(),
+            street: $("input[name='street']").val(),
+            contact_name: $("input[name='contact_name']").val(),
+            emergency_contact_no: $("input[name='emergency_contact_no']").val(),
+            contact_relationship: $("input[name='contact_relationship']").val(),
+            status: $("input[name='status']").val()
+        };
+
+        members.push(formData);
+        localStorage.setItem("members", JSON.stringify(members));
+        displayTable();
+        $("form")[0].reset();
+    });
+
+    // Handle delete button click
+    $(document).on("click", ".deleteMember", function () {
+        let index = $(this).data("index");
+        members.splice(index, 1);
+        localStorage.setItem("members", JSON.stringify(members));
+        displayTable();
+    });
+
+    // Load stored data on page load
+    let storedMembers = localStorage.getItem("members");
+    if (storedMembers) {
+        members = JSON.parse(storedMembers);
+        displayTable();
+    }
+// SAVING IN LOCAL STORAGE
+
+
+
+
+
   const openModal = function() {
     $(".wrapper").addClass("open");
     $("#viewResidentModal").addClass("open");
@@ -992,38 +1105,35 @@
     $(".dropdown__menu").toggleClass("show");
   });
 
-  $(".tab__1").on("click", function () {
-    $(".tab__1").addClass("visible");
-    $(".tab__2").removeClass("visible");
+  $(".tab__btn").on("click", function () {
+    $(".btn__container").removeClass("visible"); 
+    $(this).parent().addClass("visible"); 
   });
 
-  $(".tab__2").on("click", function () {
-    $(".tab__2").addClass("visible");
-    $(".tab__1").removeClass("visible");
-  });
+
       $(document).ready(function () {
         $("#example").DataTable();
       });
     </script>
 
     <script>
-    const closeModal = function() {
-      $("#addResidentModal").removeClass("open");
-      $("#viewResidentModal").removeClass("open");
-      $(".wrapper").removeClass("open");
-    }
+const closeModal = function() {
+  $("#addResidentModal").removeClass("open");
+  $("#viewResidentModal").removeClass("open");
+  $(".wrapper").removeClass("open");
+}
 
-    $('.btn__close').on('click', function(){
-      closeModal();
-    })
-    $("input[name='is_family_head']").on("change", function () {
-      if ($(this).val() === "1") {
-        $(".house__info").removeClass("d__none"); // Show content
-      } else {
-        $(".house__info").addClass("d__none"); // Hide content
-      }
-    });
-    $(document).ready(function () {
+$('.btn__close').on('click', function(){
+  closeModal();
+})
+$("input[name='is_family_head']").on("change", function () {
+  if ($(this).val() === "1") {
+    $(".house__info").removeClass("d__none"); // Show content
+  } else {
+    $(".house__info").addClass("d__none"); // Hide content
+  }
+});
+$(document).ready(function () {
 
 const customLoaderOn = function() {
   $('.custom__loader').removeClass('hide');
@@ -1123,16 +1233,112 @@ const loadResidents = function() {
         }
     });
 };
+// const loadHouseholdResidents = function() {
+//   customLoaderOn();
+//     const $residentsTable = $("#newResidents");
+//     const $tableBody = $residentsTable.find("tbody");
+
+//     // Destroy existing DataTable instance if it exists
+//     if ($.fn.DataTable.isDataTable($residentsTable)) {
+//         $residentsTable.DataTable().destroy();
+//     }
+
+//     // Loading
+//     $tableBody.html('<tr><td colspan="10" class="text-center">Loading...</td></tr>');
+
+//     $.ajax({
+//         url: "/admin/get-residents",
+//         type: "GET",
+//         dataType: "json",
+//         cache: true,
+//         success: function(response) {
+//             if (response.success && Array.isArray(response.data) && response.data.length) {
+//                 const residents = response.data;
+//                 const tableData = residents.map(resident => [
+//                     resident.resident_id,
+//                     `${resident.firstname} ${resident.middlename || ''} ${resident.lastname} ${resident.suffix || ''}`,
+//                     // resident.birthdate || 'N/A',
+//                     resident.birthdate ? calculateAge(resident.birthdate) : 'N/A',
+//                     resident.civil_status || 'N/A',
+//                     resident.gender || 'N/A',
+//                     // resident.voter_status ? 'Yes' : 'No',
+//                     // resident.family_head ? 'Yes' : 'No',
+//                     // resident.contact_no || 'N/A',
+//                     `<button class="btn__primary view__resident__btn action-btn" data-id="${resident.resident_id}">View</button>`
+//                 ]);
+
+//                 // Initialize DataTable
+//                 $residentsTable.DataTable({
+//                     "processing": true,
+//                     "serverSide": false,
+//                     "data": tableData,
+//                     "columns": [
+//                         { "title": "ID" },
+//                         { "title": "Name" },
+//                         // { "title": "Birthdate" },
+//                         { "title": "Age" },
+//                         { "title": "Civil Status" },
+//                         { "title": "Gender" },
+//                         // { "title": "Voter Status" },
+//                         // { "title": "Family Head" },
+//                         // { "title": "Contact No" },
+//                         { "title": "Action", "orderable": false }
+//                     ],
+//                     "order": [[0, "desc"]],
+//                     "language": {
+//                         "emptyTable": "No residents found"
+//                     },
+//                     "pagingType": "simple_numbers"
+//                 });
+
+//             } else {
+//                 // Initialize DataTable with empty data to prevent error
+//                 $residentsTable.DataTable({
+//                     "processing": true,
+//                     "serverSide": false,
+//                     "data": [],
+//                     "columns": [
+//                         { "title": "ID" },
+//                         { "title": "Name" },
+//                         // { "title": "Birthdate" },
+//                         { "title": "Age" },
+//                         { "title": "Civil Status" },
+//                         { "title": "Gender" },
+//                         // { "title": "Voter" },
+//                         // { "title": "Family Head" },
+//                         // { "title": "Contact No" },
+//                         { "title": "Action", "orderable": false }
+//                     ],
+//                     "language": {
+//                         "emptyTable": "No residents found"
+//                     },
+//                     "pagingType": "simple_numbers"
+//                 });
+//             }
+//             customLoaderOff();
+//         },
+//         error: function(xhr, status, error) {
+//             $tableBody.html('<tr><td colspan="10" class="text-center">Error loading data</td></tr>');
+//             console.error("AJAX Error:", error);
+//         }
+//     });
+// };
 
 $(".community__modal").on("submit", function (e) {
     e.preventDefault();
 
-    let formData = $(this).serialize();
+    let storedMembers = localStorage.getItem("members");
+    let membersData = storedMembers ? JSON.parse(storedMembers) : [];
+
+    if (membersData.length === 0) {
+        alert("No members to submit.");
+        return;
+    }
 
     $.ajax({
         url: "<?= site_url('/admin/create-resident') ?>",
         type: "POST",
-        data: formData,
+        data: { members: membersData }, // Send all members at once
         dataType: "json",
         beforeSend: function () {
             $(".button__submit").prop("disabled", true).text("Submitting...");
@@ -1140,12 +1346,18 @@ $(".community__modal").on("submit", function (e) {
         success: function (response) {
             if (response.status === "success") { 
                 $(".success__indicator").removeClass("hide");
-                $(".indicator__text").html('Resident Created!');
+                $(".indicator__text").html('Residents Created!');
 
                 setTimeout(function () {
                     $(".success__indicator").addClass("hide");
                 }, 3000);
-                loadResidents();
+
+                // Clear localStorage after successful submission
+                localStorage.removeItem("members");
+                members = []; // Clear the array in memory
+                displayTable(); // Refresh the table
+
+                loadResidents(); // Reload the resident list
                 closeModal();
             } else {
                 $(".text-danger").text(""); 
@@ -1162,6 +1374,7 @@ $(".community__modal").on("submit", function (e) {
         }
     });
 });
+
 
 function calculateAge(birthdate) {
     if (!birthdate) return 'N/A';

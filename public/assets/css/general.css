@@ -412,6 +412,10 @@ select {
   font-weight: 600;
 }
 
+.button__box .icon__link {
+  width: 2rem;
+  height: 2rem;
+}
 input[type="datetime-local"] {
   position: relative;
 }
@@ -440,6 +444,19 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
   top: 50%;
   right: 2rem;
   transform: translateY(-50%);
+}
+
+.heading__container .subheading {
+  font-weight: 600;
+  font-size: 2rem;
+}
+
+.truncate__text {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
 }
 
 /* CUSTOM LOADER */
@@ -489,6 +506,24 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
 .pl__ring--d {
   animation-name: ringD;
   stroke: #f42582;
+}
+
+/* Data Tables */
+th.sorting::after,
+th.sorting::before {
+  display: none !important; /* Hides sorting icons */
+}
+
+/* Select Entries per  page */
+div.dt-container select.dt-input {
+  padding: 1rem !important;
+  text-align: center !important;
+  cursor: pointer;
+}
+/* Entries title */
+label[for="dt-length-0"] {
+  text-transform: capitalize !important;
+  margin-left: 1rem !important;
 }
 
 /* Animations */
@@ -750,6 +785,7 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
   visibility: visible;
   opacity: 1;
   transition: all 0.3s ease;
+  width: 100%;
 }
 .validator__head {
   font-size: 2rem;

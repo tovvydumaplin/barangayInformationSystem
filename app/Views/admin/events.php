@@ -61,9 +61,20 @@
         border: 1px solid #e72121;
         color: #e72121;
       }
+      .event__description {
+        height: 20rem;
+      }
     </style>
   </head>
   <body>
+  <div class="custom__loader hide">
+    <svg class="pl" width="240" height="240" viewBox="0 0 240 240">
+      <circle class="pl__ring pl__ring--a" cx="120" cy="120" r="105" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 660" stroke-dashoffset="-330" stroke-linecap="round"></circle>
+      <circle class="pl__ring pl__ring--b" cx="120" cy="120" r="35" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 220" stroke-dashoffset="-110" stroke-linecap="round"></circle>
+      <circle class="pl__ring pl__ring--c" cx="85" cy="120" r="70" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 440" stroke-linecap="round"></circle>
+      <circle class="pl__ring pl__ring--d" cx="155" cy="120" r="70" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 440" stroke-linecap="round"></circle>
+    </svg>
+  </div>
   <div class="success__indicator hide">
     <div class="indicator__container">
       <div class="icon__link">
@@ -103,6 +114,9 @@
       <div id="createEventModal" class="modal">
         <div class="modal__header">
           <p class="modal__heading">Create Event</p>
+          <div class="icon__link icon__close">
+            <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M368 368L144 144M368 144L144 368"/></svg>
+          </div>
         </div>
         <form class="modal__body community__modal">
           <div class="row flex__d__col">
@@ -196,7 +210,7 @@
             <div class="row">
               <div class="input__box">
                 <textarea
-                  class="information__input"
+                  class="information__input event__description"
                   value=""
                   placeholder="Enter Street"
                   readonly
@@ -246,6 +260,18 @@
         </form>
       </div>
       <div class="container">
+      <div class="heading__box">
+          <div class="tab__container">
+            <div class="btn__container tab__1 visible">
+              <button class="tab__btn tab__event__btn__active">Event Records</button>
+              <div class="active__tab"></div>
+            </div>
+            <div class="btn__container tab__2">
+              <button class="tab__btn tab__event__btn">Archived Events</button>
+              <div class="active__tab"></div>
+            </div>
+          </div>
+        </div>
         <div class="card">
           <div class="heading__container">
             <p class="subheading">List of events</p>
@@ -323,6 +349,12 @@
 <script>
 $(document).ready(function () {
 // ~~~~~~~~~~~~~~~~~~~~~~~~ ⚡ Functions ⚡ ~~~~~~~~~~~~~~~~~~~~~~~~ //
+const customLoaderOn = function() {
+  $('.custom__loader').removeClass('hide');
+}
+const customLoaderOff = function() {
+  $('.custom__loader').addClass('hide');
+}
 
 const openErrorDisplay = function(message) {
     $('.error__text').html(message);
@@ -387,7 +419,7 @@ const updateEvent = function(saveBtn) {                       // Update Event Fu
           success: function (response) {
               if (response.success) {
                   alert("Event updated successfully!");
-                  loadEventData(); // Reload event list
+                  loadEventData(1); // Reload event list
                   $(".modal__body input, .modal__body textarea").prop("readonly", true);
                   saveBtn.removeClass("event__save").addClass("event__edit").text("Edit Event");
                   $(".indicator__text").html('Event Details Updated!');
@@ -419,7 +451,8 @@ const updateEvent = function(saveBtn) {                       // Update Event Fu
           }
       });
 }
-const loadEventData = function () {
+const loadEventData = function (status = 1) {
+  customLoaderOn();
     const $eventTable = $("#eventTable");
     const $tableBody = $eventTable.find("tbody");
 
@@ -434,16 +467,17 @@ const loadEventData = function () {
     $.ajax({
         url: "<?= base_url('admin/get-events') ?>",
         type: "GET",
+        data: { status },
         dataType: "json",
         cache: false,
         success: function (response) {
             if (response.success && Array.isArray(response.data) && response.data.length) {
                 const tableData = response.data.map((event, index) => [
                     index + 1,
-                    event.event_title,
-                    event.event_description,
-                    event.start_date,
-                    event.end_date,
+                    `<span class="truncate__text" title="${event.event_title}">${event.event_title}</span>`, // Title with tooltip
+                    `<span class="truncate__text" title="${event.event_description}">${event.event_description}</span>`, // Description with tooltip
+                    formatDate(event.start_date), // Formatted Start Date
+                    formatDate(event.end_date),   // Formatted End Date
                     `<button class="btn__primary table__button" data-id="${event.event_id}">View</button>`
                 ]);
 
@@ -452,6 +486,7 @@ const loadEventData = function () {
                     "processing": true,
                     "serverSide": false,
                     "data": tableData,
+                    "autoWidth": false,
                     "columns": [
                         { "title": "#" },
                         { "title": "Title" },
@@ -460,17 +495,21 @@ const loadEventData = function () {
                         { "title": "End Date" },
                         { "title": "Action", "orderable": false }
                     ],
+                    "columnDefs": [
+                        { "width": "5%", "targets": 0 },
+                        { "width": "10%", "targets": 1 },
+                        { "width": "20%", "targets": 2 },
+                        { "width": "15%", "targets": 3 },
+                        { "width": "15%", "targets": 4 },
+                        { "width": "10%", "targets": 5 }
+                    ],
                     "order": [[0, "desc"]],
                     "language": {
                         "emptyTable": "No events available"
                     },
-                    "pagingType": "simple_numbers",
-                    "createdRow": function (row, data, dataIndex) {
-                      $(row).find("td:eq(1)").addClass("event__title__table").attr("title", data[1]); // Title Column
-                      $(row).find("td:eq(2)").addClass("event__title__table").attr("title", data[2]); // Description Column
-                    }
+                    "pagingType": "simple_numbers"
                 });
-
+                customLoaderOff();
             } else {
                 // Initialize empty DataTable if no data
                 $eventTable.DataTable({
@@ -490,14 +529,33 @@ const loadEventData = function () {
                     },
                     "pagingType": "simple_numbers"
                 });
+                customLoaderOff();
             }
         },
         error: function (xhr, status, error) {
             $tableBody.html('<tr><td colspan="6" class="text-center">Error loading events</td></tr>');
             console.error("AJAX Error:", error);
+            customLoaderOff();
         }
     });
 };
+
+// Function to Format Date
+const formatDate = (dateString) => {
+    if (!dateString) return "";
+
+    const date = new Date(dateString);
+    return date.toLocaleString("en-US", {
+        month: "short",
+        day: "2-digit",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true
+    }).replace(",", ""); // Removes comma after day
+};
+
+
 
 const checkForms = function() {
   let firstMissingField = null;
@@ -535,7 +593,7 @@ const createEvent = function() {                              // Create Events
         dataType: "json",
         success: function (response) {
             if (response.success) {
-              loadEventData(); // Reload event list
+              loadEventData(1); // Reload event list
               $(".indicator__text").html('Event Created!');
                 $('.success__indicator').removeClass('hide');
                 setTimeout(function () {
@@ -578,7 +636,7 @@ const deactivateEvent = function() {
         dataType: "json", 
         success: function(response) {
             if (response.success) {
-              loadEventData(); 
+              loadEventData(1); 
                 $(".success__indicator").removeClass("hide");
                 $(".indicator__text").html('Event archived!');
                 setTimeout(function () {
@@ -597,6 +655,28 @@ const deactivateEvent = function() {
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~ ⚡ Event Listeners ⚡ ~~~~~~~~~~~~~~~~~~~~~~~~ //
+$('.tab__event__btn').on('click', function(){               
+    loadEventData(0);
+})
+$('.tab__event__btn__active').on('click', function(){               
+    loadEventData(1);
+})
+// TAB
+$(".tab__1").on("click", function () {
+  $(".tab__1").addClass("visible");
+  $(".tab__2").removeClass("visible");
+});
+
+$(".tab__2").on("click", function () {
+  $(".tab__2").addClass("visible");
+  $(".tab__1").removeClass("visible");
+});
+// TAB END
+$('.icon__close').on('click', function(){
+    closeErrorDisplay();
+    closeValidator();
+
+})
 $('.error__close').on('click', function(){
     closeErrorDisplay();
 })
@@ -605,6 +685,9 @@ $('.event__disable').on('click', function(){
 });
 $('.create__event__btn').on('click', function(){                // Event Creation Validation
     openValidator();
+})
+$('.validator__icon').on('click', function(){                // Close validator
+    closeValidator();
 })
 $('.validator__proceed').on('click', function(){                // Event Creation
     createEvent();
@@ -649,7 +732,7 @@ $(".icon__close").on("click", function(){                       //Closing of mod
   closeModal();
 })
 // ~~~~~~~~~~~~~~~~~~~~~~~~ ⚡ On Load Functions ⚡ ~~~~~~~~~~~~~~~~~~~~~~~~ //
-loadEventData();                                                // Load Event Data on page load
+loadEventData(1);                                                // Load Event Data on page load
 });
 
 </script>

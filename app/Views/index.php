@@ -141,7 +141,8 @@
 
       .icon__close {
         width: 2rem;
-        height: 2rem
+        height: 2rem;
+        cursor: pointer;
       }
 
       .icon__2rem {
