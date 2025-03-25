@@ -689,6 +689,9 @@ $('.create__event__btn').on('click', function(){                // Event Creatio
 $('.validator__icon').on('click', function(){                // Close validator
     closeValidator();
 })
+$('.validator__cancel').on('click', function(){                // Close validator
+    closeValidator();
+})
 $('.validator__proceed').on('click', function(){                // Event Creation
     createEvent();
 })

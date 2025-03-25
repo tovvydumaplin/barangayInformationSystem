@@ -31,12 +31,30 @@
     }
     /* New Resident Table */
     div.dt-container {
-
     width: 100%;
     }
+    .btn__box {
+      text-align: right;
+    }
+    .btn__primary {
+      padding: 1.5rem 3rem;
+    }
+    .top__container {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      padding: 2rem;
+      background-color: #f9f9f9;
+      border-radius: 1rem;
+      }
+      
+      #saveMember {
+        background-color: #1D63DC;
+      }
   </style>
   </head>
   <body>
+    <!-- Custom Loader -->
   <div class="custom__loader hide">
     <svg class="pl" width="240" height="240" viewBox="0 0 240 240">
       <circle class="pl__ring pl__ring--a" cx="120" cy="120" r="105" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 660" stroke-dashoffset="-330" stroke-linecap="round"></circle>
@@ -45,6 +63,7 @@
       <circle class="pl__ring pl__ring--d" cx="155" cy="120" r="70" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 440" stroke-linecap="round"></circle>
     </svg>
   </div>
+  <!-- Success Indicator -->
   <div class="success__indicator hide">
     <div class="indicator__container">
       <div class="icon__link">
@@ -56,14 +75,31 @@
       <p class="indicator__text">New Account Created!</p>
     </div>
   </div>
+    <!-- Validation -->
+    <div class="validator hide">
+      <div class="validator__head">
+          <p class="validator__header">Confirmation</p>
+          <ion-icon class="validator__icon" name="close-outline"></ion-icon>
+      </div>
+      <div class="validator__body">
+          <p class="validator__text__desc">Are you sure you want to proceed?</p></div>
+      <div class="validator__footer">
+          <button class="validator__btn validator__cancel">Cancel</button>
+          <button class="validator__btn validator__proceed">Proceed</button>
+      </div>
+    </div>
+    <!-- Validation ENDS -->
+
+     <!-- Error handler -->
+     <div class="error__display hide">
+        <p class="error__text"></p>
+        <ion-icon class="validator__icon error__close" name="close-outline"></ion-icon>
+     </div>
+     <!-- Error Display ENDS -->
     <?= view('includes/sidebar') ?>
     <main>
     <?= view('includes/header.php') ?>
       <div class="wrapper"></div>
-      <!-- VIEW RESIDENT MODAL -->
-
-      <!-- VIEW RESIDENT MODAL -->
-
       <!-- CREATE NEW RESIDENT MODAL -->
       <div id="addResidentModal" class="modal">
         <div class="modal__header">
@@ -74,345 +110,81 @@
           <!-- <button class="btn__secondary active">Edit Info</button> -->
         </div>
         <form method="POST" class="modal__body community__modal">
-          <div class="row">
-            <!-- 1 -->
-            <div class="input__box">
-              <input
-                class="information__input"
-                value=""
-                placeholder="Enter fullname"
-                name="firstname"
-              />
-              <span class="input__title"
-                >Firstname<span class="red__dot">*</span></span
-              >
-              <p class="text-danger"></p>
-            </div>
-
-            <!-- 1 -->
-            <div class="input__box">
-              <input
-                class="information__input"
-                value=""
-                placeholder="Enter lastname"
-                name="lastname"
-              />
-              <span class="input__title"
-                >Lastname<span class="red__dot">*</span></span
-              >
-              <p class="text-danger"></p>
-            </div>
-            <!-- 1 -->
-            <div class="input__box">
-              <input
-                class="information__input"
-                value=""
-                placeholder="Enter middlename"
-                name="middlename"
-                
-              />
-              <span class="input__title"
-                >Middlename<span class="red__dot">*</span></span
-              >
-              <p class="text-danger"></p>
-            </div>
-            <div class="input__box pos__rel">
-              <div class="select__chev__down">
-                <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M112 184l144 144 144-144"></path></svg>
-              </div>
-              <select                 
-                class="information__input"
-                value=""
-                placeholder="Enter suffix"
-                name="suffix">
-                <option disabled selected>Select one</option>
-                <option value="">None</option>
-                <option value="Jr.">Jr.</option>
-                <option value="Sr.">Sr.</option>
-                <option value="II">II</option>
-                <option value="III">III</option>
-                <option value="IV">IV</option>
-                <option value="V">V</option>
-                <option value="">Others</option>
-              </select>
-              <span class="input__title"
-                >suffix<span class="red__dot">*</span></span
-              >
-              <p class="text-danger"></p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input__box">
-              <input
-                class="information__input"
-                value=""
-                placeholder="Enter contact-no"
-                name="contact_no"
-                
-              />
-              <span class="input__title"
-                >Contact No.<span class="red__dot">*</span></span
-              >
-              <p class="text-danger"></p>
-            </div>
-            <div class="input__box">
-              <input
-                type="date"
-                class="information__input"
-                value=""
-                placeholder="Enter Birthdate"
-                name="birthdate"
-                
-              />
-              <span class="input__title"
-                >Birthdate<span class="red__dot">*</span></span
-              >
-              <p class="text-danger"></p>
-            </div>
-            <div class="input__box">
-              <input
-                class="information__input"
-                value=""
-                placeholder="Enter Age"
-                name="age"
-                
-              />
-              <span class="input__title"
-                >Age<span class="red__dot">*</span></span
-              >
-              <p class="text-danger"></p>
-            </div>
-            <div class="input__box">
-              <input
-                class="information__input"
-                value=""
-                placeholder="Enter Birthplace"
-                name="birthplace"
-                
-              />
-              <span class="input__title"
-                >Birthplace<span class="red__dot">*</span></span
-              >
-              <p class="text-danger"></p>
-            </div>
-            <div class="input__box">
-              <input
-                class="information__input"
-                value=""
-                placeholder="Enter Citizenship"
-                name="citizenship"
-                
-              />
-              <span class="input__title"
-                >Citizenship<span class="red__dot">*</span></span
-              >
-              <p class="text-danger"></p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input__box pos__rel">
-              <div class="select__chev__down">
-                <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M112 184l144 144 144-144"></path></svg>
-              </div>
-              <select
-                class="information__input"
-                value=""
-                placeholder="Enter Gender"
-                name="gender"
-                >
-                <option disabled selected>Select one</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-              </select>
-              <span class="input__title"
-                >Gender<span class="red__dot">*</span></span
-              >
-              <p class="text-danger"></p>
-            </div>
-            <div class="input__box pos__rel">
-              <div class="select__chev__down">
-                <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M112 184l144 144 144-144"></path></svg>
-              </div>
-              <select
-                class="information__input"
-                value=""
-                placeholder="Enter Civil Status"
-                name="civil_status"
-                >
-                <option disabled selected>Select one</option>
-                <option value="Single">Single</option>
-                <option value="Married">Married</option>
-                <option value="Divorced">Divorced</option>
-                <option value="Separated">Separated</option>
-                <option value="Widowed">Widowed</option>
-              </select>
-              <span class="input__title"
-                >Civil Status<span class="red__dot">*</span></span
-              >
-              <p class="text-danger"></p>
-            </div>
-            <div class="input__box">
-              <input
-                class="information__input"
-                value=""
-                placeholder="Enter Occupation"
-                name="occupation"
-                
-              />
-              <span class="input__title"
-                >Occupation<span class="red__dot">*</span></span
-              >
-              <p class="text-danger"></p>
-            </div>
-            <div class="input__box">
-              <input
-                class="information__input"
-                value=""
-                placeholder="Enter Religion"
-                name="religion"
-                
-              />
-              <span class="input__title"
-                >Religion<span class="red__dot">*</span></span
-              >
-              <p class="text-danger"></p>
-            </div>
-          </div>
-          <div class="row margin__bottom__2">
-            <!-- Disabled Radio -->
-            <div class="radio__box">
-              <p class="radio__heading">
-                Person with Disablity<span class="red__dot">*</span>
-              </p>
-              <div class="radio__buttons">
-                <div class="radio__btn__container">
-                  <input type="radio" class="radio__btn" name="is_pwd" value="1" />
-                  <span class="yes">Yes</span>
-                </div>
-                <div class="radio__btn__container">
-                  <input type="radio" class="radio__btn" name="is_pwd" value="0" />
-                  <span class="no">No</span>
-                </div>
-              </div>
-            </div>
-            <!-- Voters Radio -->
-            <div class="radio__box">
-              <p class="radio__heading">
-                Voters of Barangay<span class="red__dot">*</span>
-              </p>
-              <div class="radio__buttons">
-                <div class="radio__btn__container">
-                  <input type="radio" class="radio__btn" name="is_voter_of_barangay" value="1" />
-                  <span class="yes">Yes</span>
-                </div>
-                <div class="radio__btn__container">
-                  <input type="radio" class="radio__btn" name="is_voter_of_barangay" value="0" />
-                  <span class="no">No</span>
-                </div>
-              </div>
-            </div>
-            <!-- Head Radio -->
-            <div class="radio__box">
-              <p class="radio__heading">
-                Head of the Family<span class="red__dot">*</span>
-              </p>
-
-              <div class="radio__buttons">
-                <div class="radio__btn__container">
-                  <input type="radio" name="is_family_head" class="radio__btn" value="1" />
-                  <span class="yes">Yes</span>
-                </div>
-                <div class="radio__btn__container">
-                  <input type="radio" name="is_family_head" class="radio__btn" value="0" />
-                  <span class="no">No</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Household info | Show only when head of family is no/0 -->
-          <div class="row flex__d__col d__none house__info">
-            <p class="modal__subheading">Household Information</p>
-            <div class="btn__box"><button id="saveMember" class="btn__primary">Save Member</button></div>
-
+          <div class="top__container">
             <div class="row">
-              <div class="input__box">
-                <input
-                  class="information__input"
-                  value=""
-                  placeholder="Enter Household Ownership"
-                  name="household_name"  
-                />
-                <span class="input__title">Household Ownership<span class="red__dot">*</span></span>
-                <p class="text-danger"></p>
-              </div>
-              <div class="input__box">
-                <input
-                  class="information__input"
-                  value=""
-                  placeholder="Enter House No."
-                  name="house_no"
-                />
-                <span class="input__title"
-                  >House No.<span class="red__dot">*</span></span
-                >
-                <p class="text-danger"></p>
-              </div>
-              <div class="input__box">
-                <input
-                  class="information__input"
-                  value=""
-                  placeholder="Enter Street"
-                  name="street"
-                  
-                />
-                <span class="input__title"
-                  >Street<span class="red__dot">*</span></span
-                >
-                <p class="text-danger"></p>
-              </div>
-            </div>
-          </div>
-          <!-- Household Info End -->
-          <!-- Household members table -->
-          <div class="row flex__d__col d__none house__info">
-            <p class="modal__subheading">Household Members</p>
-            <div class="row">
-              <table id="newResidentsTable" class="display">
-                <thead class="thead">
-                  <tr>
-                    <th>#</th>
-                    <th>Name</th>
-                    <th>Birthdate</th>
-                    <th>Age</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <!-- Household members table end -->
-          <!-- Emergency Contact -->
-          <div class="row flex__d__col ">
-            <p class="modal__subheading">Emergency Contact Information</p>
-            <div class="row">
+              <!-- 1 -->
               <div class="input__box">
                 <input
                   class="information__input"
                   value=""
                   placeholder="Enter fullname"
-                  name="contact_name"  
+                  name="firstname"
                 />
-                <span class="input__title">Fullname<span class="red__dot">*</span></span>
+                <span class="input__title"
+                  >Firstname<span class="red__dot">*</span></span
+                >
                 <p class="text-danger"></p>
               </div>
+
+              <!-- 1 -->
               <div class="input__box">
                 <input
                   class="information__input"
                   value=""
-                  placeholder="Enter Contact No."
-                  name="emergency_contact_no"
+                  placeholder="Enter lastname"
+                  name="lastname"
+                />
+                <span class="input__title"
+                  >Lastname<span class="red__dot">*</span></span
+                >
+                <p class="text-danger"></p>
+              </div>
+              <!-- 1 -->
+              <div class="input__box">
+                <input
+                  class="information__input"
+                  value=""
+                  placeholder="Enter middlename"
+                  name="middlename"
+                  
+                />
+                <span class="input__title"
+                  >Middlename<span class="red__dot">*</span></span
+                >
+                <p class="text-danger"></p>
+              </div>
+              <div class="input__box pos__rel">
+                <div class="select__chev__down">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M112 184l144 144 144-144"></path></svg>
+                </div>
+                <select                 
+                  class="information__input"
+                  value=""
+                  placeholder="Enter suffix"
+                  name="suffix">
+                  <option disabled selected>Select one</option>
+                  <option value="">None</option>
+                  <option value="Jr.">Jr.</option>
+                  <option value="Sr.">Sr.</option>
+                  <option value="II">II</option>
+                  <option value="III">III</option>
+                  <option value="IV">IV</option>
+                  <option value="V">V</option>
+                  <option value="">Others</option>
+                </select>
+                <span class="input__title"
+                  >suffix<span class="red__dot">*</span></span
+                >
+                <p class="text-danger"></p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input__box">
+                <input
+                  class="information__input"
+                  value=""
+                  placeholder="Enter contact-no"
+                  name="contact_no"
                   
                 />
                 <span class="input__title"
@@ -422,30 +194,298 @@
               </div>
               <div class="input__box">
                 <input
+                  type="date"
                   class="information__input"
                   value=""
-                  placeholder="Enter relationship"
-                  name="contact_relationship"
+                  placeholder="Enter Birthdate"
+                  name="birthdate"
                   
                 />
                 <span class="input__title"
-                  >Relationship<span class="red__dot">*</span></span
+                  >Birthdate<span class="red__dot">*</span></span
+                >
+                <p class="text-danger"></p>
+              </div>
+              <div class="input__box">
+                <input
+                  class="information__input"
+                  value=""
+                  placeholder="Enter Age"
+                  name="age"
+                  
+                />
+                <span class="input__title"
+                  >Age<span class="red__dot">*</span></span
+                >
+                <p class="text-danger"></p>
+              </div>
+              <div class="input__box">
+                <input
+                  class="information__input"
+                  value=""
+                  placeholder="Enter Birthplace"
+                  name="birthplace"
+                  
+                />
+                <span class="input__title"
+                  >Birthplace<span class="red__dot">*</span></span
+                >
+                <p class="text-danger"></p>
+              </div>
+              <div class="input__box">
+                <input
+                  class="information__input"
+                  value=""
+                  placeholder="Enter Citizenship"
+                  name="citizenship"
+                  
+                />
+                <span class="input__title"
+                  >Citizenship<span class="red__dot">*</span></span
                 >
                 <p class="text-danger"></p>
               </div>
             </div>
-            <!-- STATUS -->
-              <input
-                type="hidden"
-                class="information__input"
-                value="1"
-                name="status"
-              />
+            <div class="row">
+              <div class="input__box pos__rel">
+                <div class="select__chev__down">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M112 184l144 144 144-144"></path></svg>
+                </div>
+                <select
+                  class="information__input"
+                  value=""
+                  placeholder="Enter Gender"
+                  name="gender"
+                  >
+                  <option disabled selected>Select one</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+                <span class="input__title"
+                  >Gender<span class="red__dot">*</span></span
+                >
+                <p class="text-danger"></p>
+              </div>
+              <div class="input__box pos__rel">
+                <div class="select__chev__down">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M112 184l144 144 144-144"></path></svg>
+                </div>
+                <select
+                  class="information__input"
+                  value=""
+                  placeholder="Enter Civil Status"
+                  name="civil_status"
+                  >
+                  <option disabled selected>Select one</option>
+                  <option value="Single">Single</option>
+                  <option value="Married">Married</option>
+                  <option value="Divorced">Divorced</option>
+                  <option value="Separated">Separated</option>
+                  <option value="Widowed">Widowed</option>
+                </select>
+                <span class="input__title"
+                  >Civil Status<span class="red__dot">*</span></span
+                >
+                <p class="text-danger"></p>
+              </div>
+              <div class="input__box">
+                <input
+                  class="information__input"
+                  value=""
+                  placeholder="Enter Occupation"
+                  name="occupation"
+                  
+                />
+                <span class="input__title"
+                  >Occupation<span class="red__dot">*</span></span
+                >
+                <p class="text-danger"></p>
+              </div>
+              <div class="input__box">
+                <input
+                  class="information__input"
+                  value=""
+                  placeholder="Enter Religion"
+                  name="religion"
+                  
+                />
+                <span class="input__title"
+                  >Religion<span class="red__dot">*</span></span
+                >
+                <p class="text-danger"></p>
+              </div>
+            </div>
+            <div class="row margin__bottom__2">
+              <!-- Disabled Radio -->
+              <div class="radio__box">
+                <p class="radio__heading">
+                  Person with Disablity<span class="red__dot">*</span>
+                </p>
+                <div class="radio__buttons">
+                  <div class="radio__btn__container">
+                    <input type="radio" class="radio__btn" name="is_pwd" value="1" />
+                    <span class="yes">Yes</span>
+                  </div>
+                  <div class="radio__btn__container">
+                    <input type="radio" class="radio__btn" name="is_pwd" value="0" />
+                    <span class="no">No</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Voters Radio -->
+              <div class="radio__box">
+                <p class="radio__heading">
+                  Voters of Barangay<span class="red__dot">*</span>
+                </p>
+                <div class="radio__buttons">
+                  <div class="radio__btn__container">
+                    <input type="radio" class="radio__btn" name="is_voter_of_barangay" value="1" />
+                    <span class="yes">Yes</span>
+                  </div>
+                  <div class="radio__btn__container">
+                    <input type="radio" class="radio__btn" name="is_voter_of_barangay" value="0" />
+                    <span class="no">No</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Head Radio -->
+              <div class="radio__box">
+                <p class="radio__heading">
+                  Head of the Family<span class="red__dot">*</span>
+                </p>
+
+                <div class="radio__buttons">
+                  <div class="radio__btn__container">
+                    <input type="radio" name="is_family_head" class="radio__btn" value="1" />
+                    <span class="yes">Yes</span>
+                  </div>
+                  <div class="radio__btn__container">
+                    <input type="radio" name="is_family_head" class="radio__btn" value="0" />
+                    <span class="no">No</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Household info | Show only when head of family is no/0 -->
+            <div class="row flex__d__col">
+              <p class="modal__subheading">Household Information</p>
+              <div class="row">
+                <div class="input__box">
+                  <input
+                    class="information__input"
+                    value=""
+                    placeholder="Enter Household Ownership"
+                    name="household_name"  
+                  />
+                  <span class="input__title">Household Ownership<span class="red__dot">*</span></span>
+                  <p class="text-danger"></p>
+                </div>
+                <div class="input__box">
+                  <input
+                    class="information__input"
+                    value=""
+                    placeholder="Enter House No."
+                    name="house_no"
+                  />
+                  <span class="input__title"
+                    >House No.<span class="red__dot">*</span></span
+                  >
+                  <p class="text-danger"></p>
+                </div>
+                <div class="input__box">
+                  <input
+                    class="information__input"
+                    value=""
+                    placeholder="Enter Street"
+                    name="street"
+                    
+                  />
+                  <span class="input__title"
+                    >Street<span class="red__dot">*</span></span
+                  >
+                  <p class="text-danger"></p>
+                </div>
+              </div>
+            </div>
+            <!-- Household Info End -->
+
+            <!-- Emergency Contact -->
+            <div class="row flex__d__col ">
+              <p class="modal__subheading">Emergency Contact Information</p>
+              <div class="row">
+                <div class="input__box">
+                  <input
+                    class="information__input"
+                    value=""
+                    placeholder="Enter fullname"
+                    name="contact_name"  
+                  />
+                  <span class="input__title">Fullname<span class="red__dot">*</span></span>
+                  <p class="text-danger"></p>
+                </div>
+                <div class="input__box">
+                  <input
+                    class="information__input"
+                    value=""
+                    placeholder="Enter Contact No."
+                    name="emergency_contact_no"
+                    
+                  />
+                  <span class="input__title"
+                    >Contact No.<span class="red__dot">*</span></span
+                  >
+                  <p class="text-danger"></p>
+                </div>
+                <div class="input__box">
+                  <input
+                    class="information__input"
+                    value=""
+                    placeholder="Enter relationship"
+                    name="contact_relationship"
+                    
+                  />
+                  <span class="input__title"
+                    >Relationship<span class="red__dot">*</span></span
+                  >
+                  <p class="text-danger"></p>
+                </div>
+              </div>
+              <!-- STATUS -->
+                <input
+                  type="hidden"
+                  class="information__input"
+                  value="1"
+                  name="status"
+                />
+            </div>
+            <!-- Household members table end -->
+            <div class="btn__box">
+                <button id="saveMember" class="btn btn__primary">Save Member</button>
+            </div>
+          </div>
+          <!-- Household members table -->
+          <div class="row flex__d__col d__none house__info">
+            <p class="modal__subheading">Household Members to be added</p>
+            <div class="row">
+              <table id="newResidentsTable" class="display">
+                <thead class="thead">
+                  <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Role</th>
+                    <th>Gender</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+            </div>
           </div>
         <!-- Emergency Contact END -->
           <div class="btn__box__modal submit__box">
             <span class="btn__secondary active btn__close">Close</span>
-            <button class="button__submit btn__primary">Submit</submit>
+            <button type="button" class="button__submit btn__primary create__residents__btn">Submit</submit>
           </div>
         </form>
       </div>
@@ -978,6 +1018,7 @@
         </p>
       </footer>
     </main>
+    <script src="<?= base_url('assets/js/general.js') ?>"></script>
     <script
       type="module"
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
@@ -1007,8 +1048,8 @@
             table.row.add([
                 index + 1,
                 `${member.firstname} ${member.middlename} ${member.lastname} ${member.suffix || ''}`,
-                member.birthdate,
-                member.age,
+                member.is_family_head == 1 ? "Head" :"Member", //  IF 1, display Head if 0, Display member
+                member.gender,
                 `<button class="btn btn-danger btn-sm deleteMember" data-index="${index}">Delete</button>`
             ]).draw(false); // Add rows and redraw the table
         });
@@ -1016,41 +1057,68 @@
         console.log("Table Updated:", members);
     }
 
-    // Call displayTable() whenever data updates
     $("#saveMember").click(function (e) {
-        e.preventDefault();
+    e.preventDefault();
 
-        let formData = {
-            firstname: $("input[name='firstname']").val(),
-            lastname: $("input[name='lastname']").val(),
-            middlename: $("input[name='middlename']").val(),
-            suffix: $("select[name='suffix']").val(),
-            contact_no: $("input[name='contact_no']").val(),
-            birthdate: $("input[name='birthdate']").val(),
-            age: $("input[name='age']").val(),
-            birthplace: $("input[name='birthplace']").val(),
-            citizenship: $("input[name='citizenship']").val(),
-            gender: $("select[name='gender']").val(),
-            civil_status: $("select[name='civil_status']").val(),
-            occupation: $("input[name='occupation']").val(),
-            religion: $("input[name='religion']").val(),
-            is_pwd: $("input[name='is_pwd']:checked").val(),
-            is_voter_of_barangay: $("input[name='is_voter_of_barangay']:checked").val(),
-            is_family_head: $("input[name='is_family_head']:checked").val(),
-            household_name: $("input[name='household_name']").val(),
-            house_no: $("input[name='house_no']").val(),
-            street: $("input[name='street']").val(),
-            contact_name: $("input[name='contact_name']").val(),
-            emergency_contact_no: $("input[name='emergency_contact_no']").val(),
-            contact_relationship: $("input[name='contact_relationship']").val(),
-            status: $("input[name='status']").val()
-        };
+    let requiredFields = [
+        "firstname", "lastname", "birthdate", "age",
+        "birthplace", "citizenship", "gender",
+        "civil_status", "occupation", "religion",
+        "household_name", "house_no", "street",
+        "contact_name", "emergency_contact_no", "contact_relationship"
+    ];
 
-        members.push(formData);
-        localStorage.setItem("members", JSON.stringify(members));
-        displayTable();
-        $("form")[0].reset();
-    });
+    for (let field of requiredFields) {
+        let value = $(`input[name='${field}'], select[name='${field}']`).val();
+        if (!value) {
+            // Show success indicator
+            $(".error__display").removeClass("hide");
+            $(".error__text").html(`Please fill out the ${field.replace("_", " ")} field.`);
+
+            setTimeout(() => $(".success__indicator").addClass("hide"), 3000);
+            return;
+        }
+    }
+
+    let formData = {
+        firstname: $("input[name='firstname']").val(),
+        lastname: $("input[name='lastname']").val(),
+        middlename: $("input[name='middlename']").val(),
+        suffix: $("select[name='suffix']").val(),
+        contact_no: $("input[name='contact_no']").val(),
+        birthdate: $("input[name='birthdate']").val(),
+        age: $("input[name='age']").val(),
+        birthplace: $("input[name='birthplace']").val(),
+        citizenship: $("input[name='citizenship']").val(),
+        gender: $("select[name='gender']").val(),
+        civil_status: $("select[name='civil_status']").val(),
+        occupation: $("input[name='occupation']").val(),
+        religion: $("input[name='religion']").val(),
+        is_pwd: $("input[name='is_pwd']:checked").val(),
+        is_voter_of_barangay: $("input[name='is_voter_of_barangay']:checked").val(),
+        is_family_head: $("input[name='is_family_head']:checked").val(),
+        household_name: $("input[name='household_name']").val(),
+        house_no: $("input[name='house_no']").val(),
+        street: $("input[name='street']").val(),
+        contact_name: $("input[name='contact_name']").val(),
+        emergency_contact_no: $("input[name='emergency_contact_no']").val(),
+        contact_relationship: $("input[name='contact_relationship']").val(),
+        status: $("input[name='status']").val()
+    };
+
+    members.push(formData);
+    localStorage.setItem("members", JSON.stringify(members));
+
+    closeErrorDisplay();
+    // Show success indicator
+    $(".success__indicator").removeClass("hide");
+    $(".indicator__text").html("Member added!");
+
+    setTimeout(() => $(".success__indicator").addClass("hide"), 3000);
+
+    displayTable();
+    $("form")[0].reset();
+});
 
     // Handle delete button click
     $(document).on("click", ".deleteMember", function () {
@@ -1067,43 +1135,6 @@
         displayTable();
     }
 // SAVING IN LOCAL STORAGE
-
-
-
-
-
-  const openModal = function() {
-    $(".wrapper").addClass("open");
-    $("#viewResidentModal").addClass("open");
-  }
-
-  $(".btn__add__resident").on("click", function () {
-    $(".wrapper").addClass("open");
-    $("#addResidentModal").addClass("open");
-  });
-
-  $(".wrapper").on("click", function () {
-    $(".wrapper, #viewResidentModal, #addResidentModal").removeClass("open");
-  });
-
-  $(".btn__close").on("click", function () {
-    $(".wrapper, #viewResidentModal, #addResidentModal").removeClass("open");
-  });
-
-  $(document).on("keydown", function (event) {
-    if (event.key === "Escape") {
-      $(".wrapper, #viewResidentModal, #addResidentModal").removeClass("open");
-    }
-  });
-
-  $(".menu__icon").on("click", function () {
-    $("body").toggleClass("hide__sidebar");
-    $(".nav__heading").toggleClass("d__none");
-  });
-
-  $(".user__box").on("click", function () {
-    $(".dropdown__menu").toggleClass("show");
-  });
 
   $(".tab__btn").on("click", function () {
     $(".btn__container").removeClass("visible"); 
@@ -1128,9 +1159,11 @@ $('.btn__close').on('click', function(){
 })
 $("input[name='is_family_head']").on("change", function () {
   if ($(this).val() === "1") {
-    $(".house__info").removeClass("d__none"); // Show content
+    // $(".house__info").removeClass("d__none"); // Show content
+    // $('#saveMember').show();
   } else {
-    $(".house__info").addClass("d__none"); // Hide content
+    // $(".house__info").addClass("d__none"); // Hide content
+    // $('#saveMember').hide();
   }
 });
 $(document).ready(function () {
@@ -1324,14 +1357,13 @@ const loadResidents = function() {
 //     });
 // };
 
-$(".community__modal").on("submit", function (e) {
-    e.preventDefault();
-
+// make this on click of button create__residents__btn
+const saveResidents = function() {
     let storedMembers = localStorage.getItem("members");
     let membersData = storedMembers ? JSON.parse(storedMembers) : [];
-
     if (membersData.length === 0) {
-        alert("No members to submit.");
+        openErrorDisplay('There are no residents in list.');
+        closeValidator();
         return;
     }
 
@@ -1342,13 +1374,14 @@ $(".community__modal").on("submit", function (e) {
         dataType: "json",
         beforeSend: function () {
             $(".button__submit").prop("disabled", true).text("Submitting...");
+            $("#addResidentModal :input").prop("disabled", true); // To disabled all inputs when confirmation is up
         },
         success: function (response) {
             if (response.status === "success") { 
                 $(".success__indicator").removeClass("hide");
                 $(".indicator__text").html('Residents Created!');
 
-                setTimeout(function () {
+                setTimeout(function() {
                     $(".success__indicator").addClass("hide");
                 }, 3000);
 
@@ -1361,19 +1394,55 @@ $(".community__modal").on("submit", function (e) {
                 closeModal();
             } else {
                 $(".text-danger").text(""); 
-                $.each(response.errors, function (key, value) {
+                $.each(response.errors, function(key, value) {
                     $("input[name='" + key + "']").siblings(".text-danger").text(value);
                 });
             }
         },
-        error: function () {
+        error: function() {
             alert("Something went wrong. Please try again.");
         },
-        complete: function () {
+        complete: function() {
             $(".button__submit").prop("disabled", false).text("Submit");
+            $("#addResidentModal :input").prop("disabled", false);
+
         }
     });
+};
+
+// Reactivation of input forms during closing of modal
+$(".validator__cancel").on("click", function() {
+  $("#addResidentModal :input").prop("disabled", false);
 });
+$(".validator__icon").on("click", function() {
+  $("#addResidentModal :input").prop("disabled", false);
+});
+$(".wrapper").on("click", function () {
+  $("#addResidentModal :input").prop("disabled", false);
+});
+$(document).on("keydown", function (event) {
+  if (event.key === "Escape") {
+    $("#addResidentModal :input").prop("disabled", false);
+  }
+});
+// Reactivation of input forms during closing of modal END
+
+
+$('.btn__add__resident').on("click", function(){
+  // $('#saveMember').hide();
+});
+
+$(".create__residents__btn").on("click", function(){
+  openValidator();
+  $("#addResidentModal :input").prop("disabled", true); // To disabled all inputs when confirmation is up
+});
+
+$(".validator__proceed").on("click", function(e){
+  e.preventDefault();
+  saveResidents();
+});
+
+
 
 
 function calculateAge(birthdate) {

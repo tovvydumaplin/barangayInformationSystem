@@ -3,7 +3,7 @@ namespace App\Controllers;
 use App\Models\UserModel; 
 use App\Models\EventModel; 
 use App\Models\ResidentModel; 
-use App\Models\HouseDetails; 
+use App\Models\HouseModel; 
 
 class AdminController extends BaseController
 {
@@ -451,16 +451,27 @@ public function createUser()
     {
         $request = $this->request->getPost();
     
-        $houseModel = new HouseDetails(); // Use HouseDetails model
+        $houseModel = new HouseModel(); // Use HouseDetails model
         $pinData = [
             'house_no'  => $request['house_number'], // Match DB column name
             'latitude'  => $request['latitude'],
-            'longitude' => $request['longitude']
+            'longitude' => $request['longitude'],
+            'status'    => 1
         ];
     
-        if ($houseModel->insert($pinData)) {
-            return $this->response->setJSON(['success' => true]);
-        } else {
+        try {
+            if ($houseModel->insert($pinData)) {
+                return $this->response->setJSON(['success' => true]);
+            }
+        } catch (\Exception $e) {
+            // Check if the error is due to duplicate entry
+            if (strpos($e->getMessage(), 'Duplicate entry') !== false) {
+                return $this->response->setJSON([
+                    'success' => false,
+                    'message' => 'Unique house number is enforced! A house with this number and status already exists.'
+                ]);
+            }
+    
             return $this->response->setJSON([
                 'success' => false,
                 'message' => 'Failed to save pin.'
@@ -468,9 +479,10 @@ public function createUser()
         }
     }
     
+    
     public function getHouseDetails()
     {
-        $houseModel = new HouseDetails();
+        $houseModel = new HouseModel();
         $houses = $houseModel->findAll(); // Get all records from tbl_house
     
         return $this->response->setJSON($houses); // Return data as JSON
