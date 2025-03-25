@@ -9,9 +9,9 @@ $(document).ready(function () {
 
   let markers = []; // Store markers
 
-  // Function pang add ng marker sa map
+  // Function to add a marker
   const addMarker = function (lat, lng, familyName) {
-    // Check kung ang marker ay existing na
+    // Check if the marker already exists
     if (
       markers.some(
         (m) => m.getLatLng().lat === lat && m.getLatLng().lng === lng
@@ -21,7 +21,6 @@ $(document).ready(function () {
       return;
     }
 
-    // Pang display ng pop up sa map
     const marker = L.marker([lat, lng])
       .addTo(map)
       .bindPopup(
@@ -104,7 +103,7 @@ $(document).ready(function () {
   function loadHouseMarkers() {
     // Remove all existing markers before loading new ones
     markers.forEach((marker) => map.removeLayer(marker));
-    markers = [];
+    markers = []; // Reset the array
 
     $.ajax({
       url: "get-house-details",

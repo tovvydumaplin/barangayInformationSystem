@@ -35,6 +35,8 @@
     }
     .btn__box {
       text-align: right;
+      display: flex;
+      justify-content: end;
     }
     .btn__primary {
       padding: 1.5rem 3rem;
@@ -50,6 +52,25 @@
       
       #saveMember {
         background-color: #1D63DC;
+      }
+      .grid__modified__row__1 {
+        display: grid;
+        grid-template-columns: 0.8fr 0.8fr 0.6fr 0.5fr 1.3fr;
+      }
+      .grid__modified__row__2 {
+        display: grid;
+        grid-template-columns: 0.5fr 1fr 0.5fr;
+      }
+      .grid__modified__row__5 {
+        display: grid;
+        grid-template-columns: 0.5fr 0.5fr 1.5fr;
+        gap: 2rem;
+      }
+      .grid__modified__row__6 {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 2rem;
+
       }
   </style>
   </head>
@@ -111,13 +132,14 @@
         </div>
         <form method="POST" class="modal__body community__modal">
           <div class="top__container">
-            <div class="row">
-              <!-- 1 -->
+          <p class="modal__subheading">Resident General Information</p>
+            <div class="row grid__modified__row__1">
+              <!-- Firstname -->
               <div class="input__box">
                 <input
                   class="information__input"
                   value=""
-                  placeholder="Enter fullname"
+                  placeholder="Enter firstname"
                   name="firstname"
                 />
                 <span class="input__title"
@@ -125,8 +147,7 @@
                 >
                 <p class="text-danger"></p>
               </div>
-
-              <!-- 1 -->
+              <!-- Lastname -->
               <div class="input__box">
                 <input
                   class="information__input"
@@ -139,7 +160,7 @@
                 >
                 <p class="text-danger"></p>
               </div>
-              <!-- 1 -->
+              <!-- Middlename -->
               <div class="input__box">
                 <input
                   class="information__input"
@@ -153,6 +174,7 @@
                 >
                 <p class="text-danger"></p>
               </div>
+              <!-- Suffix -->
               <div class="input__box pos__rel">
                 <div class="select__chev__down">
                   <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M112 184l144 144 144-144"></path></svg>
@@ -162,7 +184,7 @@
                   value=""
                   placeholder="Enter suffix"
                   name="suffix">
-                  <option disabled selected>Select one</option>
+                  <option value="" disabled selected>Select one</option>
                   <option value="">None</option>
                   <option value="Jr.">Jr.</option>
                   <option value="Sr.">Sr.</option>
@@ -177,8 +199,7 @@
                 >
                 <p class="text-danger"></p>
               </div>
-            </div>
-            <div class="row">
+              <!-- Contact No. -->
               <div class="input__box">
                 <input
                   class="information__input"
@@ -192,6 +213,8 @@
                 >
                 <p class="text-danger"></p>
               </div>
+            </div>
+            <div class="row grid__modified__row__2">
               <div class="input__box">
                 <input
                   type="date"
@@ -206,7 +229,7 @@
                 >
                 <p class="text-danger"></p>
               </div>
-              <div class="input__box">
+              <!-- <div class="input__box">
                 <input
                   class="information__input"
                   value=""
@@ -218,7 +241,7 @@
                   >Age<span class="red__dot">*</span></span
                 >
                 <p class="text-danger"></p>
-              </div>
+              </div> -->
               <div class="input__box">
                 <input
                   class="information__input"
@@ -369,7 +392,26 @@
             <!-- Household info | Show only when head of family is no/0 -->
             <div class="row flex__d__col">
               <p class="modal__subheading">Household Information</p>
-              <div class="row">
+              <div class="grid__modified__row__5">
+                <div class="input__box">
+                  <select
+                    id="houseNumberList"
+                    class="information__input"
+                    value=""
+                    placeholder="Enter House No."
+                    name="house_no"
+                  />
+                    <option disabled selected>Select one</option>
+                    <option value="Single">Single</option>
+                    <option value="Married">Married</option>
+                    <option value="Divorced">Divorced</option>
+                    <option value="Separated">Separated</option>
+                    <option value="Widowed">Widowed</option>
+                   </select>
+                   <span class="input__title"
+                    >House No.<span class="red__dot">*</span></span>
+                  <p class="text-danger"></p>
+                </div>
                 <div class="input__box">
                   <input
                     class="information__input"
@@ -378,18 +420,6 @@
                     name="household_name"  
                   />
                   <span class="input__title">Household Ownership<span class="red__dot">*</span></span>
-                  <p class="text-danger"></p>
-                </div>
-                <div class="input__box">
-                  <input
-                    class="information__input"
-                    value=""
-                    placeholder="Enter House No."
-                    name="house_no"
-                  />
-                  <span class="input__title"
-                    >House No.<span class="red__dot">*</span></span
-                  >
                   <p class="text-danger"></p>
                 </div>
                 <div class="input__box">
@@ -412,7 +442,7 @@
             <!-- Emergency Contact -->
             <div class="row flex__d__col ">
               <p class="modal__subheading">Emergency Contact Information</p>
-              <div class="row">
+              <div class="grid__modified__row__6">
                 <div class="input__box">
                   <input
                     class="information__input"
@@ -460,7 +490,7 @@
             </div>
             <!-- Household members table end -->
             <div class="btn__box">
-                <button id="saveMember" class="btn btn__primary">Save Member</button>
+                <button id="saveMember" class="btn btn__primary"><ion-icon name="add-outline"></ion-icon>Save Member</button>
             </div>
           </div>
           <!-- Household members table -->
@@ -1030,6 +1060,32 @@
 
     <script>
 
+// House number
+const loadHouseNumbers = function () {
+    $.ajax({
+        url: "/admin/get-house-numbers", // Adjust the endpoint as needed
+        type: "GET",
+        dataType: "json",
+        cache: false,
+        success: function (response) {
+            if (response.success && Array.isArray(response.data)) {
+                let $houseNumberList = $("#houseNumberList");
+                $houseNumberList.empty(); // Clear previous options
+                $houseNumberList.append('<option disabled selected>Select one</option>');
+
+                response.data.forEach(house => {
+                    $houseNumberList.append(`<option value="${house.house_no}">${house.house_no}</option>`);
+                });
+            } else {
+                console.error("No house numbers found.");
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error("AJAX Error:", error);
+        }
+    });
+};
+
 // SAVING IN LOCAL STORAGE
     let table = $("#newResidentsTable").DataTable(); // Initialize DataTables
     // Initialize members from localStorage or set an empty array
@@ -1050,75 +1106,96 @@
                 `${member.firstname} ${member.middlename} ${member.lastname} ${member.suffix || ''}`,
                 member.is_family_head == 1 ? "Head" :"Member", //  IF 1, display Head if 0, Display member
                 member.gender,
-                `<button class="btn btn-danger btn-sm deleteMember" data-index="${index}">Delete</button>`
+                `<button class="btn__delete" data-index="${index}"><ion-icon name="trash-outline"></ion-icon>Delete</button>`
             ]).draw(false); // Add rows and redraw the table
         });
 
         console.log("Table Updated:", members);
     }
 
-    $("#saveMember").click(function (e) {
-    e.preventDefault();
+const saveMemberLocally = function(e){
+  e.preventDefault();
 
-    let requiredFields = [
-        "firstname", "lastname", "birthdate", "age",
-        "birthplace", "citizenship", "gender",
-        "civil_status", "occupation", "religion",
-        "household_name", "house_no", "street",
-        "contact_name", "emergency_contact_no", "contact_relationship"
-    ];
+  let requiredFields = [
+      "firstname", "lastname", "middlename", 
+      "contact_no", "birthdate", "birthplace", "citizenship",
+      "gender", "civil_status", "occupation", "religion",
+      "household_name", "house_no", "street",
+      "contact_name", "emergency_contact_no", "contact_relationship"
+  ];
 
-    for (let field of requiredFields) {
-        let value = $(`input[name='${field}'], select[name='${field}']`).val();
-        if (!value) {
-            // Show success indicator
-            $(".error__display").removeClass("hide");
-            $(".error__text").html(`Please fill out the ${field.replace("_", " ")} field.`);
+  function formatFieldName(field) {
+      return field
+          .replace(/_/g, " ") // Replace underscores with spaces
+          .replace(/\b\w/g, (char) => char.toUpperCase()); // Capitalize each word
+  }
 
-            setTimeout(() => $(".success__indicator").addClass("hide"), 3000);
-            return;
-        }
-    }
+  // Check text inputs and select elements
+  for (let field of requiredFields) {
+      let value = $(`input[name='${field}'], select[name='${field}']`).val();
+      if (!value) {
+          $(".error__display").removeClass("hide");
+          $(".error__text").html(`Please fill out the <b>${formatFieldName(field)}</b> field.`);
+          setTimeout(() => $(".error__display").addClass("hide"), 3000);
+          return;
+      }
+  }
 
-    let formData = {
-        firstname: $("input[name='firstname']").val(),
-        lastname: $("input[name='lastname']").val(),
-        middlename: $("input[name='middlename']").val(),
-        suffix: $("select[name='suffix']").val(),
-        contact_no: $("input[name='contact_no']").val(),
-        birthdate: $("input[name='birthdate']").val(),
-        age: $("input[name='age']").val(),
-        birthplace: $("input[name='birthplace']").val(),
-        citizenship: $("input[name='citizenship']").val(),
-        gender: $("select[name='gender']").val(),
-        civil_status: $("select[name='civil_status']").val(),
-        occupation: $("input[name='occupation']").val(),
-        religion: $("input[name='religion']").val(),
-        is_pwd: $("input[name='is_pwd']:checked").val(),
-        is_voter_of_barangay: $("input[name='is_voter_of_barangay']:checked").val(),
-        is_family_head: $("input[name='is_family_head']:checked").val(),
-        household_name: $("input[name='household_name']").val(),
-        house_no: $("input[name='house_no']").val(),
-        street: $("input[name='street']").val(),
-        contact_name: $("input[name='contact_name']").val(),
-        emergency_contact_no: $("input[name='emergency_contact_no']").val(),
-        contact_relationship: $("input[name='contact_relationship']").val(),
-        status: $("input[name='status']").val()
-    };
+  // Check required radio buttons
+  let radioFields = ["is_pwd", "is_voter_of_barangay", "is_family_head"];
+  for (let field of radioFields) {
+      if (!$(`input[name='${field}']:checked`).val()) {
+          $(".error__display").removeClass("hide");
+          $(".error__text").html(`Please select an option for <b>${formatFieldName(field)}</b>.`);
+          setTimeout(() => $(".error__display").addClass("hide"), 3000);
+          return;
+      }
+  }
 
-    members.push(formData);
-    localStorage.setItem("members", JSON.stringify(members));
+  let formData = {
+      firstname: $("input[name='firstname']").val(),
+      lastname: $("input[name='lastname']").val(),
+      middlename: $("input[name='middlename']").val(),
+      suffix: $("select[name='suffix']").val(),
+      contact_no: $("input[name='contact_no']").val(),
+      birthdate: $("input[name='birthdate']").val(),
+      birthplace: $("input[name='birthplace']").val(),
+      citizenship: $("input[name='citizenship']").val(),
+      gender: $("select[name='gender']").val(),
+      civil_status: $("select[name='civil_status']").val(),
+      occupation: $("input[name='occupation']").val(),
+      religion: $("input[name='religion']").val(),
+      is_pwd: $("input[name='is_pwd']:checked").val(),
+      is_voter_of_barangay: $("input[name='is_voter_of_barangay']:checked").val(),
+      is_family_head: $("input[name='is_family_head']:checked").val(),
+      household_name: $("input[name='household_name']").val(),
+      house_no: $("input[name='house_no']").val(),
+      street: $("input[name='street']").val(),
+      contact_name: $("input[name='contact_name']").val(),
+      emergency_contact_no: $("input[name='emergency_contact_no']").val(),
+      contact_relationship: $("input[name='contact_relationship']").val(),
+      status: $("input[name='status']").val()
+  };
 
-    closeErrorDisplay();
-    // Show success indicator
-    $(".success__indicator").removeClass("hide");
-    $(".indicator__text").html("Member added!");
+  members.push(formData);
+  localStorage.setItem("members", JSON.stringify(members));
 
-    setTimeout(() => $(".success__indicator").addClass("hide"), 3000);
+  closeErrorDisplay();
+  $(".success__indicator").removeClass("hide");
+  $(".indicator__text").html("Member added!");
 
-    displayTable();
-    $("form")[0].reset();
+  setTimeout(() => $(".success__indicator").addClass("hide"), 3000);
+
+  displayTable();
+  $("form")[0].reset();
+}
+
+$("#saveMember").on("click", function(e){
+  saveMemberLocally(e);
 });
+
+
+
 
     // Handle delete button click
     $(document).on("click", ".deleteMember", function () {
@@ -1176,6 +1253,22 @@ const customLoaderOff = function() {
 }
 
 
+function calculateAge(birthdate) {
+    if (!birthdate) return 'N/A';
+
+    const birthDateObj = new Date(birthdate);
+    if (isNaN(birthDateObj.getTime())) return 'N/A'; // Invalid date handling
+
+    const today = new Date();
+    let age = today.getFullYear() - birthDateObj.getFullYear();
+    const monthDiff = today.getMonth() - birthDateObj.getMonth();
+    
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDateObj.getDate())) {
+        age--;
+    }
+
+    return age;
+}
 const loadResidents = function() {
   customLoaderOn();
     const $residentsTable = $("#residentsTable");
@@ -1227,11 +1320,16 @@ const loadResidents = function() {
                         // { "title": "Contact No" },
                         { "title": "Action", "orderable": false }
                     ],
+                    "columnDefs": [
+                          { "width": "80px", "targets": -1 } // Set the width for the last column (Action)
+                      ],
                     "order": [[0, "desc"]],
                     "language": {
                         "emptyTable": "No residents found"
                     },
-                    "pagingType": "simple_numbers"
+                    "pagingType": "simple_numbers",
+                    "autoWidth": false, // Ensure columns stretch
+                    "responsive": true  // Enable responsiveness
                 });
 
             } else {
@@ -1405,6 +1503,7 @@ const saveResidents = function() {
         complete: function() {
             $(".button__submit").prop("disabled", false).text("Submit");
             $("#addResidentModal :input").prop("disabled", false);
+            closeValidator();
 
         }
     });
@@ -1430,6 +1529,7 @@ $(document).on("keydown", function (event) {
 
 $('.btn__add__resident').on("click", function(){
   // $('#saveMember').hide();
+  loadHouseNumbers();
 });
 
 $(".create__residents__btn").on("click", function(){
@@ -1445,22 +1545,6 @@ $(".validator__proceed").on("click", function(e){
 
 
 
-function calculateAge(birthdate) {
-    if (!birthdate) return 'N/A';
-
-    const birthDateObj = new Date(birthdate);
-    if (isNaN(birthDateObj.getTime())) return 'N/A'; // Invalid date handling
-
-    const today = new Date();
-    let age = today.getFullYear() - birthDateObj.getFullYear();
-    const monthDiff = today.getMonth() - birthDateObj.getMonth();
-    
-    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDateObj.getDate())) {
-        age--;
-    }
-
-    return age;
-}
 
 $(document).on("click", ".view__resident__btn", function () {          
   let residentId = $(this).data("id"); 

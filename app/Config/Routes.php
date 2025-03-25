@@ -59,3 +59,5 @@ $routes->get('admin/get-resident-details','AdminController::getResidentDetails')
 $routes->post('admin/create-pin','AdminController::createPin');
 // Display pins
 $routes->get('admin/get-house-details', 'AdminController::getHouseDetails');
+// Get house numbers
+$routes->get('/admin/get-house-numbers','AdminController::getHouseNumbers');

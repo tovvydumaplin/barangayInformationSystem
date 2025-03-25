@@ -488,6 +488,23 @@ public function createUser()
         return $this->response->setJSON($houses); // Return data as JSON
     }
     
-    
+    public function getHouseNumbers()
+    {
+        $houseModel = new \App\Models\HouseModel(); 
+        $houseNumbers = $houseModel->select('house_no')->findAll();
+
+        if (!empty($houseNumbers)) {
+            return $this->response->setJSON([
+                'success' => true,
+                'data' => $houseNumbers
+            ]);
+        }
+
+        return $this->response->setJSON([
+            'success' => false,
+            'message' => 'No house numbers found.'
+        ]);
+    }
+
 }
 
