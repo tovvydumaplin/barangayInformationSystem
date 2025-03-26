@@ -400,13 +400,8 @@
                     value=""
                     placeholder="Enter House No."
                     name="house_no"
-                  />
+                  >
                     <option disabled selected>Select one</option>
-                    <option value="Single">Single</option>
-                    <option value="Married">Married</option>
-                    <option value="Divorced">Divorced</option>
-                    <option value="Separated">Separated</option>
-                    <option value="Widowed">Widowed</option>
                    </select>
                    <span class="input__title"
                     >House No.<span class="red__dot">*</span></span>
@@ -428,6 +423,7 @@
                     value=""
                     placeholder="Enter Street"
                     name="street"
+                    id="streetInput"
                     
                   />
                   <span class="input__title"
@@ -903,6 +899,7 @@
             </div>
           </div>
         </div>
+        
         <div class="card">
           <div class="heading__container">
             <p class="subheading">List of Residents</p>
@@ -1059,18 +1056,23 @@
     ></script>
 
     <script>
-
-// House number
+$(document).ready(function () {
+// ~~~~~~~~~~~~~~~~~~~~~~~~ ⚡ Global Declaration ⚡ ~~~~~~~~~~~~~~~~~~~~~~~~ //
+// -- For datatables of Add Resident Modal (TABLE)
+let table = $("#newResidentsTable").DataTable(); // Initialize DataTables
+let members = JSON.parse(localStorage.getItem("members")) || [];
+// ~~~~~~~~~~~~~~~~~~~~~~~~ ⚡ Functions ⚡ ~~~~~~~~~~~~~~~~~~~~~~~~ //
+// Get House Number
 const loadHouseNumbers = function () {
     $.ajax({
-        url: "/admin/get-house-numbers", // Adjust the endpoint as needed
+        url: "/admin/get-house-numbers",
         type: "GET",
         dataType: "json",
         cache: false,
         success: function (response) {
             if (response.success && Array.isArray(response.data)) {
                 let $houseNumberList = $("#houseNumberList");
-                $houseNumberList.empty(); // Clear previous options
+                $houseNumberList.empty();
                 $houseNumberList.append('<option disabled selected>Select one</option>');
 
                 response.data.forEach(house => {
@@ -1085,175 +1087,146 @@ const loadHouseNumbers = function () {
         }
     });
 };
+// Get house street using the house number
+const getHouseStreet = function () {
+    let houseNumber = $('#houseNumberList').val(); 
 
-// SAVING IN LOCAL STORAGE
-    let table = $("#newResidentsTable").DataTable(); // Initialize DataTables
-    // Initialize members from localStorage or set an empty array
-    let members = JSON.parse(localStorage.getItem("members")) || [];
-    
-    function displayTable() {
-        table.clear().draw(); // Clear the table properly using DataTables API
+    if (!houseNumber) {
+      alert("Please select a house number.");
+      return;
+    }
 
-        if (members.length > 0) {
-            $(".house__info").removeClass("d__none"); // Show the table section
+    $.ajax({
+      url: "get-house-street",
+      type: "GET",
+      data: { 
+        house_number: houseNumber 
+      }, 
+      dataType: "json",
+      cache: false,
+      success: function (response) {
+        if (response.success && response.data) {
+          $('#streetInput').val(response.data.house_street);
         } else {
-            $(".house__info").addClass("d__none"); // Hide if no data
+          $('#streetInput').val(""); 
+          alert("Street not found for this house number.");
+        }
+      },
+      error: function () {
+        alert("Failed to fetch house street.");
+      }
+  });
+};
+const displayTable = function() {
+        table.clear().draw(); 
+        if (members.length > 0) {
+            $(".house__info").removeClass("d__none"); 
+        } else {
+            $(".house__info").addClass("d__none"); 
         }
 
         members.forEach((member, index) => {
             table.row.add([
-                index + 1,
+                member.house_no,
                 `${member.firstname} ${member.middlename} ${member.lastname} ${member.suffix || ''}`,
                 member.is_family_head == 1 ? "Head" :"Member", //  IF 1, display Head if 0, Display member
                 member.gender,
-                `<button class="btn__delete" data-index="${index}"><ion-icon name="trash-outline"></ion-icon>Delete</button>`
-            ]).draw(false); // Add rows and redraw the table
+                `<button type="button" class="btn__delete" data-index="${index}"><ion-icon name="trash-outline"></ion-icon>Delete</button>`
+            ]).draw(false); 
         });
-
-        console.log("Table Updated:", members);
     }
 
-const saveMemberLocally = function(e){
-  e.preventDefault();
-
-  let requiredFields = [
-      "firstname", "lastname", "middlename", 
-      "contact_no", "birthdate", "birthplace", "citizenship",
-      "gender", "civil_status", "occupation", "religion",
-      "household_name", "house_no", "street",
-      "contact_name", "emergency_contact_no", "contact_relationship"
-  ];
-
-  function formatFieldName(field) {
-      return field
-          .replace(/_/g, " ") // Replace underscores with spaces
-          .replace(/\b\w/g, (char) => char.toUpperCase()); // Capitalize each word
-  }
-
-  // Check text inputs and select elements
-  for (let field of requiredFields) {
-      let value = $(`input[name='${field}'], select[name='${field}']`).val();
-      if (!value) {
-          $(".error__display").removeClass("hide");
-          $(".error__text").html(`Please fill out the <b>${formatFieldName(field)}</b> field.`);
-          setTimeout(() => $(".error__display").addClass("hide"), 3000);
-          return;
-      }
-  }
-
-  // Check required radio buttons
-  let radioFields = ["is_pwd", "is_voter_of_barangay", "is_family_head"];
-  for (let field of radioFields) {
-      if (!$(`input[name='${field}']:checked`).val()) {
-          $(".error__display").removeClass("hide");
-          $(".error__text").html(`Please select an option for <b>${formatFieldName(field)}</b>.`);
-          setTimeout(() => $(".error__display").addClass("hide"), 3000);
-          return;
-      }
-  }
-
-  let formData = {
-      firstname: $("input[name='firstname']").val(),
-      lastname: $("input[name='lastname']").val(),
-      middlename: $("input[name='middlename']").val(),
-      suffix: $("select[name='suffix']").val(),
-      contact_no: $("input[name='contact_no']").val(),
-      birthdate: $("input[name='birthdate']").val(),
-      birthplace: $("input[name='birthplace']").val(),
-      citizenship: $("input[name='citizenship']").val(),
-      gender: $("select[name='gender']").val(),
-      civil_status: $("select[name='civil_status']").val(),
-      occupation: $("input[name='occupation']").val(),
-      religion: $("input[name='religion']").val(),
-      is_pwd: $("input[name='is_pwd']:checked").val(),
-      is_voter_of_barangay: $("input[name='is_voter_of_barangay']:checked").val(),
-      is_family_head: $("input[name='is_family_head']:checked").val(),
-      household_name: $("input[name='household_name']").val(),
-      house_no: $("input[name='house_no']").val(),
-      street: $("input[name='street']").val(),
-      contact_name: $("input[name='contact_name']").val(),
-      emergency_contact_no: $("input[name='emergency_contact_no']").val(),
-      contact_relationship: $("input[name='contact_relationship']").val(),
-      status: $("input[name='status']").val()
-  };
-
-  members.push(formData);
-  localStorage.setItem("members", JSON.stringify(members));
-
-  closeErrorDisplay();
-  $(".success__indicator").removeClass("hide");
-  $(".indicator__text").html("Member added!");
-
-  setTimeout(() => $(".success__indicator").addClass("hide"), 3000);
-
-  displayTable();
-  $("form")[0].reset();
-}
-
-$("#saveMember").on("click", function(e){
-  saveMemberLocally(e);
-});
 
 
+    const saveMemberLocally = function (e) {
+    e.preventDefault();
 
+    let requiredFields = [
+        "firstname", "lastname", "middlename",
+        "contact_no", "birthdate", "birthplace", "citizenship",
+        "gender", "civil_status", "occupation", "religion",
+        "household_name", "house_no", "street",
+        "contact_name", "emergency_contact_no", "contact_relationship"
+    ];
 
-    // Handle delete button click
-    $(document).on("click", ".deleteMember", function () {
-        let index = $(this).data("index");
-        members.splice(index, 1);
-        localStorage.setItem("members", JSON.stringify(members));
-        displayTable();
-    });
-
-    // Load stored data on page load
-    let storedMembers = localStorage.getItem("members");
-    if (storedMembers) {
-        members = JSON.parse(storedMembers);
-        displayTable();
+    function formatFieldName(field) {
+        return field.replace(/_/g, " ").replace(/\b\w/g, char => char.toUpperCase());
     }
-// SAVING IN LOCAL STORAGE
 
-  $(".tab__btn").on("click", function () {
-    $(".btn__container").removeClass("visible"); 
-    $(this).parent().addClass("visible"); 
-  });
+    // Check required text inputs and select elements
+    for (let field of requiredFields) {
+        let value = $(`input[name='${field}'], select[name='${field}']`).val();
+        if (!value) {
+            openErrorDisplay(`Please fill out the <b>${formatFieldName(field)}</b> field.`);
+            return;
+        }
+    }
 
+    // Check required radio buttons
+    let radioFields = ["is_pwd", "is_voter_of_barangay", "is_family_head"];
+    for (let field of radioFields) {
+        if (!$(`input[name='${field}']:checked`).val()) {
+            openErrorDisplay(`Please select an option for <b>${formatFieldName(field)}</b>.`);
+            return;
+        }
+    }
 
-      $(document).ready(function () {
-        $("#example").DataTable();
-      });
-    </script>
+    let formData = {
+        firstname: $("input[name='firstname']").val(),
+        lastname: $("input[name='lastname']").val(),
+        middlename: $("input[name='middlename']").val(),
+        suffix: $("select[name='suffix']").val(),
+        contact_no: $("input[name='contact_no']").val(),
+        birthdate: $("input[name='birthdate']").val(),
+        birthplace: $("input[name='birthplace']").val(),
+        citizenship: $("input[name='citizenship']").val(),
+        gender: $("select[name='gender']").val(),
+        civil_status: $("select[name='civil_status']").val(),
+        occupation: $("input[name='occupation']").val(),
+        religion: $("input[name='religion']").val(),
+        is_pwd: $("input[name='is_pwd']:checked").val(),
+        is_voter_of_barangay: $("input[name='is_voter_of_barangay']:checked").val(),
+        is_family_head: $("input[name='is_family_head']:checked").val(),
+        household_name: $("input[name='household_name']").val(),
+        house_no: $("select[name='house_no']").val(),
+        street: $("input[name='street']").val(),
+        contact_name: $("input[name='contact_name']").val(),
+        emergency_contact_no: $("input[name='emergency_contact_no']").val(),
+        contact_relationship: $("input[name='contact_relationship']").val(),
+        status: $("input[name='status']").val()
+    };
 
-    <script>
-const closeModal = function() {
-  $("#addResidentModal").removeClass("open");
-  $("#viewResidentModal").removeClass("open");
-  $(".wrapper").removeClass("open");
+    console.log("Checking House No:", formData.house_no);
+console.log("Existing Members:", members);
+
+if (formData.is_family_head == "1") {
+    let existingHead = members.some(member => 
+        String(member.house_no) === String(formData.house_no) && member.is_family_head == "1"
+    );
+
+    if (existingHead) {
+        openErrorDisplay(`A family head already exists for House No. <b>${formData.house_no}</b>.`);
+        return;
+    }
 }
 
-$('.btn__close').on('click', function(){
-  closeModal();
-})
-$("input[name='is_family_head']").on("change", function () {
-  if ($(this).val() === "1") {
-    // $(".house__info").removeClass("d__none"); // Show content
-    // $('#saveMember').show();
-  } else {
-    // $(".house__info").addClass("d__none"); // Hide content
-    // $('#saveMember').hide();
-  }
-});
-$(document).ready(function () {
+    // Add member and save to localStorage
+    members.push(formData);
+    localStorage.setItem("members", JSON.stringify(members));
 
-const customLoaderOn = function() {
-  $('.custom__loader').removeClass('hide');
-}
-const customLoaderOff = function() {
-  $('.custom__loader').addClass('hide');
-}
+    closeErrorDisplay();
+    $(".success__indicator").removeClass("hide").find(".indicator__text").html("Member added!");
+    setTimeout(() => $(".success__indicator").addClass("hide"), 3000);
+
+    displayTable();
+    $("form")[0].reset();
+};
 
 
-function calculateAge(birthdate) {
+
+
+
+const calculateAge = function(birthdate) {
     if (!birthdate) return 'N/A';
 
     const birthDateObj = new Date(birthdate);
@@ -1292,7 +1265,8 @@ const loadResidents = function() {
                 const residents = response.data;
                 const tableData = residents.map(resident => [
                     resident.resident_id,
-                    `${resident.firstname} ${resident.middlename || ''} ${resident.lastname} ${resident.suffix || ''}`,
+                    `${resident.firstname} ${resident.middlename ? resident.middlename.charAt(0) + '.' : ''} ${resident.lastname} ${resident.suffix || ''}`,
+
                     // resident.birthdate || 'N/A',
                     resident.birthdate ? calculateAge(resident.birthdate) : 'N/A',
                     resident.civil_status || 'N/A',
@@ -1364,6 +1338,215 @@ const loadResidents = function() {
         }
     });
 };
+
+const saveResidents = function() {
+    let storedMembers = localStorage.getItem("members");
+    let membersData = storedMembers ? JSON.parse(storedMembers) : [];
+    if (membersData.length === 0) {
+        openErrorDisplay('There are no residents in list.');
+        closeValidator();
+        return;
+    }
+
+    $.ajax({
+        url: "<?= site_url('/admin/create-resident') ?>",
+        type: "POST",
+        data: { members: membersData }, // Send all members at once
+        dataType: "json",
+        beforeSend: function () {
+            $(".button__submit").prop("disabled", true).text("Submitting...");
+            $("#addResidentModal :input").prop("disabled", true); // To disabled all inputs when confirmation is up
+        },
+        success: function (response) {
+            if (response.status === "success") { 
+                $(".success__indicator").removeClass("hide");
+                $(".indicator__text").html('Residents Created!');
+
+                setTimeout(function() {
+                    $(".success__indicator").addClass("hide");
+                }, 3000);
+
+                // Clear localStorage after successful submission
+                localStorage.removeItem("members");
+                members = []; // Clear the array in memory
+                displayTable(); // Refresh the table
+
+                loadResidents(); // Reload the resident list
+                closeModal();
+            } else {
+                $(".text-danger").text(""); 
+                $.each(response.errors, function(key, value) {
+                    $("input[name='" + key + "']").siblings(".text-danger").text(value);
+                });
+            }
+        },
+        error: function() {
+            alert("Something went wrong. Please try again.");
+        },
+        complete: function() {
+            $(".button__submit").prop("disabled", false).text("Submit");
+            $("#addResidentModal :input").prop("disabled", false);
+            closeValidator();
+
+        }
+    });
+};
+
+const viewResidentData = function(residentId) {                  // Resident Details on button click        
+    $.ajax({
+        url: "<?= base_url('admin/get-resident-details') ?>", 
+        type: "GET",
+        data: { resident_id: residentId }, 
+        dataType: "json",
+        success: function (response) {
+            if (response.success) {
+                // Populate modal fields
+                $("input[name='view_firstname']").val(response.data.firstname);
+                $("textarea[name='view_lastname']").val(response.data.lastname);
+                $("input[name='view_middlename']").val(response.data.middlename);
+                $("input[name='view_suffix']").val(response.data.suffix);
+                $("input[name='view_contact_no']").val(response.data.contact_no);
+                $("input[name='view_birthdate']").val(response.data.birthdate);
+                $("input[name='view_age']").val(response.data.age);
+                $("input[name='view_birthplace']").val(response.data.birthplace);
+                $("input[name='view_citizenship']").val(response.data.citizenship);
+                $("input[name='view_gender']").val(response.data.gender);
+                $("input[name='view_civil_status']").val(response.data.civil_status);
+                $("input[name='view_occupation']").val(response.data.occupation);
+                $("input[name='view_religion']").val(response.data.religion);
+                // Set the respective radio button as selected
+                $("input[name='view_is_pwd'][value='" + response.data.is_pwd + "']").prop("checked", true);
+                $("input[name='view_is_voter_of_barangay'][value='" + response.data.is_voter_of_barangay + "']").prop("checked", true);
+                $("input[name='view_is_family_head'][value='" + response.data.is_family_head + "']").prop("checked", true);
+                $("input[name='view_household_name']").val(response.data.household_name);
+                $("input[name='view_house_no']").val(response.data.house_no);
+                $("input[name='view_street']").val(response.data.street);
+                $("input[name='view_contact_name']").val(response.data.contact_name);
+                $("input[name='view_emergency_contact_no']").val(response.data.emergency_contact_no);
+                $("input[name='view_contact_relationship']").val(response.data.contact_relationship);
+                // Open modal
+                // $(".wrapper").addClass("open");
+                // $("#viewEventModal").addClass("open");
+            } else {
+                alert("Failed to fetch resident details.");
+            }
+        },
+        error: function () {
+            alert("An error occurred while fetching resident details.");
+        }
+    });
+}
+
+const customLoaderOn = function() {
+  $('.custom__loader').removeClass('hide');
+}
+const customLoaderOff = function() {
+  $('.custom__loader').addClass('hide');
+}
+// ~~~~~~~~~~~~~~~~~~~~~~~~ ⚡ Event Listeners ⚡ ~~~~~~~~~~~~~~~~~~~~~~~~ //
+// -- Display street based on selected house number
+$('#houseNumberList').on("change", function(){
+  getHouseStreet();
+});
+// -- Remove a member from the datatable.
+$(document).on("click", ".btn__delete", function () {
+    let index = $(this).data("index");
+    members.splice(index, 1);
+    localStorage.setItem("members", JSON.stringify(members));
+    displayTable();
+});
+$("#saveMember").on("click", function(e){
+  saveMemberLocally(e);
+});
+
+// Data for local storage (Members)
+let storedMembers = localStorage.getItem("members");
+  if (storedMembers) {
+      members = JSON.parse(storedMembers);
+      displayTable();
+  }
+
+  $(".tab__btn").on("click", function () {
+    $(".btn__container").removeClass("visible"); 
+    $(this).parent().addClass("visible"); 
+  });
+  
+  $(document).ready(function () {
+    $("#example").DataTable();
+  });
+  const closeModal = function() {
+    $("#addResidentModal").removeClass("open");
+    $("#viewResidentModal").removeClass("open");
+    $(".wrapper").removeClass("open");
+  }
+  $('.btn__close').on('click', function(){
+    closeModal();
+  });
+
+    $("input[name='is_family_head']").on("change", function () {
+      if ($(this).val() === "1") {
+        // $(".house__info").removeClass("d__none"); // Show content
+        // $('#saveMember').show();
+      } else {
+        // $(".house__info").addClass("d__none"); // Hide content
+        // $('#saveMember').hide();
+      }
+    });
+
+    $(".validator__cancel").on("click", function() {
+  $("#addResidentModal :input").prop("disabled", false);
+});
+$(".validator__icon").on("click", function() {
+  $("#addResidentModal :input").prop("disabled", false);
+});
+$(".wrapper").on("click", function () {
+  $("#addResidentModal :input").prop("disabled", false);
+});
+$(document).on("keydown", function (event) {
+  if (event.key === "Escape") {
+    $("#addResidentModal :input").prop("disabled", false);
+  }
+});
+// Reactivation of input forms during closing of modal END
+$('.btn__add__resident').on("click", function(){
+  // $('#saveMember').hide();
+  loadHouseNumbers();
+});
+
+$(".create__residents__btn").on("click", function(){
+  openValidator();
+  $("#addResidentModal :input").prop("disabled", true); // To disabled all inputs when confirmation is up
+});
+
+$(".validator__proceed").on("click", function(e){
+  e.preventDefault();
+  saveResidents();
+});
+
+$(document).on("click", ".view__resident__btn", function () {          
+  let residentId = $(this).data("id"); 
+  $("#viewResidentModal").data("id", residentId); 
+  viewResidentData(residentId); 
+  openModal();
+});
+
+$('.icon__close').on("click", function(){
+  closeModal();
+})
+    
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~ ⚡ On load ⚡ ~~~~~~~~~~~~~~~~~~~~~~~~ //
+loadResidents();
+});    
+
+
+
+
+
+    </script>
+
+    <script>
+
 // const loadHouseholdResidents = function() {
 //   customLoaderOn();
 //     const $residentsTable = $("#newResidents");
@@ -1456,172 +1639,9 @@ const loadResidents = function() {
 // };
 
 // make this on click of button create__residents__btn
-const saveResidents = function() {
-    let storedMembers = localStorage.getItem("members");
-    let membersData = storedMembers ? JSON.parse(storedMembers) : [];
-    if (membersData.length === 0) {
-        openErrorDisplay('There are no residents in list.');
-        closeValidator();
-        return;
-    }
 
-    $.ajax({
-        url: "<?= site_url('/admin/create-resident') ?>",
-        type: "POST",
-        data: { members: membersData }, // Send all members at once
-        dataType: "json",
-        beforeSend: function () {
-            $(".button__submit").prop("disabled", true).text("Submitting...");
-            $("#addResidentModal :input").prop("disabled", true); // To disabled all inputs when confirmation is up
-        },
-        success: function (response) {
-            if (response.status === "success") { 
-                $(".success__indicator").removeClass("hide");
-                $(".indicator__text").html('Residents Created!');
-
-                setTimeout(function() {
-                    $(".success__indicator").addClass("hide");
-                }, 3000);
-
-                // Clear localStorage after successful submission
-                localStorage.removeItem("members");
-                members = []; // Clear the array in memory
-                displayTable(); // Refresh the table
-
-                loadResidents(); // Reload the resident list
-                closeModal();
-            } else {
-                $(".text-danger").text(""); 
-                $.each(response.errors, function(key, value) {
-                    $("input[name='" + key + "']").siblings(".text-danger").text(value);
-                });
-            }
-        },
-        error: function() {
-            alert("Something went wrong. Please try again.");
-        },
-        complete: function() {
-            $(".button__submit").prop("disabled", false).text("Submit");
-            $("#addResidentModal :input").prop("disabled", false);
-            closeValidator();
-
-        }
-    });
-};
 
 // Reactivation of input forms during closing of modal
-$(".validator__cancel").on("click", function() {
-  $("#addResidentModal :input").prop("disabled", false);
-});
-$(".validator__icon").on("click", function() {
-  $("#addResidentModal :input").prop("disabled", false);
-});
-$(".wrapper").on("click", function () {
-  $("#addResidentModal :input").prop("disabled", false);
-});
-$(document).on("keydown", function (event) {
-  if (event.key === "Escape") {
-    $("#addResidentModal :input").prop("disabled", false);
-  }
-});
-// Reactivation of input forms during closing of modal END
-
-
-$('.btn__add__resident').on("click", function(){
-  // $('#saveMember').hide();
-  loadHouseNumbers();
-});
-
-$(".create__residents__btn").on("click", function(){
-  openValidator();
-  $("#addResidentModal :input").prop("disabled", true); // To disabled all inputs when confirmation is up
-});
-
-$(".validator__proceed").on("click", function(e){
-  e.preventDefault();
-  saveResidents();
-});
-
-
-
-
-
-$(document).on("click", ".view__resident__btn", function () {          
-  let residentId = $(this).data("id"); 
-  $("#viewResidentModal").data("id", residentId); 
-  viewResidentData(residentId); 
-  openModal();
-});
-
-$('.icon__close').on("click", function(){
-  closeModal();
-})
-
-
-const viewResidentData = function(residentId) {                  // Resident Details on button click        
-    $.ajax({
-        url: "<?= base_url('admin/get-resident-details') ?>", 
-        type: "GET",
-        data: { resident_id: residentId }, 
-        dataType: "json",
-        success: function (response) {
-            if (response.success) {
-                // Populate modal fields
-                $("input[name='view_firstname']").val(response.data.firstname);
-                $("textarea[name='view_lastname']").val(response.data.lastname);
-                $("input[name='view_middlename']").val(response.data.middlename);
-                $("input[name='view_suffix']").val(response.data.suffix);
-                $("input[name='view_contact_no']").val(response.data.contact_no);
-                $("input[name='view_birthdate']").val(response.data.birthdate);
-                $("input[name='view_age']").val(response.data.age);
-                $("input[name='view_birthplace']").val(response.data.birthplace);
-                $("input[name='view_citizenship']").val(response.data.citizenship);
-                $("input[name='view_gender']").val(response.data.gender);
-                $("input[name='view_civil_status']").val(response.data.civil_status);
-                $("input[name='view_occupation']").val(response.data.occupation);
-                $("input[name='view_religion']").val(response.data.religion);
-                // Set the respective radio button as selected
-                $("input[name='view_is_pwd'][value='" + response.data.is_pwd + "']").prop("checked", true);
-                $("input[name='view_is_voter_of_barangay'][value='" + response.data.is_voter_of_barangay + "']").prop("checked", true);
-                $("input[name='view_is_family_head'][value='" + response.data.is_family_head + "']").prop("checked", true);
-                $("input[name='view_household_name']").val(response.data.household_name);
-                $("input[name='view_house_no']").val(response.data.house_no);
-                $("input[name='view_street']").val(response.data.street);
-                $("input[name='view_contact_name']").val(response.data.contact_name);
-                $("input[name='view_emergency_contact_no']").val(response.data.emergency_contact_no);
-                $("input[name='view_contact_relationship']").val(response.data.contact_relationship);
-                // Open modal
-                // $(".wrapper").addClass("open");
-                // $("#viewEventModal").addClass("open");
-            } else {
-                alert("Failed to fetch resident details.");
-            }
-        },
-        error: function () {
-            alert("An error occurred while fetching resident details.");
-        }
-    });
-}
-
-
-// Load residents on document ready
-$(document).ready(function() {
-    loadResidents();
-});
-
-
-
-
-
-});
-
-
-
-
-
-
-
-
     </script>
   </body>
 </html>

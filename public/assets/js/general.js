@@ -1,9 +1,11 @@
 const openErrorDisplay = function (message) {
   $(".error__text").html(message);
   $(".error__display").removeClass("hide");
+  setTimeout(() => $(".success__indicator").addClass("hide"), 3000);
 };
 const closeErrorDisplay = function () {
   $(".error__display").addClass("hide");
+  setTimeout(() => $(".success__indicator").addClass("hide"), 3000);
 };
 
 const openValidator = function () {

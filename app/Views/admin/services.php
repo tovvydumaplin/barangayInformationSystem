@@ -331,6 +331,7 @@
           </div>
           <div class="input__group">
             <input class="information__input" type="text" id="houseNumberInput" placeholder="Input House Number">
+            <input class="information__input" type="text" name="house_street" placeholder="Input Street">
             <input class="information__input" type="hidden" id="latInput">
             <input class="information__input" type="hidden" id="lngInput">
           </div>

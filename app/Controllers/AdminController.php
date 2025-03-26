@@ -454,6 +454,7 @@ public function createUser()
         $houseModel = new HouseModel(); // Use HouseDetails model
         $pinData = [
             'house_no'  => $request['house_number'], // Match DB column name
+            'house_street'  => $request['house_street'], 
             'latitude'  => $request['latitude'],
             'longitude' => $request['longitude'],
             'status'    => 1
@@ -482,15 +483,50 @@ public function createUser()
     
     public function getHouseDetails()
     {
-        $houseModel = new HouseModel();
-        $houses = $houseModel->findAll(); // Get all records from tbl_house
+        $db = db_connect();
     
-        return $this->response->setJSON($houses); // Return data as JSON
+        $query = $db->query("
+            SELECT 
+                h.house_no,
+                h.house_street,
+                h.latitude,
+                h.longitude,
+                r.firstname,
+                r.middlename,
+                r.lastname,
+                r.is_family_head
+            FROM tbl_house h
+            LEFT JOIN tbl_residents r ON h.house_no = r.house_no
+        ");
+    
+        $houses = [];
+        foreach ($query->getResultArray() as $row) {
+            $house_no = $row['house_no'];
+    
+            if (!isset($houses[$house_no])) {
+                $houses[$house_no] = [
+                    'house_no' => $house_no,
+                    'house_street' => $row['house_street'],
+                    'latitude' => $row['latitude'],
+                    'longitude' => $row['longitude'],
+                    'residents' => [],
+                ];
+            }
+    
+            if (!empty($row['firstname'])) {
+                $houses[$house_no]['residents'][] = [
+                    'fullname' => $row['firstname'] . " " . substr($row['middlename'], 0, 1) . ". " . $row['lastname'],
+                    'is_family_head' => $row['is_family_head'],
+                ];
+            }
+        }
+    
+        return $this->response->setJSON(array_values($houses));
     }
     
     public function getHouseNumbers()
     {
-        $houseModel = new \App\Models\HouseModel(); 
+        $houseModel = new HouseModel(); 
         $houseNumbers = $houseModel->select('house_no')->findAll();
 
         if (!empty($houseNumbers)) {
@@ -504,6 +540,31 @@ public function createUser()
             'success' => false,
             'message' => 'No house numbers found.'
         ]);
+    }
+    public function getHouseStreet()
+    {
+        $houseNumber = $this->request->getGet('house_number');
+
+        if (!$houseNumber) {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'House number is required'
+            ]);
+        }
+        $houseModel = new HouseModel();
+        $house = $houseModel->where('house_no',$houseNumber)->first();
+
+        if($house) {
+            return $this->response->setJSON([
+                'success' => true,
+                'data' => ['house_street' => $house['house_street']]
+            ]);
+        } else {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => "No street found for this house number"
+            ]);
+        }
     }
 
 }

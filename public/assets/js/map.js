@@ -9,35 +9,6 @@ $(document).ready(function () {
 
   let markers = []; // Store markers
 
-  // Function to add a marker
-  const addMarker = function (lat, lng, familyName) {
-    // Check if the marker already exists
-    if (
-      markers.some(
-        (m) => m.getLatLng().lat === lat && m.getLatLng().lng === lng
-      )
-    ) {
-      alert("A marker already exists at this location.");
-      return;
-    }
-
-    const marker = L.marker([lat, lng])
-      .addTo(map)
-      .bindPopup(
-        `<b>${familyName}</b><br>Lat: ${lat.toFixed(5)}, Lng: ${lng.toFixed(
-          5
-        )}<br>
-         <button class="remove-marker" data-lat="${lat}" data-lng="${lng}">Remove</button>`
-      )
-      .on("popupopen", function () {
-        $(".remove-marker").on("click", function () {
-          removeMarker(lat, lng);
-        });
-      });
-
-    markers.push(marker);
-  };
-
   // Remove marker from the map
   const removeMarker = function (lat, lng) {
     markers = markers.filter((marker) => {
@@ -62,6 +33,7 @@ $(document).ready(function () {
   // Submit family name from modal
   $("#saveHouseNumber").on("click", function () {
     const houseNumber = $("#houseNumberInput").val().trim();
+    const houseStreet = $("[name='house_street']").val();
     const latitude = $("#latInput").val(); // Keep as string to match DB
     const longitude = $("#lngInput").val(); // Keep as string to match DB
 
@@ -75,6 +47,7 @@ $(document).ready(function () {
       type: "POST",
       data: {
         house_number: houseNumber,
+        house_street: houseStreet,
         latitude: latitude,
         longitude: longitude,
       },
@@ -99,23 +72,93 @@ $(document).ready(function () {
     $("#familyModal").hide();
   });
 
+  // Function to add a marker THIS FUNCTIUON IS USED ON LOADHOUSEMARKERS
+  const addMarker = function (lat, lng, houseNumber, houseStreet, residents) {
+    if (
+      markers.some(
+        (m) => m.getLatLng().lat === lat && m.getLatLng().lng === lng
+      )
+    ) {
+      alert("A marker already exists at this location.");
+      return;
+    }
+
+    // 🔹 Log the house and residents to verify data
+    console.log(
+      `Adding marker for House No: ${houseNumber}, Street: ${houseStreet}`
+    );
+    console.log("Residents:", residents);
+
+    let residentsHTML = residents
+      .map((resident) => {
+        console.log(
+          `Resident: ${resident.fullname}, Is Head: ${resident.is_family_head}`
+        );
+        return `
+          <div class="popup__row">
+            <ion-icon name="person-circle-outline"></ion-icon>
+            <p class="popup__names">${resident.fullname} 
+              ${
+                resident.is_family_head == 1
+                  ? '<span class="family-head">[Head]</span>'
+                  : ""
+              }
+            </p>
+          </div>`;
+      })
+      .join("");
+
+    const marker = L.marker([lat, lng])
+      .addTo(map)
+      .bindPopup(
+        `<div class="custom-popup">
+            <div class="popup__header">
+              <div class="popup__header__text">
+                <p class="house__number">${houseNumber}</p>
+                <p class="popup__text">${houseStreet}</p>
+              </div>
+              <ion-icon name="close-outline"></ion-icon>
+            </div>
+            <div class="popup__body">
+              <p class="popup__heading">Family Members</p>
+              ${
+                residentsHTML ||
+                "<p class='popup__text'>No residents found.</p>"
+              }
+            </div>
+            <p class="popup__text">Latitude: ${lat.toFixed(5)}</p>
+            <p class="popup__text">Longitude: ${lng.toFixed(5)}</p>
+            <button class="remove-marker" data-lat="${lat}" data-lng="${lng}">Remove</button>
+        </div>`
+      )
+      .on("popupopen", function () {
+        $(".remove-marker").on("click", function () {
+          removeMarker(lat, lng);
+        });
+      });
+
+    markers.push(marker);
+  };
+
   // Load stored house details from DB
   function loadHouseMarkers() {
-    // Remove all existing markers before loading new ones
     markers.forEach((marker) => map.removeLayer(marker));
-    markers = []; // Reset the array
+    markers = [];
 
     $.ajax({
       url: "get-house-details",
       type: "GET",
       dataType: "json",
       success: function (houses) {
+        console.log("Received Houses Data:", houses); // Debugging
+
         houses.forEach(function (house) {
           addMarker(
             parseFloat(house.latitude),
             parseFloat(house.longitude),
             house.house_no,
-            false
+            house.house_street,
+            house.residents || [] // Pass residents array
           );
         });
       },

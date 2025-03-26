@@ -1,0 +1,1079 @@
+DEBUG - 2025-03-26 08:05:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 08:06:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 08:06:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 08:24:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 08:25:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 08:26:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 08:32:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 08:32:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 08:39:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 08:40:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 09:07:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 09:08:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 09:08:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 09:09:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 09:11:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 09:12:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 09:14:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 10:30:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 10:30:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 10:32:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 10:35:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 10:38:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 10:38:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 10:40:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 10:41:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 10:42:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 10:42:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 10:42:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 10:43:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 10:48:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 10:48:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 10:53:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 10:57:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 11:14:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 11:15:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 11:15:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 11:16:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 11:16:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 11:17:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 11:19:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 11:19:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 11:20:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 11:20:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 11:55:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 11:56:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 12:33:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 12:37:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 13:09:41 --> Received Data: Array
+(
+    [0] => Array
+        (
+            [firstname] => 123
+            [lastname] => 123
+            [middlename] => 123
+            [suffix] => 
+            [contact_no] => 123
+            [birthdate] => 2025-03-26
+            [birthplace] => 123
+            [citizenship] => 123
+            [gender] => Male
+            [civil_status] => Divorced
+            [occupation] => 123
+            [religion] => 123
+            [is_pwd] => 1
+            [is_voter_of_barangay] => 1
+            [is_family_head] => 0
+            [household_name] => 123
+            [street] => United Street
+            [contact_name] => 123
+            [emergency_contact_no] => 123
+            [contact_relationship] => 123
+            [status] => 1
+        )
+
+    [1] => Array
+        (
+            [firstname] => 123
+            [lastname] => 123
+            [middlename] => 123
+            [suffix] => Jr.
+            [contact_no] => 123
+            [birthdate] => 2025-03-19
+            [birthplace] => 123
+            [citizenship] => 123
+            [gender] => Male
+            [civil_status] => Single
+            [occupation] => 123
+            [religion] => 123
+            [is_pwd] => 1
+            [is_voter_of_barangay] => 1
+            [is_family_head] => 1
+            [household_name] => 123
+            [house_no] => 1234
+            [street] => United Street
+            [contact_name] => 123
+            [emergency_contact_no] => 123
+            [contact_relationship] => 123
+            [status] => 1
+        )
+
+)
+
+ERROR - 2025-03-26 13:09:41 --> mysqli_sql_exception: Column count doesn't match value count at row 1 in C:\barangayInformationSystem\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\barangayInformationSystem\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `tb...', 0)
+#1 C:\barangayInformationSystem\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tb...')
+#2 C:\barangayInformationSystem\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tb...')
+#3 C:\barangayInformationSystem\system\Database\BaseBuilder.php(1841): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tb...', NULL, false)
+#4 C:\barangayInformationSystem\system\Database\BaseBuilder.php(2230): CodeIgniter\Database\BaseBuilder->batchExecute('_insertBatch', 100)
+#5 C:\barangayInformationSystem\system\Model.php(428): CodeIgniter\Database\BaseBuilder->insertBatch(Array, NULL, 100)
+#6 C:\barangayInformationSystem\system\BaseModel.php(959): CodeIgniter\Model->doInsertBatch(Array, NULL, 100, false)
+#7 C:\barangayInformationSystem\app\Controllers\AdminController.php(397): CodeIgniter\BaseModel->insertBatch(Array)
+#8 C:\barangayInformationSystem\system\CodeIgniter.php(933): App\Controllers\AdminController->createResident()
+#9 C:\barangayInformationSystem\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#10 C:\barangayInformationSystem\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\barangayInformationSystem\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#12 C:\barangayInformationSystem\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\barangayInformationSystem\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 C:\barangayInformationSystem\system\rewrite.php(44): require_once('C:\\barangayInfo...')
+#15 {main}
+CRITICAL - 2025-03-26 13:09:41 --> CodeIgniter\Database\Exceptions\DatabaseException: Column count doesn't match value count at row 1
+[Method: POST, Route: admin/create-resident]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1841): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_residents` ()
+VALUES (\'2025-03-26\',\'123\',\'123\',\'Divorced\',\'123\',\'123\',\'123\',\'2025-03-26 13:09:41\',\'123\',\'123\',\'Male\',\'123\',\'0\',\'1\',\'1\',\'123\',\'123\',\'123\',\'123\',\'1\',\'United Street\',\'\',\'2025-03-26 13:09:41\'), ()', null, false)
+ 2 SYSTEMPATH\Database\BaseBuilder.php(2230): CodeIgniter\Database\BaseBuilder->batchExecute('_insertBatch', 100)
+ 3 SYSTEMPATH\Model.php(428): CodeIgniter\Database\BaseBuilder->insertBatch([...], null, 100)
+ 4 SYSTEMPATH\BaseModel.php(959): CodeIgniter\Model->doInsertBatch([...], null, 100, false)
+ 5 APPPATH\Controllers\AdminController.php(397): CodeIgniter\BaseModel->insertBatch([...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->createResident()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\barangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-03-26 13:09:41 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Column count doesn't match value count at row 1
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tbl_residents` ()
+VALUES (\'2025-03-26\',\'123\',\'123\',\'Divorced\',\'123\',\'123\',\'123\',\'2025-03-26 13:09:41\',\'123\',\'123\',\'Male\',\'123\',\'0\',\'1\',\'1\',\'123\',\'123\',\'123\',\'123\',\'1\',\'United Street\',\'\',\'2025-03-26 13:09:41\'), ()')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tbl_residents` ()
+VALUES (\'2025-03-26\',\'123\',\'123\',\'Divorced\',\'123\',\'123\',\'123\',\'2025-03-26 13:09:41\',\'123\',\'123\',\'Male\',\'123\',\'0\',\'1\',\'1\',\'123\',\'123\',\'123\',\'123\',\'1\',\'United Street\',\'\',\'2025-03-26 13:09:41\'), ()')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1841): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_residents` ()
+VALUES (\'2025-03-26\',\'123\',\'123\',\'Divorced\',\'123\',\'123\',\'123\',\'2025-03-26 13:09:41\',\'123\',\'123\',\'Male\',\'123\',\'0\',\'1\',\'1\',\'123\',\'123\',\'123\',\'123\',\'1\',\'United Street\',\'\',\'2025-03-26 13:09:41\'), ()', null, false)
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2230): CodeIgniter\Database\BaseBuilder->batchExecute('_insertBatch', 100)
+ 5 SYSTEMPATH\Model.php(428): CodeIgniter\Database\BaseBuilder->insertBatch([...], null, 100)
+ 6 SYSTEMPATH\BaseModel.php(959): CodeIgniter\Model->doInsertBatch([...], null, 100, false)
+ 7 APPPATH\Controllers\AdminController.php(397): CodeIgniter\BaseModel->insertBatch([...])
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->createResident()
+ 9 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('C:\\barangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-03-26 13:09:41 --> [Caused by] mysqli_sql_exception: Column count doesn't match value count at row 1
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `tbl_residents` ()
+VALUES (\'2025-03-26\',\'123\',\'123\',\'Divorced\',\'123\',\'123\',\'123\',\'2025-03-26 13:09:41\',\'123\',\'123\',\'Male\',\'123\',\'0\',\'1\',\'1\',\'123\',\'123\',\'123\',\'123\',\'1\',\'United Street\',\'\',\'2025-03-26 13:09:41\'), ()', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tbl_residents` ()
+VALUES (\'2025-03-26\',\'123\',\'123\',\'Divorced\',\'123\',\'123\',\'123\',\'2025-03-26 13:09:41\',\'123\',\'123\',\'Male\',\'123\',\'0\',\'1\',\'1\',\'123\',\'123\',\'123\',\'123\',\'1\',\'United Street\',\'\',\'2025-03-26 13:09:41\'), ()')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tbl_residents` ()
+VALUES (\'2025-03-26\',\'123\',\'123\',\'Divorced\',\'123\',\'123\',\'123\',\'2025-03-26 13:09:41\',\'123\',\'123\',\'Male\',\'123\',\'0\',\'1\',\'1\',\'123\',\'123\',\'123\',\'123\',\'1\',\'United Street\',\'\',\'2025-03-26 13:09:41\'), ()')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1841): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_residents` ()
+VALUES (\'2025-03-26\',\'123\',\'123\',\'Divorced\',\'123\',\'123\',\'123\',\'2025-03-26 13:09:41\',\'123\',\'123\',\'Male\',\'123\',\'0\',\'1\',\'1\',\'123\',\'123\',\'123\',\'123\',\'1\',\'United Street\',\'\',\'2025-03-26 13:09:41\'), ()', null, false)
+ 5 SYSTEMPATH\Database\BaseBuilder.php(2230): CodeIgniter\Database\BaseBuilder->batchExecute('_insertBatch', 100)
+ 6 SYSTEMPATH\Model.php(428): CodeIgniter\Database\BaseBuilder->insertBatch([...], null, 100)
+ 7 SYSTEMPATH\BaseModel.php(959): CodeIgniter\Model->doInsertBatch([...], null, 100, false)
+ 8 APPPATH\Controllers\AdminController.php(397): CodeIgniter\BaseModel->insertBatch([...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->createResident()
+10 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+11 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+15 SYSTEMPATH\rewrite.php(44): require_once('C:\\barangayInformationSystem\\public\\index.php')
+DEBUG - 2025-03-26 13:09:44 --> Received Data: Array
+(
+    [0] => Array
+        (
+            [firstname] => 123
+            [lastname] => 123
+            [middlename] => 123
+            [suffix] => 
+            [contact_no] => 123
+            [birthdate] => 2025-03-26
+            [birthplace] => 123
+            [citizenship] => 123
+            [gender] => Male
+            [civil_status] => Divorced
+            [occupation] => 123
+            [religion] => 123
+            [is_pwd] => 1
+            [is_voter_of_barangay] => 1
+            [is_family_head] => 0
+            [household_name] => 123
+            [street] => United Street
+            [contact_name] => 123
+            [emergency_contact_no] => 123
+            [contact_relationship] => 123
+            [status] => 1
+        )
+
+    [1] => Array
+        (
+            [firstname] => 123
+            [lastname] => 123
+            [middlename] => 123
+            [suffix] => Jr.
+            [contact_no] => 123
+            [birthdate] => 2025-03-19
+            [birthplace] => 123
+            [citizenship] => 123
+            [gender] => Male
+            [civil_status] => Single
+            [occupation] => 123
+            [religion] => 123
+            [is_pwd] => 1
+            [is_voter_of_barangay] => 1
+            [is_family_head] => 1
+            [household_name] => 123
+            [house_no] => 1234
+            [street] => United Street
+            [contact_name] => 123
+            [emergency_contact_no] => 123
+            [contact_relationship] => 123
+            [status] => 1
+        )
+
+)
+
+ERROR - 2025-03-26 13:09:44 --> mysqli_sql_exception: Column count doesn't match value count at row 1 in C:\barangayInformationSystem\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\barangayInformationSystem\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `tb...', 0)
+#1 C:\barangayInformationSystem\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tb...')
+#2 C:\barangayInformationSystem\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tb...')
+#3 C:\barangayInformationSystem\system\Database\BaseBuilder.php(1841): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tb...', NULL, false)
+#4 C:\barangayInformationSystem\system\Database\BaseBuilder.php(2230): CodeIgniter\Database\BaseBuilder->batchExecute('_insertBatch', 100)
+#5 C:\barangayInformationSystem\system\Model.php(428): CodeIgniter\Database\BaseBuilder->insertBatch(Array, NULL, 100)
+#6 C:\barangayInformationSystem\system\BaseModel.php(959): CodeIgniter\Model->doInsertBatch(Array, NULL, 100, false)
+#7 C:\barangayInformationSystem\app\Controllers\AdminController.php(397): CodeIgniter\BaseModel->insertBatch(Array)
+#8 C:\barangayInformationSystem\system\CodeIgniter.php(933): App\Controllers\AdminController->createResident()
+#9 C:\barangayInformationSystem\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#10 C:\barangayInformationSystem\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\barangayInformationSystem\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#12 C:\barangayInformationSystem\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\barangayInformationSystem\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 C:\barangayInformationSystem\system\rewrite.php(44): require_once('C:\\barangayInfo...')
+#15 {main}
+CRITICAL - 2025-03-26 13:09:44 --> CodeIgniter\Database\Exceptions\DatabaseException: Column count doesn't match value count at row 1
+[Method: POST, Route: admin/create-resident]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1841): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_residents` ()
+VALUES (\'2025-03-26\',\'123\',\'123\',\'Divorced\',\'123\',\'123\',\'123\',\'2025-03-26 13:09:44\',\'123\',\'123\',\'Male\',\'123\',\'0\',\'1\',\'1\',\'123\',\'123\',\'123\',\'123\',\'1\',\'United Street\',\'\',\'2025-03-26 13:09:44\'), ()', null, false)
+ 2 SYSTEMPATH\Database\BaseBuilder.php(2230): CodeIgniter\Database\BaseBuilder->batchExecute('_insertBatch', 100)
+ 3 SYSTEMPATH\Model.php(428): CodeIgniter\Database\BaseBuilder->insertBatch([...], null, 100)
+ 4 SYSTEMPATH\BaseModel.php(959): CodeIgniter\Model->doInsertBatch([...], null, 100, false)
+ 5 APPPATH\Controllers\AdminController.php(397): CodeIgniter\BaseModel->insertBatch([...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->createResident()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\barangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-03-26 13:09:44 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Column count doesn't match value count at row 1
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tbl_residents` ()
+VALUES (\'2025-03-26\',\'123\',\'123\',\'Divorced\',\'123\',\'123\',\'123\',\'2025-03-26 13:09:44\',\'123\',\'123\',\'Male\',\'123\',\'0\',\'1\',\'1\',\'123\',\'123\',\'123\',\'123\',\'1\',\'United Street\',\'\',\'2025-03-26 13:09:44\'), ()')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tbl_residents` ()
+VALUES (\'2025-03-26\',\'123\',\'123\',\'Divorced\',\'123\',\'123\',\'123\',\'2025-03-26 13:09:44\',\'123\',\'123\',\'Male\',\'123\',\'0\',\'1\',\'1\',\'123\',\'123\',\'123\',\'123\',\'1\',\'United Street\',\'\',\'2025-03-26 13:09:44\'), ()')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1841): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_residents` ()
+VALUES (\'2025-03-26\',\'123\',\'123\',\'Divorced\',\'123\',\'123\',\'123\',\'2025-03-26 13:09:44\',\'123\',\'123\',\'Male\',\'123\',\'0\',\'1\',\'1\',\'123\',\'123\',\'123\',\'123\',\'1\',\'United Street\',\'\',\'2025-03-26 13:09:44\'), ()', null, false)
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2230): CodeIgniter\Database\BaseBuilder->batchExecute('_insertBatch', 100)
+ 5 SYSTEMPATH\Model.php(428): CodeIgniter\Database\BaseBuilder->insertBatch([...], null, 100)
+ 6 SYSTEMPATH\BaseModel.php(959): CodeIgniter\Model->doInsertBatch([...], null, 100, false)
+ 7 APPPATH\Controllers\AdminController.php(397): CodeIgniter\BaseModel->insertBatch([...])
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->createResident()
+ 9 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('C:\\barangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-03-26 13:09:44 --> [Caused by] mysqli_sql_exception: Column count doesn't match value count at row 1
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `tbl_residents` ()
+VALUES (\'2025-03-26\',\'123\',\'123\',\'Divorced\',\'123\',\'123\',\'123\',\'2025-03-26 13:09:44\',\'123\',\'123\',\'Male\',\'123\',\'0\',\'1\',\'1\',\'123\',\'123\',\'123\',\'123\',\'1\',\'United Street\',\'\',\'2025-03-26 13:09:44\'), ()', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tbl_residents` ()
+VALUES (\'2025-03-26\',\'123\',\'123\',\'Divorced\',\'123\',\'123\',\'123\',\'2025-03-26 13:09:44\',\'123\',\'123\',\'Male\',\'123\',\'0\',\'1\',\'1\',\'123\',\'123\',\'123\',\'123\',\'1\',\'United Street\',\'\',\'2025-03-26 13:09:44\'), ()')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tbl_residents` ()
+VALUES (\'2025-03-26\',\'123\',\'123\',\'Divorced\',\'123\',\'123\',\'123\',\'2025-03-26 13:09:44\',\'123\',\'123\',\'Male\',\'123\',\'0\',\'1\',\'1\',\'123\',\'123\',\'123\',\'123\',\'1\',\'United Street\',\'\',\'2025-03-26 13:09:44\'), ()')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1841): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_residents` ()
+VALUES (\'2025-03-26\',\'123\',\'123\',\'Divorced\',\'123\',\'123\',\'123\',\'2025-03-26 13:09:44\',\'123\',\'123\',\'Male\',\'123\',\'0\',\'1\',\'1\',\'123\',\'123\',\'123\',\'123\',\'1\',\'United Street\',\'\',\'2025-03-26 13:09:44\'), ()', null, false)
+ 5 SYSTEMPATH\Database\BaseBuilder.php(2230): CodeIgniter\Database\BaseBuilder->batchExecute('_insertBatch', 100)
+ 6 SYSTEMPATH\Model.php(428): CodeIgniter\Database\BaseBuilder->insertBatch([...], null, 100)
+ 7 SYSTEMPATH\BaseModel.php(959): CodeIgniter\Model->doInsertBatch([...], null, 100, false)
+ 8 APPPATH\Controllers\AdminController.php(397): CodeIgniter\BaseModel->insertBatch([...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->createResident()
+10 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+11 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+15 SYSTEMPATH\rewrite.php(44): require_once('C:\\barangayInformationSystem\\public\\index.php')
+DEBUG - 2025-03-26 13:09:52 --> Received Data: Array
+(
+    [0] => Array
+        (
+            [firstname] => 123
+            [lastname] => 123
+            [middlename] => 123
+            [suffix] => 
+            [contact_no] => 123
+            [birthdate] => 2025-03-26
+            [birthplace] => 123
+            [citizenship] => 123
+            [gender] => Male
+            [civil_status] => Divorced
+            [occupation] => 123
+            [religion] => 123
+            [is_pwd] => 1
+            [is_voter_of_barangay] => 1
+            [is_family_head] => 0
+            [household_name] => 123
+            [street] => United Street
+            [contact_name] => 123
+            [emergency_contact_no] => 123
+            [contact_relationship] => 123
+            [status] => 1
+        )
+
+    [1] => Array
+        (
+            [firstname] => 123
+            [lastname] => 123
+            [middlename] => 123
+            [suffix] => Jr.
+            [contact_no] => 123
+            [birthdate] => 2025-03-19
+            [birthplace] => 123
+            [citizenship] => 123
+            [gender] => Male
+            [civil_status] => Single
+            [occupation] => 123
+            [religion] => 123
+            [is_pwd] => 1
+            [is_voter_of_barangay] => 1
+            [is_family_head] => 1
+            [household_name] => 123
+            [house_no] => 1234
+            [street] => United Street
+            [contact_name] => 123
+            [emergency_contact_no] => 123
+            [contact_relationship] => 123
+            [status] => 1
+        )
+
+)
+
+ERROR - 2025-03-26 13:09:52 --> mysqli_sql_exception: Column count doesn't match value count at row 1 in C:\barangayInformationSystem\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\barangayInformationSystem\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `tb...', 0)
+#1 C:\barangayInformationSystem\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tb...')
+#2 C:\barangayInformationSystem\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tb...')
+#3 C:\barangayInformationSystem\system\Database\BaseBuilder.php(1841): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tb...', NULL, false)
+#4 C:\barangayInformationSystem\system\Database\BaseBuilder.php(2230): CodeIgniter\Database\BaseBuilder->batchExecute('_insertBatch', 100)
+#5 C:\barangayInformationSystem\system\Model.php(428): CodeIgniter\Database\BaseBuilder->insertBatch(Array, NULL, 100)
+#6 C:\barangayInformationSystem\system\BaseModel.php(959): CodeIgniter\Model->doInsertBatch(Array, NULL, 100, false)
+#7 C:\barangayInformationSystem\app\Controllers\AdminController.php(397): CodeIgniter\BaseModel->insertBatch(Array)
+#8 C:\barangayInformationSystem\system\CodeIgniter.php(933): App\Controllers\AdminController->createResident()
+#9 C:\barangayInformationSystem\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#10 C:\barangayInformationSystem\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\barangayInformationSystem\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#12 C:\barangayInformationSystem\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\barangayInformationSystem\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 C:\barangayInformationSystem\system\rewrite.php(44): require_once('C:\\barangayInfo...')
+#15 {main}
+CRITICAL - 2025-03-26 13:09:52 --> CodeIgniter\Database\Exceptions\DatabaseException: Column count doesn't match value count at row 1
+[Method: POST, Route: admin/create-resident]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1841): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_residents` ()
+VALUES (\'2025-03-26\',\'123\',\'123\',\'Divorced\',\'123\',\'123\',\'123\',\'2025-03-26 13:09:52\',\'123\',\'123\',\'Male\',\'123\',\'0\',\'1\',\'1\',\'123\',\'123\',\'123\',\'123\',\'1\',\'United Street\',\'\',\'2025-03-26 13:09:52\'), ()', null, false)
+ 2 SYSTEMPATH\Database\BaseBuilder.php(2230): CodeIgniter\Database\BaseBuilder->batchExecute('_insertBatch', 100)
+ 3 SYSTEMPATH\Model.php(428): CodeIgniter\Database\BaseBuilder->insertBatch([...], null, 100)
+ 4 SYSTEMPATH\BaseModel.php(959): CodeIgniter\Model->doInsertBatch([...], null, 100, false)
+ 5 APPPATH\Controllers\AdminController.php(397): CodeIgniter\BaseModel->insertBatch([...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->createResident()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\barangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-03-26 13:09:52 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Column count doesn't match value count at row 1
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tbl_residents` ()
+VALUES (\'2025-03-26\',\'123\',\'123\',\'Divorced\',\'123\',\'123\',\'123\',\'2025-03-26 13:09:52\',\'123\',\'123\',\'Male\',\'123\',\'0\',\'1\',\'1\',\'123\',\'123\',\'123\',\'123\',\'1\',\'United Street\',\'\',\'2025-03-26 13:09:52\'), ()')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tbl_residents` ()
+VALUES (\'2025-03-26\',\'123\',\'123\',\'Divorced\',\'123\',\'123\',\'123\',\'2025-03-26 13:09:52\',\'123\',\'123\',\'Male\',\'123\',\'0\',\'1\',\'1\',\'123\',\'123\',\'123\',\'123\',\'1\',\'United Street\',\'\',\'2025-03-26 13:09:52\'), ()')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1841): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_residents` ()
+VALUES (\'2025-03-26\',\'123\',\'123\',\'Divorced\',\'123\',\'123\',\'123\',\'2025-03-26 13:09:52\',\'123\',\'123\',\'Male\',\'123\',\'0\',\'1\',\'1\',\'123\',\'123\',\'123\',\'123\',\'1\',\'United Street\',\'\',\'2025-03-26 13:09:52\'), ()', null, false)
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2230): CodeIgniter\Database\BaseBuilder->batchExecute('_insertBatch', 100)
+ 5 SYSTEMPATH\Model.php(428): CodeIgniter\Database\BaseBuilder->insertBatch([...], null, 100)
+ 6 SYSTEMPATH\BaseModel.php(959): CodeIgniter\Model->doInsertBatch([...], null, 100, false)
+ 7 APPPATH\Controllers\AdminController.php(397): CodeIgniter\BaseModel->insertBatch([...])
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->createResident()
+ 9 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('C:\\barangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-03-26 13:09:52 --> [Caused by] mysqli_sql_exception: Column count doesn't match value count at row 1
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `tbl_residents` ()
+VALUES (\'2025-03-26\',\'123\',\'123\',\'Divorced\',\'123\',\'123\',\'123\',\'2025-03-26 13:09:52\',\'123\',\'123\',\'Male\',\'123\',\'0\',\'1\',\'1\',\'123\',\'123\',\'123\',\'123\',\'1\',\'United Street\',\'\',\'2025-03-26 13:09:52\'), ()', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tbl_residents` ()
+VALUES (\'2025-03-26\',\'123\',\'123\',\'Divorced\',\'123\',\'123\',\'123\',\'2025-03-26 13:09:52\',\'123\',\'123\',\'Male\',\'123\',\'0\',\'1\',\'1\',\'123\',\'123\',\'123\',\'123\',\'1\',\'United Street\',\'\',\'2025-03-26 13:09:52\'), ()')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tbl_residents` ()
+VALUES (\'2025-03-26\',\'123\',\'123\',\'Divorced\',\'123\',\'123\',\'123\',\'2025-03-26 13:09:52\',\'123\',\'123\',\'Male\',\'123\',\'0\',\'1\',\'1\',\'123\',\'123\',\'123\',\'123\',\'1\',\'United Street\',\'\',\'2025-03-26 13:09:52\'), ()')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1841): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_residents` ()
+VALUES (\'2025-03-26\',\'123\',\'123\',\'Divorced\',\'123\',\'123\',\'123\',\'2025-03-26 13:09:52\',\'123\',\'123\',\'Male\',\'123\',\'0\',\'1\',\'1\',\'123\',\'123\',\'123\',\'123\',\'1\',\'United Street\',\'\',\'2025-03-26 13:09:52\'), ()', null, false)
+ 5 SYSTEMPATH\Database\BaseBuilder.php(2230): CodeIgniter\Database\BaseBuilder->batchExecute('_insertBatch', 100)
+ 6 SYSTEMPATH\Model.php(428): CodeIgniter\Database\BaseBuilder->insertBatch([...], null, 100)
+ 7 SYSTEMPATH\BaseModel.php(959): CodeIgniter\Model->doInsertBatch([...], null, 100, false)
+ 8 APPPATH\Controllers\AdminController.php(397): CodeIgniter\BaseModel->insertBatch([...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->createResident()
+10 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+11 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+15 SYSTEMPATH\rewrite.php(44): require_once('C:\\barangayInformationSystem\\public\\index.php')
+DEBUG - 2025-03-26 13:11:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 13:12:12 --> Received Data: Array
+(
+    [0] => Array
+        (
+            [firstname] => 123
+            [lastname] => 123
+            [middlename] => 123
+            [suffix] => Jr.
+            [contact_no] => 123
+            [birthdate] => 2025-03-12
+            [birthplace] => 123
+            [citizenship] => 123
+            [gender] => Male
+            [civil_status] => Single
+            [occupation] => 123
+            [religion] => 123
+            [is_pwd] => 1
+            [is_voter_of_barangay] => 1
+            [is_family_head] => 1
+            [household_name] => 123
+            [house_no] => 43
+            [street] => 123
+            [contact_name] => 123
+            [emergency_contact_no] => 123
+            [contact_relationship] => 123
+            [status] => 1
+        )
+
+)
+
+DEBUG - 2025-03-26 13:13:15 --> Received Data: Array
+(
+    [0] => Array
+        (
+            [firstname] => 123
+            [lastname] => 123
+            [middlename] => 123
+            [suffix] => Jr.
+            [contact_no] => 123321
+            [birthdate] => 2025-03-19
+            [birthplace] => 123
+            [citizenship] => 123
+            [gender] => Male
+            [civil_status] => Married
+            [occupation] => 123321
+            [religion] => TEST
+            [is_pwd] => 1
+            [is_voter_of_barangay] => 1
+            [is_family_head] => 1
+            [household_name] => 123
+            [house_no] => 1234
+            [street] => United Street
+            [contact_name] => nailyn del mundo
+            [emergency_contact_no] => 123
+            [contact_relationship] => 312
+            [status] => 1
+        )
+
+    [1] => Array
+        (
+            [firstname] => 321
+            [lastname] => 321
+            [middlename] => 321
+            [suffix] => Jr.
+            [contact_no] => 123321
+            [birthdate] => 2025-03-26
+            [birthplace] => 123321
+            [citizenship] => Test
+            [gender] => Male
+            [civil_status] => Single
+            [occupation] => Developer
+            [religion] => 31232
+            [is_pwd] => 1
+            [is_voter_of_barangay] => 1
+            [is_family_head] => 1
+            [household_name] => 123
+            [house_no] => 43
+            [street] => 321
+            [contact_name] => nailyn del mundo
+            [emergency_contact_no] => 321
+            [contact_relationship] => 123
+            [status] => 1
+        )
+
+)
+
+DEBUG - 2025-03-26 13:18:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 13:19:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 13:19:49 --> Received Data: Array
+(
+    [0] => Array
+        (
+            [firstname] => Tovvy
+            [lastname] => Dumaplin
+            [middlename] => B
+            [suffix] => Jr.
+            [contact_no] => 09323876554
+            [birthdate] => 2025-03-26
+            [birthplace] => City of Binan, Laguna
+            [citizenship] => Filipino
+            [gender] => Male
+            [civil_status] => Single
+            [occupation] => Developer
+            [religion] => Catholic
+            [is_pwd] => 1
+            [is_voter_of_barangay] => 1
+            [is_family_head] => 1
+            [household_name] => Dumaplin
+            [house_no] => 41
+            [street] => b5 l26 crismor ave elvinda village
+            [contact_name] => 123
+            [emergency_contact_no] => 123
+            [contact_relationship] => 123
+            [status] => 1
+        )
+
+    [1] => Array
+        (
+            [firstname] => nailyn
+            [lastname] => del mundo
+            [middlename] => Cabading
+            [suffix] => 
+            [contact_no] => 09323876554
+            [birthdate] => 2025-03-26
+            [birthplace] => Binan Laguna
+            [citizenship] => Filipino
+            [gender] => Female
+            [civil_status] => Single
+            [occupation] => Developer
+            [religion] => TEST
+            [is_pwd] => 1
+            [is_voter_of_barangay] => 1
+            [is_family_head] => 0
+            [household_name] => 123
+            [house_no] => 41
+            [street] => 123
+            [contact_name] => 123
+            [emergency_contact_no] => 123
+            [contact_relationship] => 123
+            [status] => 1
+        )
+
+)
+
+DEBUG - 2025-03-26 13:20:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 13:21:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 13:21:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 13:21:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 13:33:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 13:36:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 13:36:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 13:39:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 13:41:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 13:45:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 13:46:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 13:47:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 13:48:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 13:48:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 14:01:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 16:27:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 16:27:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 16:27:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 16:27:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 16:27:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-03-26 16:27:58 --> mysqli_sql_exception: Unknown column 'tbl_residents.house_id' in 'on clause' in C:\barangayInformationSystem\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\barangayInformationSystem\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `tbl_hou...', 0)
+#1 C:\barangayInformationSystem\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `tbl_hou...')
+#2 C:\barangayInformationSystem\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `tbl_hou...')
+#3 C:\barangayInformationSystem\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `tbl_hou...', Array, false)
+#4 C:\barangayInformationSystem\system\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\barangayInformationSystem\system\BaseModel.php(675): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\barangayInformationSystem\app\Controllers\AdminController.php(491): CodeIgniter\BaseModel->findAll()
+#7 C:\barangayInformationSystem\system\CodeIgniter.php(933): App\Controllers\AdminController->getHouseDetails()
+#8 C:\barangayInformationSystem\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#9 C:\barangayInformationSystem\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\barangayInformationSystem\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#11 C:\barangayInformationSystem\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\barangayInformationSystem\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 C:\barangayInformationSystem\system\rewrite.php(44): require_once('C:\\barangayInfo...')
+#14 {main}
+CRITICAL - 2025-03-26 16:27:58 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'tbl_residents.house_id' in 'on clause'
+[Method: GET, Route: admin/get-house-details]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `tbl_house`.*, `tbl_residents`.`firstname`, `tbl_residents`.`middlename`, `tbl_residents`.`lastname`, `tbl_residents`.`is_family_head`
+FROM `tbl_house`
+LEFT JOIN `tbl_residents` ON `tbl_residents`.`house_id` = `tbl_house`.`house_id`', [], false)
+ 2 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(675): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Controllers\AdminController.php(491): CodeIgniter\BaseModel->findAll()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->getHouseDetails()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\barangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-03-26 16:27:58 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'tbl_residents.house_id' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `tbl_house`.*, `tbl_residents`.`firstname`, `tbl_residents`.`middlename`, `tbl_residents`.`lastname`, `tbl_residents`.`is_family_head`
+FROM `tbl_house`
+LEFT JOIN `tbl_residents` ON `tbl_residents`.`house_id` = `tbl_house`.`house_id`')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `tbl_house`.*, `tbl_residents`.`firstname`, `tbl_residents`.`middlename`, `tbl_residents`.`lastname`, `tbl_residents`.`is_family_head`
+FROM `tbl_house`
+LEFT JOIN `tbl_residents` ON `tbl_residents`.`house_id` = `tbl_house`.`house_id`')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `tbl_house`.*, `tbl_residents`.`firstname`, `tbl_residents`.`middlename`, `tbl_residents`.`lastname`, `tbl_residents`.`is_family_head`
+FROM `tbl_house`
+LEFT JOIN `tbl_residents` ON `tbl_residents`.`house_id` = `tbl_house`.`house_id`', [], false)
+ 4 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(675): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Controllers\AdminController.php(491): CodeIgniter\BaseModel->findAll()
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->getHouseDetails()
+ 8 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 9 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+13 SYSTEMPATH\rewrite.php(44): require_once('C:\\barangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-03-26 16:27:58 --> [Caused by] mysqli_sql_exception: Unknown column 'tbl_residents.house_id' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `tbl_house`.*, `tbl_residents`.`firstname`, `tbl_residents`.`middlename`, `tbl_residents`.`lastname`, `tbl_residents`.`is_family_head`
+FROM `tbl_house`
+LEFT JOIN `tbl_residents` ON `tbl_residents`.`house_id` = `tbl_house`.`house_id`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `tbl_house`.*, `tbl_residents`.`firstname`, `tbl_residents`.`middlename`, `tbl_residents`.`lastname`, `tbl_residents`.`is_family_head`
+FROM `tbl_house`
+LEFT JOIN `tbl_residents` ON `tbl_residents`.`house_id` = `tbl_house`.`house_id`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `tbl_house`.*, `tbl_residents`.`firstname`, `tbl_residents`.`middlename`, `tbl_residents`.`lastname`, `tbl_residents`.`is_family_head`
+FROM `tbl_house`
+LEFT JOIN `tbl_residents` ON `tbl_residents`.`house_id` = `tbl_house`.`house_id`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `tbl_house`.*, `tbl_residents`.`firstname`, `tbl_residents`.`middlename`, `tbl_residents`.`lastname`, `tbl_residents`.`is_family_head`
+FROM `tbl_house`
+LEFT JOIN `tbl_residents` ON `tbl_residents`.`house_id` = `tbl_house`.`house_id`', [], false)
+ 5 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(675): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Controllers\AdminController.php(491): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->getHouseDetails()
+ 9 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('C:\\barangayInformationSystem\\public\\index.php')
+ERROR - 2025-03-26 16:28:07 --> mysqli_sql_exception: Duplicate entry '41-1' for key 'unq_house_status' in C:\barangayInformationSystem\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\barangayInformationSystem\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `tb...', 0)
+#1 C:\barangayInformationSystem\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tb...')
+#2 C:\barangayInformationSystem\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tb...')
+#3 C:\barangayInformationSystem\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tb...', Array, false)
+#4 C:\barangayInformationSystem\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\barangayInformationSystem\system\BaseModel.php(839): CodeIgniter\Model->doInsert(Array)
+#6 C:\barangayInformationSystem\system\Model.php(800): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\barangayInformationSystem\app\Controllers\AdminController.php(464): CodeIgniter\Model->insert(Array)
+#8 C:\barangayInformationSystem\system\CodeIgniter.php(933): App\Controllers\AdminController->createPin()
+#9 C:\barangayInformationSystem\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#10 C:\barangayInformationSystem\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\barangayInformationSystem\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#12 C:\barangayInformationSystem\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\barangayInformationSystem\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 C:\barangayInformationSystem\system\rewrite.php(44): require_once('C:\\barangayInfo...')
+#15 {main}
+ERROR - 2025-03-26 16:28:14 --> mysqli_sql_exception: Unknown column 'tbl_residents.house_id' in 'on clause' in C:\barangayInformationSystem\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\barangayInformationSystem\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `tbl_hou...', 0)
+#1 C:\barangayInformationSystem\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `tbl_hou...')
+#2 C:\barangayInformationSystem\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `tbl_hou...')
+#3 C:\barangayInformationSystem\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `tbl_hou...', Array, false)
+#4 C:\barangayInformationSystem\system\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\barangayInformationSystem\system\BaseModel.php(675): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\barangayInformationSystem\app\Controllers\AdminController.php(491): CodeIgniter\BaseModel->findAll()
+#7 C:\barangayInformationSystem\system\CodeIgniter.php(933): App\Controllers\AdminController->getHouseDetails()
+#8 C:\barangayInformationSystem\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#9 C:\barangayInformationSystem\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\barangayInformationSystem\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#11 C:\barangayInformationSystem\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\barangayInformationSystem\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 C:\barangayInformationSystem\system\rewrite.php(44): require_once('C:\\barangayInfo...')
+#14 {main}
+CRITICAL - 2025-03-26 16:28:14 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'tbl_residents.house_id' in 'on clause'
+[Method: GET, Route: admin/get-house-details]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `tbl_house`.*, `tbl_residents`.`firstname`, `tbl_residents`.`middlename`, `tbl_residents`.`lastname`, `tbl_residents`.`is_family_head`
+FROM `tbl_house`
+LEFT JOIN `tbl_residents` ON `tbl_residents`.`house_id` = `tbl_house`.`house_id`', [], false)
+ 2 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(675): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Controllers\AdminController.php(491): CodeIgniter\BaseModel->findAll()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->getHouseDetails()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\barangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-03-26 16:28:14 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'tbl_residents.house_id' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `tbl_house`.*, `tbl_residents`.`firstname`, `tbl_residents`.`middlename`, `tbl_residents`.`lastname`, `tbl_residents`.`is_family_head`
+FROM `tbl_house`
+LEFT JOIN `tbl_residents` ON `tbl_residents`.`house_id` = `tbl_house`.`house_id`')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `tbl_house`.*, `tbl_residents`.`firstname`, `tbl_residents`.`middlename`, `tbl_residents`.`lastname`, `tbl_residents`.`is_family_head`
+FROM `tbl_house`
+LEFT JOIN `tbl_residents` ON `tbl_residents`.`house_id` = `tbl_house`.`house_id`')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `tbl_house`.*, `tbl_residents`.`firstname`, `tbl_residents`.`middlename`, `tbl_residents`.`lastname`, `tbl_residents`.`is_family_head`
+FROM `tbl_house`
+LEFT JOIN `tbl_residents` ON `tbl_residents`.`house_id` = `tbl_house`.`house_id`', [], false)
+ 4 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(675): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Controllers\AdminController.php(491): CodeIgniter\BaseModel->findAll()
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->getHouseDetails()
+ 8 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 9 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+13 SYSTEMPATH\rewrite.php(44): require_once('C:\\barangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-03-26 16:28:14 --> [Caused by] mysqli_sql_exception: Unknown column 'tbl_residents.house_id' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `tbl_house`.*, `tbl_residents`.`firstname`, `tbl_residents`.`middlename`, `tbl_residents`.`lastname`, `tbl_residents`.`is_family_head`
+FROM `tbl_house`
+LEFT JOIN `tbl_residents` ON `tbl_residents`.`house_id` = `tbl_house`.`house_id`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `tbl_house`.*, `tbl_residents`.`firstname`, `tbl_residents`.`middlename`, `tbl_residents`.`lastname`, `tbl_residents`.`is_family_head`
+FROM `tbl_house`
+LEFT JOIN `tbl_residents` ON `tbl_residents`.`house_id` = `tbl_house`.`house_id`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `tbl_house`.*, `tbl_residents`.`firstname`, `tbl_residents`.`middlename`, `tbl_residents`.`lastname`, `tbl_residents`.`is_family_head`
+FROM `tbl_house`
+LEFT JOIN `tbl_residents` ON `tbl_residents`.`house_id` = `tbl_house`.`house_id`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `tbl_house`.*, `tbl_residents`.`firstname`, `tbl_residents`.`middlename`, `tbl_residents`.`lastname`, `tbl_residents`.`is_family_head`
+FROM `tbl_house`
+LEFT JOIN `tbl_residents` ON `tbl_residents`.`house_id` = `tbl_house`.`house_id`', [], false)
+ 5 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(675): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Controllers\AdminController.php(491): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->getHouseDetails()
+ 9 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('C:\\barangayInformationSystem\\public\\index.php')
+DEBUG - 2025-03-26 16:28:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-03-26 16:29:00 --> mysqli_sql_exception: Unknown column 'tbl_residents.house_id' in 'on clause' in C:\barangayInformationSystem\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\barangayInformationSystem\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `tbl_hou...', 0)
+#1 C:\barangayInformationSystem\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `tbl_hou...')
+#2 C:\barangayInformationSystem\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `tbl_hou...')
+#3 C:\barangayInformationSystem\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `tbl_hou...', Array, false)
+#4 C:\barangayInformationSystem\system\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\barangayInformationSystem\system\BaseModel.php(675): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\barangayInformationSystem\app\Controllers\AdminController.php(491): CodeIgniter\BaseModel->findAll()
+#7 C:\barangayInformationSystem\system\CodeIgniter.php(933): App\Controllers\AdminController->getHouseDetails()
+#8 C:\barangayInformationSystem\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#9 C:\barangayInformationSystem\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\barangayInformationSystem\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#11 C:\barangayInformationSystem\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\barangayInformationSystem\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 C:\barangayInformationSystem\system\rewrite.php(44): require_once('C:\\barangayInfo...')
+#14 {main}
+CRITICAL - 2025-03-26 16:29:00 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'tbl_residents.house_id' in 'on clause'
+[Method: GET, Route: admin/get-house-details]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `tbl_house`.*, `tbl_residents`.`firstname`, `tbl_residents`.`middlename`, `tbl_residents`.`lastname`, `tbl_residents`.`is_family_head`
+FROM `tbl_house`
+LEFT JOIN `tbl_residents` ON `tbl_residents`.`house_id` = `tbl_house`.`house_id`', [], false)
+ 2 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(675): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Controllers\AdminController.php(491): CodeIgniter\BaseModel->findAll()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->getHouseDetails()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\barangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-03-26 16:29:00 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'tbl_residents.house_id' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `tbl_house`.*, `tbl_residents`.`firstname`, `tbl_residents`.`middlename`, `tbl_residents`.`lastname`, `tbl_residents`.`is_family_head`
+FROM `tbl_house`
+LEFT JOIN `tbl_residents` ON `tbl_residents`.`house_id` = `tbl_house`.`house_id`')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `tbl_house`.*, `tbl_residents`.`firstname`, `tbl_residents`.`middlename`, `tbl_residents`.`lastname`, `tbl_residents`.`is_family_head`
+FROM `tbl_house`
+LEFT JOIN `tbl_residents` ON `tbl_residents`.`house_id` = `tbl_house`.`house_id`')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `tbl_house`.*, `tbl_residents`.`firstname`, `tbl_residents`.`middlename`, `tbl_residents`.`lastname`, `tbl_residents`.`is_family_head`
+FROM `tbl_house`
+LEFT JOIN `tbl_residents` ON `tbl_residents`.`house_id` = `tbl_house`.`house_id`', [], false)
+ 4 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(675): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Controllers\AdminController.php(491): CodeIgniter\BaseModel->findAll()
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->getHouseDetails()
+ 8 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 9 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+13 SYSTEMPATH\rewrite.php(44): require_once('C:\\barangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-03-26 16:29:00 --> [Caused by] mysqli_sql_exception: Unknown column 'tbl_residents.house_id' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `tbl_house`.*, `tbl_residents`.`firstname`, `tbl_residents`.`middlename`, `tbl_residents`.`lastname`, `tbl_residents`.`is_family_head`
+FROM `tbl_house`
+LEFT JOIN `tbl_residents` ON `tbl_residents`.`house_id` = `tbl_house`.`house_id`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `tbl_house`.*, `tbl_residents`.`firstname`, `tbl_residents`.`middlename`, `tbl_residents`.`lastname`, `tbl_residents`.`is_family_head`
+FROM `tbl_house`
+LEFT JOIN `tbl_residents` ON `tbl_residents`.`house_id` = `tbl_house`.`house_id`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `tbl_house`.*, `tbl_residents`.`firstname`, `tbl_residents`.`middlename`, `tbl_residents`.`lastname`, `tbl_residents`.`is_family_head`
+FROM `tbl_house`
+LEFT JOIN `tbl_residents` ON `tbl_residents`.`house_id` = `tbl_house`.`house_id`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `tbl_house`.*, `tbl_residents`.`firstname`, `tbl_residents`.`middlename`, `tbl_residents`.`lastname`, `tbl_residents`.`is_family_head`
+FROM `tbl_house`
+LEFT JOIN `tbl_residents` ON `tbl_residents`.`house_id` = `tbl_house`.`house_id`', [], false)
+ 5 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(675): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Controllers\AdminController.php(491): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->getHouseDetails()
+ 9 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('C:\\barangayInformationSystem\\public\\index.php')
+DEBUG - 2025-03-26 16:30:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-03-26 16:30:15 --> mysqli_sql_exception: Unknown column 'tbl_residents.house_id' in 'on clause' in C:\barangayInformationSystem\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\barangayInformationSystem\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `tbl_hou...', 0)
+#1 C:\barangayInformationSystem\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `tbl_hou...')
+#2 C:\barangayInformationSystem\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `tbl_hou...')
+#3 C:\barangayInformationSystem\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `tbl_hou...', Array, false)
+#4 C:\barangayInformationSystem\system\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\barangayInformationSystem\system\BaseModel.php(675): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\barangayInformationSystem\app\Controllers\AdminController.php(491): CodeIgniter\BaseModel->findAll()
+#7 C:\barangayInformationSystem\system\CodeIgniter.php(933): App\Controllers\AdminController->getHouseDetails()
+#8 C:\barangayInformationSystem\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#9 C:\barangayInformationSystem\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\barangayInformationSystem\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#11 C:\barangayInformationSystem\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\barangayInformationSystem\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 C:\barangayInformationSystem\system\rewrite.php(44): require_once('C:\\barangayInfo...')
+#14 {main}
+CRITICAL - 2025-03-26 16:30:15 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'tbl_residents.house_id' in 'on clause'
+[Method: GET, Route: admin/get-house-details]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `tbl_house`.*, `tbl_residents`.`firstname`, `tbl_residents`.`middlename`, `tbl_residents`.`lastname`, `tbl_residents`.`is_family_head`
+FROM `tbl_house`
+LEFT JOIN `tbl_residents` ON `tbl_residents`.`house_id` = `tbl_house`.`house_id`', [], false)
+ 2 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(675): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Controllers\AdminController.php(491): CodeIgniter\BaseModel->findAll()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->getHouseDetails()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\barangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-03-26 16:30:15 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'tbl_residents.house_id' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `tbl_house`.*, `tbl_residents`.`firstname`, `tbl_residents`.`middlename`, `tbl_residents`.`lastname`, `tbl_residents`.`is_family_head`
+FROM `tbl_house`
+LEFT JOIN `tbl_residents` ON `tbl_residents`.`house_id` = `tbl_house`.`house_id`')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `tbl_house`.*, `tbl_residents`.`firstname`, `tbl_residents`.`middlename`, `tbl_residents`.`lastname`, `tbl_residents`.`is_family_head`
+FROM `tbl_house`
+LEFT JOIN `tbl_residents` ON `tbl_residents`.`house_id` = `tbl_house`.`house_id`')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `tbl_house`.*, `tbl_residents`.`firstname`, `tbl_residents`.`middlename`, `tbl_residents`.`lastname`, `tbl_residents`.`is_family_head`
+FROM `tbl_house`
+LEFT JOIN `tbl_residents` ON `tbl_residents`.`house_id` = `tbl_house`.`house_id`', [], false)
+ 4 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(675): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Controllers\AdminController.php(491): CodeIgniter\BaseModel->findAll()
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->getHouseDetails()
+ 8 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 9 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+13 SYSTEMPATH\rewrite.php(44): require_once('C:\\barangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-03-26 16:30:15 --> [Caused by] mysqli_sql_exception: Unknown column 'tbl_residents.house_id' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `tbl_house`.*, `tbl_residents`.`firstname`, `tbl_residents`.`middlename`, `tbl_residents`.`lastname`, `tbl_residents`.`is_family_head`
+FROM `tbl_house`
+LEFT JOIN `tbl_residents` ON `tbl_residents`.`house_id` = `tbl_house`.`house_id`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `tbl_house`.*, `tbl_residents`.`firstname`, `tbl_residents`.`middlename`, `tbl_residents`.`lastname`, `tbl_residents`.`is_family_head`
+FROM `tbl_house`
+LEFT JOIN `tbl_residents` ON `tbl_residents`.`house_id` = `tbl_house`.`house_id`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `tbl_house`.*, `tbl_residents`.`firstname`, `tbl_residents`.`middlename`, `tbl_residents`.`lastname`, `tbl_residents`.`is_family_head`
+FROM `tbl_house`
+LEFT JOIN `tbl_residents` ON `tbl_residents`.`house_id` = `tbl_house`.`house_id`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `tbl_house`.*, `tbl_residents`.`firstname`, `tbl_residents`.`middlename`, `tbl_residents`.`lastname`, `tbl_residents`.`is_family_head`
+FROM `tbl_house`
+LEFT JOIN `tbl_residents` ON `tbl_residents`.`house_id` = `tbl_house`.`house_id`', [], false)
+ 5 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(675): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Controllers\AdminController.php(491): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->getHouseDetails()
+ 9 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('C:\\barangayInformationSystem\\public\\index.php')
+ERROR - 2025-03-26 16:30:34 --> mysqli_sql_exception: Unknown column 'tbl_residents.house_id' in 'on clause' in C:\barangayInformationSystem\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\barangayInformationSystem\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `tbl_hou...', 0)
+#1 C:\barangayInformationSystem\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `tbl_hou...')
+#2 C:\barangayInformationSystem\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `tbl_hou...')
+#3 C:\barangayInformationSystem\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `tbl_hou...', Array, false)
+#4 C:\barangayInformationSystem\system\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\barangayInformationSystem\system\BaseModel.php(675): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\barangayInformationSystem\app\Controllers\AdminController.php(491): CodeIgniter\BaseModel->findAll()
+#7 C:\barangayInformationSystem\system\CodeIgniter.php(933): App\Controllers\AdminController->getHouseDetails()
+#8 C:\barangayInformationSystem\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#9 C:\barangayInformationSystem\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\barangayInformationSystem\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#11 C:\barangayInformationSystem\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\barangayInformationSystem\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 C:\barangayInformationSystem\system\rewrite.php(44): require_once('C:\\barangayInfo...')
+#14 {main}
+CRITICAL - 2025-03-26 16:30:34 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'tbl_residents.house_id' in 'on clause'
+[Method: GET, Route: admin/get-house-details]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `tbl_house`.*, `tbl_residents`.`firstname`, `tbl_residents`.`middlename`, `tbl_residents`.`lastname`, `tbl_residents`.`is_family_head`
+FROM `tbl_house`
+LEFT JOIN `tbl_residents` ON `tbl_residents`.`house_id` = `tbl_house`.`house_id`', [], false)
+ 2 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(675): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Controllers\AdminController.php(491): CodeIgniter\BaseModel->findAll()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->getHouseDetails()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\barangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-03-26 16:30:34 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'tbl_residents.house_id' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `tbl_house`.*, `tbl_residents`.`firstname`, `tbl_residents`.`middlename`, `tbl_residents`.`lastname`, `tbl_residents`.`is_family_head`
+FROM `tbl_house`
+LEFT JOIN `tbl_residents` ON `tbl_residents`.`house_id` = `tbl_house`.`house_id`')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `tbl_house`.*, `tbl_residents`.`firstname`, `tbl_residents`.`middlename`, `tbl_residents`.`lastname`, `tbl_residents`.`is_family_head`
+FROM `tbl_house`
+LEFT JOIN `tbl_residents` ON `tbl_residents`.`house_id` = `tbl_house`.`house_id`')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `tbl_house`.*, `tbl_residents`.`firstname`, `tbl_residents`.`middlename`, `tbl_residents`.`lastname`, `tbl_residents`.`is_family_head`
+FROM `tbl_house`
+LEFT JOIN `tbl_residents` ON `tbl_residents`.`house_id` = `tbl_house`.`house_id`', [], false)
+ 4 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(675): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Controllers\AdminController.php(491): CodeIgniter\BaseModel->findAll()
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->getHouseDetails()
+ 8 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 9 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+13 SYSTEMPATH\rewrite.php(44): require_once('C:\\barangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-03-26 16:30:34 --> [Caused by] mysqli_sql_exception: Unknown column 'tbl_residents.house_id' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `tbl_house`.*, `tbl_residents`.`firstname`, `tbl_residents`.`middlename`, `tbl_residents`.`lastname`, `tbl_residents`.`is_family_head`
+FROM `tbl_house`
+LEFT JOIN `tbl_residents` ON `tbl_residents`.`house_id` = `tbl_house`.`house_id`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `tbl_house`.*, `tbl_residents`.`firstname`, `tbl_residents`.`middlename`, `tbl_residents`.`lastname`, `tbl_residents`.`is_family_head`
+FROM `tbl_house`
+LEFT JOIN `tbl_residents` ON `tbl_residents`.`house_id` = `tbl_house`.`house_id`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `tbl_house`.*, `tbl_residents`.`firstname`, `tbl_residents`.`middlename`, `tbl_residents`.`lastname`, `tbl_residents`.`is_family_head`
+FROM `tbl_house`
+LEFT JOIN `tbl_residents` ON `tbl_residents`.`house_id` = `tbl_house`.`house_id`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `tbl_house`.*, `tbl_residents`.`firstname`, `tbl_residents`.`middlename`, `tbl_residents`.`lastname`, `tbl_residents`.`is_family_head`
+FROM `tbl_house`
+LEFT JOIN `tbl_residents` ON `tbl_residents`.`house_id` = `tbl_house`.`house_id`', [], false)
+ 5 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(675): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Controllers\AdminController.php(491): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->getHouseDetails()
+ 9 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('C:\\barangayInformationSystem\\public\\index.php')
+DEBUG - 2025-03-26 16:33:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 16:33:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 17:05:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 17:06:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 17:06:44 --> Received Data: Array
+(
+    [0] => Array
+        (
+            [firstname] => Tovvy
+            [lastname] => Dumaplin
+            [middlename] => B
+            [suffix] => Sr.
+            [contact_no] => 09323876554
+            [birthdate] => 2025-03-26
+            [birthplace] => Binan Laguna
+            [citizenship] => Filipino
+            [gender] => Male
+            [civil_status] => Single
+            [occupation] => Developer
+            [religion] => Catholic
+            [is_pwd] => 0
+            [is_voter_of_barangay] => 0
+            [is_family_head] => 1
+            [household_name] => Dumaplin
+            [house_no] => 41
+            [street] => Crismor Avenue
+            [contact_name] => nailyn del mundo
+            [emergency_contact_no] => 098988375672
+            [contact_relationship] => Partner
+            [status] => 1
+        )
+
+)
+
+DEBUG - 2025-03-26 17:06:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 17:07:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 17:08:01 --> Received Data: Array
+(
+    [0] => Array
+        (
+            [firstname] => Test
+            [lastname] => Account
+            [middlename] => D
+            [suffix] => Jr.
+            [contact_no] => 09323876554
+            [birthdate] => 2025-03-25
+            [birthplace] => Binan Laguna
+            [citizenship] => Filipino
+            [gender] => Male
+            [civil_status] => Single
+            [occupation] => Developer
+            [religion] => Catholic
+            [is_pwd] => 1
+            [is_voter_of_barangay] => 1
+            [is_family_head] => 1
+            [household_name] => Dumaplin
+            [house_no] => 41
+            [street] => Crismor Avenue
+            [contact_name] => nailyn del mundo
+            [emergency_contact_no] => 098988375672
+            [contact_relationship] => Friend
+            [status] => 1
+        )
+
+)
+
+DEBUG - 2025-03-26 17:08:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 17:33:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 17:48:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-26 18:01:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
