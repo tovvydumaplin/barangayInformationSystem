@@ -96,14 +96,17 @@ $(document).ready(function () {
         );
         return `
           <div class="popup__row">
-            <ion-icon name="person-circle-outline"></ion-icon>
-            <p class="popup__names">${resident.fullname} 
-              ${
-                resident.is_family_head == 1
-                  ? '<span class="family-head">[Head]</span>'
-                  : ""
-              }
-            </p>
+            <div class="resident__box">
+              <i class="fa-solid fa-user"></i>
+              <p class="popup__names pos__rel">${resident.fullname} 
+                ${
+                  resident.is_family_head == 1
+                    ? '<span class="family-head">Head</span>'
+                    : ""
+                }
+              </p>
+            </div>
+            <i class="delete__resident fa-solid fa-trash"></i>
           </div>`;
       })
       .join("");
@@ -115,19 +118,26 @@ $(document).ready(function () {
             <div class="popup__header">
               <div class="popup__header__text">
                 <p class="house__number">${houseNumber}</p>
-                <p class="popup__text">${houseStreet}</p>
               </div>
-              <ion-icon name="close-outline"></ion-icon>
+              <p class="popup__text">${houseStreet}</p>
             </div>
             <div class="popup__body">
-              <p class="popup__heading">Family Members</p>
-              ${
-                residentsHTML ||
-                "<p class='popup__text'>No residents found.</p>"
-              }
+              <div class="coordinates__container">
+                <p class="popup__text"><span>Latitude:</span> ${lat.toFixed(
+                  5
+                )}</p>
+                <p class="popup__text"><span>Longitude:</span> ${lng.toFixed(
+                  5
+                )}</p>
+              </div>
+              <div class="members__container">
+                <p class="popup__heading">Family Members</p>
+                ${
+                  residentsHTML ||
+                  "<p class='popup__text'>No residents found.</p>"
+                }
+              </div>
             </div>
-            <p class="popup__text">Latitude: ${lat.toFixed(5)}</p>
-            <p class="popup__text">Longitude: ${lng.toFixed(5)}</p>
             <button class="remove-marker" data-lat="${lat}" data-lng="${lng}">Remove</button>
         </div>`
       )

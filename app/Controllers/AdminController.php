@@ -497,6 +497,7 @@ public function createUser()
                 r.is_family_head
             FROM tbl_house h
             LEFT JOIN tbl_residents r ON h.house_no = r.house_no
+            WHERE h.status = 1
         ");
     
         $houses = [];
