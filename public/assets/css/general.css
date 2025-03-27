@@ -974,3 +974,19 @@ td {
   font-weight: 600;
   cursor: pointer;
 }
+
+.btn__group {
+  z-index: 9999999;
+  position: absolute;
+  bottom: 2rem;
+  display: flex;
+  gap: 1rem;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 1rem;
+}
+
+#map {
+  display: flex;
+  justify-content: center;
+}

@@ -343,11 +343,13 @@
         </form>
       </div>
       <div class="container">
-        <div class="map" id="map"></div>
-        <button type="button" class="btn__edit__mode">Activate Suicide Mode</button>
-        <button type="button" class="save-marker">SAVE</button>
-        <button id="toggleAutoSave">Toggle Auto-Save</button>
-
+        <div class="map" id="map">
+        <div class="btn__group">        
+          <button type="button" class="btn__edit__mode">Activate Suicide Mode</button>
+          <button type="button" class="save-marker">SAVE</button>
+          <button id="toggleAutoSave">Toggle Auto-Save</button>
+        </div>
+        </div>
       </div>
       <!-- Family Name Input Modal -->
       <div id="familyModal" class="pin__modal">
@@ -369,8 +371,6 @@
         <form>
       </div>
 
-<!-- Clear Markers Button -->
-      <button id="clearMarkers">Clear All Markers</button>
       <footer class="footer">
         <p class="copyright">
           Copyright 2025 Barangay 42-C. All Rights Reserved.
