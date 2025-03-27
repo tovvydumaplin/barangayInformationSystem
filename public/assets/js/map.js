@@ -1,4 +1,9 @@
 $(document).ready(function () {
+  // ~~~~~~~~~~~~~~~~~~~~~~~~ ⚡ Global Declarations ⚡ ~~~~~~~~~~~~~~~~~~~~~~~~ //
+  let markers = []; // Store markers USED IN (1)
+  let isEditMode = false;
+  // ~~~~~~~~~~~~~~~~~~~~~~~~ ⚡ Map Initialization ⚡ ~~~~~~~~~~~~~~~~~~~~~~~~ //
+
   // Initialize map centered at San Pedro, Laguna
   const map = L.map("map").setView([14.3589, 121.0557], 13);
 
@@ -6,8 +11,7 @@ $(document).ready(function () {
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution: "© OpenStreetMap contributors",
   }).addTo(map);
-
-  let markers = []; // Store markers
+  // ~~~~~~~~~~~~~~~~~~~~~~~~ ⚡ Functions ⚡ ~~~~~~~~~~~~~~~~~~~~~~~~ //
 
   // Remove marker from the map
   const removeMarker = function (lat, lng) {
@@ -20,22 +24,11 @@ $(document).ready(function () {
     });
   };
 
-  // Handle map click
-  map.on("click", function (e) {
-    const lat = e.latlng.lat;
-    const lng = e.latlng.lng;
-
-    $("#latInput").val(lat);
-    $("#lngInput").val(lng);
-    $("#familyModal").show();
-  });
-
-  // Submit family name from modal
-  $("#saveHouseNumber").on("click", function () {
+  const saveHouseNumber = function () {
     const houseNumber = $("#houseNumberInput").val().trim();
     const houseStreet = $("[name='house_street']").val();
-    const latitude = $("#latInput").val(); // Keep as string to match DB
-    const longitude = $("#lngInput").val(); // Keep as string to match DB
+    const latitude = $("#latInput").val();
+    const longitude = $("#lngInput").val();
 
     if (!houseNumber) {
       alert("Please enter a house number.");
@@ -65,35 +58,26 @@ $(document).ready(function () {
         alert("Failed to connect to the server.");
       },
     });
-  });
+  };
 
-  // Close modal
-  $("#closeModal").on("click", function () {
-    $("#familyModal").hide();
-  });
+  const activateEditMode = function () {
+    isEditMode = true;
+    markers.forEach((marker) => marker.dragging.enable()); // Enable dragging
+  };
+  const deactivateEditMode = function () {
+    isEditMode = false;
+    markers.forEach((marker) => marker.dragging.disable()); // Disable dragging
+  };
 
-  // Function to add a marker THIS FUNCTIUON IS USED ON LOADHOUSEMARKERS
+  let autoSaveEnabled = true; // Toggle for auto-save mode
+
+  // Function to add a marker (Used in loadHouseMarkers)
   const addMarker = function (lat, lng, houseNumber, houseStreet, residents) {
-    if (
-      markers.some(
-        (m) => m.getLatLng().lat === lat && m.getLatLng().lng === lng
-      )
-    ) {
-      alert("A marker already exists at this location.");
-      return;
-    }
-
-    // 🔹 Log the house and residents to verify data
-    console.log(
-      `Adding marker for House No: ${houseNumber}, Street: ${houseStreet}`
-    );
-    console.log("Residents:", residents);
+    let newLat = lat;
+    let newLng = lng;
 
     let residentsHTML = residents
       .map((resident) => {
-        console.log(
-          `Resident: ${resident.fullname}, Is Head: ${resident.is_family_head}`
-        );
         return `
           <div class="popup__row">
             <div class="resident__box">
@@ -106,12 +90,14 @@ $(document).ready(function () {
                 }
               </p>
             </div>
-            <i class="delete__resident fa-solid fa-trash"></i>
+            <i class="delete__resident fa-solid fa-trash" data-resident-id="${
+              resident.resident_id
+            }"></i>
           </div>`;
       })
       .join("");
 
-    const marker = L.marker([lat, lng])
+    const marker = L.marker([lat, lng], { draggable: isEditMode })
       .addTo(map)
       .bindPopup(
         `<div class="custom-popup">
@@ -123,12 +109,12 @@ $(document).ready(function () {
             </div>
             <div class="popup__body">
               <div class="coordinates__container">
-                <p class="popup__text"><span>Latitude:</span> ${lat.toFixed(
+                <p class="popup__text"><span>Latitude:</span> <span class="popup-lat">${lat.toFixed(
                   5
-                )}</p>
-                <p class="popup__text"><span>Longitude:</span> ${lng.toFixed(
+                )}</span></p>
+                <p class="popup__text"><span>Longitude:</span> <span class="popup-lng">${lng.toFixed(
                   5
-                )}</p>
+                )}</span></p>
               </div>
               <div class="members__container">
                 <p class="popup__heading">Family Members</p>
@@ -138,13 +124,62 @@ $(document).ready(function () {
                 }
               </div>
             </div>
-            <button class="remove-marker" data-lat="${lat}" data-lng="${lng}">Remove</button>
-        </div>`
+            <button class="add-marker" data-lat="${lat}" data-lng="${lng}">Add Resident</button>
+            <button class="save-marker" style="display:none" data-house="${houseNumber}">Save Location</button>
+        </div>`,
+        { closeOnClick: false }
       )
-      .on("popupopen", function () {
-        $(".remove-marker").on("click", function () {
-          removeMarker(lat, lng);
-        });
+      .on("dragend", function (event) {
+        if (!isEditMode) return;
+
+        newLat = event.target.getLatLng().lat;
+        newLng = event.target.getLatLng().lng;
+
+        // Save the original house number before updating it
+        let oldHouseNumber = houseNumber;
+
+        // Show an alert with previous and new coordinates
+        alert(
+          `House Number: ${houseNumber}\n\n` +
+            `Previous Location:\nLatitude: ${lat.toFixed(
+              5
+            )}\nLongitude: ${lng.toFixed(5)}\n\n` +
+            `New Location:\nLatitude: ${newLat.toFixed(
+              5
+            )}\nLongitude: ${newLng.toFixed(5)}`
+        );
+
+        // Ask user for a new house number
+        let newHouseNumber = prompt("Enter new house number:", houseNumber);
+
+        if (newHouseNumber === null || newHouseNumber.trim() === "") {
+          // If user cancels or leaves blank, reset marker position
+          marker.setLatLng([lat, lng]);
+          return;
+        }
+
+        // Get the current popup container
+        let popupContent = marker.getPopup().getContent();
+        let tempDiv = document.createElement("div");
+        tempDiv.innerHTML = popupContent;
+
+        // Update elements inside the popup
+        tempDiv.querySelector(".popup-lat").textContent = newLat.toFixed(5);
+        tempDiv.querySelector(".popup-lng").textContent = newLng.toFixed(5);
+        tempDiv.querySelector(".house__number").textContent = newHouseNumber;
+
+        // Show the save button and update its data attribute
+        let saveButton = tempDiv.querySelector(".save-marker");
+        saveButton.style.display = "block";
+        saveButton.setAttribute("data-house", newHouseNumber);
+
+        // Update the popup with the modified content
+        marker.setPopupContent(tempDiv.innerHTML);
+
+        // Auto-save if enabled
+        if (autoSaveEnabled) {
+          updateMarkerLocation(oldHouseNumber, newHouseNumber, newLat, newLng);
+        }
       });
 
     markers.push(marker);
@@ -178,6 +213,82 @@ $(document).ready(function () {
     });
   }
 
-  // Call function to load saved houses when the page loads
+  const updateMarkerLocation = function (
+    oldHouseNumber,
+    newHouseNumber,
+    newLat,
+    newLng
+  ) {
+    $.ajax({
+      url: "update-house-location",
+      type: "POST",
+      data: {
+        old_house_number: oldHouseNumber, // Send old house number
+        house_number: newHouseNumber, // Send new house number
+        latitude: newLat,
+        longitude: newLng,
+      },
+      dataType: "json",
+      success: function (response) {
+        if (response.success) {
+          alert("House number and location updated successfully!");
+        } else {
+          alert("Failed to update house number and location.");
+        }
+      },
+      error: function () {
+        alert("Error updating house details.");
+      },
+    });
+  };
+
+  $(document).on("click", ".save-marker", function () {
+    const houseNumber = $(this).data("house");
+    const marker = markers.find((m) =>
+      m.getPopup().getContent().includes(houseNumber)
+    );
+
+    if (!marker) return;
+
+    const newLat = marker.getLatLng().lat;
+    const newLng = marker.getLatLng().lng;
+
+    updateMarkerLocation(houseNumber, newLat, newLng);
+
+    // Hide save button after saving
+    $(this).hide();
+  });
+
+  // ~~~~~~~~~~~~~~~~~~~~~~~~ ⚡ Event Listeners ⚡ ~~~~~~~~~~~~~~~~~~~~~~~~ //
+  $(".btn__edit__mode").on("click", function () {
+    if (isEditMode) {
+      deactivateEditMode();
+      $(this).text("Switch to Edit Mode");
+    } else {
+      activateEditMode();
+      $(this).text("Switch to View Mode");
+    }
+  });
+
+  $("#saveHouseNumber").on("click", function () {
+    saveHouseNumber();
+  });
+
+  // Handle map click
+  map.on("click", function (e) {
+    if (!isEditMode) return;
+    const lat = e.latlng.lat;
+    const lng = e.latlng.lng;
+
+    $("#latInput").val(lat);
+    $("#lngInput").val(lng);
+    $("#familyModal").show();
+  });
+
+  // Close modal
+  $("#closeModal").on("click", function () {
+    $("#familyModal").hide();
+  });
+  // ~~~~~~~~~~~~~~~~~~~~~~~~ ⚡ ON LOAD ⚡ ~~~~~~~~~~~~~~~~~~~~~~~~ //
   loadHouseMarkers();
 });

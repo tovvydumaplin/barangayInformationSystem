@@ -86,6 +86,29 @@
         main {
         position: relative;
       }
+      .input__group {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+      }
+
+      .input__group .information__input {
+        font-size: 1.6rem;
+      }
+      .btn__cancel__services {
+        background-color: transparent;
+        color: #5f5f5f;
+      }
+      .btn__save__services {
+        color: var(--main-color);
+      }
+      .btn__save__services {
+        background-color: var(--main-color);
+        color: #fff;
+      }
+      .icon__close, .btn__cancel__services, .btn__save__services {
+        cursor: pointer;
+      }
     </style>
   </head>
   <body>
@@ -321,6 +344,10 @@
       </div>
       <div class="container">
         <div class="map" id="map"></div>
+        <button type="button" class="btn__edit__mode">Activate Suicide Mode</button>
+        <button type="button" class="save-marker">SAVE</button>
+        <button id="toggleAutoSave">Toggle Auto-Save</button>
+
       </div>
       <!-- Family Name Input Modal -->
       <div id="familyModal" class="pin__modal">
@@ -336,8 +363,8 @@
             <input class="information__input" type="hidden" id="lngInput">
           </div>
           <div class="btn__box">
-            <button class="btn btn__save" type="button" id="saveHouseNumber">Save</button>
-            <button class="btn btn__cancel" type="button" id="closeModal">Cancel</button>
+            <button class="btn btn__save__services" type="button" id="saveHouseNumber">Save</button>
+            <button class="btn btn__cancel__services" type="button" id="closeModalServices">Cancel</button>
            </div>
         <form>
       </div>
@@ -381,6 +408,12 @@
         $(".user__box").on("click", function () {
           $(".dropdown__menu").toggleClass("show");
         });
+        $('.icon__close').on("click", function(){
+          $("#familyModal").hide();
+        })
+        $('.btn__cancel__services').on("click", function(){
+          $("#familyModal").hide();
+        })
       });
     </script>
   </body>

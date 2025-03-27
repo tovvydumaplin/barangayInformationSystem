@@ -63,3 +63,7 @@ $routes->get('admin/get-house-details', 'AdminController::getHouseDetails');
 $routes->get('/admin/get-house-numbers','AdminController::getHouseNumbers');
 // Get House Street 
 $routes->get('admin/get-house-street','AdminController::getHouseStreet');
+// Remove resident from house
+$routes->post('admin/remove-resident-in-house','AdminController::removeResidentInHouse');
+// Update pin location
+$routes->post('admin/update-house-location','AdminController::updateHouseLocation');

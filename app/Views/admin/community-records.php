@@ -1402,7 +1402,7 @@ const viewResidentData = function(residentId) {                  // Resident Det
             if (response.success) {
                 // Populate modal fields
                 $("input[name='view_firstname']").val(response.data.firstname);
-                $("textarea[name='view_lastname']").val(response.data.lastname);
+                $("input[name='view_lastname']").val(response.data.lastname);
                 $("input[name='view_middlename']").val(response.data.middlename);
                 $("input[name='view_suffix']").val(response.data.suffix);
                 $("input[name='view_contact_no']").val(response.data.contact_no);

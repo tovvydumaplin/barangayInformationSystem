@@ -494,7 +494,8 @@ public function createUser()
                 r.firstname,
                 r.middlename,
                 r.lastname,
-                r.is_family_head
+                r.is_family_head,
+                r.resident_id
             FROM tbl_house h
             LEFT JOIN tbl_residents r ON h.house_no = r.house_no
             WHERE h.status = 1
@@ -518,6 +519,7 @@ public function createUser()
                 $houses[$house_no]['residents'][] = [
                     'fullname' => $row['firstname'] . " " . substr($row['middlename'], 0, 1) . ". " . $row['lastname'],
                     'is_family_head' => $row['is_family_head'],
+                    'resident_id' => $row['resident_id'],
                 ];
             }
         }
@@ -567,6 +569,65 @@ public function createUser()
             ]);
         }
     }
+
+    public function removeResidentInHouse()
+    {
+        $residentId = $this->request->getPost('resident_id');
+        $houseNo = $this->request->getPost('house_no'); // Should be 0
+
+        if (!$residentId) {
+            return $this->response->setJSON(['success' => false, 'message' => 'Invalid resident ID']);
+        }
+
+        $residentModel = new ResidentModel();
+        $updated = $residentModel->update($residentId, ['house_no' => $houseNo]);
+
+        if ($updated) {
+            return $this->response->setJSON(['success' => true, 'message' => 'House number updated']);
+        } else {
+            return $this->response->setJSON(['success' => false, 'message' => 'Failed to update house number']);
+        }
+    }
+
+    public function updateHouseLocation()
+    {
+        $oldHouseNumber = $this->request->getPost('old_house_number'); // Previous house number
+        $newHouseNumber = $this->request->getPost('house_number'); // New house number
+        $latitude = $this->request->getPost('latitude');
+        $longitude = $this->request->getPost('longitude');
+    
+        if (!$oldHouseNumber || !$newHouseNumber || !$latitude || !$longitude) {
+            return $this->response->setJSON(['success' => false, 'message' => 'Invalid data.']);
+        }
+    
+        $houseModel = new HouseModel();
+    
+        // Ensure we update both house_no and coordinates
+        $updateData = [
+            'house_no' => $newHouseNumber,
+            'latitude' => $latitude,
+            'longitude' => $longitude
+        ];
+    
+        // Update the correct record based on the old house number
+        $update = $houseModel->where('house_no', $oldHouseNumber)->set($updateData)->update();
+    
+        if ($update) {
+            return $this->response->setJSON([
+                'success' => true,
+                'message' => 'House location updated successfully!',
+            ]);
+        } else {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Update failed. Please check your database.',
+            ]);
+        }
+    }
+    
+    
+    
+
 
 }
 

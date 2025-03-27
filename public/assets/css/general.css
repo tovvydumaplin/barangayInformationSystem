@@ -894,6 +894,7 @@ td {
   background-color: #dbeafe;
   border-radius: 50%;
   color: #1e40af;
+  font-weight: 600;
 }
 
 .popup__header {
@@ -960,4 +961,16 @@ td {
   display: flex;
   align-items: center;
   gap: 1rem;
+}
+
+.add-marker {
+  border: none;
+  background-color: #0d9275;
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin-top: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
 }
