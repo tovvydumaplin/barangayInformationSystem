@@ -6,5 +6,5 @@ class HouseModel extends Model
 {
     protected $table = 'tbl_house'; 
     protected $primaryKey = 'id';
-    protected $allowedFields = ['house_no','house_street', 'longitude', 'latitude', 'status'];
+    protected $allowedFields = ['house_no','house_street', 'type','longitude', 'latitude', 'status'];
 }

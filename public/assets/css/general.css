@@ -889,12 +889,16 @@ td {
 }
 
 .house__number {
-  display: block;
-  padding: 1rem;
-  background-color: #dbeafe;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  aspect-ratio: 1 / 1;
   border-radius: 50%;
+  background-color: #dbeafe;
   color: #1e40af;
   font-weight: 600;
+  text-align: center;
 }
 
 .popup__header {
@@ -984,9 +988,64 @@ td {
   padding: 2rem;
   background-color: #ffffff;
   border-radius: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.08);
 }
-
-#map {
+.map__box {
   display: flex;
   justify-content: center;
+  position: relative;
+}
+.btn__edit__mode,
+.btn__hide__markers {
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+  border: none;
+  background-color: #fff;
+  color: #2f2f2f;
+  border: 1px solid #aeaeae;
+  border-radius: 0.5rem;
+  font-family: "Roboto", sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.6rem;
+  transition: all 0.3s ease;
+}
+
+.btn__edit__mode.selected {
+  background-color: #2f2f2f;
+  color: #fff;
+}
+.btn__hide__markers.selected {
+  background-color: #2f2f2f;
+  color: #fff;
+}
+.search__box {
+  position: relative;
+}
+#searchHouseInput {
+  height: 100%;
+  padding: 0 5rem 0 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #aeaeae;
+}
+#searchHouseButton {
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  border: 1px solid #aeaeae;
+  padding: 1rem;
+  background-color: var(--main-color);
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+}
+#searchHouseInput:focus {
+  outline: none;
+  box-shadow: none;
+  border-color: inherit; /* Keeps the default border */
 }

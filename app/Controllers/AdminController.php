@@ -453,8 +453,9 @@ public function createUser()
     
         $houseModel = new HouseModel(); // Use HouseDetails model
         $pinData = [
-            'house_no'  => $request['house_number'], // Match DB column name
+            'house_no'  => $request['house_number'],
             'house_street'  => $request['house_street'], 
+            'type'      => $request['type'],
             'latitude'  => $request['latitude'],
             'longitude' => $request['longitude'],
             'status'    => 1
@@ -491,6 +492,7 @@ public function createUser()
                 h.house_street,
                 h.latitude,
                 h.longitude,
+                h.type,
                 r.firstname,
                 r.middlename,
                 r.lastname,
@@ -511,6 +513,7 @@ public function createUser()
                     'house_street' => $row['house_street'],
                     'latitude' => $row['latitude'],
                     'longitude' => $row['longitude'],
+                    'type' => $row['type'],
                     'residents' => [],
                 ];
             }
