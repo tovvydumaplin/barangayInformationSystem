@@ -904,6 +904,7 @@ td {
 .popup__header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 1rem;
   border-bottom: 1px solid #e8e8e8;
   padding-bottom: 1rem;
@@ -940,6 +941,20 @@ td {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.popup__address {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 150px; /* Adjust width as needed */
+  display: block;
+}
+.pin__type {
+  text-transform: capitalize;
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  color: #0d9275;
+  font-weight: 600;
 }
 
 .leaflet-popup-content {
@@ -1048,4 +1063,10 @@ td {
   outline: none;
   box-shadow: none;
   border-color: inherit; /* Keeps the default border */
+}
+
+.header__container__text {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }

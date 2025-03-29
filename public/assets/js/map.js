@@ -77,19 +77,37 @@ $(document).ready(function () {
   // Function to add a marker (Used in loadHouseMarkers)
   const houseIcons = {
     residential: L.icon({
-      iconUrl: "https://cdn-icons-png.flaticon.com/128/616/616489.png", // Residential House Icon
+      iconUrl: "https://cdn-icons-png.flaticon.com/512/684/684908.png", // Residential House Icon
       iconSize: [32, 32],
       iconAnchor: [16, 32],
       popupAnchor: [0, -32],
     }),
     government: L.icon({
-      iconUrl: "https://cdn-icons-png.flaticon.com/128/3135/3135768.png", // Government Building Icon
+      iconUrl: "https://cdn-icons-png.flaticon.com/512/1838/1838419.png", // Government Building Icon
       iconSize: [32, 32],
       iconAnchor: [16, 32],
       popupAnchor: [0, -32],
     }),
-    default: L.icon({
-      iconUrl: "https://cdn-icons-png.flaticon.com/128/1828/1828466.png", // Default House Icon
+    commercial: L.icon({
+      iconUrl: "https://cdn-icons-png.flaticon.com/512/10845/10845690.png", // Commercial
+      iconSize: [32, 32],
+      iconAnchor: [16, 32],
+      popupAnchor: [0, -32],
+    }),
+    healthcare: L.icon({
+      iconUrl: "https://cdn-icons-png.flaticon.com/512/2994/2994480.png", // health care House Icon
+      iconSize: [32, 32],
+      iconAnchor: [16, 32],
+      popupAnchor: [0, -32],
+    }),
+    education: L.icon({
+      iconUrl: "https://cdn-icons-png.flaticon.com/512/8074/8074788.png", // education
+      iconSize: [32, 32],
+      iconAnchor: [16, 32],
+      popupAnchor: [0, -32],
+    }),
+    transport: L.icon({
+      iconUrl: "https://cdn-icons-png.flaticon.com/512/14364/14364405.png", // transport House Icon
       iconSize: [32, 32],
       iconAnchor: [16, 32],
       popupAnchor: [0, -32],
@@ -107,9 +125,8 @@ $(document).ready(function () {
     let newLat = lat;
     let newLng = lng;
 
-    console.log("House Type:", type); // Debugging output
+    console.log("House Type:", type); // Debugging
 
-    // Ensure `type` is always a string, defaulting to "default"
     const iconType = type ? type.toLowerCase() : "default";
 
     let residentsHTML = residents
@@ -135,17 +152,19 @@ $(document).ready(function () {
 
     const marker = L.marker([lat, lng], {
       draggable: isEditMode,
-      icon: houseIcons[iconType] || houseIcons.default, // Ensure a valid icon
+      icon: houseIcons[iconType] || houseIcons.default,
     })
       .addTo(map)
       .bindPopup(
         `<div class="custom-popup">
             <div class="popup__header">
-              <div class="popup__header__text">
-                <p class="house__number">${houseNumber}</p>
-                <p class="house__number">${type || "Unknown Type"}</p>
+              <div class="header__container__text">
+                <div class="popup__header__text">
+                  <p class="house__number">${houseNumber}</p>
+                </div>
+                <p class="popup__address" title="${houseStreet}">${houseStreet}</p>
               </div>
-              <p class="popup__text">${houseStreet}</p>
+              <p class="pin__type">${type || "Unknown Type"}</p>
             </div>
             <div class="popup__body">
               <div class="coordinates__container">
@@ -235,7 +254,7 @@ $(document).ready(function () {
             house.type,
             house.house_no,
             house.house_street,
-            house.residents || [] // Pass residents array
+            house.residents || []
           );
         });
       },
@@ -387,6 +406,52 @@ $(document).ready(function () {
          Hide Markers
       `);
     }
+  });
+
+  $(document).on("click", ".delete__resident", function () {
+    let residentId = $(this).data("resident-id");
+    let residentRow = $(this).closest(".popup__row"); // Target the row div
+
+    if (!confirm("Are you sure you want to remove this resident?")) {
+      return;
+    }
+
+    $.ajax({
+      url: "remove-resident-in-house",
+      type: "POST",
+      data: { resident_id: residentId, house_no: 0 },
+      dataType: "json",
+      success: function (response) {
+        if (response.success) {
+          alert("Resident removed successfully!");
+
+          residentRow.remove();
+
+          let membersContainer = $(".members__container");
+          if (membersContainer.find(".popup__row").length === 0) {
+            membersContainer.html(
+              "<p class='popup__text'>No residents found.</p>"
+            );
+          }
+
+          let currentPopup = $(".leaflet-popup-content").parent();
+          if (currentPopup.length > 0) {
+            let newContent = $(".custom-popup").html();
+            let marker = markers.find((m) => m.isPopupOpen());
+            if (marker) {
+              marker.setPopupContent(
+                `<div class="custom-popup">${newContent}</div>`
+              );
+            }
+          }
+        } else {
+          alert("Failed to remove resident.");
+        }
+      },
+      error: function () {
+        alert("An error occurred. Please try again.");
+      },
+    });
   });
 
   $("#saveHouseNumber").on("click", function () {

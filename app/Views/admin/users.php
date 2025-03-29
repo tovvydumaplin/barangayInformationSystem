@@ -427,6 +427,7 @@
         </p>
       </footer>
     </main>
+    
     <script
       type="module"
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
@@ -435,9 +436,11 @@
       nomodule
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
     ></script>
+    
 
 <script>
 // ~~~~~~~~~~~~~~~~~~~~~~~~ ⚡ Functions ⚡ ~~~~~~~~~~~~~~~~~~~~~~~~ //
+
 const openErrorDisplay = function(message) {
     $('.error__text').html(message);
     $('.error__display').removeClass('hide');
@@ -781,6 +784,7 @@ $(".btn__add__resident").on("click", function () {                    // Open cr
 $(".wrapper").on("click", function () {                               // Hide modals when clicking outside (wrapper)
     hideModal();
     closeErrorDisplay();
+    closeValidator();
 
 });
 $(document).on("keydown", function (event) {                          // Hide modals when pressing Escape key       
@@ -801,6 +805,15 @@ $('.information__input').on('focus', function() {
     if ($(this).val().trim() === '') {
         $(this).closest('.input__box').find('.red__dot').show();
     }
+});
+
+$(".validator__icon").on("click", function () {
+  // Close validator
+  closeValidator();
+});
+$(".validator__cancel").on("click", function () {
+  // Close validator
+  closeValidator();
 });
 // ~~~~~~~~~~~~~~~~~~~~~~~~ ⚡ Image Event Handling ⚡ ~~~~~~~~~~~~~~~~~~~~~~~~ //
 
