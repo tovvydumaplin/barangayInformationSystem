@@ -64,3 +64,32 @@ $(".menu__icon").on("click", function () {
 $(".user__box").on("click", function () {
   $(".dropdown__menu").toggleClass("show");
 });
+
+// TABS
+// Map viewing
+$(".tab__1").on("click", function () {
+  $(".tab__1").addClass("visible");
+  $(".tab__2").removeClass("visible");
+  $(".tab__3").removeClass("visible");
+  $(".card__mapping").removeClass("hidden");
+  $(".card__table").addClass("hidden");
+});
+// Resident Records Viewing
+$(".tab__2").on("click", function () {
+  $(".tab__2").addClass("visible");
+  $(".tab__1").removeClass("visible");
+  $(".tab__3").removeClass("visible");
+  $(".card__table").removeClass("hidden");
+  $(".card__mapping").addClass("hidden");
+});
+$(".tab__3").on("click", function () {
+  $(".tab__2").removeClass("visible");
+  $(".tab__1").removeClass("visible");
+
+  $(".card__mapping").addClass("visible");
+});
+// $(".map__tab").on("click", function () {
+//   $(".card__mapping").removeClass("hidden");
+//   $(".card__table").addClass("hidden");
+// });
+// TAB END

@@ -183,7 +183,7 @@ $(document).ready(function () {
                 }
               </div>
             </div>
-            <button class="add-marker" data-lat="${lat}" data-lng="${lng}">Add Resident</button>
+            <button class="add-marker" data-lat="${lat}" data-lng="${lng}" data-house="${houseNumber}">Add Resident</button>
             <button class="save-marker" style="display:none" data-house="${houseNumber}">Save Location</button>
         </div>`,
         { closeOnClick: false }
@@ -222,7 +222,7 @@ $(document).ready(function () {
         tempDiv.querySelector(".house__number").textContent = newHouseNumber;
 
         let saveButton = tempDiv.querySelector(".save-marker");
-        saveButton.style.display = "block";
+        // saveButton.style.display = "block";
         saveButton.setAttribute("data-house", newHouseNumber);
 
         marker.setPopupContent(tempDiv.innerHTML);
@@ -245,7 +245,7 @@ $(document).ready(function () {
       type: "GET",
       dataType: "json",
       success: function (houses) {
-        console.log("Received Houses Data:", houses); // Debugging
+        console.log("Received Houses Data:", houses);
 
         houses.forEach(function (house) {
           addMarker(
@@ -263,7 +263,6 @@ $(document).ready(function () {
       },
     });
   }
-
   const updateMarkerLocation = function (
     oldHouseNumber,
     newHouseNumber,
