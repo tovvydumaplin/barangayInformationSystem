@@ -1189,7 +1189,7 @@ let table = $("#newResidentsTable").DataTable(); // Initialize DataTables
 let members = JSON.parse(localStorage.getItem("members")) || [];
 // ~~~~~~~~~~~~~~~~~~~~~~~~ ⚡ Functions ⚡ ~~~~~~~~~~~~~~~~~~~~~~~~ //
 // Get House Number
-const loadHouseNumbers = function () {
+const loadHouseNumbers = function (callback) {
     $.ajax({
         url: "/admin/get-house-numbers",
         type: "GET",
@@ -1204,6 +1204,8 @@ const loadHouseNumbers = function () {
                 response.data.forEach(house => {
                     $houseNumberList.append(`<option value="${house.house_no}">${house.house_no}</option>`);
                 });
+
+                if (callback) callback(); 
             } else {
                 console.error("No house numbers found.");
             }
@@ -1658,13 +1660,15 @@ $('.icon__close').on("click", function(){
 $('.btn__cancel__services').on("click", function(){
   $("#familyModal").hide();
 })
-$('add-marker').on("click", function(){
-  openModal();
-});
+
 $(document).on("click", ".add-marker", function() {
+  let houseNumber = $(this).data("house");
+  let houseStreet = $(this).data("street");
   $(".wrapper").addClass("open");
   $("#addResidentModal").addClass("open");
-  loadHouseNumbers();
+
+loadHouseNumbers(() => $("#houseNumberList").val(houseNumber)); // Set after loading
+  $('#streetInput').val(houseStreet);
 });
 
 
@@ -1860,7 +1864,7 @@ loadResidents();
                 }
               </div>
             </div>
-            <button class="add-marker" data-lat="${lat}" data-lng="${lng}" data-house="${houseNumber}">Add Resident</button>
+            <button class="add-marker" data-lat="${lat}" data-lng="${lng}" data-house="${houseNumber}" data-street="${houseStreet}">Add Resident</button>
             <button class="save-marker" style="display:none" data-house="${houseNumber}">Save Location</button>
         </div>`,
         { closeOnClick: false }

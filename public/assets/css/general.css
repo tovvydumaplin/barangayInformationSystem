@@ -244,7 +244,7 @@ hr {
   height: 100%;
   background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
   backdrop-filter: blur(2px); /* Adds blur effect */
-  z-index: 1999;
+  z-index: 1600;
   visibility: hidden;
   opacity: 0;
   transition: all 0.3s ease;
