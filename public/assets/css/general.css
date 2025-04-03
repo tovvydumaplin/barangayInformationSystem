@@ -835,7 +835,8 @@ label[for="dt-length-0"] {
 .validator__cancel {
   border: 1px solid rgb(160, 160, 160);
 }
-.validator__proceed {
+.validator__proceed,
+.validator__proceed__archive {
   background-color: var(--main-color);
   color: #fff;
 }
@@ -1074,4 +1075,8 @@ td {
 
 .btn__group {
   z-index: 498;
+}
+
+.input__group .information__input {
+  padding: 2rem;
 }

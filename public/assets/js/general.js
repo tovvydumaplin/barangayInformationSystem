@@ -85,8 +85,15 @@ $(".tab__2").on("click", function () {
 $(".tab__3").on("click", function () {
   $(".tab__2").removeClass("visible");
   $(".tab__1").removeClass("visible");
-
   $(".card__mapping").addClass("visible");
+});
+$(".tab__4").on("click", function () {
+  $(".tab__2").removeClass("visible");
+  $(".tab__1").removeClass("visible");
+  $(".tab__3").removeClass("visible");
+  $(".tab__4").addClass("visible");
+  $(".card__table").removeClass("hidden");
+  $(".card__mapping").addClass("hidden");
 });
 // $(".map__tab").on("click", function () {
 //   $(".card__mapping").removeClass("hidden");

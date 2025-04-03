@@ -194,11 +194,39 @@
     <div class="validator__body">
         <p class="validator__text__desc">Are you sure you want to proceed?</p></div>
     <div class="validator__footer">
-        <button class="validator__btn validator__cancel">Cancel</button>
+        <button type="button" class="validator__btn validator__cancel">Cancel</button>
         <button class="validator__btn validator__proceed">Proceed</button>
     </div>
   </div>
     <!-- Validation ENDS -->
+    <!-- Validation FOR Archiving -->
+  <!-- <div class="validator hide">
+    <div class="validator__head">
+        <p class="validator__header">Confirmation</p>
+        <ion-icon class="validator__icon" name="close-outline"></ion-icon>
+    </div>
+    <div class="validator__body">
+        <p class="validator__text__desc">Are you sure you want to proceed?</p></div>
+    <div class="validator__footer">
+        <button type="button" class="validator__btn validator__cancel">Cancel</button>
+        <button type="button" class="validator__btn validator__proceed__archive">Proceed</button>
+    </div>
+  </div> -->
+    <!-- Validation ENDS Archiving -->
+    <!-- Validation FOR Reactivation -->
+    <!-- <div class="validator hide">
+      <div class="validator__head">
+          <p class="validator__header">Confirmation</p>
+          <ion-icon class="validator__icon" name="close-outline"></ion-icon>
+      </div>
+      <div class="validator__body">
+          <p class="validator__text__desc">Are you sure you want to proceed?</p></div>
+      <div class="validator__footer">
+          <button type="button" class="validator__btn validator__cancel">Cancel</button>
+          <button type="button" class="validator__btn validator__proceed__reactivate">Proceed</button>
+      </div>
+    </div> -->
+    <!-- Validation ENDS Reactivation -->
 
      <!-- Error handler -->
     <div class="error__display hide">
@@ -615,6 +643,7 @@
           </div>
         </div>
         <form method="POST" class="modal__body community__modal">
+          <input id="residentStatus"/>
           <div class="row">
             <!-- 1 -->
             <div class="input__box">
@@ -966,7 +995,8 @@
         <!-- Emergency Contact END -->
           <div class="btn__box__modal submit__box">
             <span class="btn__secondary active btn__close">Close</span>
-            <!-- <button class="button__submit btn__primary">Edit</submit> -->
+            <button type="button" id="archiveButton" class="button__submit btn__primary">Archive</submit>
+            <button type="button" id="reactivateButton" class="button__submit btn__primary">Reactivate</submit>
           </div>
         </form>
       </div>
@@ -1363,6 +1393,92 @@ const calculateAge = function(birthdate) {
     return age;
 }
 const loadResidents = function() {
+    customLoaderOn();
+    const $residentsTable = $("#residentsTable");
+
+    if ($.fn.DataTable.isDataTable($residentsTable)) {
+        $residentsTable.DataTable().destroy();
+        $residentsTable.empty();  // Clear table structure
+        $residentsTable.append('<thead><tr><th>ID</th><th>Name</th><th>Age</th><th>Civil Status</th><th>Gender</th><th>Action</th></tr></thead><tbody></tbody>');
+    }
+
+    // Show loading message
+    $residentsTable.find("tbody").html('<tr><td colspan="10" class="text-center">Loading...</td></tr>');
+
+    $.ajax({
+        url: "/admin/get-residents",
+        type: "GET",
+        dataType: "json",
+        cache: false,  // Ensure fresh data
+        success: function(response) {
+            if (response.success && Array.isArray(response.data) && response.data.length) {
+                const residents = response.data;
+                const tableData = residents.map(resident => [
+                    resident.resident_id,
+                    `${resident.firstname} ${resident.middlename ? resident.middlename.charAt(0) + '.' : ''} ${resident.lastname} ${resident.suffix || ''}`,
+                    resident.birthdate ? calculateAge(resident.birthdate) : 'N/A',
+                    resident.civil_status || 'N/A',
+                    resident.gender || 'N/A',
+                    `<button class="btn__primary view__resident__btn action-btn" data-id="${resident.resident_id}">View</button>`
+                ]);
+
+                // Reinitialize DataTable
+                $residentsTable.DataTable({
+                    "destroy": true,  // Ensure reinitialization
+                    "processing": true,
+                    "serverSide": false,
+                    "data": tableData,
+                    "columns": [
+                        { "title": "ID" },
+                        { "title": "Name" },
+                        { "title": "Age" },
+                        { "title": "Civil Status" },
+                        { "title": "Gender" },
+                        { "title": "Action", "orderable": false }
+                    ],
+                    "columnDefs": [
+                        { "width": "80px", "targets": -1 } 
+                    ],
+                    "order": [[0, "desc"]],
+                    "language": {
+                        "emptyTable": "No residents found"
+                    },
+                    "pagingType": "simple_numbers",
+                    "autoWidth": false,
+                    "responsive": true  
+                });
+
+            } else {
+                // Initialize DataTable with empty data
+                $residentsTable.DataTable({
+                    "destroy": true,  // Ensure reinitialization
+                    "processing": true,
+                    "serverSide": false,
+                    "data": [],
+                    "columns": [
+                        { "title": "ID" },
+                        { "title": "Name" },
+                        { "title": "Age" },
+                        { "title": "Civil Status" },
+                        { "title": "Gender" },
+                        { "title": "Action", "orderable": false }
+                    ],
+                    "language": {
+                        "emptyTable": "No residents found"
+                    },
+                    "pagingType": "simple_numbers"
+                });
+            }
+            customLoaderOff();
+        },
+        error: function(xhr, status, error) {
+            $residentsTable.find("tbody").html('<tr><td colspan="10" class="text-center">Error loading data</td></tr>');
+            console.error("AJAX Error:", error);
+        }
+    });
+};
+
+const loadArchivedResidents = function() {
   customLoaderOn();
     const $residentsTable = $("#residentsTable");
     const $tableBody = $residentsTable.find("tbody");
@@ -1375,7 +1491,7 @@ const loadResidents = function() {
     $tableBody.html('<tr><td colspan="10" class="text-center">Loading...</td></tr>');
 
     $.ajax({
-        url: "/admin/get-residents",
+        url: "/admin/get-archived-residents",
         type: "GET",
         dataType: "json",
         cache: true,
@@ -1385,14 +1501,10 @@ const loadResidents = function() {
                 const tableData = residents.map(resident => [
                     resident.resident_id,
                     `${resident.firstname} ${resident.middlename ? resident.middlename.charAt(0) + '.' : ''} ${resident.lastname} ${resident.suffix || ''}`,
-
-                    // resident.birthdate || 'N/A',
                     resident.birthdate ? calculateAge(resident.birthdate) : 'N/A',
                     resident.civil_status || 'N/A',
                     resident.gender || 'N/A',
-                    // resident.voter_status ? 'Yes' : 'No',
-                    // resident.family_head ? 'Yes' : 'No',
-                    // resident.contact_no || 'N/A',
+
                     `<button class="btn__primary view__resident__btn action-btn" data-id="${resident.resident_id}">View</button>`
                 ]);
 
@@ -1404,13 +1516,10 @@ const loadResidents = function() {
                     "columns": [
                         { "title": "ID" },
                         { "title": "Name" },
-                        // { "title": "Birthdate" },
                         { "title": "Age" },
                         { "title": "Civil Status" },
                         { "title": "Gender" },
-                        // { "title": "Voter Status" },
-                        // { "title": "Family Head" },
-                        // { "title": "Contact No" },
+
                         { "title": "Action", "orderable": false }
                     ],
                     "columnDefs": [
@@ -1421,8 +1530,8 @@ const loadResidents = function() {
                         "emptyTable": "No residents found"
                     },
                     "pagingType": "simple_numbers",
-                    "autoWidth": false, // Ensure columns stretch
-                    "responsive": true  // Enable responsiveness
+                    "autoWidth": false, 
+                    "responsive": true  
                 });
 
             } else {
@@ -1434,13 +1543,94 @@ const loadResidents = function() {
                     "columns": [
                         { "title": "ID" },
                         { "title": "Name" },
-                        // { "title": "Birthdate" },
                         { "title": "Age" },
                         { "title": "Civil Status" },
                         { "title": "Gender" },
-                        // { "title": "Voter" },
-                        // { "title": "Family Head" },
-                        // { "title": "Contact No" },
+                        { "title": "Action", "orderable": false }
+                    ],
+                    "language": {
+                        "emptyTable": "No residents found"
+                    },
+                    "pagingType": "simple_numbers"
+                });
+            }
+            customLoaderOff();
+        },
+        error: function(xhr, status, error) {
+            $tableBody.html('<tr><td colspan="10" class="text-center">Error loading data</td></tr>');
+            console.error("AJAX Error:", error);
+        }
+    });
+};
+// not yet
+const loadHouseholdRecords = function() {
+  customLoaderOn();
+    const $residentsTable = $("#residentsTable");
+    const $tableBody = $residentsTable.find("tbody");
+
+    if ($.fn.DataTable.isDataTable($residentsTable)) {
+        $residentsTable.DataTable().destroy();
+    }
+
+    // Loading
+    $tableBody.html('<tr><td colspan="10" class="text-center">Loading...</td></tr>');
+
+    $.ajax({
+        url: "/admin/get-archived-residents",
+        type: "GET",
+        dataType: "json",
+        cache: true,
+        success: function(response) {
+            if (response.success && Array.isArray(response.data) && response.data.length) {
+                const residents = response.data;
+                const tableData = residents.map(resident => [
+                    resident.resident_id,
+                    `${resident.firstname} ${resident.middlename ? resident.middlename.charAt(0) + '.' : ''} ${resident.lastname} ${resident.suffix || ''}`,
+                    resident.birthdate ? calculateAge(resident.birthdate) : 'N/A',
+                    resident.civil_status || 'N/A',
+                    resident.gender || 'N/A',
+
+                    `<button class="btn__primary view__resident__btn action-btn" data-id="${resident.resident_id}">View</button>`
+                ]);
+
+                // Initialize DataTable
+                $residentsTable.DataTable({
+                    "processing": true,
+                    "serverSide": false,
+                    "data": tableData,
+                    "columns": [
+                        { "title": "ID" },
+                        { "title": "Name" },
+                        { "title": "Age" },
+                        { "title": "Civil Status" },
+                        { "title": "Gender" },
+
+                        { "title": "Action", "orderable": false }
+                    ],
+                    "columnDefs": [
+                          { "width": "80px", "targets": -1 } // Set the width for the last column (Action)
+                      ],
+                    "order": [[0, "desc"]],
+                    "language": {
+                        "emptyTable": "No residents found"
+                    },
+                    "pagingType": "simple_numbers",
+                    "autoWidth": false, 
+                    "responsive": true  
+                });
+
+            } else {
+                // Initialize DataTable with empty data to prevent error
+                $residentsTable.DataTable({
+                    "processing": true,
+                    "serverSide": false,
+                    "data": [],
+                    "columns": [
+                        { "title": "ID" },
+                        { "title": "Name" },
+                        { "title": "Age" },
+                        { "title": "Civil Status" },
+                        { "title": "Gender" },
                         { "title": "Action", "orderable": false }
                     ],
                     "language": {
@@ -1510,6 +1700,49 @@ const saveResidents = function() {
         }
     });
 };
+const archiveResident = function (archiveResidentId) {
+  $.ajax({
+        url: "<?= base_url('admin/archive-resident') ?>", 
+        type: "POST",
+        data: { residentIdData: archiveResidentId }, 
+        dataType: "json",
+        success: function (response) {
+            if (response.success) {
+              closeModal();
+              loadResidents();
+              $(".success__indicator").removeClass("hide").find(".indicator__text").html("Resident archived!");
+              setTimeout(() => $(".success__indicator").addClass("hide"), 3000);
+            } else {
+              openErrorDisplay(`Failed to load resident details.`);
+            }
+        },
+        error: function () {
+            openErrorDisplay(`An error occurred while fetching resident details.`);
+
+        }
+    });
+}
+const reactivateResident = function(resId) {
+  $.ajax({
+      url: "<?= base_url('admin/reactivate-resident') ?>", 
+      type: "POST",
+      data: { resIdData: resId }, 
+      dataType: "json",
+      success: function (response) {
+          if (response.success) {
+              closeModal();
+              loadArchivedResidents();
+              $(".success__indicator").removeClass("hide").find(".indicator__text").html("Resident reactivated!");
+              setTimeout(() => $(".success__indicator").addClass("hide"), 3000);
+          } else {
+              alert("Failed to fetch resident details.");
+          }
+      },
+      error: function () {
+          alert("An error occurred while fetching resident details.");
+      }
+  }); 
+}
 const viewResidentData = function(residentId) {                  // Resident Details on button click        
     $.ajax({
         url: "<?= base_url('admin/get-resident-details') ?>", 
@@ -1542,6 +1775,16 @@ const viewResidentData = function(residentId) {                  // Resident Det
                 $("input[name='view_contact_name']").val(response.data.contact_name);
                 $("input[name='view_emergency_contact_no']").val(response.data.emergency_contact_no);
                 $("input[name='view_contact_relationship']").val(response.data.contact_relationship);
+                $('#archiveButton').data('resident-id', residentId);
+                $('#reactivateButton').data('resident-id', residentId);
+                $('#residentStatus').val(response.data.status);
+                if (response.data.status == 1) {
+                  $('#archiveButton').show();
+                  $('#reactivateButton').hide();
+                } else {
+                  $('#archiveButton').hide();
+                  $('#reactivateButton').show();
+                }
                 // Open modal
                 // $(".wrapper").addClass("open");
                 // $("#viewEventModal").addClass("open");
@@ -1561,6 +1804,19 @@ const customLoaderOff = function() {
   $('.custom__loader').addClass('hide');
 }
 // ~~~~~~~~~~~~~~~~~~~~~~~~ ⚡ Event Listeners ⚡ ~~~~~~~~~~~~~~~~~~~~~~~~ //
+
+
+// Archive Resident
+$('#archiveButton').on('click', function() {
+    residentIdToArchive = $(this).data('resident-id'); 
+    archiveResident(residentIdToArchive); 
+});
+
+// Reactivate Resident
+$('#reactivateButton').on('click', function() {
+    residentIdToReactivate = $(this).data('resident-id'); 
+    reactivateResident(residentIdToReactivate);
+});
 
 // -- Display street based on selected house number
 $('#houseNumberList').on("change", function(){
@@ -1856,15 +2112,16 @@ loadResidents();
                   5
                 )}</span></p>
               </div>
-              <div class="members__container">
+              ${type.toLowerCase() === "residential" ?
+               `<div class="members__container">
                 <p class="popup__heading">Family Members</p>
                 ${
                   residentsHTML ||
                   "<p class='popup__text'>No residents found.</p>"
                 }
-              </div>
+              </div>` : ""}
             </div>
-            <button class="add-marker" data-lat="${lat}" data-lng="${lng}" data-house="${houseNumber}" data-street="${houseStreet}">Add Resident</button>
+            ${type.toLowerCase() === "residential" ? `<button class="add-marker" data-lat="${lat}" data-lng="${lng}" data-house="${houseNumber}" data-street="${houseStreet}">Add Resident</button>` : ""}
             <button class="save-marker" style="display:none" data-house="${houseNumber}">Save Location</button>
         </div>`,
         { closeOnClick: false }
@@ -2033,6 +2290,13 @@ loadResidents();
   }
 
   // ~~~~~~~~~~~~~~~~~~~~~~~~ ⚡ Event Listeners ⚡ ~~~~~~~~~~~~~~~~~~~~~~~~ //
+
+  $(".tab__2").on("click", function() {
+    loadResidents();
+  })
+  $(".tab__4").on("click", function() {
+    loadArchivedResidents();
+  })
   $(".btn__edit__mode").on("click", function () {
     if (isEditMode) {
       deactivateEditMode();

@@ -73,9 +73,6 @@ class AdminController extends BaseController
         return $this->response->setJSON(["data" => $data]);
     }
     
-    
-    
-    
     public function getUser()
     {
         $token = $this->request->getGet("token"); 
@@ -135,7 +132,35 @@ class AdminController extends BaseController
             return $this->response->setStatusCode(500)->setJSON(['error' => 'Failed to update user status']);
         }
     }
+
+    public function archiveResident() {
+        $residentIdData = $this->request->getPost('residentIdData');
+        $status = 0;
+
+        $residentModel = new residentModel();
+        $update = $residentModel->where('resident_id', $residentIdData)->set('status', $status)->update();
+
+        if ($update) {
+            return $this->response->setStatusCode(200)->setJSON(['success' => true, 'message' => 'Resident Deactivated']);
+        } else {
+            return $this->response->setStatusCode(500)->setJSON(['error'=>'Failed to update resident status']);
+        }
+
+    }
     
+    public function reactivateResident() {
+        $resIdData = $this->request->getPost('resIdData');
+        $status = 1;
+
+        $residentModel = new residentModel();
+        $update = $residentModel->where('resident_id', $resIdData)->set('status', $status)->update();
+        
+        if ($update) {
+            return $this->response->setStatusCode(200)->setJSON(['success' => true, 'message' => 'Resident Reactivated!']);
+        } else {
+            return $this->response->setStatusCode(500)->setJSON(['error'=>'Failed to update resident status']);
+        }
+    }
     
 
 
@@ -418,6 +443,12 @@ public function createUser()
             'success' => count($residents) > 0,
             'data' => $residents
         ]);
+    }
+    public function getArchivedResidents() {
+        $residentModel = new ResidentModel();
+        $residents = $residentModel->where('status', '0')->findAll();
+
+        return $this->response->setJSON(['success' => count($residents) > 0, 'data'=>$residents]);
     }
 
     public function getResidentDetails()

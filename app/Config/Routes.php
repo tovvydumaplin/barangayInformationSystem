@@ -53,6 +53,12 @@ $routes->post('/admin/create-resident','AdminController::createResident');
 $routes->get('admin/get-residents', 'AdminController::loadResidents');
 // View resident
 $routes->get('admin/get-resident-details','AdminController::getResidentDetails');
+// View archived residents
+$routes->get('/admin/get-archived-residents', 'AdminController::getArchivedResidents');
+// Archive resident
+$routes->post('admin/archive-resident', 'AdminController::archiveResident');
+// Reactivate resident
+$routes->post('admin/reactivate-resident', 'AdminController::reactivateResident');
 
 
 // Create pin location
