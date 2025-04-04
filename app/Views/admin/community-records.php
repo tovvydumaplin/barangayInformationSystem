@@ -15,18 +15,23 @@
     <link rel="stylesheet" href="<?= base_url('assets/css/community-records.css') ?>" />
     <link rel="stylesheet" href="<?= base_url('assets/css/table.css') ?>" />
     <link rel="stylesheet" href="<?= base_url('assets/DataTables/datatables.min.css') ?>" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+
         <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="<?= base_url('assets/DataTables/datatables.min.js') ?>"></script>
     <script src="<?= base_url('assets/js/apexcharts.min.js') ?>"></script>
+    
   <style>
     .modal {
       min-width: 150rem;
     }
     .submit__box {
-      display: flex;
-      gap: 2rem;
-    }
+    display: flex;
+    gap: 2rem;
+    padding: 2rem 0;
+}
     .icon__close {
       cursor: pointer;
     }
@@ -159,6 +164,23 @@
       .card__table.hidden {
         display: none;
       }
+
+      .top__container {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        height: 85%;
+        overflow-y: scroll;
+        padding-right: 1rem;
+      }
+      .modal__body {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        height: 85%;
+        overflow-y: scroll;
+        padding-right: 1rem;
+    }
   </style>
   </head>
   <body>
@@ -603,7 +625,7 @@
             </div>
             <!-- Household members table end -->
             <div class="btn__box">
-                <button id="saveMember" class="btn btn__primary"><ion-icon name="add-outline"></ion-icon>Save Member</button>
+                <button id="saveMember" class="btn btn__primary"><i class="bi bi-person-fill-add"></i>Save Member</button>
             </div>
           </div>
           <!-- Household members table -->
@@ -642,8 +664,9 @@
             <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M368 368L144 144M368 144L144 368"/></svg>
           </div>
         </div>
-        <form method="POST" class="modal__body community__modal">
-          <input id="residentStatus"/>
+        <form method="POST" class="modal__body modal__viewing community__modal">
+          <input type="hidden" id="residentStatus"/>
+          <input type="hidden" id="residentId"/>
           <div class="row">
             <!-- 1 -->
             <div class="input__box">
@@ -652,6 +675,7 @@
                 value=""
                 placeholder="Enter fullname"
                 name="view_firstname"
+                readonly
               />
               <span class="input__title"
                 >Firstname<span class="red__dot">*</span></span
@@ -666,6 +690,7 @@
                 value=""
                 placeholder="Enter lastname"
                 name="view_lastname"
+                readonly
               />
               <span class="input__title"
                 >Lastname<span class="red__dot">*</span></span
@@ -679,6 +704,7 @@
                 value=""
                 placeholder="Enter middlename"
                 name="view_middlename"
+                readonly
                 
               />
               <span class="input__title"
@@ -694,7 +720,8 @@
                 class="information__input"
                 value=""
                 placeholder="Enter suffix"
-                name="view_suffix">
+                name="view_suffix"
+                disabled>
                 <option disabled selected>Select one</option>
                 <option value="">None</option>
                 <option value="Jr.">Jr.</option>
@@ -718,6 +745,7 @@
                 value=""
                 placeholder="Enter contact-no"
                 name="view_contact_no"
+                readonly
                 
               />
               <span class="input__title"
@@ -732,6 +760,7 @@
                 value=""
                 placeholder="Enter Birthdate"
                 name="view_birthdate"
+                readonly
                 
               />
               <span class="input__title"
@@ -745,6 +774,7 @@
                 value=""
                 placeholder="Enter Age"
                 name="view_age"
+                readonly
                 
               />
               <span class="input__title"
@@ -758,6 +788,7 @@
                 value=""
                 placeholder="Enter Birthplace"
                 name="view_birthplace"
+                readonly
                 
               />
               <span class="input__title"
@@ -771,6 +802,7 @@
                 value=""
                 placeholder="Enter Citizenship"
                 name="view_citizenship"
+                readonly
                 
               />
               <span class="input__title"
@@ -789,6 +821,7 @@
                 value=""
                 placeholder="Enter Gender"
                 name="view_gender"
+                disabled
                 >
                 <option disabled selected>Select one</option>
                 <option value="Male">Male</option>
@@ -808,6 +841,7 @@
                 value=""
                 placeholder="Enter Civil Status"
                 name="view_civil_status"
+                disabled
                 >
                 <option disabled selected>Select one</option>
                 <option value="Single">Single</option>
@@ -827,6 +861,7 @@
                 value=""
                 placeholder="Enter Occupation"
                 name="view_occupation"
+                readonly
                 
               />
               <span class="input__title"
@@ -840,6 +875,7 @@
                 value=""
                 placeholder="Enter Religion"
                 name="view_religion"
+                readonly
                 
               />
               <span class="input__title"
@@ -910,6 +946,7 @@
                   value=""
                   placeholder="Enter Household Ownership"
                   name="view_household_name"  
+                  readonly
                 />
                 <span class="input__title">Household Ownership<span class="red__dot">*</span></span>
                 <p class="text-danger"></p>
@@ -920,6 +957,7 @@
                   value=""
                   placeholder="Enter House No."
                   name="view_house_no"
+                  readonly
                 />
                 <span class="input__title"
                   >House No.<span class="red__dot">*</span></span
@@ -932,6 +970,7 @@
                   value=""
                   placeholder="Enter Street"
                   name="view_street"
+                  readonly
                   
                 />
                 <span class="input__title"
@@ -953,6 +992,7 @@
                   value=""
                   placeholder="Enter fullname"
                   name="view_contact_name"  
+                  readonly
                 />
                 <span class="input__title">Fullname<span class="red__dot">*</span></span>
                 <p class="text-danger"></p>
@@ -963,6 +1003,7 @@
                   value=""
                   placeholder="Enter Contact No."
                   name="view_emergency_contact_no"
+                  readonly
                   
                 />
                 <span class="input__title"
@@ -976,6 +1017,7 @@
                   value=""
                   placeholder="Enter relationship"
                   name="view_contact_relationship"
+                  readonly
                   
                 />
                 <span class="input__title"
@@ -993,12 +1035,14 @@
               />
           </div>
         <!-- Emergency Contact END -->
-          <div class="btn__box__modal submit__box">
-            <span class="btn__secondary active btn__close">Close</span>
-            <button type="button" id="archiveButton" class="button__submit btn__primary">Archive</submit>
-            <button type="button" id="reactivateButton" class="button__submit btn__primary">Reactivate</submit>
-          </div>
         </form>
+        <div class="btn__box__modal submit__box">
+          <button type="button" id="editViewResident" class="btn__edit__resident">
+          <i class="bi bi-pencil-square"></i>Edit
+          </button>
+          <button type="button" id="archiveButton" class="button__submit btn__primary"><i class="bi bi-archive"></i>Archive</button>
+          <button type="button" id="reactivateButton" class="button__submit btn__primary"><i class="bi bi-arrow-repeat"></i>Reactivate</button>
+        </div>
       </div>
       <!-- End of view/update modal -->
       <div class="container">
@@ -1012,10 +1056,10 @@
               <button class="tab__btn">Resident Records</button>
               <div class="active__tab"></div>
             </div>
-            <div class="btn__container tab__3">
+            <!-- <div class="btn__container tab__3">
               <button class="tab__btn">Household Resident</button>
               <div class="active__tab"></div>
-            </div>
+            </div> -->
             <div class="btn__container tab__4 map__tab">
               <button class="tab__btn">Archived Records</button>
               <div class="active__tab"></div>
@@ -1149,6 +1193,7 @@
                   <th>Age</th>
                   <th>Civil Status</th>
                   <th>Gender</th>
+                  <th>House No.</th>
                   <!-- <th>Voter</th>
                   <th>Family Head</th>
                   <th>Contact No.</th> -->
@@ -1204,7 +1249,8 @@
     </main>
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 
@@ -1397,13 +1443,11 @@ const loadResidents = function() {
     const $residentsTable = $("#residentsTable");
 
     if ($.fn.DataTable.isDataTable($residentsTable)) {
-        $residentsTable.DataTable().destroy();
-        $residentsTable.empty();  // Clear table structure
-        $residentsTable.append('<thead><tr><th>ID</th><th>Name</th><th>Age</th><th>Civil Status</th><th>Gender</th><th>Action</th></tr></thead><tbody></tbody>');
+        $residentsTable.DataTable().clear().destroy();
     }
 
     // Show loading message
-    $residentsTable.find("tbody").html('<tr><td colspan="10" class="text-center">Loading...</td></tr>');
+    $residentsTable.find("tbody").html('<tr><td colspan="7" class="text-center">Loading...</td></tr>');
 
     $.ajax({
         url: "/admin/get-residents",
@@ -1419,12 +1463,13 @@ const loadResidents = function() {
                     resident.birthdate ? calculateAge(resident.birthdate) : 'N/A',
                     resident.civil_status || 'N/A',
                     resident.gender || 'N/A',
+                    resident.house_no || 'N/A',
                     `<button class="btn__primary view__resident__btn action-btn" data-id="${resident.resident_id}">View</button>`
                 ]);
 
                 // Reinitialize DataTable
                 $residentsTable.DataTable({
-                    "destroy": true,  // Ensure reinitialization
+                    "destroy": true,
                     "processing": true,
                     "serverSide": false,
                     "data": tableData,
@@ -1434,10 +1479,11 @@ const loadResidents = function() {
                         { "title": "Age" },
                         { "title": "Civil Status" },
                         { "title": "Gender" },
+                        { "title": "House No." },
                         { "title": "Action", "orderable": false }
                     ],
                     "columnDefs": [
-                        { "width": "80px", "targets": -1 } 
+                        { "width": "80px", "targets": -1 }
                     ],
                     "order": [[0, "desc"]],
                     "language": {
@@ -1451,7 +1497,7 @@ const loadResidents = function() {
             } else {
                 // Initialize DataTable with empty data
                 $residentsTable.DataTable({
-                    "destroy": true,  // Ensure reinitialization
+                    "destroy": true,
                     "processing": true,
                     "serverSide": false,
                     "data": [],
@@ -1461,6 +1507,7 @@ const loadResidents = function() {
                         { "title": "Age" },
                         { "title": "Civil Status" },
                         { "title": "Gender" },
+                        { "title": "House No." },
                         { "title": "Action", "orderable": false }
                     ],
                     "language": {
@@ -1472,11 +1519,12 @@ const loadResidents = function() {
             customLoaderOff();
         },
         error: function(xhr, status, error) {
-            $residentsTable.find("tbody").html('<tr><td colspan="10" class="text-center">Error loading data</td></tr>');
+            $residentsTable.find("tbody").html('<tr><td colspan="7" class="text-center">Error loading data</td></tr>');
             console.error("AJAX Error:", error);
         }
     });
 };
+
 
 const loadArchivedResidents = function() {
   customLoaderOn();
@@ -1504,7 +1552,7 @@ const loadArchivedResidents = function() {
                     resident.birthdate ? calculateAge(resident.birthdate) : 'N/A',
                     resident.civil_status || 'N/A',
                     resident.gender || 'N/A',
-
+                    resident.house_no || 'N/A',
                     `<button class="btn__primary view__resident__btn action-btn" data-id="${resident.resident_id}">View</button>`
                 ]);
 
@@ -1519,6 +1567,7 @@ const loadArchivedResidents = function() {
                         { "title": "Age" },
                         { "title": "Civil Status" },
                         { "title": "Gender" },
+                        { "title": "House No." },
 
                         { "title": "Action", "orderable": false }
                     ],
@@ -1546,6 +1595,7 @@ const loadArchivedResidents = function() {
                         { "title": "Age" },
                         { "title": "Civil Status" },
                         { "title": "Gender" },
+                        { "title": "House No." },
                         { "title": "Action", "orderable": false }
                     ],
                     "language": {
@@ -1755,14 +1805,14 @@ const viewResidentData = function(residentId) {                  // Resident Det
                 $("input[name='view_firstname']").val(response.data.firstname);
                 $("input[name='view_lastname']").val(response.data.lastname);
                 $("input[name='view_middlename']").val(response.data.middlename);
-                $("input[name='view_suffix']").val(response.data.suffix);
+                $("select[name='view_suffix']").val(response.data.suffix);
                 $("input[name='view_contact_no']").val(response.data.contact_no);
                 $("input[name='view_birthdate']").val(response.data.birthdate);
                 $("input[name='view_age']").val(response.data.age);
                 $("input[name='view_birthplace']").val(response.data.birthplace);
                 $("input[name='view_citizenship']").val(response.data.citizenship);
-                $("input[name='view_gender']").val(response.data.gender);
-                $("input[name='view_civil_status']").val(response.data.civil_status);
+                $("select[name='view_gender']").val(response.data.gender);
+                $("select[name='view_civil_status']").val(response.data.civil_status);
                 $("input[name='view_occupation']").val(response.data.occupation);
                 $("input[name='view_religion']").val(response.data.religion);
                 // Set the respective radio button as selected
@@ -1775,6 +1825,7 @@ const viewResidentData = function(residentId) {                  // Resident Det
                 $("input[name='view_contact_name']").val(response.data.contact_name);
                 $("input[name='view_emergency_contact_no']").val(response.data.emergency_contact_no);
                 $("input[name='view_contact_relationship']").val(response.data.contact_relationship);
+                $('#residentId').val(residentId);
                 $('#archiveButton').data('resident-id', residentId);
                 $('#reactivateButton').data('resident-id', residentId);
                 $('#residentStatus').val(response.data.status);
@@ -1803,20 +1854,120 @@ const customLoaderOn = function() {
 const customLoaderOff = function() {
   $('.custom__loader').addClass('hide');
 }
+
+
+const updateResident = function() {
+  let formData = new FormData();
+
+  formData.append("resident_id", $("#residentId").val());
+  formData.append("firstname", $(".information__input[name='view_firstname']").val());
+  formData.append("lastname", $(".information__input[name='view_lastname']").val());
+  formData.append("middlename", $(".information__input[name='view_middlename']").val());
+  formData.append("suffix", $(".information__input[name='view_suffix']").val());
+  formData.append("contact_no", $(".information__input[name='view_contact_no']").val());
+  formData.append("birthdate", $(".information__input[name='view_birthdate']").val());
+  formData.append("birthplace", $(".information__input[name='view_birthplace']").val());
+  formData.append("citizenship", $(".information__input[name='view_citizenship']").val());
+  formData.append("gender", $(".information__input[name='view_gender']").val());
+  formData.append("civil_status", $(".information__input[name='view_civil_status']").val());
+  formData.append("occupation", $(".information__input[name='view_occupation']").val());
+  formData.append("religion", $(".information__input[name='view_religion']").val());
+  formData.append("is_pwd", $("input[name='view_is_pwd']:checked").val());
+  formData.append("is_voter_of_barangay", $("input[name='view_is_voter_of_barangay']:checked").val());
+  formData.append("is_family_head", $("input[name='view_is_family_head']:checked").val());
+  formData.append("household_name", $(".information__input[name='view_household_name']").val());
+  formData.append("house_no", $(".information__input[name='view_house_no']").val());
+  formData.append("street", $(".information__input[name='view_street']").val());
+  formData.append("contact_name", $(".information__input[name='view_contact_name']").val());
+  formData.append("emergency_contanct_no", $(".information__input[name='view_emergency_contact_no']").val());
+  formData.append("contact_relationship", $(".information__input[name='view_contact_relationship']").val());
+
+
+  $.ajax({
+      url: "<?= site_url('admin/update-resident') ?>",
+      type: "POST",
+      data: formData,
+      processData: false,
+      contentType: false,
+      dataType: "json",
+      success: function (response) {
+          if (response.success) {
+              $(".success__indicator").removeClass("hide");
+              $(".indicator__text").html('Resident Updated!');
+              const residentId = formData.get("resident_id");
+              viewResidentData(residentId);
+              loadResidents();
+              setTimeout(function () {
+                  $(".success__indicator").addClass("hide");
+              }, 3000);
+              hideModal();
+          } else {
+              alert("Error updating user.");
+          }
+      },
+      error: function (xhr, status, error) {
+          console.error("Update Error:", error);
+          alert("Failed to update user.");
+      },
+  });
+}
 // ~~~~~~~~~~~~~~~~~~~~~~~~ ⚡ Event Listeners ⚡ ~~~~~~~~~~~~~~~~~~~~~~~~ //
+$(document).on("click", "#editViewResident", function() {
+    const btn = $(this);
+    const form = $(".modal__viewing");
+
+    if (btn.text().trim() === "Edit") {
+        // Enable inputs and selects
+        form.find("input").prop("readonly", false);
+        form.find("select").prop("disabled", false);
+        
+        // Change button text to "Save"
+        btn.text("Save");
+    } else {
+        // ======== Add Your Save Logic Here ========
+        console.log("Saving data..."); 
+        updateResident();
+        form.find("input").prop("readonly", true);
+        form.find("select").prop("disabled", true);
+        
+        // Change button text back to "Edit"
+        btn.text("Edit");
+    }
+});
+
 
 
 // Archive Resident
 $('#archiveButton').on('click', function() {
-    residentIdToArchive = $(this).data('resident-id'); 
-    archiveResident(residentIdToArchive); 
+    // Show confirmation prompt
+    const isConfirmed = confirm("Are you sure you want to archive this resident?");
+
+    if (isConfirmed) {
+        // If the user clicks "OK", proceed with archiving
+        residentIdToArchive = $(this).data('resident-id');
+        archiveResident(residentIdToArchive);
+    } else {
+        // If the user clicks "Cancel", do nothing
+        return;
+    }
 });
+
 
 // Reactivate Resident
 $('#reactivateButton').on('click', function() {
-    residentIdToReactivate = $(this).data('resident-id'); 
-    reactivateResident(residentIdToReactivate);
+    // Show confirmation prompt
+    const isConfirmed = confirm("Are you sure you want to reactivate this resident?");
+
+    if (isConfirmed) {
+        // If the user clicks "OK", proceed with reactivating
+        residentIdToReactivate = $(this).data('resident-id');
+        reactivateResident(residentIdToReactivate);
+    } else {
+        // If the user clicks "Cancel", do nothing
+        return;
+    }
 });
+
 
 // -- Display street based on selected house number
 $('#houseNumberList').on("change", function(){

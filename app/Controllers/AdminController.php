@@ -4,7 +4,7 @@ use App\Models\UserModel;
 use App\Models\EventModel; 
 use App\Models\ResidentModel; 
 use App\Models\HouseModel; 
-
+use App\Models\InventoryModel;
 class AdminController extends BaseController
 {
     public function dashboard()
@@ -478,6 +478,68 @@ public function createUser()
         }
     }
 
+
+    public function updateResident()
+    {
+        $resident_id = $this->request->getPost('resident_id');
+        $firstname = $this->request->getPost('firstname');
+        $lastname = $this->request->getPost('lastname');
+        $middlename = $this->request->getPost('middlename');
+        $suffix = $this->request->getPost('suffix');
+        $contact_no = $this->request->getPost('contact_no');
+        $birthdate = $this->request->getPost('birthdate');
+        $birthplace = $this->request->getPost('birthplace');
+        $citizenship = $this->request->getPost('citizenship');
+        $gender = $this->request->getPost('gender');
+        $civil_status = $this->request->getPost('civil_status');
+        $occupation = $this->request->getPost('occupation');
+        $religion = $this->request->getPost('religion');
+        $is_pwd = $this->request->getPost('is_pwd');
+        $is_voter_of_barangay = $this->request->getPost('is_voter_of_barangay');
+        $is_family_head = $this->request->getPost('is_family_head');
+        $household_name = $this->request->getPost('household_name');
+        $house_no = $this->request->getPost('house_no');
+        $street = $this->request->getPost('street');
+        $contact_name = $this->request->getPost('contact_name');
+        $emergency_contact_no = $this->request->getPost('emergency_contanct_no');
+        $contact_relationship = $this->request->getPost('contact_relationship');
+    
+        // Perform update logic, like querying your model and updating the database
+        $residentModel = new ResidentModel();
+    
+        // Assuming you are updating a resident with the given ID
+        $updateData = [
+            'firstname' => $firstname,
+            'lastname' => $lastname,
+            'middlename' => $middlename,
+            'suffix' => $suffix,
+            'contact_no' => $contact_no,
+            'birthdate' => $birthdate,
+            'birthplace' => $birthplace,
+            'citizenship' => $citizenship,
+            'gender' => $gender,
+            'civil_status' => $civil_status,
+            'occupation' => $occupation,
+            'religion' => $religion,
+            'is_pwd' => $is_pwd,
+            'is_voter_of_barangay' => $is_voter_of_barangay,
+            'is_family_head' => $is_family_head,
+            'household_name' => $household_name,
+            'house_no' => $house_no,
+            'street' => $street,
+            'contact_name' => $contact_name,
+            'emergency_contact_no' => $emergency_contact_no,
+            'contact_relationship' => $contact_relationship,
+        ];
+    
+        // Updating the resident in the database
+        $residentModel->update($resident_id, $updateData);
+    
+        return $this->response->setJSON(['success' => true]);
+    }
+    
+
+
     public function createPin()
     {
         $request = $this->request->getPost();
@@ -659,8 +721,196 @@ public function createUser()
         }
     }
     
+    public function createItem()
+    {
+        $validation = \Config\Services::validation();
+        $session = session();
+        $model = new InventoryModel();
+    
+        // Define the upload path inside a subfolder 'inventory'
+        $uploadPath = FCPATH . 'uploads/inventory/';
+    
+        // Ensure the uploads/inventory directory exists
+        if (!is_dir($uploadPath)) {
+            mkdir($uploadPath, 0777, true); // Create the folder if it doesn't exist
+        }
+    
+        // Get the uploaded image
+        $file = $this->request->getFile('image');
+        if (!$file) {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'No file uploaded.'
+            ]);
+        }
+    
+        // Handle the file upload
+        if ($file->isValid() && !$file->hasMoved()) {
+            // Generate a random name for the file and move it to the 'uploads/inventory' folder
+            $newName = $file->getRandomName();
+            $file->move($uploadPath, $newName);
+    
+            // Save only the filename in the database (no path)
+            $imagePath = $newName; // Store only the filename
+        } else {
+            $imagePath = null;
+        }
+    
+        // Check if image was uploaded successfully
+        if (!$imagePath) {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'Please select an image.'
+            ]);
+        }
+    
+        // Get form data
+        $assetName = $this->request->getPost('item_name');
+        $assetQuantity = $this->request->getPost('item_quantity');
+    
+        // Validate form data (you can add more validation as needed)
+        if (empty($assetName) || empty($assetQuantity)) {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'Asset name and quantity are required.'
+            ]);
+        }
+    
+        // Prepare data to save
+        $data = [
+            'item_name' => $assetName,
+            'item_quantity' => $assetQuantity,
+            'image' => $imagePath, // Store only the filename in the database
+            'status' => 1, // Assuming you are setting the status to 1
+        ];
+    
+        if ($model->insert($data)) {
+            return $this->response->setJSON([
+                'status' => 'success',
+                'message' => 'Item Created Successfully!',
+            ]);
+        } else {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'Failed to create item.',
+            ]);
+        }
+    }
     
     
+    
+    
+    public function getInventoryData()
+    {
+        $inventoryModel = new InventoryModel();
+
+        $items = $inventoryModel->where('status', 1)->findAll();
+
+        return $this->response->setJSON($items);
+    }
+
+    
+    public function getItemDetails()
+    {
+        $itemId = $this->request->getGet('item_id');  // Get item_id from the GET request
+
+        if (!$itemId) {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'Item ID is required.'
+            ]);
+        }
+
+        $model = new InventoryModel();
+
+        // Fetch item by item_id
+        $item = $model->find($itemId);
+
+        if ($item) {
+            return $this->response->setJSON([
+                'status' => 'success',
+                'data' => $item
+            ]);
+        } else {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'Item not found.'
+            ]);
+        }
+    }
+
+public function updateItem()
+{
+    $validation = \Config\Services::validation();
+    $model = new InventoryModel();
+
+    // Validate input data
+    $validation->setRules([
+        'view_asset_name' => 'required',
+        'view_asset_quantity' => 'required|is_natural_no_zero',
+    ]);
+
+    if (!$this->validate($validation->getRules())) {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => $this->validator->getErrors()
+        ]);
+    }
+
+    $itemId = $this->request->getPost('item_id');
+    $itemName = $this->request->getPost('view_asset_name');
+    $itemQuantity = $this->request->getPost('view_asset_quantity');
+    
+    // Handle file upload if there's an image to update
+    $file = $this->request->getFile('viewFileInput');
+    $imagePath = null;
+
+    if ($file && $file->isValid() && !$file->hasMoved()) {
+        $uploadPath = FCPATH . 'uploads/inventory/';
+        
+        // Check if the folder exists, if not create it
+        if (!is_dir($uploadPath)) {
+            mkdir($uploadPath, 0777, true);
+        }
+        
+        // Generate a new random file name
+        $newName = $file->getRandomName();
+        
+        // Move the uploaded file to the server directory
+        if ($file->move($uploadPath, $newName)) {
+            $imagePath = 'uploads/inventory/' . $newName;
+        } else {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'File upload failed!'
+            ]);
+        }
+    } else {
+        // If no new image, use the current one
+        $imagePath = $this->request->getPost('current_image');
+    }
+
+    // Prepare the updated data
+    $data = [
+        'item_name' => $itemName,
+        'item_quantity' => $itemQuantity,
+        'image' => $imagePath
+    ];
+
+    // Update the item in the database
+    if ($model->update($itemId, $data)) {
+        return $this->response->setJSON([
+            'status' => 'success',
+            'message' => 'Item updated successfully!'
+        ]);
+    } else {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Failed to update item.'
+        ]);
+    }
+}
+
 
 
 }

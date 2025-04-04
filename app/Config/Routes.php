@@ -51,6 +51,8 @@ $routes->post('/admin/deactivate-event', 'AdminController::deactivateEvent');
 $routes->post('/admin/create-resident','AdminController::createResident');
 // View all residents
 $routes->get('admin/get-residents', 'AdminController::loadResidents');
+// Update residents
+$routes->post('/admin/update-resident', 'AdminController::updateResident');
 // View resident
 $routes->get('admin/get-resident-details','AdminController::getResidentDetails');
 // View archived residents
@@ -73,3 +75,10 @@ $routes->get('admin/get-house-street','AdminController::getHouseStreet');
 $routes->post('admin/remove-resident-in-house','AdminController::removeResidentInHouse');
 // Update pin location
 $routes->post('admin/update-house-location','AdminController::updateHouseLocation');
+
+// Lending Items
+$routes->post('admin/create-item', 'AdminController::createItem');
+$routes->get('admin/inventory-data', 'AdminController::getInventoryData');
+$routes->get('admin/get-item-details', 'AdminController::getItemDetails');
+$routes->post('admin/update-item', 'AdminController::updateItem');
+

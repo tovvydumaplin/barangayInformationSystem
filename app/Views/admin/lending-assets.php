@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="<?= base_url('assets/css/lending-assets.css') ?>" />
     <link rel="stylesheet" href="<?= base_url('assets/css/table.css') ?>" />
     <link href="<?= base_url('assets/DataTables/datatables.min.css') ?>" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
     <script src="<?= base_url('assets/DataTables/datatables.min.js') ?>"></script>
     <script src="<?= base_url('assets/js/apexcharts.min.js') ?>"></script>
@@ -44,19 +45,21 @@
         <form class="modal__body community__modal">
           <div class="row flex__d__col">
             <div class="row modal__register__modified">
-              <img class="img__upload" src="img__default.png" />
+            <input type="file" id="fileInput" accept="image/*" style="display: none;" />
+            <img class="img__upload" src="img__default.png" style="cursor: pointer;" />
+
             </div>
             <div class="row">
               <div class="input__box">
                 <input
+                  id="assetName"
                   class="information__input"
                   value=""
-                  placeholder="Enter Street"
-                  name="street"
-                  readonly
+                  placeholder="Enter name"
+                  name="asset_name"
                 />
                 <span class="input__title"
-                  >Street<span class="red__dot">*</span></span
+                  >Item name<span class="red__dot">*</span></span
                 >
                 <p class="text-danger"></p>
               </div>
@@ -64,308 +67,71 @@
             <div class="row">
               <div class="input__box">
                 <input
+                  id="assetQuantity"
                   class="information__input"
                   value=""
-                  placeholder="Enter Street"
-                  name="street"
-                  readonly
+                  placeholder="Enter quantity"
+                  name="asset_quantity"
                 />
                 <span class="input__title"
-                  >Street<span class="red__dot">*</span></span
+                  >Quantity<span class="red__dot">*</span></span
                 >
                 <p class="text-danger"></p>
               </div>
             </div>
           </div>
           <div class="btn__box__modal">
-            <span class="btn__primary active">Register Item</span>
+            <span class="btn__primary active btn__register__item">Register Item</span>
           </div>
         </form>
       </div>
-      <div id="addResidentModal" class="modal">
-        <div class="modal__header">
-          <p class="modal__heading">Add Resident Information</p>
-          <button class="btn__secondary active">Edit Info</button>
-        </div>
-        <form class="modal__body community__modal">
-          <div class="row">
-            <!-- 1 -->
-            <div class="input__box">
-              <input
-                class="information__input"
-                value=""
-                placeholder="Enter fullname"
-                name="firstname"
-                readonly
-              />
-              <span class="input__title"
-                >Firstname<span class="red__dot">*</span></span
-              >
-              <p class="text-danger"></p>
-            </div>
-            <!-- 1 -->
-            <div class="input__box">
-              <input
-                class="information__input"
-                value=""
-                placeholder="Enter lastname"
-                name="lastname"
-                readonly
-              />
-              <span class="input__title"
-                >Lastname<span class="red__dot">*</span></span
-              >
-              <p class="text-danger"></p>
-            </div>
-            <!-- 1 -->
-            <div class="input__box">
-              <input
-                class="information__input"
-                value=""
-                placeholder="Enter middlename"
-                name="middlename"
-                readonly
-              />
-              <span class="input__title"
-                >Middlename<span class="red__dot">*</span></span
-              >
-              <p class="text-danger"></p>
-            </div>
-            <div class="input__box">
-              <input
-                class="information__input"
-                value=""
-                placeholder="Enter suffix"
-                name="suffix"
-                readonly
-              />
-              <span class="input__title"
-                >suffix<span class="red__dot">*</span></span
-              >
-              <p class="text-danger"></p>
-            </div>
+      <!-- Modal to View/Edit Item -->
+      <!-- Modal to View/Edit Item -->
+      <div id="viewItemModal" class="modal">
+          <div class="modal__header">
+              <p class="modal__heading">Register Item</p>
           </div>
-          <div class="row">
-            <div class="input__box">
-              <input
-                class="information__input"
-                value=""
-                placeholder="Enter contact-no"
-                name="contact-no"
-                readonly
-              />
-              <span class="input__title"
-                >Contact No.<span class="red__dot">*</span></span
-              >
-              <p class="text-danger"></p>
-            </div>
-            <div class="input__box">
-              <input
-                type="date"
-                class="information__input"
-                value=""
-                placeholder="Enter Birthdate"
-                name="birthdate"
-                readonly
-              />
-              <span class="input__title"
-                >Birthdate<span class="red__dot">*</span></span
-              >
-              <p class="text-danger"></p>
-            </div>
-            <div class="input__box">
-              <input
-                class="information__input"
-                value=""
-                placeholder="Enter Age"
-                name="age"
-                readonly
-              />
-              <span class="input__title"
-                >Age<span class="red__dot">*</span></span
-              >
-              <p class="text-danger"></p>
-            </div>
-            <div class="input__box">
-              <input
-                class="information__input"
-                value=""
-                placeholder="Enter Birthplace"
-                name="birthplace"
-                readonly
-              />
-              <span class="input__title"
-                >Birthplace<span class="red__dot">*</span></span
-              >
-              <p class="text-danger"></p>
-            </div>
-            <div class="input__box">
-              <input
-                class="information__input"
-                value=""
-                placeholder="Enter Citizenship"
-                name="citizenship"
-                readonly
-              />
-              <span class="input__title"
-                >Citizenship<span class="red__dot">*</span></span
-              >
-              <p class="text-danger"></p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input__box">
-              <input
-                class="information__input"
-                value=""
-                placeholder="Enter Gender"
-                name="gender"
-                readonly
-              />
-              <span class="input__title"
-                >Gender<span class="red__dot">*</span></span
-              >
-              <p class="text-danger"></p>
-            </div>
-            <div class="input__box">
-              <input
-                class="information__input"
-                value=""
-                placeholder="Enter Civil Status"
-                name="civil-status"
-                readonly
-              />
-              <span class="input__title"
-                >Civil Status<span class="red__dot">*</span></span
-              >
-              <p class="text-danger"></p>
-            </div>
-            <div class="input__box">
-              <input
-                class="information__input"
-                value=""
-                placeholder="Enter Occupation"
-                name="occupation"
-                readonly
-              />
-              <span class="input__title"
-                >Occupation<span class="red__dot">*</span></span
-              >
-              <p class="text-danger"></p>
-            </div>
-            <div class="input__box">
-              <input
-                class="information__input"
-                value=""
-                placeholder="Enter Religion"
-                name="religion"
-                readonly
-              />
-              <span class="input__title"
-                >Religion<span class="red__dot">*</span></span
-              >
-              <p class="text-danger"></p>
-            </div>
-          </div>
-          <div class="row margin__bottom__2">
-            <div class="radio__box">
-              <p class="radio__heading">
-                Person with Disablity<span class="red__dot">*</span>
-              </p>
-
-              <div class="radio__buttons">
-                <div class="radio__btn__container">
-                  <input type="radio" class="radio__btn" value="yes" />
-                  <span class="yes">Yes</span>
-                </div>
-                <div class="radio__btn__container">
-                  <input type="radio" class="radio__btn" value="no" />
-                  <span class="no">No</span>
-                </div>
+          <form class="modal__body community__modal" id="updateItemForm">
+              <input type="hidden" id="item_id" name="item_id" />
+              <input type="hidden" id="current_image" name="current_image" />
+              <div class="row flex__d__col">
+                  <div class="row modal__register__modified">
+                      <input type="file" id="viewFileInput" accept="image/*" style="display: none;" />
+                      <img class="img__upload" src="img__default.png" style="cursor: pointer;" id="viewItemImage" />
+                  </div>
+                  <div class="row">
+                      <div class="input__box">
+                          <input
+                              id="viewAssetName"
+                              class="information__input"
+                              value=""
+                              placeholder="Enter name"
+                              name="view_asset_name"
+                          />
+                          <span class="input__title">Item name<span class="red__dot">*</span></span>
+                          <p class="text-danger"></p>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="input__box">
+                          <input
+                              id="viewAssetQuantity"
+                              class="information__input"
+                              value=""
+                              placeholder="Enter quantity"
+                              name="view_asset_quantity"
+                          />
+                          <span class="input__title">Quantity<span class="red__dot">*</span></span>
+                          <p class="text-danger"></p>
+                      </div>
+                  </div>
               </div>
-            </div>
-            <div class="radio__box">
-              <p class="radio__heading">
-                Voters of Barangay<span class="red__dot">*</span>
-              </p>
-
-              <div class="radio__buttons">
-                <div class="radio__btn__container">
-                  <input type="radio" class="radio__btn" value="yes" />
-                  <span class="yes">Yes</span>
-                </div>
-                <div class="radio__btn__container">
-                  <input type="radio" class="radio__btn" value="no" />
-                  <span class="no">No</span>
-                </div>
+              <div class="btn__box__modal">
+                  <span class="btn__primary active btn__register__item" id="editItemBtn">Save Changes</span>
               </div>
-            </div>
-            <div class="radio__box">
-              <p class="radio__heading">
-                Head of the Family<span class="red__dot">*</span>
-              </p>
-
-              <div class="radio__buttons">
-                <div class="radio__btn__container">
-                  <input type="radio" class="radio__btn" value="yes" />
-                  <span class="yes">Yes</span>
-                </div>
-                <div class="radio__btn__container">
-                  <input type="radio" class="radio__btn" value="no" />
-                  <span class="no">No</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row flex__d__col">
-            <p class="modal__subheading">Household Information</p>
-            <div class="row">
-              <div class="input__box">
-                <input
-                  class="information__input"
-                  value=""
-                  placeholder="Enter Household Ownership"
-                  name="household-ownership"
-                  readonly
-                />
-                <span class="input__title"
-                  >Household Ownership<span class="red__dot">*</span></span
-                >
-                <p class="text-danger"></p>
-              </div>
-              <div class="input__box">
-                <input
-                  class="information__input"
-                  value=""
-                  placeholder="Enter House No."
-                  name="house-no"
-                  readonly
-                />
-                <span class="input__title"
-                  >House No.<span class="red__dot">*</span></span
-                >
-                <p class="text-danger"></p>
-              </div>
-              <div class="input__box">
-                <input
-                  class="information__input"
-                  value=""
-                  placeholder="Enter Street"
-                  name="street"
-                  readonly
-                />
-                <span class="input__title"
-                  >Street<span class="red__dot">*</span></span
-                >
-                <p class="text-danger"></p>
-              </div>
-            </div>
-          </div>
-          <div class="btn__box__modal">
-            <span class="btn__secondary active btn__close">Close</span>
-          </div>
-        </form>
+          </form>
       </div>
+
       <div class="container">
         <div class="heading__box">
           <div class="tab__container">
@@ -420,153 +186,16 @@
             </div>
           </div>
           <div class="container">
-            <table id="example" class="display">
+            <table id="inventoryTable" class="display">
               <thead class="thead">
                 <tr>
-                  <th>#</th>
-                  <th>Item Name</th>
-                  <th>Total Quantity</th>
-                  <th>Date Created</th>
+                  <th>Asset Name</th>
+                  <th>Quantity</th>
+                  <th>Image</th>
                   <th>Action</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>Walis</td>
-                  <td>11</td>
-                  <td>10-21-2025</td>
-                  <td>
-                    <button class="btn__primary table__button">View</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>Broom</td>
-                  <td>8</td>
-                  <td>11-15-2025</td>
-                  <td>
-                    <button class="btn__primary table__button">View</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>Mop</td>
-                  <td>5</td>
-                  <td>12-01-2025</td>
-                  <td>
-                    <button class="btn__primary table__button">View</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>4</td>
-                  <td>Dustpan</td>
-                  <td>7</td>
-                  <td>01-10-2026</td>
-                  <td>
-                    <button class="btn__primary table__button">View</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>5</td>
-                  <td>Rug</td>
-                  <td>12</td>
-                  <td>02-18-2026</td>
-                  <td>
-                    <button class="btn__primary table__button">View</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>6</td>
-                  <td>Bleach</td>
-                  <td>6</td>
-                  <td>03-05-2026</td>
-                  <td>
-                    <button class="btn__primary table__button">View</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>7</td>
-                  <td>Detergent</td>
-                  <td>9</td>
-                  <td>04-22-2026</td>
-                  <td>
-                    <button class="btn__primary table__button">View</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>8</td>
-                  <td>Fabric Softener</td>
-                  <td>10</td>
-                  <td>05-30-2026</td>
-                  <td>
-                    <button class="btn__primary table__button">View</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>9</td>
-                  <td>Dishwashing Liquid</td>
-                  <td>4</td>
-                  <td>06-15-2026</td>
-                  <td>
-                    <button class="btn__primary table__button">View</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>10</td>
-                  <td>Garbage Bags</td>
-                  <td>20</td>
-                  <td>07-09-2026</td>
-                  <td>
-                    <button class="btn__primary table__button">View</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>11</td>
-                  <td>Hand Soap</td>
-                  <td>15</td>
-                  <td>08-25-2026</td>
-                  <td>
-                    <button class="btn__primary table__button">View</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>12</td>
-                  <td>Disinfectant Spray</td>
-                  <td>3</td>
-                  <td>09-14-2026</td>
-                  <td>
-                    <button class="btn__primary table__button">View</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>13</td>
-                  <td>Scrub Sponge</td>
-                  <td>7</td>
-                  <td>10-07-2026</td>
-                  <td>
-                    <button class="btn__primary table__button">View</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>14</td>
-                  <td>Toilet Cleaner</td>
-                  <td>5</td>
-                  <td>11-18-2026</td>
-                  <td>
-                    <button class="btn__primary table__button">View</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>15</td>
-                  <td>Gloves</td>
-                  <td>13</td>
-                  <td>12-31-2026</td>
-                  <td>
-                    <button class="btn__primary table__button">View</button>
-                  </td>
-                </tr>
-              </tbody>
+              <tbody></tbody>
             </table>
           </div>
         </div>
@@ -587,6 +216,184 @@
     ></script>
 
     <script>
+$(document).ready(function () {
+    const $fileInput = $('#fileInput');
+    const $imgUpload = $('.img__upload');
+
+    // Click image to open file picker
+    $imgUpload.on('click', function () {
+        $fileInput.click();
+    });
+
+    // Image preview only (no upload here)
+    $fileInput.on('change', function () {
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                $imgUpload.attr('src', e.target.result);
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    // Call createItem() when button is clicked
+    $('.btn__register__item').on('click', function (e) {
+        e.preventDefault();
+        
+        const file = $fileInput[0].files[0];
+        const assetName = $('#assetName').val();  // Change to #assetName, since that's the ID in your HTML
+        const assetQuantity = $('#assetQuantity').val();
+        
+        console.log('Asset Name:', assetName);
+        console.log('Asset Quantity:', assetQuantity);
+        console.log('File:', file);
+        
+        createItem(file, assetName, assetQuantity);
+    });
+
+    // Upload data + image
+    const createItem = function(file, assetName, assetQuantity) {
+        let formData = new FormData();
+        formData.append('image', file);
+        formData.append('item_name', assetName);
+        formData.append('item_quantity', assetQuantity);
+
+        $.ajax({
+            url: "<?= site_url('/admin/create-item') ?>",  // Assuming you are using CodeIgniter
+            type: "POST",
+            data: formData,
+            dataType: "json",
+            contentType: false, // Required for file uploads
+            processData: false, // Prevent jQuery from processing data
+            beforeSend: function () {
+                $(".text-danger").text(""); // Clear previous error messages
+            },
+            success: function (response) {
+                if (response.status == "success") {
+                      alert(" YES");
+                } else if (response.status == "validation_error") {
+                    let firstErrorMessage = "";  // Store the first error message
+
+                    $.each(response.errors, function (key, value) {
+                        if (!firstErrorMessage) {
+                            firstErrorMessage = value;  // Get the first error message
+                        }
+                    });
+
+                    if (firstErrorMessage) {
+                        // openErrorDisplay(firstErrorMessage);  // Show first validation error
+                    }
+                    closeValidator();  // Close validator
+                } else {
+                    // openErrorDisplay(response.message);  // Open general error display
+                    closeValidator();  // Close form validator
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error("AJAX Error:", xhr.responseText);
+                alert("Something went wrong. Please try again.");
+            }
+        });
+    };
+
+    // Open modal and populate data (this should be defined before DataTable initialization)
+    function viewItem(itemId) {
+        $.ajax({
+            url: '<?= site_url('admin/get-item-details') ?>',
+            type: 'GET',
+            data: { item_id: itemId },
+            success: function(response) {
+                if (response.status === 'success') {
+                    $('#item_id').val(response.data.item_id);
+                    $('#viewAssetName').val(response.data.item_name);
+                    $('#viewAssetQuantity').val(response.data.item_quantity);
+                    $('#viewItemImage').attr('src', '/uploads/inventory/' + response.data.image);
+                    $('#current_image').val(response.data.image);
+                    $('#viewItemModal').show();
+                } else {
+                    alert('Error: ' + response.message);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.log('Error fetching item details:', error);
+            }
+        });
+    }
+
+    // Initialize DataTable
+    $('#inventoryTable').DataTable({
+        ajax: {
+            url: '<?= site_url('admin/inventory-data') ?>',  // URL to fetch data from
+            type: 'GET',  // HTTP method for fetching data
+            dataSrc: '',  // Assuming the data is returned as an array of objects
+            error: function (xhr, status, error) {
+                console.log('Error fetching inventory data:', error);  // Log error if fetching fails
+            }
+        },
+        columns: [
+            { data: 'item_name' },  // Display the asset name
+            { data: 'item_quantity' },  // Display the asset quantity
+            {
+                data: 'image',  // Column to display image
+                render: function (data, type, row) {
+                    const imagePath = data ? '/uploads/inventory/' + data : '/path/to/default/image.jpg'; // Default image
+                    return '<img src="' + imagePath + '" alt="' + row.item_name + '" style="width: 50px; height: 50px; object-fit: cover;">';
+                }
+            },
+            {
+                data: null,  // Action column for buttons or links
+                render: function (data, type, row) {
+                  return '<button class="btn btn-info btn-sm view-item-btn" data-item-id="' + row.item_id + '">View</button>';
+                }
+            }
+        ]
+    });
+
+    // Update item details
+    function updateItem() {
+        var formData = new FormData($('#updateItemForm')[0]); // Serialize form data
+
+        $.ajax({
+            url: '<?= site_url('admin/update-item') ?>',
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(response) {
+                if (response.status === 'success') {
+                    alert('Item updated successfully!');
+                    $('#viewItemModal').hide();
+                    $('#inventoryTable').DataTable().ajax.reload();  // Refresh DataTable
+                } else {
+                    alert('Error: ' + response.message);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.log('Error updating item:', error);
+            }
+        });
+    }
+    $('#inventoryTable').on('click', '.view-item-btn', function() {
+        const itemId = $(this).data('item-id');  // Get the item_id from the button's data attribute
+        viewItem(itemId);  // Call the viewItem function
+        $('#viewItemModal').addClass('open');
+        $('.wrapper').addClass('open');
+    });
+    // Close modal when clicking the background or a close button
+    $('.close').on('click', function() {
+        $('#viewItemModal').hide();
+    });
+    $('#editItemBtn').on('click', function() {
+      updateItem();
+    });
+
+});
+
+
+
+
+
       document.querySelectorAll(".table__button").forEach((button) => {
         button.addEventListener("click", () => {
           document.querySelector(".wrapper").classList.add("open");
@@ -604,7 +411,7 @@
       document.querySelector(".wrapper").addEventListener("click", function () {
         document.querySelector(".wrapper").classList.remove("open");
         document.getElementById("registerItemModal").classList.remove("open");
-        document.getElementById("addResidentModal").classList.remove("open");
+        document.getElementById("viewItemModal").classList.remove("open");
       });
 
       document
@@ -612,13 +419,13 @@
         .addEventListener("click", function () {
           document.querySelector(".wrapper").classList.remove("open");
           document.getElementById("registerItemModal").classList.remove("open");
-          document.getElementById("addResidentModal").classList.remove("open");
+          document.getElementById("viewItemModal").classList.remove("open");
         });
       document.addEventListener("keydown", (event) => {
         if (event.key === "Escape") {
           document.querySelector(".wrapper").classList.remove("open");
           document.getElementById("registerItemModal").classList.remove("open");
-          document.getElementById("addResidentModal").classList.remove("open");
+          document.getElementById("viewItemModal").classList.remove("open");
         }
       });
 

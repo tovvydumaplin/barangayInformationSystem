@@ -152,6 +152,21 @@ hr {
   height: 2rem;
 }
 
+.btn__edit__resident {
+  background-color: #fff;
+  color: var(--main-color);
+  font-family: "Roboto", sans-serif;
+  font-weight: 600;
+  font-size: 1.6rem;
+  border: 1px solid var(--main-color);
+  padding: 1rem;
+  border-radius: 0.6rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
 /* Input Elements */
 .input__box {
   position: relative;
@@ -233,7 +248,7 @@ hr {
   opacity: 0;
   transition: all 0.3s ease;
   height: 95%;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
 }
 
 .wrapper {

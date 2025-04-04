@@ -82,11 +82,11 @@ $(".tab__2").on("click", function () {
   $(".card__table").removeClass("hidden");
   $(".card__mapping").addClass("hidden");
 });
-$(".tab__3").on("click", function () {
-  $(".tab__2").removeClass("visible");
-  $(".tab__1").removeClass("visible");
-  $(".card__mapping").addClass("visible");
-});
+// $(".tab__3").on("click", function () {
+//   $(".tab__2").removeClass("visible");
+//   $(".tab__1").removeClass("visible");
+//   $(".card__mapping").addClass("visible");
+// });
 $(".tab__4").on("click", function () {
   $(".tab__2").removeClass("visible");
   $(".tab__1").removeClass("visible");
