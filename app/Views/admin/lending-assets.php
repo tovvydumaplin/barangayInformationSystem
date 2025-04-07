@@ -34,6 +34,26 @@
 
   </head>
   <body>
+  <!-- Error handler -->
+<div class="error__display hide">
+  <p class="error__text"></p>
+  <ion-icon class="validator__icon error__close" name="close-outline"></ion-icon>
+</div>
+  <!-- Error Display ENDS -->
+   <!-- Success Indicator -->
+  <div class="success__indicator hide">
+    <div class="indicator__container">
+      <div class="icon__link">
+        <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-check-circle" viewBox="0 0 16 16">
+          <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+          <path d="m10.97 4.97-.02.022-3.473 4.425-2.093-2.094a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05"/>
+        </svg>
+      </div>
+      <p class="indicator__text">Success!</p>
+    </div>
+  </div>
+   <!-- Success Indicator END -->
+
   <?= view ('includes/sidebar') ?>
     <main>
     <?= view('includes/header.php') ?>
@@ -46,7 +66,7 @@
           <div class="row flex__d__col">
             <div class="row modal__register__modified">
             <input type="file" id="fileInput" accept="image/*" style="display: none;" />
-            <img class="img__upload" src="img__default.png" style="cursor: pointer;" />
+            <img class="img__upload"  style="cursor: pointer;" />
 
             </div>
             <div class="row">
@@ -91,13 +111,13 @@
           <div class="modal__header">
               <p class="modal__heading">Register Item</p>
           </div>
-          <form class="modal__body community__modal" id="updateItemForm">
+          <form class="modal__body community__modal" id="updateItemForm" enctype="multipart/form-data" method="post"> 
               <input type="hidden" id="item_id" name="item_id" />
               <input type="hidden" id="current_image" name="current_image" />
               <div class="row flex__d__col">
                   <div class="row modal__register__modified">
-                      <input type="file" id="viewFileInput" accept="image/*" style="display: none;" />
-                      <img class="img__upload" src="img__default.png" style="cursor: pointer;" id="viewItemImage" />
+                      <input type="file" id="viewFileInput" accept="image/*" style="display: none" />
+                      <img class="view__img__upload" src="img__default.png" style="cursor: pointer;" id="viewItemImage" />
                   </div>
                   <div class="row">
                       <div class="input__box">
@@ -127,7 +147,7 @@
                   </div>
               </div>
               <div class="btn__box__modal">
-                  <span class="btn__primary active btn__register__item" id="editItemBtn">Save Changes</span>
+                  <span class="btn__primary active" id="editItemBtn">Save Changes</span>
               </div>
           </form>
       </div>
@@ -181,7 +201,7 @@
                     />
                   </svg>
                 </div>
-                Register Item
+                Add Item
               </button>
             </div>
           </div>
@@ -214,7 +234,7 @@
       nomodule
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
     ></script>
-
+    <script src="<?= base_url('assets/js/general.js') ?>"></script>
     <script>
 $(document).ready(function () {
     const $fileInput = $('#fileInput');
@@ -245,15 +265,85 @@ $(document).ready(function () {
         const assetName = $('#assetName').val();  // Change to #assetName, since that's the ID in your HTML
         const assetQuantity = $('#assetQuantity').val();
         
-        console.log('Asset Name:', assetName);
-        console.log('Asset Quantity:', assetQuantity);
-        console.log('File:', file);
+        if (!file) { openErrorDisplay('Please select an image before proceeding.'); return; }
+        if (!assetName) { openErrorDisplay('Item name is missing!.'); return }
+        if (!assetQuantity) { openErrorDisplay('Item quantity is required!.'); return }
         
         createItem(file, assetName, assetQuantity);
     });
 
-    // Upload data + image
-    const createItem = function(file, assetName, assetQuantity) {
+
+
+    // Open modal and populate data (this should be defined before DataTable initialization)
+    function viewItem(itemId) {
+    $.ajax({
+        url: '<?= site_url('admin/get-item-details') ?>',
+        type: 'GET',
+        data: { item_id: itemId },
+        success: function(response) {
+            if (response.status === 'success') {
+                $('#item_id').val(response.data.item_id);
+                $('#viewAssetName').val(response.data.item_name);
+                $('#viewAssetQuantity').val(response.data.item_quantity);
+                $('#viewItemImage').attr('src', '/uploads/inventory/' + response.data.image);
+                $('#current_image').val(response.data.image);
+                
+                // Reset the file input to make sure it's clear
+                $('#viewFileInput').val('');
+                
+                $('#viewItemModal').show();
+            } else {
+                alert('Error: ' + response.message);
+            }
+        },
+        error: function(xhr, status, error) {
+            console.log('Error fetching item details:', error);
+        }
+    });
+}
+
+    // Initialize DataTable
+    const loadInventory = function () {
+    // Check if the DataTable is already initialized and destroy it
+    if ($.fn.DataTable.isDataTable('#inventoryTable')) {
+        $('#inventoryTable').DataTable().clear().destroy();
+    }
+
+    // Reinitialize DataTable
+    $('#inventoryTable').DataTable({
+        ajax: {
+            url: '<?= site_url('admin/inventory-data') ?>',
+            type: 'GET',
+            dataSrc: '',
+            error: function (xhr, status, error) {
+                console.log('Error fetching inventory data:', error);
+            }
+        },
+        columns: [
+            { data: 'item_name' },
+            { data: 'item_quantity' },
+            {
+                data: 'image',
+                render: function (data, type, row) {
+                    const imagePath = data ? '/uploads/inventory/' + data : '/path/to/default/image.jpg';
+                    return '<img src="' + imagePath + '" alt="' + row.item_name + '" style="width: 50px; height: 50px; object-fit: cover;">';
+                }
+            },
+            {
+                data: null,
+                render: function (data, type, row) {
+                    return '<button class="btn btn__view view-item-btn" data-item-id="' + row.item_id + '">View</button>';
+                }
+            }
+        ]
+    });
+}
+
+
+    loadInventory();
+
+        // Upload data + image
+        const createItem = function(file, assetName, assetQuantity) {
         let formData = new FormData();
         formData.append('image', file);
         formData.append('item_name', assetName);
@@ -271,7 +361,14 @@ $(document).ready(function () {
             },
             success: function (response) {
                 if (response.status == "success") {
-                      alert(" YES");
+                  $(".success__indicator").removeClass("hide");
+                    $(".indicator__text").html('Item created!');
+                    setTimeout(function () {
+                        $(".success__indicator").addClass("hide");
+                    }, 3000);
+                    $('#registerItemModal').removeClass('open');
+                    $('.wrapper').removeClass('open');
+                    loadInventory();
                 } else if (response.status == "validation_error") {
                     let firstErrorMessage = "";  // Store the first error message
 
@@ -285,6 +382,8 @@ $(document).ready(function () {
                         // openErrorDisplay(firstErrorMessage);  // Show first validation error
                     }
                     closeValidator();  // Close validator
+                                    // Success handler
+
                 } else {
                     // openErrorDisplay(response.message);  // Open general error display
                     closeValidator();  // Close form validator
@@ -297,83 +396,6 @@ $(document).ready(function () {
         });
     };
 
-    // Open modal and populate data (this should be defined before DataTable initialization)
-    function viewItem(itemId) {
-        $.ajax({
-            url: '<?= site_url('admin/get-item-details') ?>',
-            type: 'GET',
-            data: { item_id: itemId },
-            success: function(response) {
-                if (response.status === 'success') {
-                    $('#item_id').val(response.data.item_id);
-                    $('#viewAssetName').val(response.data.item_name);
-                    $('#viewAssetQuantity').val(response.data.item_quantity);
-                    $('#viewItemImage').attr('src', '/uploads/inventory/' + response.data.image);
-                    $('#current_image').val(response.data.image);
-                    $('#viewItemModal').show();
-                } else {
-                    alert('Error: ' + response.message);
-                }
-            },
-            error: function(xhr, status, error) {
-                console.log('Error fetching item details:', error);
-            }
-        });
-    }
-
-    // Initialize DataTable
-    $('#inventoryTable').DataTable({
-        ajax: {
-            url: '<?= site_url('admin/inventory-data') ?>',  // URL to fetch data from
-            type: 'GET',  // HTTP method for fetching data
-            dataSrc: '',  // Assuming the data is returned as an array of objects
-            error: function (xhr, status, error) {
-                console.log('Error fetching inventory data:', error);  // Log error if fetching fails
-            }
-        },
-        columns: [
-            { data: 'item_name' },  // Display the asset name
-            { data: 'item_quantity' },  // Display the asset quantity
-            {
-                data: 'image',  // Column to display image
-                render: function (data, type, row) {
-                    const imagePath = data ? '/uploads/inventory/' + data : '/path/to/default/image.jpg'; // Default image
-                    return '<img src="' + imagePath + '" alt="' + row.item_name + '" style="width: 50px; height: 50px; object-fit: cover;">';
-                }
-            },
-            {
-                data: null,  // Action column for buttons or links
-                render: function (data, type, row) {
-                  return '<button class="btn btn-info btn-sm view-item-btn" data-item-id="' + row.item_id + '">View</button>';
-                }
-            }
-        ]
-    });
-
-    // Update item details
-    function updateItem() {
-        var formData = new FormData($('#updateItemForm')[0]); // Serialize form data
-
-        $.ajax({
-            url: '<?= site_url('admin/update-item') ?>',
-            type: 'POST',
-            data: formData,
-            contentType: false,
-            processData: false,
-            success: function(response) {
-                if (response.status === 'success') {
-                    alert('Item updated successfully!');
-                    $('#viewItemModal').hide();
-                    $('#inventoryTable').DataTable().ajax.reload();  // Refresh DataTable
-                } else {
-                    alert('Error: ' + response.message);
-                }
-            },
-            error: function(xhr, status, error) {
-                console.log('Error updating item:', error);
-            }
-        });
-    }
     $('#inventoryTable').on('click', '.view-item-btn', function() {
         const itemId = $(this).data('item-id');  // Get the item_id from the button's data attribute
         viewItem(itemId);  // Call the viewItem function
@@ -384,9 +406,84 @@ $(document).ready(function () {
     $('.close').on('click', function() {
         $('#viewItemModal').hide();
     });
-    $('#editItemBtn').on('click', function() {
-      updateItem();
+
+
+
+// Update your JavaScript to handle the form submission better
+$('#editItemBtn').on('click', function(e) {
+    e.preventDefault();
+    updateItem();
+});
+
+// Add this to your JavaScript file inside the $(document).ready function
+// This makes clicking on the preview image open the file picker dialog
+$('#viewItemImage').on('click', function() {
+    $('#viewFileInput').click();
+});
+
+// Your existing code for handling the file selection remains the same
+$('#viewFileInput').on('change', function() {
+    const file = this.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            $('#viewItemImage').attr('src', e.target.result);
+        };
+        reader.readAsDataURL(file);
+    }
+});
+
+function updateItem() {
+    // Get form elements
+    const formElement = document.getElementById('updateItemForm');
+    const fileInput = document.getElementById('viewFileInput');
+    
+    // Create FormData object from the form
+    const formData = new FormData(formElement);
+    
+    // Check if a file is selected and log it
+    if (fileInput.files.length > 0) {
+        console.log("File selected:", fileInput.files[0].name);
+        // Make sure the file is included under the correct name
+        formData.append('image_file', fileInput.files[0]);
+    } else {
+        console.log("No file selected");
+    }
+    
+    // Debug - log all form data entries
+    for (const pair of formData.entries()) {
+        console.log(pair[0] + ': ' + pair[1]);
+    }
+    
+    $.ajax({
+        url: '<?= site_url('admin/update-item') ?>',
+        type: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(response) {
+            console.log("Response:", response);
+            if (response.status === 'success') {
+                $('#viewItemModal').removeClass('open');
+                $('.wrapper').removeClass('open');
+                $('#inventoryTable').DataTable().ajax.reload();
+                // Success handler
+                $(".success__indicator").removeClass("hide");
+                $(".indicator__text").html('Item updated!');
+                setTimeout(function () {
+                    $(".success__indicator").addClass("hide");
+                }, 3000);
+            } else {
+                alert('Error: ' + (response.message || 'Failed to update item'));
+            }
+        },
+        error: function(xhr, status, error) {
+            console.log('Error updating item:', xhr.responseText);
+            alert('Error updating item. Please try again.');
+        }
     });
+}
+
 
 });
 

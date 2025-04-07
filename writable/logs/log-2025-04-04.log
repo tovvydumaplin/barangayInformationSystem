@@ -400,3 +400,367 @@ DEBUG - 2025-04-04 17:26:05 --> Session: Class initialized using 'CodeIgniter\Se
 DEBUG - 2025-04-04 17:26:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 DEBUG - 2025-04-04 17:26:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 DEBUG - 2025-04-04 17:26:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-04 18:46:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-04 18:46:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-04 18:46:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-04 18:46:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-04 18:46:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-04 18:46:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-04 18:47:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-04-04 18:47:09 --> mysqli_sql_exception: Unknown column 'image' in 'field list' in C:\BarangayInformationSystem\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\BarangayInformationSystem\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `tb...', 0)
+#1 C:\BarangayInformationSystem\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tb...')
+#2 C:\BarangayInformationSystem\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tb...')
+#3 C:\BarangayInformationSystem\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tb...', Array, false)
+#4 C:\BarangayInformationSystem\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\BarangayInformationSystem\system\BaseModel.php(839): CodeIgniter\Model->doInsert(Array)
+#6 C:\BarangayInformationSystem\system\Model.php(800): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\BarangayInformationSystem\app\Controllers\AdminController.php(787): CodeIgniter\Model->insert(Array)
+#8 C:\BarangayInformationSystem\system\CodeIgniter.php(933): App\Controllers\AdminController->createItem()
+#9 C:\BarangayInformationSystem\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#10 C:\BarangayInformationSystem\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\BarangayInformationSystem\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#12 C:\BarangayInformationSystem\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\BarangayInformationSystem\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 C:\BarangayInformationSystem\system\rewrite.php(44): require_once('C:\\BarangayInfo...')
+#15 {main}
+CRITICAL - 2025-04-04 18:47:09 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'image' in 'field list'
+[Method: POST, Route: admin/create-item]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_inventory` (`item_name`, `item_quantity`, `image`, `status`, `created_at`, `updated_at`) VALUES (:item_name:, :item_quantity:, :image:, :status:, :created_at:, :updated_at:)', [...], false)
+ 2 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 5 APPPATH\Controllers\AdminController.php(787): CodeIgniter\Model->insert([...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->createItem()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-04-04 18:47:09 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'image' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tbl_inventory` (`item_name`, `item_quantity`, `image`, `status`, `created_at`, `updated_at`) VALUES (\'Gcash\', \'123\', \'1743763629_1de0757ecf0292e764c6.png\', 1, \'2025-04-04 18:47:09\', \'2025-04-04 18:47:09\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tbl_inventory` (`item_name`, `item_quantity`, `image`, `status`, `created_at`, `updated_at`) VALUES (\'Gcash\', \'123\', \'1743763629_1de0757ecf0292e764c6.png\', 1, \'2025-04-04 18:47:09\', \'2025-04-04 18:47:09\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_inventory` (`item_name`, `item_quantity`, `image`, `status`, `created_at`, `updated_at`) VALUES (:item_name:, :item_quantity:, :image:, :status:, :created_at:, :updated_at:)', [...], false)
+ 4 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 7 APPPATH\Controllers\AdminController.php(787): CodeIgniter\Model->insert([...])
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->createItem()
+ 9 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-04-04 18:47:09 --> [Caused by] mysqli_sql_exception: Unknown column 'image' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `tbl_inventory` (`item_name`, `item_quantity`, `image`, `status`, `created_at`, `updated_at`) VALUES (\'Gcash\', \'123\', \'1743763629_1de0757ecf0292e764c6.png\', 1, \'2025-04-04 18:47:09\', \'2025-04-04 18:47:09\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tbl_inventory` (`item_name`, `item_quantity`, `image`, `status`, `created_at`, `updated_at`) VALUES (\'Gcash\', \'123\', \'1743763629_1de0757ecf0292e764c6.png\', 1, \'2025-04-04 18:47:09\', \'2025-04-04 18:47:09\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tbl_inventory` (`item_name`, `item_quantity`, `image`, `status`, `created_at`, `updated_at`) VALUES (\'Gcash\', \'123\', \'1743763629_1de0757ecf0292e764c6.png\', 1, \'2025-04-04 18:47:09\', \'2025-04-04 18:47:09\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_inventory` (`item_name`, `item_quantity`, `image`, `status`, `created_at`, `updated_at`) VALUES (:item_name:, :item_quantity:, :image:, :status:, :created_at:, :updated_at:)', [...], false)
+ 5 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 8 APPPATH\Controllers\AdminController.php(787): CodeIgniter\Model->insert([...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->createItem()
+10 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+11 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+15 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+DEBUG - 2025-04-04 18:47:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-04-04 18:47:18 --> mysqli_sql_exception: Unknown column 'image' in 'field list' in C:\BarangayInformationSystem\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\BarangayInformationSystem\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `tb...', 0)
+#1 C:\BarangayInformationSystem\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tb...')
+#2 C:\BarangayInformationSystem\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tb...')
+#3 C:\BarangayInformationSystem\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tb...', Array, false)
+#4 C:\BarangayInformationSystem\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\BarangayInformationSystem\system\BaseModel.php(839): CodeIgniter\Model->doInsert(Array)
+#6 C:\BarangayInformationSystem\system\Model.php(800): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\BarangayInformationSystem\app\Controllers\AdminController.php(787): CodeIgniter\Model->insert(Array)
+#8 C:\BarangayInformationSystem\system\CodeIgniter.php(933): App\Controllers\AdminController->createItem()
+#9 C:\BarangayInformationSystem\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#10 C:\BarangayInformationSystem\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\BarangayInformationSystem\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#12 C:\BarangayInformationSystem\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\BarangayInformationSystem\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 C:\BarangayInformationSystem\system\rewrite.php(44): require_once('C:\\BarangayInfo...')
+#15 {main}
+CRITICAL - 2025-04-04 18:47:18 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'image' in 'field list'
+[Method: POST, Route: admin/create-item]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_inventory` (`item_name`, `item_quantity`, `image`, `status`, `created_at`, `updated_at`) VALUES (:item_name:, :item_quantity:, :image:, :status:, :created_at:, :updated_at:)', [...], false)
+ 2 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 5 APPPATH\Controllers\AdminController.php(787): CodeIgniter\Model->insert([...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->createItem()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-04-04 18:47:18 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'image' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tbl_inventory` (`item_name`, `item_quantity`, `image`, `status`, `created_at`, `updated_at`) VALUES (\'Gcash\', \'123\', \'1743763638_c35f2deaec4dba525962.png\', 1, \'2025-04-04 18:47:18\', \'2025-04-04 18:47:18\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tbl_inventory` (`item_name`, `item_quantity`, `image`, `status`, `created_at`, `updated_at`) VALUES (\'Gcash\', \'123\', \'1743763638_c35f2deaec4dba525962.png\', 1, \'2025-04-04 18:47:18\', \'2025-04-04 18:47:18\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_inventory` (`item_name`, `item_quantity`, `image`, `status`, `created_at`, `updated_at`) VALUES (:item_name:, :item_quantity:, :image:, :status:, :created_at:, :updated_at:)', [...], false)
+ 4 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 7 APPPATH\Controllers\AdminController.php(787): CodeIgniter\Model->insert([...])
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->createItem()
+ 9 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-04-04 18:47:18 --> [Caused by] mysqli_sql_exception: Unknown column 'image' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `tbl_inventory` (`item_name`, `item_quantity`, `image`, `status`, `created_at`, `updated_at`) VALUES (\'Gcash\', \'123\', \'1743763638_c35f2deaec4dba525962.png\', 1, \'2025-04-04 18:47:18\', \'2025-04-04 18:47:18\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tbl_inventory` (`item_name`, `item_quantity`, `image`, `status`, `created_at`, `updated_at`) VALUES (\'Gcash\', \'123\', \'1743763638_c35f2deaec4dba525962.png\', 1, \'2025-04-04 18:47:18\', \'2025-04-04 18:47:18\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tbl_inventory` (`item_name`, `item_quantity`, `image`, `status`, `created_at`, `updated_at`) VALUES (\'Gcash\', \'123\', \'1743763638_c35f2deaec4dba525962.png\', 1, \'2025-04-04 18:47:18\', \'2025-04-04 18:47:18\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_inventory` (`item_name`, `item_quantity`, `image`, `status`, `created_at`, `updated_at`) VALUES (:item_name:, :item_quantity:, :image:, :status:, :created_at:, :updated_at:)', [...], false)
+ 5 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 8 APPPATH\Controllers\AdminController.php(787): CodeIgniter\Model->insert([...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->createItem()
+10 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+11 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+15 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+DEBUG - 2025-04-04 18:47:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-04 18:47:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-04 18:47:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-04-04 18:47:57 --> mysqli_sql_exception: Duplicate entry '0' for key 'tbl_inventory.PRIMARY' in C:\BarangayInformationSystem\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\BarangayInformationSystem\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `tb...', 0)
+#1 C:\BarangayInformationSystem\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tb...')
+#2 C:\BarangayInformationSystem\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tb...')
+#3 C:\BarangayInformationSystem\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tb...', Array, false)
+#4 C:\BarangayInformationSystem\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\BarangayInformationSystem\system\BaseModel.php(839): CodeIgniter\Model->doInsert(Array)
+#6 C:\BarangayInformationSystem\system\Model.php(800): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\BarangayInformationSystem\app\Controllers\AdminController.php(787): CodeIgniter\Model->insert(Array)
+#8 C:\BarangayInformationSystem\system\CodeIgniter.php(933): App\Controllers\AdminController->createItem()
+#9 C:\BarangayInformationSystem\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#10 C:\BarangayInformationSystem\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\BarangayInformationSystem\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#12 C:\BarangayInformationSystem\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\BarangayInformationSystem\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 C:\BarangayInformationSystem\system\rewrite.php(44): require_once('C:\\BarangayInfo...')
+#15 {main}
+CRITICAL - 2025-04-04 18:47:57 --> CodeIgniter\Database\Exceptions\DatabaseException: Duplicate entry '0' for key 'tbl_inventory.PRIMARY'
+[Method: POST, Route: admin/create-item]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_inventory` (`item_name`, `item_quantity`, `image`, `status`, `created_at`, `updated_at`) VALUES (:item_name:, :item_quantity:, :image:, :status:, :created_at:, :updated_at:)', [...], false)
+ 2 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 5 APPPATH\Controllers\AdminController.php(787): CodeIgniter\Model->insert([...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->createItem()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-04-04 18:47:57 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Duplicate entry '0' for key 'tbl_inventory.PRIMARY'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tbl_inventory` (`item_name`, `item_quantity`, `image`, `status`, `created_at`, `updated_at`) VALUES (\'Vape\', \'200\', \'1743763677_f1bb230ca1c1f7b29152.jpg\', 1, \'2025-04-04 18:47:57\', \'2025-04-04 18:47:57\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tbl_inventory` (`item_name`, `item_quantity`, `image`, `status`, `created_at`, `updated_at`) VALUES (\'Vape\', \'200\', \'1743763677_f1bb230ca1c1f7b29152.jpg\', 1, \'2025-04-04 18:47:57\', \'2025-04-04 18:47:57\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_inventory` (`item_name`, `item_quantity`, `image`, `status`, `created_at`, `updated_at`) VALUES (:item_name:, :item_quantity:, :image:, :status:, :created_at:, :updated_at:)', [...], false)
+ 4 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 7 APPPATH\Controllers\AdminController.php(787): CodeIgniter\Model->insert([...])
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->createItem()
+ 9 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-04-04 18:47:57 --> [Caused by] mysqli_sql_exception: Duplicate entry '0' for key 'tbl_inventory.PRIMARY'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `tbl_inventory` (`item_name`, `item_quantity`, `image`, `status`, `created_at`, `updated_at`) VALUES (\'Vape\', \'200\', \'1743763677_f1bb230ca1c1f7b29152.jpg\', 1, \'2025-04-04 18:47:57\', \'2025-04-04 18:47:57\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tbl_inventory` (`item_name`, `item_quantity`, `image`, `status`, `created_at`, `updated_at`) VALUES (\'Vape\', \'200\', \'1743763677_f1bb230ca1c1f7b29152.jpg\', 1, \'2025-04-04 18:47:57\', \'2025-04-04 18:47:57\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tbl_inventory` (`item_name`, `item_quantity`, `image`, `status`, `created_at`, `updated_at`) VALUES (\'Vape\', \'200\', \'1743763677_f1bb230ca1c1f7b29152.jpg\', 1, \'2025-04-04 18:47:57\', \'2025-04-04 18:47:57\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_inventory` (`item_name`, `item_quantity`, `image`, `status`, `created_at`, `updated_at`) VALUES (:item_name:, :item_quantity:, :image:, :status:, :created_at:, :updated_at:)', [...], false)
+ 5 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 8 APPPATH\Controllers\AdminController.php(787): CodeIgniter\Model->insert([...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->createItem()
+10 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+11 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+15 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+DEBUG - 2025-04-04 18:48:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-04-04 18:48:07 --> mysqli_sql_exception: Duplicate entry '0' for key 'tbl_inventory.PRIMARY' in C:\BarangayInformationSystem\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\BarangayInformationSystem\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `tb...', 0)
+#1 C:\BarangayInformationSystem\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tb...')
+#2 C:\BarangayInformationSystem\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tb...')
+#3 C:\BarangayInformationSystem\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tb...', Array, false)
+#4 C:\BarangayInformationSystem\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\BarangayInformationSystem\system\BaseModel.php(839): CodeIgniter\Model->doInsert(Array)
+#6 C:\BarangayInformationSystem\system\Model.php(800): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\BarangayInformationSystem\app\Controllers\AdminController.php(787): CodeIgniter\Model->insert(Array)
+#8 C:\BarangayInformationSystem\system\CodeIgniter.php(933): App\Controllers\AdminController->createItem()
+#9 C:\BarangayInformationSystem\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#10 C:\BarangayInformationSystem\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\BarangayInformationSystem\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#12 C:\BarangayInformationSystem\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\BarangayInformationSystem\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 C:\BarangayInformationSystem\system\rewrite.php(44): require_once('C:\\BarangayInfo...')
+#15 {main}
+CRITICAL - 2025-04-04 18:48:07 --> CodeIgniter\Database\Exceptions\DatabaseException: Duplicate entry '0' for key 'tbl_inventory.PRIMARY'
+[Method: POST, Route: admin/create-item]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_inventory` (`item_name`, `item_quantity`, `image`, `status`, `created_at`, `updated_at`) VALUES (:item_name:, :item_quantity:, :image:, :status:, :created_at:, :updated_at:)', [...], false)
+ 2 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 5 APPPATH\Controllers\AdminController.php(787): CodeIgniter\Model->insert([...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->createItem()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-04-04 18:48:07 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Duplicate entry '0' for key 'tbl_inventory.PRIMARY'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tbl_inventory` (`item_name`, `item_quantity`, `image`, `status`, `created_at`, `updated_at`) VALUES (\'Vape\', \'200\', \'1743763687_318725444ecc6fd873d2.jpg\', 1, \'2025-04-04 18:48:07\', \'2025-04-04 18:48:07\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tbl_inventory` (`item_name`, `item_quantity`, `image`, `status`, `created_at`, `updated_at`) VALUES (\'Vape\', \'200\', \'1743763687_318725444ecc6fd873d2.jpg\', 1, \'2025-04-04 18:48:07\', \'2025-04-04 18:48:07\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_inventory` (`item_name`, `item_quantity`, `image`, `status`, `created_at`, `updated_at`) VALUES (:item_name:, :item_quantity:, :image:, :status:, :created_at:, :updated_at:)', [...], false)
+ 4 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 7 APPPATH\Controllers\AdminController.php(787): CodeIgniter\Model->insert([...])
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->createItem()
+ 9 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-04-04 18:48:07 --> [Caused by] mysqli_sql_exception: Duplicate entry '0' for key 'tbl_inventory.PRIMARY'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `tbl_inventory` (`item_name`, `item_quantity`, `image`, `status`, `created_at`, `updated_at`) VALUES (\'Vape\', \'200\', \'1743763687_318725444ecc6fd873d2.jpg\', 1, \'2025-04-04 18:48:07\', \'2025-04-04 18:48:07\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tbl_inventory` (`item_name`, `item_quantity`, `image`, `status`, `created_at`, `updated_at`) VALUES (\'Vape\', \'200\', \'1743763687_318725444ecc6fd873d2.jpg\', 1, \'2025-04-04 18:48:07\', \'2025-04-04 18:48:07\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tbl_inventory` (`item_name`, `item_quantity`, `image`, `status`, `created_at`, `updated_at`) VALUES (\'Vape\', \'200\', \'1743763687_318725444ecc6fd873d2.jpg\', 1, \'2025-04-04 18:48:07\', \'2025-04-04 18:48:07\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_inventory` (`item_name`, `item_quantity`, `image`, `status`, `created_at`, `updated_at`) VALUES (:item_name:, :item_quantity:, :image:, :status:, :created_at:, :updated_at:)', [...], false)
+ 5 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 8 APPPATH\Controllers\AdminController.php(787): CodeIgniter\Model->insert([...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->createItem()
+10 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+11 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+15 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+DEBUG - 2025-04-04 18:48:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-04 18:48:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-04 18:48:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-04 18:48:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-04 18:48:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-04 18:56:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-04 18:56:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-04 18:56:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-04 18:57:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-04 18:57:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-04 18:57:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-04 18:57:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-04 18:57:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-04 18:57:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-04 18:58:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-04 19:00:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-04 19:01:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-04 19:03:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-04 19:03:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-04 19:04:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-04 19:04:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-04 19:11:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-04 19:11:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-04 19:11:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-04 19:11:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-04 19:11:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-04 19:15:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-04 19:15:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-04 19:15:51 --> Files received: Array
+(
+)
+
+DEBUG - 2025-04-04 19:15:51 --> File object: 
+DEBUG - 2025-04-04 19:15:51 --> No valid file uploaded, keeping current image
+DEBUG - 2025-04-04 19:15:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-04 19:15:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-04 19:15:58 --> Files received: Array
+(
+)
+
+DEBUG - 2025-04-04 19:15:58 --> File object: 
+DEBUG - 2025-04-04 19:15:58 --> No valid file uploaded, keeping current image
+DEBUG - 2025-04-04 19:15:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-04 19:16:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-04 19:16:18 --> Files received: Array
+(
+)
+
+DEBUG - 2025-04-04 19:16:18 --> File object: 
+DEBUG - 2025-04-04 19:16:18 --> No valid file uploaded, keeping current image
+DEBUG - 2025-04-04 19:16:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-04 19:18:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-04 19:18:57 --> POST data: {"item_id":"2","current_image":"1743763714_2d0874df088756d50872.png","view_asset_name":"Airzzx","view_asset_quantity":"99"}
+DEBUG - 2025-04-04 19:18:57 --> FILES data: []
+DEBUG - 2025-04-04 19:18:57 --> No valid file uploaded, keeping current image
+DEBUG - 2025-04-04 19:18:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-04 19:19:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-04 19:19:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-04 19:19:06 --> POST data: {"item_id":"2","current_image":"1743763714_2d0874df088756d50872.png","view_asset_name":"Airzzxxc","view_asset_quantity":"99"}
+DEBUG - 2025-04-04 19:19:06 --> FILES data: {"image_file":{}}
+DEBUG - 2025-04-04 19:19:06 --> Valid file found: GCash-logo-1-1.png
+DEBUG - 2025-04-04 19:19:06 --> File moved successfully: 1743765546_89e8264008faf6c0cb60.png
+DEBUG - 2025-04-04 19:19:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-04 19:19:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-04 19:20:40 --> POST data: {"item_id":"2","current_image":"1743765546_89e8264008faf6c0cb60.png","view_asset_name":"Airzzxxc","view_asset_quantity":"99"}
+DEBUG - 2025-04-04 19:20:40 --> FILES data: []
+DEBUG - 2025-04-04 19:20:40 --> No valid file uploaded, keeping current image
+DEBUG - 2025-04-04 19:20:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-04 19:20:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-04 19:20:45 --> POST data: {"item_id":"2","current_image":"1743765546_89e8264008faf6c0cb60.png","view_asset_name":"Airzzxxc","view_asset_quantity":"99"}
+DEBUG - 2025-04-04 19:20:45 --> FILES data: {"image_file":{}}
+DEBUG - 2025-04-04 19:20:45 --> Valid file found: logo-airspeed.png
+DEBUG - 2025-04-04 19:20:45 --> File moved successfully: 1743765645_5261a39c8a17197e320c.png
+DEBUG - 2025-04-04 19:23:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-04 19:23:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-04 19:24:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-04 19:24:02 --> POST data: {"item_id":"2","current_image":"1743765645_5261a39c8a17197e320c.png","view_asset_name":"Airzzxxc","view_asset_quantity":"99"}
+DEBUG - 2025-04-04 19:24:02 --> FILES data: {"image_file":{}}
+DEBUG - 2025-04-04 19:24:02 --> Valid file found: GCash-logo-1-1.png
+DEBUG - 2025-04-04 19:24:02 --> File moved successfully: 1743765842_244c3235dae2ebece9c0.png
+DEBUG - 2025-04-04 19:24:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-04 19:24:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-04 19:24:32 --> POST data: {"item_id":"2","current_image":"1743765842_244c3235dae2ebece9c0.png","view_asset_name":"Airzzxxc","view_asset_quantity":"99"}
+DEBUG - 2025-04-04 19:24:32 --> FILES data: {"image_file":{}}
+DEBUG - 2025-04-04 19:24:32 --> Valid file found: png-clipart-react-javascript-webbylab-computer-icons-angularjs-github-text-logo.png
+DEBUG - 2025-04-04 19:24:32 --> File moved successfully: 1743765872_b5aa33714667e5be2946.png
+DEBUG - 2025-04-04 19:24:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-04 19:24:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

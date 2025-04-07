@@ -16,6 +16,17 @@
     <link rel="stylesheet" href="<?= base_url('assets/css/table.css') ?>" />
     <link rel="stylesheet" href="<?= base_url('assets/DataTables/datatables.min.css') ?>" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- DataTables Buttons CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css" />
+
+    <!-- DataTables Buttons JS -->
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+
+    <!-- JSZip (required for Excel export) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+
+    <!-- xlsx (required for Excel export) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
 
 
         <!-- Leaflet CSS -->
@@ -181,6 +192,15 @@
         overflow-y: scroll;
         padding-right: 1rem;
     }
+    /* #addResidentModal {
+      overflow-y: scroll;
+    } */
+     .house__info {
+      background-color: #fff;
+      padding: 2rem;
+      border-radius: 1rem;
+      border: 1px solid #ececec;
+     }
   </style>
   </head>
   <body>
@@ -323,8 +343,7 @@
                   value=""
                   placeholder="Enter suffix"
                   name="suffix">
-                  <option value="" disabled selected>Select one</option>
-                  <option value="">None</option>
+                  <option value="" selected>None</option>
                   <option value="Jr.">Jr.</option>
                   <option value="Sr.">Sr.</option>
                   <option value="II">II</option>
@@ -334,9 +353,8 @@
                   <option value="">Others</option>
                 </select>
                 <span class="input__title"
-                  >suffix<span class="red__dot">*</span></span
+                  >suffix</span
                 >
-                <p class="text-danger"></p>
               </div>
               <!-- Contact No. -->
               <div class="input__box">
@@ -395,13 +413,8 @@
                 <p class="text-danger"></p>
               </div>
               <div class="input__box">
-                <input
-                  class="information__input"
-                  value=""
-                  placeholder="Enter Citizenship"
-                  name="citizenship"
-                  
-                />
+              <select class="information__input" name="citizenship" id="nationalityDropdown">
+              </select>
                 <span class="input__title"
                   >Citizenship<span class="red__dot">*</span></span
                 >
@@ -623,31 +636,30 @@
                   name="status"
                 />
             </div>
-            <!-- Household members table end -->
-            <div class="btn__box">
-                <button id="saveMember" class="btn btn__primary"><i class="bi bi-person-fill-add"></i>Save Member</button>
+              <!-- Household members table end -->
+              <div class="btn__box">
+                  <button id="saveMember" class="btn btn__primary"><i class="bi bi-person-fill-add"></i>Save Member</button>
+              </div>
+              <div class="row flex__d__col d__none house__info">
+              <p class="modal__subheading">Household Members to be added</p>
+              <div class="row">
+                <table id="newResidentsTable" class="display">
+                  <thead class="thead">
+                    <tr>
+                      <th>#</th>
+                      <th>Name</th>
+                      <th>Role</th>
+                      <th>Gender</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
-          <!-- Household members table -->
-          <div class="row flex__d__col d__none house__info">
-            <p class="modal__subheading">Household Members to be added</p>
-            <div class="row">
-              <table id="newResidentsTable" class="display">
-                <thead class="thead">
-                  <tr>
-                    <th>#</th>
-                    <th>Name</th>
-                    <th>Role</th>
-                    <th>Gender</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        <!-- Emergency Contact END -->
+
           <div class="btn__box__modal submit__box">
             <span class="btn__secondary active btn__close">Close</span>
             <button type="button" class="button__submit btn__primary create__residents__btn">Submit</submit>
@@ -797,16 +809,19 @@
               <p class="text-danger"></p>
             </div>
             <div class="input__box">
-              <input
+              <select class="information__input" name="view_citizenship" id="viewNationalityDropdown" disabled>
+
+              </select>
+              <!-- <input
                 class="information__input"
                 value=""
                 placeholder="Enter Citizenship"
                 name="view_citizenship"
                 readonly
                 
-              />
+              /> -->
               <span class="input__title"
-                >Citizenship<span class="red__dot">*</span></span
+                >Citizenship</span
               >
               <p class="text-danger"></p>
             </div>
@@ -1071,26 +1086,51 @@
           <div class="heading__container">
             <p class="subheading">List of Residents</p>
             <div class="button__box">
-              <button class="btn__secondary">
-                <div class="icon__link">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="icon__link"
-                    viewBox="0 0 512 512"
-                  >
-                    <path
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="32"
-                      d="M32 144h448M112 256h288M208 368h96"
-                    />
-                  </svg>
-                </div>
+              <div class="filter__container">            
+                <button class="btn__secondary filter__btn">
+                  <div class="icon__link">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="icon__link"
+                      viewBox="0 0 512 512"
+                    >
+                      <path
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="32"
+                        d="M32 144h448M112 256h288M208 368h96"
+                      />
+                    </svg>
+                  </div>
                 Filter
               </button>
-              <button class="btn__secondary">
+              <div class="filter__items hide">
+                <p class="filter__subheading">Add Filter</p>
+                <div class="filter__items__box">
+                  <div class="filter__item" data-filter="Single">
+                      <i class="bi bi__custom bi-person"></i><span class="filter__title">Single</span>
+                    </div>
+                    <div class="filter__item" data-filter="Married">
+                      <i class="bi bi__custom bi-heart"></i><span class="filter__title">Married</span>
+                    </div>
+                    <div class="filter__item" data-filter="Divorced">
+                      <i class="bi bi__custom bi-house-door"></i><span class="filter__title">Divorced</span>
+                    </div>
+                    <div class="filter__item" data-filter="Male">
+                      <i class="bi bi__custom bi-gender-male"></i><span class="filter__title">Male</span>
+                    </div>
+                    <div class="filter__item" data-filter="Female">
+                      <i class="bi bi__custom bi-gender-female"></i><span class="filter__title">Female</span>
+                    </div>
+                    <div class="filter__item" data-filter="All">
+                      <i class="bi bi__custom bi-gender-female"></i><span class="filter__title">All</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button class="btn__secondary export__excel__btn">
                 <div class="icon__link">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -1380,7 +1420,7 @@ const saveMemberLocally = function (e) {
         contact_no: $("input[name='contact_no']").val(),
         birthdate: $("input[name='birthdate']").val(),
         birthplace: $("input[name='birthplace']").val(),
-        citizenship: $("input[name='citizenship']").val(),
+        citizenship: $("select[name='citizenship']").val(),
         gender: $("select[name='gender']").val(),
         civil_status: $("select[name='civil_status']").val(),
         occupation: $("input[name='occupation']").val(),
@@ -1467,53 +1507,70 @@ const loadResidents = function() {
                     `<button class="btn__primary view__resident__btn action-btn" data-id="${resident.resident_id}">View</button>`
                 ]);
 
-                // Reinitialize DataTable
-                $residentsTable.DataTable({
-                    "destroy": true,
-                    "processing": true,
-                    "serverSide": false,
-                    "data": tableData,
-                    "columns": [
-                        { "title": "ID" },
-                        { "title": "Name" },
-                        { "title": "Age" },
-                        { "title": "Civil Status" },
-                        { "title": "Gender" },
-                        { "title": "House No." },
-                        { "title": "Action", "orderable": false }
+                // Reinitialize DataTable with export button
+                const table = $residentsTable.DataTable({
+                    destroy: true,
+                    processing: true,
+                    serverSide: false,
+                    data: tableData,
+                    columns: [
+                        { title: "ID" },
+                        { title: "Name" },
+                        { title: "Age" },
+                        { title: "Civil Status" },
+                        { title: "Gender" },
+                        { title: "House No." },
+                        { title: "Action", orderable: false }
                     ],
-                    "columnDefs": [
-                        { "width": "80px", "targets": -1 }
+                    columnDefs: [
+                        { width: "80px", targets: -1 }
                     ],
-                    "order": [[0, "desc"]],
-                    "language": {
-                        "emptyTable": "No residents found"
+                    order: [[0, "desc"]],
+                    language: {
+                        emptyTable: "No residents found"
                     },
-                    "pagingType": "simple_numbers",
-                    "autoWidth": false,
-                    "responsive": true  
+                    pagingType: "simple_numbers",
+                    autoWidth: false,
+                    responsive: true,
+                    // Add the export button to DataTable
+                    buttons: [
+                        {
+                            extend: 'excelHtml5',
+                            text: 'Export to Excel',
+                            className: 'btn__secondary',
+                            title: 'Residents Data',
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5] // You can specify which columns to export
+                            }
+                        }
+                    ]
+                });
+
+                // Trigger the export when your custom button is clicked
+                $(".export__excel__btn").on("click", function() {
+                    table.button(0).trigger(); // Trigger the first button (Excel export)
                 });
 
             } else {
                 // Initialize DataTable with empty data
                 $residentsTable.DataTable({
-                    "destroy": true,
-                    "processing": true,
-                    "serverSide": false,
-                    "data": [],
-                    "columns": [
-                        { "title": "ID" },
-                        { "title": "Name" },
-                        { "title": "Age" },
-                        { "title": "Civil Status" },
-                        { "title": "Gender" },
-                        { "title": "House No." },
-                        { "title": "Action", "orderable": false }
+                    destroy: true,
+                    processing: true,
+                    serverSide: false,
+                    data: [],
+                    columns: [
+                        { title: "ID" },
+                        { title: "Name" },
+                        { title: "Age" },
+                        { title: "Civil Status" },
+                        { title: "Gender" },
+                        { title: "House No." },
+                        { title: "Action", orderable: false }
                     ],
-                    "language": {
-                        "emptyTable": "No residents found"
+                    language: {
+                        emptyTable: "No residents found"
                     },
-                    "pagingType": "simple_numbers"
+                    pagingType: "simple_numbers"
                 });
             }
             customLoaderOff();
@@ -1524,6 +1581,9 @@ const loadResidents = function() {
         }
     });
 };
+
+
+
 
 
 const loadArchivedResidents = function() {
@@ -1810,7 +1870,7 @@ const viewResidentData = function(residentId) {                  // Resident Det
                 $("input[name='view_birthdate']").val(response.data.birthdate);
                 $("input[name='view_age']").val(response.data.age);
                 $("input[name='view_birthplace']").val(response.data.birthplace);
-                $("input[name='view_citizenship']").val(response.data.citizenship);
+                $("select[name='view_citizenship']").val(response.data.citizenship);
                 $("select[name='view_gender']").val(response.data.gender);
                 $("select[name='view_civil_status']").val(response.data.civil_status);
                 $("input[name='view_occupation']").val(response.data.occupation);
@@ -1911,7 +1971,162 @@ const updateResident = function() {
       },
   });
 }
+
+const loadFilteredResidents = function(filter) {
+    customLoaderOn();
+    const $residentsTable = $("#residentsTable");
+
+    if ($.fn.DataTable.isDataTable($residentsTable)) {
+        $residentsTable.DataTable().clear().destroy();
+    }
+
+    $residentsTable.find("tbody").html('<tr><td colspan="7" class="text-center">Loading...</td></tr>');
+    console.log(filter);
+    $.ajax({
+        url: "/admin/filter-residents",
+        type: "GET",
+        data: { filter }, // pass the clicked filter
+        dataType: "json",
+        cache: false,
+        success: function(response) {
+            if (response.success && Array.isArray(response.data) && response.data.length) {
+                const residents = response.data;
+                const tableData = residents.map(resident => [
+                    resident.resident_id,
+                    `${resident.firstname} ${resident.middlename ? resident.middlename.charAt(0) + '.' : ''} ${resident.lastname} ${resident.suffix || ''}`,
+                    resident.birthdate ? calculateAge(resident.birthdate) : 'N/A',
+                    resident.civil_status || 'N/A',
+                    resident.gender || 'N/A',
+                    resident.house_no || 'N/A',
+                    `<button class="btn__primary view__resident__btn action-btn" data-id="${resident.resident_id}">View</button>`
+                ]);
+
+                $residentsTable.DataTable({
+                    destroy: true,
+                    processing: true,
+                    serverSide: false,
+                    data: tableData,
+                    columns: [
+                        { title: "ID" },
+                        { title: "Name" },
+                        { title: "Age" },
+                        { title: "Civil Status" },
+                        { title: "Gender" },
+                        { title: "House No." },
+                        { title: "Action", orderable: false }
+                    ],
+                    columnDefs: [{ width: "80px", targets: -1 }],
+                    order: [[0, "desc"]],
+                    language: { emptyTable: "No residents found" },
+                    pagingType: "simple_numbers",
+                    autoWidth: false,
+                    responsive: true
+                });
+            } else {
+                $residentsTable.DataTable({
+                    destroy: true,
+                    processing: true,
+                    serverSide: false,
+                    data: [],
+                    columns: [
+                        { title: "ID" },
+                        { title: "Name" },
+                        { title: "Age" },
+                        { title: "Civil Status" },
+                        { title: "Gender" },
+                        { title: "House No." },
+                        { title: "Action", orderable: false }
+                    ],
+                    language: { emptyTable: "No residents found" },
+                    pagingType: "simple_numbers"
+                });
+            }
+            customLoaderOff();
+        },
+        error: function(xhr, status, error) {
+            $residentsTable.find("tbody").html('<tr><td colspan="7" class="text-center">Error loading data</td></tr>');
+            console.error("AJAX Error:", error);
+        }
+    });
+};
+
+const loadNationality = function() {
+    const nationalities = [
+      "Afghan", "Albanian", "Algerian", "American", "Andorran", "Angolan", "Antiguan or Barbudan",
+      "Argentine", "Armenian", "Australian", "Austrian", "Azerbaijani", "Bahamian", "Bahraini",
+      "Bangladeshi", "Barbadian", "Belarusian", "Belgian", "Belizean", "Beninese", "Bhutanese",
+      "Bolivian", "Bosnian or Herzegovinian", "Botswanan", "Brazilian", "Bruneian", "Bulgarian",
+      "Burkinabé", "Burundian", "Cabo Verdean", "Cambodian", "Cameroonian", "Canadian",
+      "Central African", "Chadian", "Chilean", "Chinese", "Colombian", "Comoran", "Congolese",
+      "Costa Rican", "Croatian", "Cuban", "Cypriot", "Czech", "Danish", "Djiboutian", "Dominican",
+      "Dutch", "East Timorese", "Ecuadorean", "Egyptian", "Emirati", "Equatoguinean", "Eritrean",
+      "Estonian", "Eswatini", "Ethiopian", "Fijian", "Finnish", "French", "Gabonese", "Gambian",
+      "Georgian", "German", "Ghanaian", "Greek", "Grenadian", "Guatemalan", "Guinean",
+      "Bissau-Guinean", "Guyanese", "Haitian", "Honduran", "Hungarian", "Icelander", "Indian",
+      "Indonesian", "Iranian", "Iraqi", "Irish", "Israeli", "Italian", "Ivorian", "Jamaican",
+      "Japanese", "Jordanian", "Kazakhstani", "Kenyan", "Kiribati", "Kittitian or Nevisian",
+      "Kuwaiti", "Kyrgyzstani", "Laotian", "Latvian", "Lebanese", "Liberian", "Libyan",
+      "Liechtensteiner", "Lithuanian", "Luxembourgish", "Malagasy", "Malawian", "Malaysian",
+      "Maldivian", "Malian", "Maltese", "Marshallese", "Mauritanian", "Mauritian", "Mexican",
+      "Micronesian", "Moldovan", "Monégasque", "Mongolian", "Montenegrin", "Moroccan",
+      "Mozambican", "Myanmar (Burmese)", "Namibian", "Nauruan", "Nepali", "New Zealander",
+      "Nicaraguan", "Nigerien", "Nigerian", "North Korean", "North Macedonian", "Norwegian",
+      "Omani", "Pakistani", "Palauan", "Palestinian", "Panamanian", "Papua New Guinean",
+      "Paraguayan", "Peruvian", "Filipino", "Polish", "Portuguese", "Qatari", "Romanian",
+      "Russian", "Rwandan", "Saint Lucian", "Salvadoran", "Samoan", "San Marinese",
+      "Sao Tomean", "Saudi", "Scottish", "Senegalese", "Serbian", "Seychellois",
+      "Sierra Leonean", "Singaporean", "Slovak", "Slovenian", "Solomon Islander", "Somali",
+      "South African", "South Korean", "South Sudanese", "Spanish", "Sri Lankan", "Sudanese",
+      "Surinamese", "Swazi", "Swedish", "Swiss", "Syrian", "Taiwanese", "Tajikistani",
+      "Tanzanian", "Thai", "Togolese", "Tongan", "Trinidadian or Tobagonian", "Tunisian",
+      "Turkish", "Turkmen", "Tuvaluan", "Ugandan", "Ukrainian", "Uruguayan", "Uzbekistani",
+      "Vanuatuan", "Vatican citizen", "Venezuelan", "Vietnamese", "Welsh", "Yemeni",
+      "Zambian", "Zimbabwean"
+    ];
+
+    const $nationalityDropdown = $('#nationalityDropdown');
+    const $viewNationalityDropdown = $('#viewNationalityDropdown');
+
+    $nationalityDropdown.empty().append('<option value="">Select one</option>');
+    $viewNationalityDropdown.empty().append('<option value="">Select one</option>');
+
+    $.each(nationalities, function (i, nationality) {
+      $nationalityDropdown.append(`<option value="${nationality}">${nationality}</option>`);
+      $viewNationalityDropdown.append(`<option value="${nationality}">${nationality}</option>`);
+    });
+  }
 // ~~~~~~~~~~~~~~~~~~~~~~~~ ⚡ Event Listeners ⚡ ~~~~~~~~~~~~~~~~~~~~~~~~ //
+$(document).on("click", function (event) {
+    if (!$(event.target).closest(".filter__items").length) {
+        $(".filter__items").addClass("hide");
+    }
+});
+
+$('.filter__item').on('click', function() {
+    $('.filter__item').removeClass('active');
+    
+    $(this).addClass('active');
+    
+    const filterValue = $(this).data('filter');
+    
+});
+
+$('.filter__btn').on("click", function(){
+  $('.filter__items').toggleClass("hide");
+  event.stopPropagation(); 
+});
+
+$(document).on("click", ".filter__item", function () {
+    const selectedFilter = $(this).data("filter");
+    if (selectedFilter === "All") {
+      loadResidents();
+    } else {
+    loadFilteredResidents(selectedFilter);
+    }
+});
+
+
+
 $(document).on("click", "#editViewResident", function() {
     const btn = $(this);
     const form = $(".modal__viewing");
@@ -2081,7 +2296,7 @@ loadHouseNumbers(() => $("#houseNumberList").val(houseNumber)); // Set after loa
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~ ⚡ On load ⚡ ~~~~~~~~~~~~~~~~~~~~~~~~ //
 loadResidents();
-
+loadNationality();
 
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ⚡ MAP JS HERE ONLY ⚡ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
@@ -2442,6 +2657,9 @@ loadResidents();
 
   // ~~~~~~~~~~~~~~~~~~~~~~~~ ⚡ Event Listeners ⚡ ~~~~~~~~~~~~~~~~~~~~~~~~ //
 
+  $(".tab__1").on("click", function() {
+    loadHouseMarkers();
+  })
   $(".tab__2").on("click", function() {
     loadResidents();
   })

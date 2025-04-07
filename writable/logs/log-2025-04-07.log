@@ -1,0 +1,116 @@
+DEBUG - 2025-04-07 20:48:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-07 20:48:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-07 20:48:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-07 20:48:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-07 20:56:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-07 20:56:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-07 21:01:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-07 21:01:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-07 21:03:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-07 21:05:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-07 21:06:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-07 21:07:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-07 21:13:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-07 21:14:01 --> Received Data: Array
+(
+    [0] => Array
+        (
+            [firstname] => Tovvy
+            [lastname] => Dumaplin
+            [middlename] => B
+            [suffix] => 
+            [contact_no] => 09323876554
+            [birthdate] => 2025-04-07
+            [birthplace] => Binan Laguna
+            [citizenship] => Filipino
+            [gender] => Male
+            [civil_status] => Single
+            [occupation] => Developer
+            [religion] => Catholic
+            [is_pwd] => 0
+            [is_voter_of_barangay] => 0
+            [is_family_head] => 0
+            [household_name] => Dumaplin
+            [house_no] => 44
+            [street] => Crismor Avenue
+            [contact_name] => nailyn del mundo
+            [emergency_contact_no] => 098988375672
+            [contact_relationship] => Partner
+            [status] => 1
+        )
+
+)
+
+DEBUG - 2025-04-07 21:16:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-07 21:18:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-07 21:27:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-07 21:28:30 --> Received Data: Array
+(
+    [0] => Array
+        (
+            [firstname] => nailyn
+            [lastname] => del mundo
+            [middlename] => 123
+            [suffix] => 
+            [contact_no] => 123
+            [birthdate] => 2025-04-10
+            [birthplace] => 123
+            [citizenship] => Andorran
+            [gender] => Male
+            [civil_status] => Single
+            [occupation] => 123
+            [religion] => 123
+            [is_pwd] => 0
+            [is_voter_of_barangay] => 0
+            [is_family_head] => 1
+            [household_name] => 123
+            [house_no] => 152
+            [street] => 2312
+            [contact_name] => 123
+            [emergency_contact_no] => 123
+            [contact_relationship] => 123
+            [status] => 1
+        )
+
+    [1] => Array
+        (
+            [firstname] => Test
+            [lastname] => ASD
+            [middlename] => ZXC
+            [suffix] => 
+            [contact_no] => 09323876554
+            [birthdate] => 2025-04-08
+            [birthplace] => 123
+            [citizenship] => Albanian
+            [gender] => Female
+            [civil_status] => Married
+            [occupation] => Developer
+            [religion] => 123
+            [is_pwd] => 1
+            [is_voter_of_barangay] => 1
+            [is_family_head] => 0
+            [household_name] => Dumaplin
+            [house_no] => 44
+            [street] => Crismor Avenue
+            [contact_name] => nailyn del mundo
+            [emergency_contact_no] => 098988375672
+            [contact_relationship] => 123
+            [status] => 1
+        )
+
+)
+
+DEBUG - 2025-04-07 21:28:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-07 21:54:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-07 21:54:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-07 21:55:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-07 21:55:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-07 21:55:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-07 21:55:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-07 21:55:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-07 21:55:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-07 22:13:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-07 22:13:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-07 22:13:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-07 22:14:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-07 22:21:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
