@@ -85,3 +85,20 @@
   align-items: center;
   gap: 1rem;
 }
+.icon__counter {
+  background-color: var(--main-color);
+  color: #fff;
+  padding: 1rem;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  font-size: 1.8rem;
+}
+.asset__qty {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.d__none {
+  display: none;
+}

@@ -66,7 +66,7 @@
           <div class="row flex__d__col">
             <div class="row modal__register__modified">
             <input type="file" id="fileInput" accept="image/*" style="display: none;" />
-            <img class="img__upload"  style="cursor: pointer;" />
+            <img class="img__upload" src="<?= base_url("assets/images/img__default.png");?>"  style="cursor: pointer;" />
 
             </div>
             <div class="row">
@@ -85,7 +85,7 @@
               </div>
             </div>
             <div class="row">
-              <div class="input__box">
+              <div class="input__box asset__qty">
                 <input
                   id="assetQuantity"
                   class="information__input"
@@ -93,6 +93,8 @@
                   placeholder="Enter quantity"
                   name="asset_quantity"
                 />
+                <i class="icon__counter icon__counter__remove bi bi-dash-lg"></i>
+                <i class="icon__counter icon__counter__add bi bi-plus"></i>
                 <span class="input__title"
                   >Quantity<span class="red__dot">*</span></span
                 >
@@ -109,7 +111,7 @@
       <!-- Modal to View/Edit Item -->
       <div id="viewItemModal" class="modal">
           <div class="modal__header">
-              <p class="modal__heading">Register Item</p>
+              <p class="modal__heading">View Item</p>
           </div>
           <form class="modal__body community__modal" id="updateItemForm" enctype="multipart/form-data" method="post"> 
               <input type="hidden" id="item_id" name="item_id" />
@@ -127,45 +129,104 @@
                               value=""
                               placeholder="Enter name"
                               name="view_asset_name"
+                              readonly
                           />
                           <span class="input__title">Item name<span class="red__dot">*</span></span>
                           <p class="text-danger"></p>
                       </div>
                   </div>
                   <div class="row">
-                      <div class="input__box">
+                      <div class="input__box asset__qty">
                           <input
                               id="viewAssetQuantity"
                               class="information__input"
                               value=""
                               placeholder="Enter quantity"
                               name="view_asset_quantity"
+                              type="number"
+                              readonly
                           />
+                          <i class="icon__counter btn__remove__qty bi bi-dash-lg"></i>
+                          <i class="icon__counter btn__add__qty bi bi-plus"></i>
                           <span class="input__title">Quantity<span class="red__dot">*</span></span>
                           <p class="text-danger"></p>
                       </div>
                   </div>
               </div>
               <div class="btn__box__modal">
-                  <span class="btn__primary active" id="editItemBtn">Save Changes</span>
+                  <span class="btn__save__asset btn__primary active d__none" id="editItemBtn">Save Changes</span>
+                  <span class="btn__edit__asset btn__primary" id="">Edit</span>
               </div>
           </form>
       </div>
+
+      <!-- Borrow item modal -->
+      <div id="borrowItemModal" class="modal">
+          <div class="modal__header">
+              <p class="modal__heading">Borrow Item</p>
+          </div>
+          <form class="modal__body community__modal" id="updateItemForm" enctype="multipart/form-data" method="post"> 
+              <input type="hidden" id="item_id" name="item_id" />
+              <input type="hidden" id="current_image" name="current_image" />
+              <div class="row flex__d__col">
+                  <div class="row modal__register__modified">
+                      <input type="file" id="viewFileInput" accept="image/*" style="display: none" />
+                      <img class="view__img__upload" src="img__default.png" style="cursor: pointer;" id="viewItemImage" />
+                  </div>
+                  <div class="row">
+                      <div class="input__box">
+                          <input
+                              id="viewAssetName"
+                              class="information__input"
+                              value=""
+                              placeholder="Enter name"
+                              name="view_asset_name"
+                              readonly
+                          />
+                          <span class="input__title">Item name<span class="red__dot">*</span></span>
+                          <p class="text-danger"></p>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="input__box asset__qty">
+                          <input
+                              id="viewAssetQuantity"
+                              class="information__input"
+                              value=""
+                              placeholder="Enter quantity"
+                              name="view_asset_quantity"
+                              type="number"
+                              readonly
+                          />
+                          <i class="icon__counter btn__remove__qty bi bi-dash-lg"></i>
+                          <i class="icon__counter btn__add__qty bi bi-plus"></i>
+                          <span class="input__title">Quantity<span class="red__dot">*</span></span>
+                          <p class="text-danger"></p>
+                      </div>
+                  </div>
+              </div>
+              <div class="btn__box__modal">
+                  <span class="btn__save__asset btn__primary active d__none" id="editItemBtn">Save Changes</span>
+                  <span class="btn__edit__asset btn__primary" id="">Edit</span>
+              </div>
+          </form>
+      </div>
+      <!-- Borrow item modal END -->
 
       <div class="container">
         <div class="heading__box">
           <div class="tab__container">
             <div class="btn__container tab__1 visible">
-              <button class="tab__btn">Inventory</button>
+              <button class="tab__btn inventory__tab">Inventory</button>
               <div class="active__tab"></div>
             </div>
             <div class="btn__container tab__2">
-              <button class="tab__btn">Lending Item</button>
+              <button class="tab__btn lending__tab">Lending Item</button>
               <div class="active__tab"></div>
             </div>
           </div>
         </div>
-        <div class="card">
+        <div class="card card__inventory">
           <div class="heading__container">
             <p class="subheading">List of Items</p>
             <div class="button__box">
@@ -219,6 +280,63 @@
             </table>
           </div>
         </div>
+        <!-- Lending Item Tab -->
+        <div class="card lending__items d__none">
+          <div class="heading__container">
+            <p class="subheading">Lent Items</p>
+            <div class="button__box">
+              <button class="btn__secondary active btn__borrow__item">
+                <div class="icon__link">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="ionicon"
+                    viewBox="0 0 512 512"
+                  >
+                    <path
+                      d="M376 144c-3.92 52.87-44 96-88 96s-84.15-43.12-88-96c-4-55 35-96 88-96s92 42 88 96z"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="32"
+                    />
+                    <path
+                      d="M288 304c-87 0-175.3 48-191.64 138.6-2 10.92 4.21 21.4 15.65 21.4H464c11.44 0 17.62-10.48 15.65-21.4C463.3 352 375 304 288 304z"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-miterlimit="10"
+                      stroke-width="32"
+                    />
+                    <path
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="32"
+                      d="M88 176v112M144 232H32"
+                    />
+                  </svg>
+                </div>
+                Borrow
+              </button>
+            </div>
+          </div>
+          <div class="container">
+            <table id="inventoryTable" class="display">
+              <thead class="thead">
+                <tr>
+                  <th>Borrower</th>
+                  <th>Asset Name</th>
+                  <th>Quantity</th>
+                  <th>Image</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+        <!-- Lending Item Tab ENDS -->
       </div>
       <footer class="footer">
         <p class="copyright">
@@ -397,12 +515,11 @@ $(document).ready(function () {
     };
 
     $('#inventoryTable').on('click', '.view-item-btn', function() {
-        const itemId = $(this).data('item-id');  // Get the item_id from the button's data attribute
-        viewItem(itemId);  // Call the viewItem function
+        const itemId = $(this).data('item-id');  
+        viewItem(itemId);  
         $('#viewItemModal').addClass('open');
         $('.wrapper').addClass('open');
     });
-    // Close modal when clicking the background or a close button
     $('.close').on('click', function() {
         $('#viewItemModal').hide();
     });
@@ -432,6 +549,79 @@ $('#viewFileInput').on('change', function() {
         reader.readAsDataURL(file);
     }
 });
+
+const activateAssetInputs = function () {
+  $('#viewAssetName').removeAttr("readonly");
+  $('#viewAssetQuantity').removeAttr("readonly");
+
+  $('#viewItemImage').css({
+    'pointer-events': '',
+    'cursor': 'pointer',
+    'opacity': ''
+  });
+}
+
+const restrictAssetInputs = function() {
+  $('#viewAssetName').attr("readonly");
+  $('#viewAssetQuantity').attr("readonly");
+
+  $('#viewItemImage').css({
+    'pointer-events': 'none',
+    'cursor': 'default',
+    'opacity': 0.6 // Looks faded/disabled
+  });
+}
+$('.btn__edit__asset').on("click", function(){
+  $('.btn__save__asset').removeClass("d__none");
+  $('.btn__edit__asset').addClass("d__none");
+  activateAssetInputs();
+});
+
+$('.view-item-btn').on('click', function () {
+    const form = $('#updateItemForm');
+    restrictAssetInputs(); // For Viewing modal
+    form.find('input').prop('disabled', true);
+
+    $('#viewItemImage').css({
+        'pointer-events': 'none',
+        'cursor': 'default',
+        'opacity': 0.7 
+    });
+
+    form.find('.bi-plus, .bi-dash-lg').css('pointer-events', 'none').css('opacity', 0.5);
+});
+
+const addQuantity = function (inputSelector) {
+  const input = $(inputSelector);
+  const currentVal = parseInt(input.val()) || 0;
+  input.val(currentVal + 1);
+};
+
+const lessQuantity = function (inputSelector) {
+  const input = $(inputSelector);
+  const currentVal = parseInt(input.val()) || 0;
+  if (currentVal > 0) {
+      input.val(currentVal - 1);
+  }
+};
+
+    // For View/Update modal
+    $('.bi-plus').on('click', function () {
+        addQuantity('#viewAssetQuantity');
+    });
+
+    $('.bi-dash-lg').on('click', function () {
+        lessQuantity('#viewAssetQuantity');
+    });
+
+    // For Create modal
+    $('.icon__counter__add').on('click', function () {
+        addQuantity('#assetQuantity');
+    });
+
+    $('.icon__counter__remove').on('click', function () {
+        lessQuantity('#assetQuantity');
+    });
 
 function updateItem() {
     // Get form elements
@@ -487,68 +677,68 @@ function updateItem() {
 
 });
 
+$(document).ready(function () {
+  // Handle table buttons
+  $(".table__button, .btn__add__item").on("click", function () {
+    $(".wrapper").addClass("open");
+    $("#registerItemModal").addClass("open");
+  });
 
+  $(".btn__borrow__item").on("click", function () {
+    $(".wrapper").addClass("open");
+    $("#borrowItemModal").addClass("open");
+  });
 
+  // Close on wrapper click or close button
+  $(".wrapper, .btn__close").on("click", function () {
+    $(".wrapper").removeClass("open");
+    $("#registerItemModal").removeClass("open");
+    $("#viewItemModal").removeClass("open");
+    $("#borrowItemModal").removeClass("open");
 
+  });
 
-      document.querySelectorAll(".table__button").forEach((button) => {
-        button.addEventListener("click", () => {
-          document.querySelector(".wrapper").classList.add("open");
-          document.getElementById("registerItemModal").classList.add("open");
-        });
-      });
+  // Close on Escape key
+  $(document).on("keydown", function (event) {
+    if (event.key === "Escape") {
+      $(".wrapper").removeClass("open");
+      $("#registerItemModal").removeClass("open");
+      $("#viewItemModal").removeClass("open");
+      $("#borrowItemModal").removeClass("open");
+    }
+  });
 
-      document
-        .querySelector(".btn__add__item")
-        .addEventListener("click", function () {
-          document.querySelector(".wrapper").classList.add("open");
-          document.getElementById("registerItemModal").classList.add("open");
-        });
+  // Toggle sidebar
+  $(".menu__icon").on("click", function () {
+    $("body").toggleClass("hide__sidebar");
+    $(".nav__heading").toggleClass("d__none");
+  });
 
-      document.querySelector(".wrapper").addEventListener("click", function () {
-        document.querySelector(".wrapper").classList.remove("open");
-        document.getElementById("registerItemModal").classList.remove("open");
-        document.getElementById("viewItemModal").classList.remove("open");
-      });
+  // Toggle user dropdown
+  $(".user__box").on("click", function () {
+    $(".dropdown__menu").toggleClass("show");
+  });
 
-      document
-        .querySelector(".btn__close")
-        .addEventListener("click", function () {
-          document.querySelector(".wrapper").classList.remove("open");
-          document.getElementById("registerItemModal").classList.remove("open");
-          document.getElementById("viewItemModal").classList.remove("open");
-        });
-      document.addEventListener("keydown", (event) => {
-        if (event.key === "Escape") {
-          document.querySelector(".wrapper").classList.remove("open");
-          document.getElementById("registerItemModal").classList.remove("open");
-          document.getElementById("viewItemModal").classList.remove("open");
-        }
-      });
+  // Tab switch
+  $(".tab__1").on("click", function () {
+    $(".tab__1").addClass("visible");
+    $(".tab__2").removeClass("visible");
+    $('.lending__items ').addClass('d__none');
+    $('.card__inventory ').removeClass('d__none');
+  });
 
-      document
-        .querySelector(".menu__icon")
-        .addEventListener("click", function () {
-          document.querySelector("body").classList.toggle("hide__sidebar");
-          document.querySelector(".nav__heading").classList.toggle("d__none");
-        });
+  $(".tab__2").on("click", function () {
+    $(".tab__2").addClass("visible");
+    $(".tab__1").removeClass("visible");
+    $('.lending__items ').removeClass('d__none');
+    $('.card__inventory ').addClass('d__none');
+    
+  });
 
-      document
-        .querySelector(".user__box")
-        .addEventListener("click", function () {
-          document.querySelector(".dropdown__menu").classList.toggle("show");
-        });
-      document.querySelector(".tab__1").addEventListener("click", function () {
-        document.querySelector(".tab__1").classList.add("visible");
-        document.querySelector(".tab__2").classList.remove("visible");
-      });
-      document.querySelector(".tab__2").addEventListener("click", function () {
-        document.querySelector(".tab__2").classList.add("visible");
-        document.querySelector(".tab__1").classList.remove("visible");
-      });
-      $(document).ready(function () {
-        $("#example").DataTable();
-      });
+  // Initialize DataTable
+  $("#example").DataTable();
+});
+
     </script>
   </body>
 </html>
