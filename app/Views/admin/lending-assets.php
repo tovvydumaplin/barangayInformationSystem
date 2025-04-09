@@ -165,49 +165,39 @@
           <div class="modal__header">
               <p class="modal__heading">Borrow Item</p>
           </div>
-          <form class="modal__body community__modal" id="updateItemForm" enctype="multipart/form-data" method="post"> 
-              <input type="hidden" id="item_id" name="item_id" />
-              <input type="hidden" id="current_image" name="current_image" />
+          <form class="modal__body community__modal" id="borrowForm" enctype="multipart/form-data" method="post"> 
               <div class="row flex__d__col">
-                  <div class="row modal__register__modified">
-                      <input type="file" id="viewFileInput" accept="image/*" style="display: none" />
-                      <img class="view__img__upload" src="img__default.png" style="cursor: pointer;" id="viewItemImage" />
+                  <div class="row">
+                    <div class="input__box">
+                        <select
+                            id="listOfResidents"
+                            class="information__input"
+                            value=""
+                            placeholder="Enter name"
+                            name="listOfResidents"
+                        >
+                        </select>
+                        <span class="input__title">Borrower's Fullname<span class="red__dot">*</span></span>
+                        <p class="text-danger"></p>
+                    </div>
                   </div>
                   <div class="row">
-                      <div class="input__box">
-                          <input
-                              id="viewAssetName"
-                              class="information__input"
-                              value=""
-                              placeholder="Enter name"
-                              name="view_asset_name"
-                              readonly
-                          />
-                          <span class="input__title">Item name<span class="red__dot">*</span></span>
-                          <p class="text-danger"></p>
-                      </div>
+                    <div class="input__box">
+                      <select id="listOfItems" class="information__input" value="" placeholder="Enter name" name="listOfItems"></select>
+                      <span class="input__title">Item<span class="red__dot">*</span></span>
+                      <p class="text-danger"></p>
+                    </div>
                   </div>
-                  <div class="row">
-                      <div class="input__box asset__qty">
-                          <input
-                              id="viewAssetQuantity"
-                              class="information__input"
-                              value=""
-                              placeholder="Enter quantity"
-                              name="view_asset_quantity"
-                              type="number"
-                              readonly
-                          />
-                          <i class="icon__counter btn__remove__qty bi bi-dash-lg"></i>
-                          <i class="icon__counter btn__add__qty bi bi-plus"></i>
-                          <span class="input__title">Quantity<span class="red__dot">*</span></span>
-                          <p class="text-danger"></p>
-                      </div>
+                  <div class="row">                      
+                    <div class="input__box">
+                      <input id="lendQuantity" class="information__input" value="" placeholder="Enter quantity" name="lendQuantity" type="number" />
+                      <span class="input__title">Quantity<span class="red__dot">*</span></span>
+                      <p class="text-danger"></p>
+                    </div>
                   </div>
               </div>
               <div class="btn__box__modal">
-                  <span class="btn__save__asset btn__primary active d__none" id="editItemBtn">Save Changes</span>
-                  <span class="btn__edit__asset btn__primary" id="">Edit</span>
+                  <span class="btn__primary" id="lendBtn">Submit</span>
               </div>
           </form>
       </div>
@@ -322,18 +312,17 @@
             </div>
           </div>
           <div class="container">
-            <table id="inventoryTable" class="display">
-              <thead class="thead">
-                <tr>
-                  <th>Borrower</th>
-                  <th>Asset Name</th>
-                  <th>Quantity</th>
-                  <th>Image</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody></tbody>
-            </table>
+          <table id="lendingTable" class="display">
+            <thead>
+              <tr>
+                <th>Item Name</th>
+                <th>Quantity</th>
+                <th>Date Borrowed</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
           </div>
         </div>
         <!-- Lending Item Tab ENDS -->
@@ -374,6 +363,54 @@ $(document).ready(function () {
             reader.readAsDataURL(file);
         }
     });
+
+    // For borrower modal
+    const listOfResidents = function () {
+      $.ajax({
+          url: '<?= site_url('admin/fetch-residents') ?>',
+          type: 'GET',
+          dataType: 'json',
+          success: function (data) {
+              const $select = $('#listOfResidents');
+              $select.empty();
+              $select.append('<option value="">Choose a resident</option>');
+              data.forEach(resident => {
+                  $select.append(`<option value="${resident.resident_id}">${resident.fullname}</option>`);
+              });
+          },
+          error: function (xhr, status, error) {
+              console.error('Error loading residents:', error);
+          }
+      });
+  };
+
+
+    const listOfItems = function () {
+        $.ajax({
+            url: '<?= site_url('admin/fetch-items') ?>', // your route to fetch items
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                const $select = $('#listOfItems');
+                $select.empty(); // clear existing options
+                $select.append('<option value="">Choose an item</option>');
+                data.forEach(item => {
+                    $select.append(`<option value="${item.item_id}">${item.item_name}</option>`);
+                });
+            },
+            error: function (xhr, status, error) {
+                console.error('Error loading items:', error);
+            }
+        });
+    };
+
+    $(document).ready(function () {
+        listOfResidents();
+        listOfItems();
+    });
+
+
+    // for borrower modal end
 
     // Call createItem() when button is clicked
     $('.btn__register__item').on('click', function (e) {
@@ -457,8 +494,93 @@ $(document).ready(function () {
     });
 }
 
+const loadLendingHistory = function() {
+  if (!$.fn.DataTable.isDataTable('#lendingTable')) {
+        $('#lendingTable').DataTable({
+            ajax: {
+                url: '<?= site_url('admin/lend-items') ?>',
+                type: 'GET',
+                dataSrc: '',
+                error: function (xhr, status, error) {
+                    console.log('Error fetching lending data:', error);
+                }
+            },
+            columns: [
+                { data: 'item_name', title: 'Item Name' },
+                { data: 'borrowed_quantity', title: 'Quantity' },
+                { data: 'date_borrowed', title: 'Date Borrowed' },
+                { data: 'borrower_name', title: 'Borrower' },  // New column for borrower name
+                { data: 'house_no', title: 'House No' },  // New column for house number
+                {
+                    data: null,
+                    render: function (data, type, row) {
+                        return `<button class="btn btn__view view-item-btn" data-id="${row.id}" data-item="${row.item_id}">View</button>`;
+                    },
+                    title: 'Action'
+                }
+            ]
+        });
+    }
+}
+
+
+// Lending table
+$('.lending__tab').on('click', function () {
+  console.log('Tab clicked');
+  loadLendingHistory();
+});
+
+
+
+
 
     loadInventory();
+
+    const newLending = function () {
+    let form = $('#borrowForm')[0];
+    let formData = new FormData(form);
+
+    // Get the selected Item's ID and Name
+    let itemID = $('#listOfItems').val();  // Get the selected item's ID
+    let itemName = $('#listOfItems option:selected').text();  // Get the selected item's name
+
+    // Add itemName to the FormData
+    formData.append('item_name', itemName);
+
+    // Log values from the formData
+    console.log('Item ID:', itemID);
+    console.log('Item Name:', itemName);
+    console.log('Quantity:', formData.get('lendQuantity'));
+
+    $.ajax({
+        url: "<?= site_url('/admin/new-lending') ?>",
+        type: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false,
+        beforeSend: function () {
+            $('#lendBtn').prop('disabled', true).text('Submitting...');
+        },
+        success: function (response) {
+            console.log('Response:', response);
+            alert('Lending recorded successfully!');
+            $('#lendBtn').prop('disabled', false).text('Submit');
+            $('#borrowForm')[0].reset();
+        },
+        error: function (xhr, status, error) {
+            console.error('Error response:', xhr.responseText);
+            alert('An error occurred while submitting.');
+            $('#lendBtn').prop('disabled', false).text('Submit');
+        }
+    });
+};
+
+
+
+$('#lendBtn').on('click', function () {
+    newLending();
+});
+
 
         // Upload data + image
         const createItem = function(file, assetName, assetQuantity) {

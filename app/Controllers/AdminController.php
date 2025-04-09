@@ -5,6 +5,7 @@ use App\Models\EventModel;
 use App\Models\ResidentModel; 
 use App\Models\HouseModel; 
 use App\Models\InventoryModel;
+use App\Models\LendingModel;
 class AdminController extends BaseController
 {
     public function dashboard()
@@ -831,6 +832,31 @@ public function createUser()
 
         return $this->response->setJSON($items);
     }
+    public function lendItems()
+    {
+        $lendingModel = new LendingModel();
+        $residentModel = new ResidentModel();
+    
+        // Fetch lending records and join with tbl_residents to get the full borrower name and house number
+        $items = $lendingModel->select('tbl_lending.*, 
+                                         tbl_residents.firstname, 
+                                         tbl_residents.middlename, 
+                                         tbl_residents.lastname, 
+                                         tbl_residents.suffix, 
+                                         tbl_residents.house_no')
+                              ->join('tbl_residents', 'tbl_residents.resident_id = tbl_lending.borrower_id')
+                              ->where('tbl_lending.status', 1)  
+                              ->findAll();
+    
+        foreach ($items as &$item) {
+            $item['borrower_name'] = $item['firstname'] . ' ' . $item['middlename'] . ' ' . $item['lastname'] . ' ' . $item['suffix'];
+        }
+    
+        return $this->response->setJSON($items);  // Return as JSON response
+    }
+    
+    
+    
 
     
     public function getItemDetails()
@@ -956,6 +982,63 @@ public function createUser()
         }
     }
 
+    public function fetchResidents()
+    {
+        $residentModel = new ResidentModel();
+    
+        $residents = $residentModel
+            ->select("resident_id, CONCAT_WS(' ', firstname, middlename, lastname, suffix) as fullname")
+            ->where('status', 1) // optional: only active residents
+            ->findAll();
+    
+        return $this->response->setJSON($residents);
+    }
+    
+    
+    public function fetchItems()
+    {
+        $itemModel = new InventoryModel();
+        $items = $itemModel->select('item_id, item_name')->where('item_quantity >', 0)->findAll();
+        return $this->response->setJSON($items);
+    }
 
+    public function newLending()
+    {
+        $borrowerID = $this->request->getPost('listOfResidents');  // Borrower's ID from the form
+        $itemID     = $this->request->getPost('listOfItems');      // Item's ID from the form
+        $quantity   = $this->request->getPost('lendQuantity');     // Quantity from the form
+        $itemName   = $this->request->getPost('item_name');        // Item name passed via AJAX
+    
+        if (!$borrowerID || !$itemID || !$quantity || !$itemName) {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'All fields are required.'
+            ]);
+        }
+    
+        // Insert data into tbl_lending table
+        $lendingModel = new LendingModel();
+    
+        $data = [
+            'item_id'           => $itemID,
+            'item_name'         => $itemName,  
+            'borrower_id'       => $borrowerID,
+            'borrowed_quantity' => $quantity,
+            'status'            => '1',  
+            'date_borrowed'     => date('Y-m-d'),  
+        ];
+    
+        // Save the lending record
+        $lendingModel->insert($data);
+    
+        return $this->response->setJSON([
+            'status' => 'success',
+            'message' => 'Lending record saved successfully.'
+        ]);
+    }
+    
+    
+
+    
 }
 

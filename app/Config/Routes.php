@@ -83,3 +83,9 @@ $routes->get('admin/inventory-data', 'AdminController::getInventoryData');
 $routes->get('admin/get-item-details', 'AdminController::getItemDetails');
 $routes->post('admin/update-item', 'AdminController::updateItem');
 
+$routes->get('admin/lend-items', 'AdminController::lendItems');
+$routes->get('admin/fetch-residents', 'AdminController::fetchResidents');
+$routes->get('admin/fetch-items', 'AdminController::fetchItems');
+// lending
+$routes->post('admin/new-lending', 'AdminController::newLending');
+
