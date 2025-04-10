@@ -89,3 +89,9 @@ $routes->get('admin/fetch-items', 'AdminController::fetchItems');
 // lending
 $routes->post('admin/new-lending', 'AdminController::newLending');
 
+$routes->post('admin/view-lent-items', 'AdminController::fetchLendItemDetails');
+$routes->post('/admin/update-lending-status', 'AdminController::updateLendingStatus');
+// Officials
+$routes->post('admin/create-official', 'AdminController::createOfficial');
+$routes->get('admin/load-officials', 'AdminController::loadOfficials');
+$routes->get('admin/get-official', 'AdminController::getOfficial');

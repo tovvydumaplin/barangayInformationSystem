@@ -31,3 +31,6 @@
 .input__box__container {
   width: 100%;
 }
+.grid__2__cols__modified {
+  grid-template-columns: 1fr 1fr;
+}

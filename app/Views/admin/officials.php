@@ -42,186 +42,148 @@
         <div class="modal__header">
           <p class="modal__heading">Add Official</p>
         </div>
-        <form class="modal__body community__modal">
-          <div class="row flex__d__col">
-            <div class="row">
-              <div class="img__box">
-                <img src="img__default.png" class="img__profile" />
-              </div>
-              <div class="input__box__container">
-                <div class="input__box margin__bottom__2">
-                  <input
-                    class="information__input"
-                    value=""
-                    placeholder="Enter Street"
-                    name="street"
-                    readonly
-                  />
-                  <span class="input__title"
-                    >Firstname<span class="red__dot">*</span></span
-                  >
-                  <p class="text-danger"></p>
+          <form id="createUserForm" action="<?= site_url('/admin/create-user') ?>" method="POST" class="modal__body community__modal" enctype="multipart/form-data">
+            <?= csrf_field() ?>
+            <div class="row flex__d__col">
+                <div class="row grid grid__2__cols__modified">
+                <div class="img__box" onclick="document.getElementById('profile_image').click()">
+                    <input type="file" name="profile_image" id="profile_image" accept="image/*" onchange="previewImage(event)" style="display: none;">
+                    <img class="img__profile" id="imagePreview" src="<?= base_url('assets/images/img__default.png')?>" alt="  " style="width: 100%; max-height: 15rem; cursor: pointer;">
                 </div>
-                <div class="input__box">
-                  <input
-                    class="information__input"
-                    value=""
-                    placeholder="Enter Street"
-                    name="street"
-                    readonly
-                  />
-                  <span class="input__title"
-                    >Lastname<span class="red__dot">*</span></span
-                  >
-                  <p class="text-danger"></p>
+                    <div class="input__box__container">
+                        <div class="input__box margin__bottom__2">
+                            <input class="information__input" placeholder="Enter Firstname" name="firstname" required />
+                            <span class="input__title">Firstname<span class="red__dot">*</span></span>
+                            <p class="text-danger"></p>
+                        </div>
+                        <div class="input__box">
+                            <input class="information__input" placeholder="Enter Lastname" name="lastname" required />
+                            <span class="input__title">Lastname<span class="red__dot">*</span></span>
+                            <p class="text-danger"></p>
+                        </div>
+                    </div>
                 </div>
-              </div>
+
+                <div class="row">
+                    <div class="input__box">
+                        <input class="information__input" placeholder="Enter Middlename" name="middlename" required />
+                        <span class="input__title">Middlename<span class="red__dot">*</span></span>
+                        <p class="text-danger"></p>
+                    </div>
+                    <div class="input__box">
+                        <span class="input__title">Suffix<span class="red__dot">*</span></span>
+                        <select class="information__input" name="suffix">
+                            <option value="" disabled selected>Choose Suffix</option>
+                            <option value="">None</option>
+                            <option value="Jr.">Jr.</option>
+                            <option value="Sr.">Sr.</option>
+                            <option value="II">II</option>
+                            <option value="III">III</option>
+                            <option value="IV">IV</option>
+                        </select>
+                        <p class="text-danger"></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input__box">
+                        <input class="information__input" placeholder="Enter Position" name="position" required />
+                        <span class="input__title">Position<span class="red__dot">*</span></span>
+                        <p class="text-danger"></p>
+                        <p class="text-danger error-email"></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input__box">
+                        <span class="input__title">Start of Service<span class="red__dot">*</span></span>
+                        <input type="date" class="information__input" name="start_service" required/>
+                        <p class="text-danger"></p>
+                    </div>
+                    <div class="input__box">
+                        <span class="input__title">End of Service<span class="red__dot">*</span></span>
+                        <input type="date" class="information__input" name="end_service" required/>
+                        <p class="text-danger"></p>
+                    </div>
+                </div>
+                <div class="btn__box__modal">
+                    <button type="button" class="btn__primary active btn__create__official">Create Official</button>
+                </div>
             </div>
-            <div class="row">
-              <div class="input__box">
-                <input
-                  class="information__input"
-                  value=""
-                  placeholder="Enter middlename"
-                  readonly
-                />
-                <span class="input__title"
-                  >Middlename<span class="red__dot">*</span></span
-                >
-                <p class="text-danger"></p>
-              </div>
-              <div class="input__box">
-                <input
-                  class="information__input"
-                  value=""
-                  placeholder="Enter middlename"
-                  readonly
-                />
-                <span class="input__title"
-                  >Suffix<span class="red__dot">*</span></span
-                >
-                <p class="text-danger"></p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="input__box">
-                <input
-                  class="information__input"
-                  value=""
-                  name="street"
-                  readonly
-                />
-                <span class="input__title"
-                  >Position<span class="red__dot">*</span></span
-                >
-                <p class="text-danger"></p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="input__box">
-                <input
-                  class="information__input"
-                  value=""
-                  name="street"
-                  readonly
-                  type="date"
-                />
-                <span class="input__title"
-                  >Position<span class="red__dot">*</span></span
-                >
-                <p class="text-danger"></p>
-              </div>
-              <div class="input__box">
-                <input
-                  class="information__input"
-                  value=""
-                  name="street"
-                  readonly
-                  type="date"
-                />
-                <span class="input__title"
-                  >Position<span class="red__dot">*</span></span
-                >
-                <p class="text-danger"></p>
-              </div>
-            </div>
-          </div>
-          <div class="btn__box__modal">
-            <span class="btn__primary active">Create Event</span>
-          </div>
         </form>
       </div>
+      <!-- View Officials -->
       <div id="viewEventModal" class="modal">
         <div class="modal__header">
-          <p class="modal__heading">View Event</p>
+          <p class="modal__heading">View Official</p>
         </div>
-        <form class="modal__body community__modal">
-          <div class="row flex__d__col">
-            <div class="row">
-              <div class="input__box">
-                <input
-                  class="information__input"
-                  value=""
-                  placeholder="Enter Street"
-                  name="street"
-                  readonly
-                />
-                <span class="input__title"
-                  >Street<span class="red__dot">*</span></span
-                >
-                <p class="text-danger"></p>
-              </div>
+          <form id="createUserForm" action="<?= site_url('/admin/create-user') ?>" method="POST" class="modal__body community__modal" enctype="multipart/form-data">
+            <?= csrf_field() ?>
+            <div class="row flex__d__col">
+                <div class="row grid grid__2__cols__modified">
+                <div class="img__box" onclick="document.getElementById('profile_image').click()">
+                    <input type="file" name="profile_image" id="profile_image" accept="image/*" onchange="previewImage(event)" style="display: none;">
+                    <img class="img__profile" id="viewImagePreview" src="<?= base_url('assets/images/img__default.png')?>" alt="  " style="width: 100%; max-height: 15rem; cursor: pointer;">
+                </div>
+                    <div class="input__box__container">
+                        <div class="input__box margin__bottom__2">
+                            <input class="information__input" placeholder="Enter Firstname" name="firstname" required />
+                            <span class="input__title">Firstname<span class="red__dot">*</span></span>
+                            <p class="text-danger"></p>
+                        </div>
+                        <div class="input__box">
+                            <input class="information__input" placeholder="Enter Lastname" name="lastname" required />
+                            <span class="input__title">Lastname<span class="red__dot">*</span></span>
+                            <p class="text-danger"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input__box">
+                        <input class="information__input" placeholder="Enter Middlename" name="middlename" required />
+                        <span class="input__title">Middlename<span class="red__dot">*</span></span>
+                        <p class="text-danger"></p>
+                    </div>
+                    <div class="input__box">
+                        <span class="input__title">Suffix<span class="red__dot">*</span></span>
+                        <select class="information__input" name="suffix">
+                            <option value="" disabled selected>Choose Suffix</option>
+                            <option value="">None</option>
+                            <option value="Jr.">Jr.</option>
+                            <option value="Sr.">Sr.</option>
+                            <option value="II">II</option>
+                            <option value="III">III</option>
+                            <option value="IV">IV</option>
+                        </select>
+                        <p class="text-danger"></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input__box">
+                        <input class="information__input" placeholder="Enter Position" name="position" required />
+                        <span class="input__title">Position<span class="red__dot">*</span></span>
+                        <p class="text-danger"></p>
+                        <p class="text-danger error-email"></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input__box">
+                        <span class="input__title">Start of Service<span class="red__dot">*</span></span>
+                        <input type="date" class="information__input" name="start_service" required/>
+                        <p class="text-danger"></p>
+                    </div>
+                    <div class="input__box">
+                        <span class="input__title">End of Service<span class="red__dot">*</span></span>
+                        <input type="date" class="information__input" name="end_service" required/>
+                        <p class="text-danger"></p>
+                    </div>
+                </div>
+                <div class="btn__box__modal">
+                    <button type="button" class="btn__primary active btn__create__official">Create Official</button>
+                </div>
             </div>
-            <div class="row">
-              <div class="input__box">
-                <textarea
-                  class="information__input"
-                  value=""
-                  placeholder="Enter Street"
-                  readonly
-                ></textarea>
-                <span class="input__title"
-                  >Street<span class="red__dot">*</span></span
-                >
-                <p class="text-danger"></p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="input__box">
-                <input
-                  class="information__input"
-                  value=""
-                  name="street"
-                  readonly
-                  type="date"
-                />
-                <span class="input__title"
-                  >Event Start Date/Time<span class="red__dot">*</span></span
-                >
-                <p class="text-danger"></p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="input__box">
-                <input
-                  class="information__input"
-                  value=""
-                  name="street"
-                  readonly
-                  type="date"
-                />
-                <span class="input__title"
-                  >Event End Date/Time<span class="red__dot">*</span></span
-                >
-                <p class="text-danger"></p>
-              </div>
-            </div>
-          </div>
-          <div class="btn__box__modal">
-            <span class="btn__primary active">Create Event</span>
-          </div>
         </form>
       </div>
+      <!-- View official ends -->
       <div class="container">
         <div class="card">
           <div class="heading__container">
@@ -283,7 +245,7 @@
             </div>
           </div>
           <div class="container">
-            <table id="example" class="display">
+            <table id="officialsTable" class="display">
               <thead class="thead">
                 <tr>
                   <th>#</th>
@@ -295,16 +257,6 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>Excalibur Barangay Fest</td>
-                  <td>Lorem ipsum dolor sit amet consectur</td>
-                  <td>12-31-93/ 11:34</td>
-                  <td>12-31-93/ 11:34</td>
-                  <td>
-                    <button class="btn__primary table__button">View</button>
-                  </td>
-                </tr>
               </tbody>
             </table>
           </div>
@@ -326,50 +278,174 @@
     ></script>
 
     <script>
-      document.querySelectorAll(".table__button").forEach((button) => {
-        button.addEventListener("click", () => {
-          document.querySelector(".wrapper").classList.add("open");
-          document.getElementById("viewEventModal").classList.add("open");
+
+    const createOfficial = function () {
+        let form = $('#createUserForm')[0];
+        let formData = new FormData(form);
+
+        $.ajax({
+            url: "<?= site_url('admin/create-official') ?>",
+            method: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            beforeSend: function () {
+                $('.btn__create__official').prop('disabled', true).text('Submitting...');
+            },
+            success: function (response) {
+                console.log(response);
+                if (response.status === 'success') {
+                    alert('Official created successfully!');
+                    $('#createUserForm')[0].reset();
+                    $('#createEventModal').removeClass('open'); // Close the modal
+                    // Optionally reload a list
+                    // loadOfficials();
+                } else {
+                    alert(response.message || 'Something went wrong!');
+                }
+            },
+            error: function (xhr) {
+                console.error(xhr.responseText);
+                alert('An error occurred while submitting the form.');
+            },
+            complete: function () {
+                $('.btn__create__official').prop('disabled', false).text('Create Official');
+            }
         });
+    };
+
+
+    const loadOfficials = function() {
+    if ($.fn.DataTable.isDataTable("#officialsTable")) {
+        $("#officialsTable").DataTable().destroy();
+    }
+
+    $("#officialsTable").DataTable({
+        "processing": true,
+        "serverSide": false,
+        "ajax": {
+            "url": "<?= site_url('/admin/load-officials') ?>",
+            "type": "GET",
+            "dataSrc": "data"
+        },
+        "columns": [
+            { 
+                "data": "profile_image", 
+                "render": function(data, type, row) {
+                    return `<img src="${data}" width="50" height="50" style="border-radius: 50%;">`;
+                }
+            },
+            { "data": "official_id" },  
+            { "data": "full_name" },  
+            { "data": "position" },    
+            { "data": "suffix" },        
+            { "data": "status" },      
+            { "data": "action" }      
+        ],
+        "order": [[0, "desc"]] 
+    });
+};
+
+loadOfficials();
+
+    const previewImage = function(event) {
+        let reader = new FileReader();
+        reader.onload = function () {
+            let preview = document.getElementById("imagePreview");
+            preview.src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    }
+
+    $('.btn__create__official').on('click', function () {
+        createOfficial();
+    });
+
+    $(document).on("click", ".viewOfficialBtn", function () {
+      $(".wrapper").addClass("open");
+      $("#viewEventModal").addClass("open");
+    });
+
+
+    $(document).on('click', '.viewOfficialBtn', function () {
+    const officialId = $(this).data('id');
+      console.log(officialId);
+    $(".wrapper").addClass("open");
+    $("#viewEventModal").addClass("open");
+
+    $.ajax({
+        url: "<?= site_url('/admin/get-official') ?>",
+        type: "GET",
+        data: { official_id: officialId },
+        dataType: "json",
+        success: function (response) {
+            if (response.status === 'success') {
+                const official = response.data;
+
+                $("input[name='firstname']").val(official.firstname);
+                $("input[name='middlename']").val(official.middlename);
+                $("input[name='lastname']").val(official.lastname);
+                $("select[name='suffix']").val(official.suffix);
+                $("input[name='position']").val(official.position);
+                $("input[name='start_service']").val(official.start_service);
+                $("input[name='end_service']").val(official.end_service);
+
+                const imageUrl = official.image
+                    ? "<?= base_url() ?>" + official.image
+                    : "<?= base_url('uploads/default-profile.png') ?>";
+                $('#viewImagePreview').attr('src', imageUrl);
+            }
+        }
+    });
+});
+
+    $(document).ready(function () {
+      // Handle table buttons click
+      $(".table__button").on("click", function () {
+        $(".wrapper").addClass("open");
+        $("#viewEventModal").addClass("open");
+      });
+      // $('.btn__secondary').on('click', function(){
+      //   loadOfficials();
+      // });
+      // Handle add item button click
+      $(".btn__add__item").on("click", function () {
+        $(".wrapper").addClass("open");
+        $("#createEventModal").addClass("open");
       });
 
-      document
-        .querySelector(".btn__add__item")
-        .addEventListener("click", function () {
-          document.querySelector(".wrapper").classList.add("open");
-          document.getElementById("createEventModal").classList.add("open");
-        });
-
-      document.querySelector(".wrapper").addEventListener("click", function () {
-        document.querySelector(".wrapper").classList.remove("open");
-        document.getElementById("createEventModal").classList.remove("open");
-        document.getElementById("viewEventModal").classList.remove("open");
+      // Handle wrapper click (outside modal)
+      $(".wrapper").on("click", function () {
+        $(".wrapper").removeClass("open");
+        $("#createEventModal").removeClass("open");
+        $("#viewEventModal").removeClass("open");
       });
 
-      document.addEventListener("keydown", (event) => {
+      // Handle Escape key press
+      $(document).on("keydown", function (event) {
         if (event.key === "Escape") {
-          document.querySelector(".wrapper").classList.remove("open");
-          document.getElementById("createEventModal").classList.remove("open");
-          document.getElementById("viewEventModal").classList.remove("open");
+          $(".wrapper").removeClass("open");
+          $("#createEventModal").removeClass("open");
+          $("#viewEventModal").removeClass("open");
+          loadOfficials();
         }
       });
 
-      document
-        .querySelector(".menu__icon")
-        .addEventListener("click", function () {
-          document.querySelector("body").classList.toggle("hide__sidebar");
-          document.querySelector(".nav__heading").classList.toggle("d__none");
-        });
-
-      document
-        .querySelector(".user__box")
-        .addEventListener("click", function () {
-          document.querySelector(".dropdown__menu").classList.toggle("show");
-        });
-
-      $(document).ready(function () {
-        $("#example").DataTable();
+      // Handle menu icon click
+      $(".menu__icon").on("click", function () {
+        $("body").toggleClass("hide__sidebar");
+        $(".nav__heading").toggleClass("d__none");
       });
+
+      // Handle user box click
+      $(".user__box").on("click", function () {
+        $(".dropdown__menu").toggleClass("show");
+      });
+
+      // Initialize DataTable
+      $("#example").DataTable();
+    });
+
     </script>
   </body>
 </html>

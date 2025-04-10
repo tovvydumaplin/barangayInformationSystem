@@ -6,6 +6,7 @@ use App\Models\ResidentModel;
 use App\Models\HouseModel; 
 use App\Models\InventoryModel;
 use App\Models\LendingModel;
+use App\Models\OfficialModel;
 class AdminController extends BaseController
 {
     public function dashboard()
@@ -1016,29 +1017,291 @@ public function createUser()
             ]);
         }
     
-        // Insert data into tbl_lending table
-        $lendingModel = new LendingModel();
+        // Check if the item exists in the inventory and if the quantity is enough
+        $inventoryModel = new InventoryModel();
+        $item = $inventoryModel->find($itemID);
     
+        if (!$item) {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'Item not found in inventory.'
+            ]);
+        }
+    
+        // Since $item is an array, access it using $item['item_quantity']
+        if ($item['item_quantity'] < $quantity) {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'Not enough quantity in inventory.'
+            ]);
+        }
+    
+        // Proceed to insert data into tbl_lending table
+        $lendingModel = new LendingModel();
         $data = [
             'item_id'           => $itemID,
             'item_name'         => $itemName,  
             'borrower_id'       => $borrowerID,
             'borrowed_quantity' => $quantity,
-            'status'            => '1',  
+            'status'            => '1',  // assuming '1' means active or borrowed
             'date_borrowed'     => date('Y-m-d'),  
         ];
     
         // Save the lending record
         $lendingModel->insert($data);
     
+        // Deduct the borrowed quantity from the inventory
+        $inventoryModel->update($itemID, [
+            'item_quantity' => $item['item_quantity'] - $quantity
+        ]);
+    
         return $this->response->setJSON([
             'status' => 'success',
-            'message' => 'Lending record saved successfully.'
+            'message' => 'Lending record saved successfully'
         ]);
     }
     
     
+    
+    
+    
+    public function fetchLendItemDetails()
+    {
+        $id = $this->request->getPost('id');
+    
+        $lendingModel = new LendingModel();
+        $residentModel = new ResidentModel();
+    
+        $lendingRecord = (array) $lendingModel->find($id);
+    
+        if ($lendingRecord) {
+            $resident = (array) $residentModel->find($lendingRecord['borrower_id']);
+            
+            if ($resident) {
+                $lendingRecord['borrower_fullname'] = $resident['firstname'] . ' ' . $resident['lastname'];
+            }
+    
+            return $this->response->setJSON($lendingRecord);
+        } else {
+            return $this->response->setStatusCode(404)->setJSON(['error' => 'Record not found']);
+        }
+    }
+    public function updateLendingStatus()
+{
+    $lendId = $this->request->getPost('lendId');
+    $status = $this->request->getPost('status');  
 
+    if (!$lendId || !$status) {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Missing required parameters'
+        ]);
+    }
+
+    $lendingModel = new LendingModel();
+    $inventoryModel = new InventoryModel();
+    
+    // Step 1: Fetch the lending record
+    $lendingRecord = $lendingModel->find($lendId);
+    
+    if (!$lendingRecord) {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Lending record not found'
+        ]);
+    }
+    
+    // Step 2: Update lending status
+    $data = [
+        'status' => $status,
+        'updated_at' => date('Y-m-d H:i:s')
+    ];
+    
+    $update = $lendingModel->update($lendId, $data);
+
+    if ($update) {
+        // Step 3: Update the inventory by adding the returned quantity
+        $itemId = $lendingRecord['item_id'];  // Get the item ID from lending record
+        $lendQuantity = $lendingRecord['borrowed_quantity'];  // Get the quantity returned
+
+        $inventoryRecord = $inventoryModel->find($itemId);
+
+        if ($inventoryRecord) {
+            // Increase the inventory quantity by the returned quantity
+            $updatedInventoryQuantity = $inventoryRecord['item_quantity'] + $lendQuantity;
+            $inventoryModel->update($itemId, ['item_quantity' => $updatedInventoryQuantity]);
+        } else {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'Item not found in inventory'
+            ]);
+        }
+
+        return $this->response->setJSON([
+            'status' => 'success',
+            'message' => 'Lending status updated to returned and inventory updated'
+        ]);
+    } else {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Failed to update lending status'
+        ]);
+    }
+}
+
+// Officials
+public function createOfficial()
+{
+    $validation = \Config\Services::validation();
+    $model = new \App\Models\OfficialModel();
+
+    $uploadPath = FCPATH . 'uploads/';
+
+    if (!is_dir($uploadPath)) {
+        mkdir($uploadPath, 0777, true);
+    }
+
+    $file = $this->request->getFile('profile_image');
+
+    if (!$file) {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'No file uploaded.'
+        ]);
+    }
+
+    if ($file->isValid() && !$file->hasMoved()) {
+        $newName = $file->getRandomName();
+        $file->move($uploadPath, $newName);
+
+        $imagePath = 'uploads/' . $newName;
+    } else {
+        $imagePath = null;
+    }
+
+    if (!$imagePath) {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Please select an image.'
+        ]);
+    }
+
+    // You can add validation rules here if needed (email, date, etc.)
+    // For example:
+    $validationRules = [
+        'firstname'     => 'required',
+        'middlename'    => 'required',
+        'lastname'      => 'required',
+        'position'      => 'required',
+        'start_service' => 'required|valid_date',
+        'end_service'   => 'required|valid_date',
+    ];
+
+    if (!$this->validate($validationRules)) {
+        return $this->response->setJSON([
+            'status' => 'validation_error',
+            'errors' => $validation->getErrors()
+        ]);
+    }
+
+    $data = [
+        'firstname'     => $this->request->getPost('firstname'),
+        'middlename'    => $this->request->getPost('middlename'),
+        'lastname'      => $this->request->getPost('lastname'),
+        'suffix'        => $this->request->getPost('suffix'),
+        'position'      => $this->request->getPost('position'),
+        'status'        => 1,
+        'start_service' => $this->request->getPost('start_service'),
+        'end_service'   => $this->request->getPost('end_service'),
+        'image'         => $imagePath,
+    ];
+
+    if ($model->insert($data)) {
+        return $this->response->setJSON([
+            'status' => 'success',
+            'message' => 'Official Created Successfully!'
+        ]);
+    } else {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Failed to create official.'
+        ]);
+    }
+}
+
+
+public function loadOfficials()
+{
+    $model = new OfficialModel();
+    $officials = $model->findAll();
+
+    $data = [];
+    foreach ($officials as $official) {
+        $profile_image = !empty($official['image'])
+            ? base_url($official['image']) 
+            : base_url('uploads/default-profile.png');
+
+        $data[] = [
+            "official_id"   => $official['official_id'],
+            "full_name"     => $official['firstname'] . ' ' . $official['lastname'],
+            "position"      => $official['position'],
+            "suffix"        => $official['suffix'],
+            "status"        => $official['status'] == 1 
+                ? '<span class="text-success">Active</span>' 
+                : '<span class="text-inactive">Inactive</span>',
+            "profile_image" => $profile_image,
+            "action"        => '<button class="btn__primary table__button viewOfficialBtn" data-id="'.$official['official_id'].'">View</button>'
+        ];
+    }
+
+    return $this->response->setJSON(["data" => $data]);
+}
+
+public function getOfficial()
+{
+    $officialId = $this->request->getGet('official_id');
+
+    if (!$officialId) {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Official ID is required'
+        ]);
+    }
+
+    $model = new OfficialModel();
+    $official = $model->find($officialId);
+
+    if (!$official) {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Official not found'
+        ]);
+    }
+
+    $image = !empty($official['image']) 
+    ? $official['image'] 
+    : 'uploads/default-profile.png';
+
+
+    $data = [
+        'firstname'      => $official['firstname'],
+        'middlename'     => $official['middlename'],
+        'lastname'       => $official['lastname'],
+        'suffix'         => $official['suffix'],
+        'position'       => $official['position'],
+        'start_service'  => $official['start_service'],
+        'end_service'    => $official['end_service'],
+        'image'          => $image,
+    ];
+
+    return $this->response->setJSON([
+        'status' => 'success',
+        'data'   => $data
+    ]);
+}
+
+    
+    
     
 }
 

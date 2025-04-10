@@ -101,6 +101,7 @@
 .filter__items__box {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  gap: 1rem;
 }
 .filter__item {
   padding: 2rem;
@@ -127,4 +128,10 @@
 }
 .bi__custom {
   font-size: 3rem;
+}
+
+.filter__subheading {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
 }

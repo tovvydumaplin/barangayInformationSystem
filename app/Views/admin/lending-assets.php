@@ -202,6 +202,64 @@
           </form>
       </div>
       <!-- Borrow item modal END -->
+      <!-- Borrow item modal VIEW -->
+      <div id="viewBorrowItemModal" class="modal">
+        <div class="modal__header">
+            <p class="modal__heading">Borrow Item</p>
+        </div>
+        <form class="modal__body community__modal" id="viewBorrowForm" enctype="multipart/form-data" method="post"> 
+            <div class="row flex__d__col">
+                <div class="row">
+                    <div class="input__box">
+                        <input
+                            id="viewLendId"
+                            class="information__input"
+                            value=""
+                            placeholder="Enter name"
+                            name="listOfResidents"
+                            type="hidden"
+                        />
+                        <input
+                            id="viewListOfResidents"
+                            class="information__input"
+                            value=""
+                            placeholder="Enter name"
+                            name="listOfResidents"
+                        />
+                        </i>
+                        <span class="input__title">Borrower's Fullname<span class="red__dot">*</span></span>
+                        <p class="text-danger"></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input__box">
+                        <input id="viewListOfItems" class="information__input" value="" placeholder="Enter name" name="listOfItems"/>
+                        <span class="input__title">Item<span class="red__dot">*</span></span>
+                        <p class="text-danger"></p>
+                    </div>
+                </div>
+                <div class="row">                      
+                    <div class="input__box">
+                        <input id="viewLendQuantity" class="information__input" value="" placeholder="Enter quantity" name="lendQuantity" type="number" />
+                        <span class="input__title">Quantity<span class="red__dot">*</span></span>
+                        <p class="text-danger"></p>
+                    </div>
+                </div>
+                <div class="row">                      
+                    <div class="input__box">
+                        <input id="viewDateBorrowed" class="information__input" value="" placeholder="Enter quantity" name="lendDate" />
+                        <span class="input__title">Date Borrowed<span class="red__dot">*</span></span>
+                        <p class="text-danger"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="btn__box__modal">
+                <span class="btn__primary" id="viewLendBtn">Mark as returned</span>
+            </div>
+        </form>
+    </div>
+
+      <!-- Borrow item modal VIEW END -->
 
       <div class="container">
         <div class="heading__box">
@@ -366,23 +424,23 @@ $(document).ready(function () {
 
     // For borrower modal
     const listOfResidents = function () {
-      $.ajax({
-          url: '<?= site_url('admin/fetch-residents') ?>',
-          type: 'GET',
-          dataType: 'json',
-          success: function (data) {
-              const $select = $('#listOfResidents');
-              $select.empty();
-              $select.append('<option value="">Choose a resident</option>');
-              data.forEach(resident => {
-                  $select.append(`<option value="${resident.resident_id}">${resident.fullname}</option>`);
-              });
-          },
-          error: function (xhr, status, error) {
-              console.error('Error loading residents:', error);
-          }
-      });
-  };
+        $.ajax({
+            url: '<?= site_url('admin/fetch-residents') ?>',
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                const $select = $('#listOfResidents');
+                $select.empty();
+                $select.append('<option value="">Choose a resident</option>');
+                data.forEach(resident => {
+                    $select.append(`<option value="${resident.resident_id}">${resident.fullname}</option>`);
+                });
+            },
+            error: function (xhr, status, error) {
+                console.error('Error loading residents:', error);
+            }
+        });
+    };
 
 
     const listOfItems = function () {
@@ -464,7 +522,7 @@ $(document).ready(function () {
         $('#inventoryTable').DataTable().clear().destroy();
     }
 
-    // Reinitialize DataTable
+    // Reinitialize DataTable after destruction
     $('#inventoryTable').DataTable({
         ajax: {
             url: '<?= site_url('admin/inventory-data') ?>',
@@ -475,53 +533,115 @@ $(document).ready(function () {
             }
         },
         columns: [
-            { data: 'item_name' },
-            { data: 'item_quantity' },
+            { data: 'item_name', title: 'Item Name' },
+            { data: 'item_quantity', title: 'Quantity' },
             {
                 data: 'image',
                 render: function (data, type, row) {
                     const imagePath = data ? '/uploads/inventory/' + data : '/path/to/default/image.jpg';
                     return '<img src="' + imagePath + '" alt="' + row.item_name + '" style="width: 50px; height: 50px; object-fit: cover;">';
-                }
+                },
+                title: 'Image'
             },
             {
                 data: null,
                 render: function (data, type, row) {
                     return '<button class="btn btn__view view-item-btn" data-item-id="' + row.item_id + '">View</button>';
-                }
+                },
+                title: 'Action'
+            }
+        ],
+        // Optionally you can add other settings like pagination, sorting, etc.
+        paging: true,
+        ordering: true,
+        searching: true
+    });
+};
+
+
+const markAsReturned = function () {
+    let lendId = $('#viewLendId').val();  
+
+    if (!lendId) {
+        alert('Invalid lending record');
+        return;
+    }
+
+    $.ajax({
+        url: "<?= site_url('/admin/update-lending-status') ?>",  
+        type: 'POST',
+        data: {
+            lendId: lendId,
+            status: 2 // Status for "returned"
+        },
+        beforeSend: function () {
+            $('#lendBtn').prop('disabled', true).text('Processing...'); // Disable button during the request
+        },
+        success: function (response) {
+            console.log('Response:', response);
+            if (response.status === 'success') {
+                alert('Lending marked as returned and inventory updated!');
+                $('#viewBorrowItemModal').removeClass('open'); // Close the modal after success
+            } else {
+                alert('Failed to mark as returned: ' + response.message); 
+            }
+            loadLendingHistory();  // Reload lending history after success
+        },
+        error: function (xhr, status, error) {
+            console.error('Error:', error);
+            alert('An error occurred while updating the lending status.');
+        },
+        complete: function () {
+            $('#lendBtn').prop('disabled', false).text('Submit');  // Re-enable button after the request completes
+            loadLendingHistory();  // Reload lending history (in case of any error)
+            $('#viewBorrowItemModal').removeClass("open");  // Close the modal
+            $('.wrapper').removeClass("open");  // Close the wrapper
+        }
+    });
+};
+
+
+
+
+
+$('#viewLendBtn').on("click", function () {
+    markAsReturned();  
+});
+
+const loadLendingHistory = function() {
+    // Check if the DataTable is already initialized
+    if ($.fn.DataTable.isDataTable('#lendingTable')) {
+        // Destroy the existing DataTable instance
+        $('#lendingTable').DataTable().clear().destroy();
+    }
+
+    // Re-initialize the DataTable with new data
+    $('#lendingTable').DataTable({
+        ajax: {
+            url: '<?= site_url('admin/lend-items') ?>',
+            type: 'GET',
+            dataSrc: '',
+            error: function (xhr, status, error) {
+                console.log('Error fetching lending data:', error);
+            }
+        },
+        columns: [
+            { data: 'borrower_name', title: 'Borrower' },  
+            { data: 'item_name', title: 'Item Name' },
+            { data: 'borrowed_quantity', title: 'Quantity' },
+            { data: 'date_borrowed', title: 'Date Borrowed' },
+            { data: 'house_no', title: 'House No' },  
+            {
+                data: null,
+                render: function (data, type, row) {
+                    return `<button class="btn btn__view view__lending__btn" data-id="${row.id}" data-item="${row.item_id}">View</button>`;
+                },
+                title: 'Action'
             }
         ]
     });
-}
+};
 
-const loadLendingHistory = function() {
-  if (!$.fn.DataTable.isDataTable('#lendingTable')) {
-        $('#lendingTable').DataTable({
-            ajax: {
-                url: '<?= site_url('admin/lend-items') ?>',
-                type: 'GET',
-                dataSrc: '',
-                error: function (xhr, status, error) {
-                    console.log('Error fetching lending data:', error);
-                }
-            },
-            columns: [
-                { data: 'item_name', title: 'Item Name' },
-                { data: 'borrowed_quantity', title: 'Quantity' },
-                { data: 'date_borrowed', title: 'Date Borrowed' },
-                { data: 'borrower_name', title: 'Borrower' },  // New column for borrower name
-                { data: 'house_no', title: 'House No' },  // New column for house number
-                {
-                    data: null,
-                    render: function (data, type, row) {
-                        return `<button class="btn btn__view view-item-btn" data-id="${row.id}" data-item="${row.item_id}">View</button>`;
-                    },
-                    title: 'Action'
-                }
-            ]
-        });
-    }
-}
 
 
 // Lending table
@@ -535,6 +655,8 @@ $('.lending__tab').on('click', function () {
 
 
     loadInventory();
+
+
 
     const newLending = function () {
     let form = $('#borrowForm')[0];
@@ -563,17 +685,70 @@ $('.lending__tab').on('click', function () {
         },
         success: function (response) {
             console.log('Response:', response);
-            alert('Lending recorded successfully!');
-            $('#lendBtn').prop('disabled', false).text('Submit');
-            $('#borrowForm')[0].reset();
+            if (response.message) {
+                  alert(response.message);
+              } else {
+                  alert('Lending recorded successfully!');
+              }
         },
         error: function (xhr, status, error) {
             console.error('Error response:', xhr.responseText);
-            alert('An error occurred while submitting.');
+
+            // Handle specific error cases based on the response
+            try {
+                // Parse the response if it's JSON
+                const response = JSON.parse(xhr.responseText);
+                
+                if (response.message) {
+                    // Display the message from the backend
+                    alert(response.message);
+                } else {
+                    // Generic error message
+                    alert('An error occurred while submitting.');
+                }
+            } catch (e) {
+                // If the response is not JSON, just show a general error
+                alert('An error occurred while submitting.');
+            }
+        },
+        complete: function () {
             $('#lendBtn').prop('disabled', false).text('Submit');
+            $('#borrowForm')[0].reset(); 
+            loadLendingHistory();
+            $('#borrowItemModal').removeClass("open");  // Close the modal
+            $('.wrapper').removeClass("open");  // Close the wrapper
         }
     });
 };
+
+
+
+$(document).on("click", ".view__lending__btn", function () {
+  const recordId = $(this).data("id");
+
+  $('#viewBorrowItemModal').addClass("open");
+  $('.wrapper').addClass("open");
+
+  $.ajax({
+    url: "/admin/view-lent-items",
+    method: "POST",
+    data: { id: recordId },
+    dataType: "json",
+    success: function (res) {
+      $('#viewLendId').val(res.id).prop('disabled', true);
+      $('#viewListOfResidents').val(res.borrower_fullname).prop('disabled', true);
+      $('#viewListOfItems').val(res.item_name).prop('disabled', true);
+      $('#viewLendQuantity').val(res.borrowed_quantity).prop('readonly', true);
+      $('#viewDateBorrowed').val(res.date_borrowed).prop('readonly', true);
+
+      // $('#viewLendBtn').hide();
+    },
+    error: function (xhr) {
+      console.error("Error loading lending data:", xhr.responseText);
+    }
+  });
+});
+
 
 
 
@@ -583,14 +758,14 @@ $('#lendBtn').on('click', function () {
 
 
         // Upload data + image
-        const createItem = function(file, assetName, assetQuantity) {
+      const createItem = function(file, assetName, assetQuantity) {
         let formData = new FormData();
         formData.append('image', file);
         formData.append('item_name', assetName);
         formData.append('item_quantity', assetQuantity);
 
         $.ajax({
-            url: "<?= site_url('/admin/create-item') ?>",  // Assuming you are using CodeIgniter
+            url: "<?= site_url('/admin/create-item') ?>",  
             type: "POST",
             data: formData,
             dataType: "json",
@@ -648,19 +823,22 @@ $('#lendBtn').on('click', function () {
 
 
 
-// Update your JavaScript to handle the form submission better
+
 $('#editItemBtn').on('click', function(e) {
     e.preventDefault();
     updateItem();
 });
 
-// Add this to your JavaScript file inside the $(document).ready function
-// This makes clicking on the preview image open the file picker dialog
+$('.inventory__tab').on('click',function(){
+  loadInventory();
+  loadLendingHistory();
+});
+
 $('#viewItemImage').on('click', function() {
     $('#viewFileInput').click();
 });
 
-// Your existing code for handling the file selection remains the same
+
 $('#viewFileInput').on('change', function() {
     const file = this.files[0];
     if (file) {
@@ -690,7 +868,7 @@ const restrictAssetInputs = function() {
   $('#viewItemImage').css({
     'pointer-events': 'none',
     'cursor': 'default',
-    'opacity': 0.6 // Looks faded/disabled
+    'opacity': 0.6 
   });
 }
 $('.btn__edit__asset').on("click", function(){
@@ -817,6 +995,7 @@ $(document).ready(function () {
     $("#registerItemModal").removeClass("open");
     $("#viewItemModal").removeClass("open");
     $("#borrowItemModal").removeClass("open");
+    $("#viewBorrowItemModal").removeClass("open");
 
   });
 
@@ -827,6 +1006,8 @@ $(document).ready(function () {
       $("#registerItemModal").removeClass("open");
       $("#viewItemModal").removeClass("open");
       $("#borrowItemModal").removeClass("open");
+    $("#viewBorrowItemModal").removeClass("open");
+
     }
   });
 
