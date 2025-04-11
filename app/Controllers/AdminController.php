@@ -1245,7 +1245,8 @@ public function loadOfficials()
             "official_id"   => $official['official_id'],
             "full_name"     => $official['firstname'] . ' ' . $official['lastname'],
             "position"      => $official['position'],
-            "suffix"        => $official['suffix'],
+            "start_service" => $official['start_service'],
+            "end_service"   => $official['end_service'],
             "status"        => $official['status'] == 1 
                 ? '<span class="text-success">Active</span>' 
                 : '<span class="text-inactive">Inactive</span>',
@@ -1284,6 +1285,7 @@ public function getOfficial()
 
 
     $data = [
+        'official_id'    => $official['official_id'],
         'firstname'      => $official['firstname'],
         'middlename'     => $official['middlename'],
         'lastname'       => $official['lastname'],
@@ -1300,7 +1302,55 @@ public function getOfficial()
     ]);
 }
 
-    
+public function updateOfficial()
+{
+    $id = $this->request->getPost('official_id');
+
+    if (empty($id)) {
+        return $this->response->setJSON([
+            'success' => false,
+            'message' => 'Official ID is missing'
+        ]);
+    }
+
+    $data = [
+        'firstname'      => $this->request->getPost('firstname'),
+        'lastname'       => $this->request->getPost('lastname'),
+        'middlename'     => $this->request->getPost('middlename'),
+        'suffix'         => $this->request->getPost('suffix'),
+        'position'       => $this->request->getPost('position'),
+        'start_service'  => $this->request->getPost('view_start_service'),
+        'end_service'    => $this->request->getPost('view_end_service'),
+        'status'         => $this->request->getPost('view_status'),
+        'updated_at'     => date('Y-m-d H:i:s')
+    ];
+
+    $image = $this->request->getFile('view_profile_image');
+    if ($image && $image->isValid() && !$image->hasMoved()) {
+        $newName = $image->getRandomName();
+        $image->move('uploads/profile_images', $newName);
+        $data['image'] = 'uploads/profile_images/' . $newName;
+    }
+
+    $officialModel = new \App\Models\OfficialModel();
+    $updated = $officialModel->update($id, $data);
+
+    if ($updated) {
+        return $this->response->setJSON([
+            'success'    => true,
+            'message'    => 'Official updated successfully',
+            'image_url'  => isset($data['image']) ? base_url($data['image']) : null
+        ]);
+    } else {
+        return $this->response->setJSON([
+            'success' => false,
+            'message' => 'Failed to update official'
+        ]);
+    }
+}
+
+
+
     
     
 }

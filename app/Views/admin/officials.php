@@ -125,12 +125,13 @@
                 </div>
                     <div class="input__box__container">
                         <div class="input__box margin__bottom__2">
-                            <input class="information__input" placeholder="Enter Firstname" name="firstname" required />
+                          <input type="hidden" name="view_user_id" id="view_user_id">
+                            <input class="information__input" placeholder="Enter Firstname" name="view_firstname" required />
                             <span class="input__title">Firstname<span class="red__dot">*</span></span>
                             <p class="text-danger"></p>
                         </div>
                         <div class="input__box">
-                            <input class="information__input" placeholder="Enter Lastname" name="lastname" required />
+                            <input class="information__input" placeholder="Enter Lastname" name="view_lastname" required />
                             <span class="input__title">Lastname<span class="red__dot">*</span></span>
                             <p class="text-danger"></p>
                         </div>
@@ -139,13 +140,13 @@
 
                 <div class="row">
                     <div class="input__box">
-                        <input class="information__input" placeholder="Enter Middlename" name="middlename" required />
+                        <input class="information__input" placeholder="Enter Middlename" name="view_middlename" required />
                         <span class="input__title">Middlename<span class="red__dot">*</span></span>
                         <p class="text-danger"></p>
                     </div>
                     <div class="input__box">
                         <span class="input__title">Suffix<span class="red__dot">*</span></span>
-                        <select class="information__input" name="suffix">
+                        <select class="information__input" name="view_suffix">
                             <option value="" disabled selected>Choose Suffix</option>
                             <option value="">None</option>
                             <option value="Jr.">Jr.</option>
@@ -159,7 +160,7 @@
                 </div>
                 <div class="row">
                     <div class="input__box">
-                        <input class="information__input" placeholder="Enter Position" name="position" required />
+                        <input class="information__input" placeholder="Enter Position" name="view_position" required />
                         <span class="input__title">Position<span class="red__dot">*</span></span>
                         <p class="text-danger"></p>
                         <p class="text-danger error-email"></p>
@@ -168,17 +169,27 @@
                 <div class="row">
                     <div class="input__box">
                         <span class="input__title">Start of Service<span class="red__dot">*</span></span>
-                        <input type="date" class="information__input" name="start_service" required/>
+                        <input type="date" class="information__input" name="view_start_service" required/>
                         <p class="text-danger"></p>
                     </div>
                     <div class="input__box">
                         <span class="input__title">End of Service<span class="red__dot">*</span></span>
-                        <input type="date" class="information__input" name="end_service" required/>
+                        <input type="date" class="information__input" name="view_end_service" required/>
+                        <p class="text-danger"></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input__box">
+                        <span class="input__title">Status</span>
+                        <select type="date" class="information__input" name="view_status" required>
+                          <option value="1">Mark as Active</option>
+                          <option value="0">Mark as Inactive</option>
+                        </select>
                         <p class="text-danger"></p>
                     </div>
                 </div>
                 <div class="btn__box__modal">
-                    <button type="button" class="btn__primary active btn__create__official">Create Official</button>
+                   <button type="submit" class="btn__primary active" id="submitUserBtn">Update Official</button>
                 </div>
             </div>
         </form>
@@ -248,12 +259,14 @@
             <table id="officialsTable" class="display">
               <thead class="thead">
                 <tr>
-                  <th>#</th>
-                  <th>Event Name</th>
-                  <th>Description</th>
-                  <th>Start Date/Time</th>
-                  <th>End Date/Time</th>
-                  <th>Action</th>
+                  <th>Image</th>
+                  <th>Official ID</th>
+                  <th>Fullname</th>
+                  <th>Position</th>
+                  <th>Start Date</th>
+                  <th>End Date</th>
+                  <th>Position</th>
+                  <th>Status</th>
                 </tr>
               </thead>
               <tbody>
@@ -338,7 +351,8 @@
             { "data": "official_id" },  
             { "data": "full_name" },  
             { "data": "position" },    
-            { "data": "suffix" },        
+            { "data": "start_service" },        
+            { "data": "end_service" },      
             { "data": "status" },      
             { "data": "action" }      
         ],
@@ -356,6 +370,70 @@ loadOfficials();
         };
         reader.readAsDataURL(event.target.files[0]);
     }
+
+    const updateOfficial = function () {
+    let button = $(".btn__secondary__edit");
+
+    if (button.text() === "Edit") {
+        $("#viewImageInput").prop("disabled", false);
+        button.text("Save");
+    } else {
+        $("#viewImageInput").prop("disabled", true);
+        button.text("Edit");
+
+        let officialID = $("#view_user_id").val();
+
+        if (!officialID) {
+            alert("Error: Official ID is missing!");
+            return;
+        }
+
+        let formData = new FormData();
+        formData.append("official_id", officialID);
+        formData.append("firstname", $("[name='view_firstname']").val());
+        formData.append("lastname", $("[name='view_lastname']").val());
+        formData.append("middlename", $("[name='view_middlename']").val());
+        formData.append("suffix", $("[name='view_suffix']").val());
+        formData.append("position", $("[name='view_position']").val());
+        formData.append("view_start_service", $("[name='view_start_service']").val());
+        formData.append("view_end_service", $("[name='view_end_service']").val());
+        formData.append("view_status", $("[name='view_status']").val());
+
+        let file = $("#profile_image")[0].files[0];
+        if (file) {
+            formData.append("view_profile_image", file);
+        }
+
+        $.ajax({
+            url: "<?= site_url('/admin/update-official') ?>",
+            type: "POST",
+            data: formData,
+            processData: false,
+            contentType: false,
+            dataType: "json",
+            success: function (response) {
+                if (response.success) {
+                    if (response.image_url) {
+                        $("#viewImagePreview").attr("src", response.image_url);
+                    }
+                    alert("Success!");
+                } else {
+                    alert("Error: " + response.message);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error("Update Error:", error);
+                alert("Failed to update user.");
+            },
+        });
+    }
+};
+
+
+$("#submitUserBtn").on("click", function (e) {
+    e.preventDefault(); 
+    updateOfficial(); 
+});
 
     $('.btn__create__official').on('click', function () {
         createOfficial();
@@ -382,13 +460,14 @@ loadOfficials();
             if (response.status === 'success') {
                 const official = response.data;
 
-                $("input[name='firstname']").val(official.firstname);
-                $("input[name='middlename']").val(official.middlename);
-                $("input[name='lastname']").val(official.lastname);
-                $("select[name='suffix']").val(official.suffix);
-                $("input[name='position']").val(official.position);
-                $("input[name='start_service']").val(official.start_service);
-                $("input[name='end_service']").val(official.end_service);
+                $("input[name='view_firstname']").val(official.firstname);
+                $("input[name='view_middlename']").val(official.middlename);
+                $("input[name='view_lastname']").val(official.lastname);
+                $("select[name='view_suffix']").val(official.suffix);
+                $("input[name='view_position']").val(official.position);
+                $("input[name='view_start_service']").val(official.start_service);
+                $("input[name='view_end_service']").val(official.end_service);
+                $("input[name='view_user_id']").val(official.official_id);
 
                 const imageUrl = official.image
                     ? "<?= base_url() ?>" + official.image

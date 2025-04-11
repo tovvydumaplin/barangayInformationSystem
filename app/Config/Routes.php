@@ -95,3 +95,4 @@ $routes->post('/admin/update-lending-status', 'AdminController::updateLendingSta
 $routes->post('admin/create-official', 'AdminController::createOfficial');
 $routes->get('admin/load-officials', 'AdminController::loadOfficials');
 $routes->get('admin/get-official', 'AdminController::getOfficial');
+$routes->post('admin/update-official', 'AdminController::updateOfficial');
