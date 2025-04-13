@@ -1388,7 +1388,7 @@ public function createComplaint()
         'complainant_id' => $complainantId,
         'complainant_name' => $complainantName,
         'complain_against' => $fileAgainstName,
-        'complain_aganst_id' => $fileAgainstId,
+        'complain_against_id' => $fileAgainstId,
         'date' => $date,
         'complain_title' => $complainTitle,
         'complain_details' => $complainDetails,
