@@ -183,7 +183,7 @@
             </div>
         </div>
         <div class="btn__box__modal">
-            <button class="btn__primary active" id="markAsCompleted">
+            <button type="button" class="btn__primary active" id="markAsCompleted">
                 Mark as Solved
             </button>
             <span class="btn__secondary active">Close</span>
@@ -338,6 +338,7 @@ const loadComplaints = function() {
             type: 'GET',
             dataSrc: 'data'  
         },
+        order: [[0, 'desc']],
         columns: [
             { data: 'complaint_id' },
             { data: 'type_of_complaint' },
@@ -347,11 +348,11 @@ const loadComplaints = function() {
                 data: 'status',
                 render: function(data, type, row) {
                     if (data == 0) {
-                        return 'In Progress';
+                        return '<span class="status__badge badge__inprogress">In Progress</span>';
                     } else if (data == 1) {
-                        return 'Completed';
+                        return '<span class="status__badge badge__completed">Completed</span>';
                     }
-                    return 'Unknown';  
+                    return '<span class="status-badge badge--unknown">Unknown</span>';
                 }
             },
             { data: 'complain_title' },
@@ -389,6 +390,7 @@ $('#createComplainForm').on('submit', function (e) {
         success: function (response) {
             if (response.status === 'success') {
                 alert('Complaint filed successfully!');
+                loadComplaints();
                 $('#createComplainForm')[0].reset();
                 $(".wrapper, #addReportModal").removeClass("open");
             } else {
@@ -398,6 +400,8 @@ $('#createComplainForm').on('submit', function (e) {
         error: function (xhr, status, error) {
             console.error(xhr.responseText);
             alert('An error occurred while submitting the form.');
+            $('#createComplainForm')[0].reset();
+            $(".wrapper, #addReportModal").removeClass("open");
         }
     });
 });
@@ -421,6 +425,12 @@ const viewComplaint = function(complaintId) {
                 $('textarea[name="view_complaint_details"]').val(complaint.complain_details);
                 $('input[name="view_complaint_id"]').val(complaint.complaint_id);
                 // Show the modal
+                if (complaint.status == 1) {
+                    $('#markAsCompleted').text('Mark as Unsolved').addClass('unsolve').removeClass('solve');
+                } else {
+                    $('#markAsCompleted').text('Mark as Solved').addClass('solve').removeClass('unsolve');
+                }
+
                 $("#viewReportModal").addClass("open");
                 $(".wrapper").addClass("open");
 
@@ -434,31 +444,41 @@ const viewComplaint = function(complaintId) {
         }
     });
 }
-$('#markAsCompleted').on('click', function(e) {
-    e.preventDefault();
-
+$('#markAsCompleted').on('click', function () {
     const complaintId = $('input[name="view_complaint_id"]').val();
+    const isSolved = $(this).hasClass('unsolve');
+    const newStatus = isSolved ? 0 : 1;
 
     $.ajax({
         url: '<?= site_url('admin/mark-as-solved') ?>',
-        method: 'POST',
+        type: 'POST',
         data: {
-            complaint_id: complaintId
+            complaint_id: complaintId,
+            status: newStatus
         },
-        success: function(response) {
+        dataType: 'json',
+        success: function (response) {
             if (response.status === 'success') {
-                $('#viewReportModal').modal('hide');
-                loadComplaints();
+                if (newStatus === 1) {
+                    $('#markAsCompleted').text('Mark as Unsolved').addClass('unsolve').removeClass('solve');
+                } else {
+                    $('#markAsCompleted').text('Mark as Solved').addClass('solve').removeClass('unsolve');
+                }
+                $("#viewReportModal").removeClass("open");
+                $(".wrapper").removeClass("open");
+                loadComplaints(); // refresh table
             } else {
-                alert('Failed to mark as completed.');
+                alert('Error: ' + response.message);
             }
         },
-        error: function(xhr) {
+        error: function (xhr) {
             console.error(xhr.responseText);
-            alert('An error occurred.');
+            alert('Something went wrong.');
         }
     });
 });
+
+
 
 
 

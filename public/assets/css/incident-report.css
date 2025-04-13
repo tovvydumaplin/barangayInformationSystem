@@ -39,3 +39,39 @@
   display: flex;
   gap: 2rem;
 }
+.status__badge {
+  background-color: #f0f0f0;
+  color: #858585;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  display: inline-block;
+  text-align: center;
+}
+
+.badge__inprogress {
+  background-color: #ffe08a;
+  color: #856404;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+}
+
+.badge__completed {
+  background-color: #e1f4e7;
+  color: #5ab87b;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+}
+
+.badge__unknown {
+  background-color: #d6d8db;
+  color: #383d41;
+}
+
+.btn__primary.active.solve {
+}
+.btn__primary.active.unsolve {
+  background-color: red;
+}

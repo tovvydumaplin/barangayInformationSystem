@@ -1303,6 +1303,11 @@ $(document).ready(function () {
 // -- For datatables of Add Resident Modal (TABLE)
 let table = $("#newResidentsTable").DataTable(); // Initialize DataTables
 let members = JSON.parse(localStorage.getItem("members")) || [];
+if (members.length === 0) {
+    $('.create__residents__btn').hide(); 
+} else {
+    $('.create__residents__btn').show(); 
+}
 // ~~~~~~~~~~~~~~~~~~~~~~~~ ⚡ Functions ⚡ ~~~~~~~~~~~~~~~~~~~~~~~~ //
 // Get House Number
 const loadHouseNumbers = function (callback) {
@@ -1438,7 +1443,7 @@ const saveMemberLocally = function (e) {
     };
 
     console.log("Checking House No:", formData.house_no);
-console.log("Existing Members:", members);
+    console.log("Existing Members:", members);
 
 if (formData.is_family_head == "1") {
     let existingHead = members.some(member => 
@@ -1449,6 +1454,8 @@ if (formData.is_family_head == "1") {
         openErrorDisplay(`A family head already exists for House No. <b>${formData.house_no}</b>.`);
         return;
     }
+
+
 }
 
     // Add member and save to localStorage
@@ -2091,8 +2098,9 @@ const loadNationality = function() {
     $viewNationalityDropdown.empty().append('<option value="">Select one</option>');
 
     $.each(nationalities, function (i, nationality) {
-      $nationalityDropdown.append(`<option value="${nationality}">${nationality}</option>`);
-      $viewNationalityDropdown.append(`<option value="${nationality}">${nationality}</option>`);
+      const isSelected = nationality === "Filipino" ? 'selected' : '';
+      $nationalityDropdown.append(`<option value="${nationality}" ${isSelected}>${nationality}</option>`);
+      $viewNationalityDropdown.append(`<option value="${nationality}" ${isSelected}>${nationality}</option>`);
     });
   }
 // ~~~~~~~~~~~~~~~~~~~~~~~~ ⚡ Event Listeners ⚡ ~~~~~~~~~~~~~~~~~~~~~~~~ //
@@ -2193,10 +2201,14 @@ $(document).on("click", ".btn__delete", function () {
     let index = $(this).data("index");
     members.splice(index, 1);
     localStorage.setItem("members", JSON.stringify(members));
+    $('.create__residents__btn').hide(); 
+
     displayTable();
 });
 $("#saveMember").on("click", function(e){
   saveMemberLocally(e);
+  $('.create__residents__btn').show(); 
+
 });
 
 // Data for local storage (Members)

@@ -190,6 +190,13 @@
                   </div>
                   <div class="row">                      
                     <div class="input__box">
+                      <textarea id="borrowDesc" class="information__input borrow__textarea" value="" placeholder="Enter desc" name="borrowDesc"></textarea>
+                      <span class="input__title">Reason<span class="red__dot">*</span></span>
+                      <p class="text-danger"></p>
+                    </div>
+                  </div>
+                  <div class="row">                      
+                    <div class="input__box">
                       <input id="lendQuantity" class="information__input" value="" placeholder="Enter quantity" name="lendQuantity" type="number" />
                       <span class="input__title">Quantity<span class="red__dot">*</span></span>
                       <p class="text-danger"></p>
@@ -240,6 +247,13 @@
                 </div>
                 <div class="row">                      
                     <div class="input__box">
+                      <textarea id="viewBorrowDesc" class="information__input borrow__textarea" value="" placeholder="Enter desc" name="viewBorrowDesc" readonly></textarea>
+                      <span class="input__title">Reason<span class="red__dot">*</span></span>
+                      <p class="text-danger"></p>
+                    </div>
+                </div>
+                <div class="row">                      
+                    <div class="input__box">
                         <input id="viewLendQuantity" class="information__input" value="" placeholder="Enter quantity" name="lendQuantity" type="number" />
                         <span class="input__title">Quantity<span class="red__dot">*</span></span>
                         <p class="text-danger"></p>
@@ -260,7 +274,7 @@
     </div>
 
       <!-- Borrow item modal VIEW END -->
-
+ 
       <div class="container">
         <div class="heading__box">
           <div class="tab__container">
@@ -543,6 +557,7 @@ $(document).ready(function () {
                 },
                 title: 'Image'
             },
+            
             {
                 data: null,
                 render: function (data, type, row) {
@@ -552,6 +567,7 @@ $(document).ready(function () {
             }
         ],
         // Optionally you can add other settings like pagination, sorting, etc.
+        order: [[0, 'desc']],
         paging: true,
         ordering: true,
         searching: true
@@ -638,7 +654,8 @@ const loadLendingHistory = function() {
                 },
                 title: 'Action'
             }
-        ]
+        ],
+        order: [[3, 'desc']]
     });
 };
 
@@ -658,7 +675,7 @@ $('.lending__tab').on('click', function () {
 
 
 
-    const newLending = function () {
+  const newLending = function () {
     let form = $('#borrowForm')[0];
     let formData = new FormData(form);
 
@@ -740,6 +757,7 @@ $(document).on("click", ".view__lending__btn", function () {
       $('#viewListOfItems').val(res.item_name).prop('disabled', true);
       $('#viewLendQuantity').val(res.borrowed_quantity).prop('readonly', true);
       $('#viewDateBorrowed').val(res.date_borrowed).prop('readonly', true);
+      $('#viewBorrowDesc').val(res.borrower_desc).prop('readonly', true);
 
       // $('#viewLendBtn').hide();
     },

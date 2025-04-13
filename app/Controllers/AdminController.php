@@ -1010,8 +1010,9 @@ public function createUser()
         $itemID     = $this->request->getPost('listOfItems');      // Item's ID from the form
         $quantity   = $this->request->getPost('lendQuantity');     // Quantity from the form
         $itemName   = $this->request->getPost('item_name');        // Item name passed via AJAX
+        $borrowDesc   = $this->request->getPost('borrowDesc');        // Item name passed via AJAX
     
-        if (!$borrowerID || !$itemID || !$quantity || !$itemName) {
+        if (!$borrowerID || !$itemID || !$quantity || !$itemName || !$borrowDesc) {
             return $this->response->setJSON([
                 'status' => 'error',
                 'message' => 'All fields are required.'
@@ -1044,6 +1045,7 @@ public function createUser()
             'item_name'         => $itemName,  
             'borrower_id'       => $borrowerID,
             'borrowed_quantity' => $quantity,
+            'borrower_desc' => $borrowDesc,
             'status'            => '1',  // assuming '1' means active or borrowed
             'date_borrowed'     => date('Y-m-d'),  
         ];
@@ -1428,12 +1430,19 @@ public function getComplaints() {
 public function markAsSolved()
 {
     $complaintId = $this->request->getPost('complaint_id');
+    $newStatus = $this->request->getPost('status');
+
     $complainModel = new ComplainModel();
 
-    $complainModel->update($complaintId, ['status' => 1]);
+    if (!$complainModel->find($complaintId)) {
+        return $this->response->setJSON(['status' => 'error', 'message' => 'Complaint not found.']);
+    }
+
+    $complainModel->update($complaintId, ['status' => $newStatus]);
 
     return $this->response->setJSON(['status' => 'success']);
 }
+
 
 }
 

@@ -102,3 +102,7 @@
 .d__none {
   display: none;
 }
+
+.borrow__textarea {
+  height: 15rem;
+}
