@@ -1156,7 +1156,7 @@ public function createUser()
 public function createOfficial()
 {
     $validation = \Config\Services::validation();
-    $model = new \App\Models\OfficialModel();
+    $model = new OfficialModel();
 
     $uploadPath = FCPATH . 'uploads/';
 
@@ -1189,8 +1189,7 @@ public function createOfficial()
         ]);
     }
 
-    // You can add validation rules here if needed (email, date, etc.)
-    // For example:
+    // Validation rules
     $validationRules = [
         'firstname'     => 'required',
         'middlename'    => 'required',
@@ -1207,6 +1206,47 @@ public function createOfficial()
         ]);
     }
 
+    // Get the position
+    $position = $this->request->getPost('position');
+
+    // Define the position limits
+    $positionLimits = [
+        'Administrator'                                => 1,  
+        'Captain'                                      => 1,  
+        'Comm. On Peace & Order & Public Safety'        => 1,  
+        'Comm. On Public Works and Infrastructure'      => 1, 
+        'Comm. On Solid Waste Management'               => 1, 
+        'Comm. On Appropriations'                       => 1,  
+        'Comm. On Nutrition'                           => 1,  
+        'Comm. On Women & Family Welfare'               => 1,
+        'Comm. On Disaster Preparedness'               => 1,  
+        'Chief Tanod'                                  => 1,  
+        'Deputy Tanod'                                 => 5, 
+        'Member'                                       => 7,  
+        'Sk Kagawad'                                   => 7,  
+        'Sk Chairperson'                               => 1, 
+        'Secretary'                                    => 1,  
+        'Treasurer'                                    => 1, 
+        'Tanod'                                        => 10, 
+    ];
+
+
+
+    // Check if the position exists in the limits array
+    if (isset($positionLimits[$position])) {
+        // Check how many officials already have this position
+        $existingOfficials = $model->where('position', $position)->countAllResults();
+
+        // Compare with the limit
+        if ($existingOfficials >= $positionLimits[$position]) {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'The position "' . $position . '" already has the maximum allowed number of officials.'
+            ]);
+        }
+    }
+
+    // Insert the new official data
     $data = [
         'firstname'     => $this->request->getPost('firstname'),
         'middlename'    => $this->request->getPost('middlename'),
@@ -1230,6 +1270,16 @@ public function createOfficial()
             'message' => 'Failed to create official.'
         ]);
     }
+}
+
+
+public function getOfficials()
+{
+    $officialModel = new OfficialModel();
+
+    $officials = $officialModel->select('position')->findAll();
+
+    return $this->response->setJSON($officials);
 }
 
 

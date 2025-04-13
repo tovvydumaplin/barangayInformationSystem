@@ -85,7 +85,25 @@
                 </div>
                 <div class="row">
                     <div class="input__box">
-                        <input class="information__input" placeholder="Enter Position" name="position" required />
+                        <select class="information__input" placeholder="Enter Position" name="position" required>
+                            <option value="" selected>Choose Position</option>
+                            <option value="Captain">Captain</option>
+                            <option value="Comm. On Peace & Order & Public Safety">Comm. On Peace & Order & Public Safety</option>
+                            <option value="Comm. On Public Works and Infrastructure">Comm. On Public Works and Infrastructure</option>
+                            <option value="Comm. On Solid Waste Management">Comm. On Solid Waste Management</option>
+                            <option value="Comm. On Appropriations">Comm. On Appropriations</option>
+                            <option value="Comm. On Nutrition">Comm. On Nutrition</option>
+                            <option value="Comm. On Women & Family Welfare">Comm. On Women & Family Welfare</option>
+                            <option value="Comm. On Disaster Preparedness">Comm. On Disaster Preparedness</option>
+                            <option value="Chief Tanod">Chief Tanod</option>
+                            <option value="Deputy Tanod">Deputy Tanod</option>
+                            <option value="Member">Member</option>
+                            <option value="Sk Kagawad">Sk Kagawad</option>
+                            <option value="Sk Chairperson">Sk Chairperson</option>
+                            <option value="Secretary">Secretary</option>
+                            <option value="Treasurer">Treasurer</option>
+                            <option value="Tanod">Tanod</option>
+                        </select>
                         <span class="input__title">Position<span class="red__dot">*</span></span>
                         <p class="text-danger"></p>
                         <p class="text-danger error-email"></p>
@@ -291,41 +309,42 @@
 
     <script>
 
-    const createOfficial = function () {
-        let form = $('#createUserForm')[0];
-        let formData = new FormData(form);
+const createOfficial = function () {
+    let form = $('#createUserForm')[0];
+    let formData = new FormData(form);
 
-        $.ajax({
-            url: "<?= site_url('admin/create-official') ?>",
-            method: 'POST',
-            data: formData,
-            contentType: false,
-            processData: false,
-            beforeSend: function () {
-                $('.btn__create__official').prop('disabled', true).text('Submitting...');
-            },
-            success: function (response) {
-                console.log(response);
-                if (response.status === 'success') {
-                    alert('Official created successfully!');
-                    $('#createUserForm')[0].reset();
-                    $('#createEventModal').removeClass('open'); // Close the modal
-                    $('.wrapper').removeClass('open'); // Close the modal
-                    // Optionally reload a list
-                    loadOfficials();
-                } else {
-                    alert(response.message || 'Something went wrong!');
-                }
-            },
-            error: function (xhr) {
-                console.error(xhr.responseText);
-                alert('An error occurred while submitting the form.');
-            },
-            complete: function () {
-                $('.btn__create__official').prop('disabled', false).text('Create Official');
+    $.ajax({
+        url: "<?= site_url('admin/create-official') ?>",
+        method: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false,
+        beforeSend: function () {
+            $('.btn__create__official').prop('disabled', true).text('Submitting...');
+        },
+        success: function (response) {
+            if (response.status === 'success') {
+                alert('Official created successfully!');
+                $('#createUserForm')[0].reset();
+                $('#createEventModal').removeClass('open'); // Close the modal
+                $('.wrapper').removeClass('open'); // Close the modal
+                loadOfficials();
+            } else if (response.status === 'error') {
+                alert(response.message); 
+            } else {
+                alert(response.message || 'Something went wrong!');
             }
-        });
-    };
+        },
+        error: function (xhr) {
+            console.error(xhr.responseText);
+            alert('An error occurred while submitting the form.');
+        },
+        complete: function () {
+            $('.btn__create__official').prop('disabled', false).text('Create Official');
+        }
+    });
+};
+
 
 
     const loadOfficials = function() {

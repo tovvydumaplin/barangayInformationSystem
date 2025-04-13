@@ -96,6 +96,8 @@ $routes->post('admin/create-official', 'AdminController::createOfficial');
 $routes->get('admin/load-officials', 'AdminController::loadOfficials');
 $routes->get('admin/get-official', 'AdminController::getOfficial');
 $routes->post('admin/update-official', 'AdminController::updateOfficial');
+$routes->get('admin/get-officials', 'AdminController::getOfficials');
+
 // Compaints
 $routes->post('admin/create-complaint', 'AdminController::createComplaint');
 $routes->get('admin/residents-list', 'AdminController::residentsList');
