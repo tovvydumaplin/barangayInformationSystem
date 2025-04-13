@@ -177,7 +177,25 @@
                 </div>
                 <div class="row">
                     <div class="input__box">
-                        <input class="information__input" placeholder="Enter Position" name="view_position" required />
+                      <select class="information__input" placeholder="Enter Position" name="view_position" required>
+                        <option value="" selected>Choose Position</option>
+                            <option value="Captain">Captain</option>
+                            <option value="Comm. On Peace & Order & Public Safety">Comm. On Peace & Order & Public Safety</option>
+                            <option value="Comm. On Public Works and Infrastructure">Comm. On Public Works and Infrastructure</option>
+                            <option value="Comm. On Solid Waste Management">Comm. On Solid Waste Management</option>
+                            <option value="Comm. On Appropriations">Comm. On Appropriations</option>
+                            <option value="Comm. On Nutrition">Comm. On Nutrition</option>
+                            <option value="Comm. On Women & Family Welfare">Comm. On Women & Family Welfare</option>
+                            <option value="Comm. On Disaster Preparedness">Comm. On Disaster Preparedness</option>
+                            <option value="Chief Tanod">Chief Tanod</option>
+                            <option value="Deputy Tanod">Deputy Tanod</option>
+                            <option value="Member">Member</option>
+                            <option value="Sk Kagawad">Sk Kagawad</option>
+                            <option value="Sk Chairperson">Sk Chairperson</option>
+                            <option value="Secretary">Secretary</option>
+                            <option value="Treasurer">Treasurer</option>
+                            <option value="Tanod">Tanod</option>
+                        </select>
                         <span class="input__title">Position<span class="red__dot">*</span></span>
                         <p class="text-danger"></p>
                         <p class="text-danger error-email"></p>
@@ -485,7 +503,7 @@ $("#submitUserBtn").on("click", function (e) {
                 $("input[name='view_middlename']").val(official.middlename);
                 $("input[name='view_lastname']").val(official.lastname);
                 $("select[name='view_suffix']").val(official.suffix);
-                $("input[name='view_position']").val(official.position);
+                $("select[name='view_position']").val(official.position);
                 $("input[name='view_start_service']").val(official.start_service);
                 $("input[name='view_end_service']").val(official.end_service);
                 $("input[name='view_user_id']").val(official.official_id);

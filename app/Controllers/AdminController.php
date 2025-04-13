@@ -1366,18 +1366,62 @@ public function updateOfficial()
         ]);
     }
 
+    $position = $this->request->getPost('position');
+
+    // Define position limits
+    $positionLimits = [
+        'Administrator'                                => 1,
+        'Captain'                                      => 1,
+        'Comm. On Peace & Order & Public Safety'       => 1,
+        'Comm. On Public Works and Infrastructure'     => 1,
+        'Comm. On Solid Waste Management'              => 1,
+        'Comm. On Appropriations'                      => 1,
+        'Comm. On Nutrition'                           => 1,
+        'Comm. On Women & Family Welfare'              => 1,
+        'Comm. On Disaster Preparedness'               => 1,
+        'Chief Tanod'                                  => 1,
+        'Deputy Tanod'                                 => 5,
+        'Member'                                       => 7,
+        'Sk Kagawad'                                   => 7,
+        'Sk Chairperson'                               => 1,
+        'Secretary'                                    => 1,
+        'Treasurer'                                    => 1,
+        'Tanod'                                        => 10,
+    ];
+
+    // Check if position limit exists
+    if (isset($positionLimits[$position])) {
+        $officialModel = new OfficialModel();
+
+        // Count officials already holding this position, excluding the one being updated
+        $currentCount = $officialModel
+            ->where('position', $position)
+            ->where('official_id !=', $id)
+            ->countAllResults();
+
+        // Compare with limit
+        if ($currentCount >= $positionLimits[$position]) {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => "The maximum number of officials for the position '$position' has already been reached."
+            ]);
+        }
+    }
+
+    // Prepare data for update
     $data = [
         'firstname'      => $this->request->getPost('firstname'),
         'lastname'       => $this->request->getPost('lastname'),
         'middlename'     => $this->request->getPost('middlename'),
         'suffix'         => $this->request->getPost('suffix'),
-        'position'       => $this->request->getPost('position'),
+        'position'       => $position,
         'start_service'  => $this->request->getPost('view_start_service'),
         'end_service'    => $this->request->getPost('view_end_service'),
         'status'         => $this->request->getPost('view_status'),
         'updated_at'     => date('Y-m-d H:i:s')
     ];
 
+    // Handle image upload
     $image = $this->request->getFile('view_profile_image');
     if ($image && $image->isValid() && !$image->hasMoved()) {
         $newName = $image->getRandomName();
@@ -1385,7 +1429,7 @@ public function updateOfficial()
         $data['image'] = 'uploads/profile_images/' . $newName;
     }
 
-    $officialModel = new \App\Models\OfficialModel();
+    // Update official
     $updated = $officialModel->update($id, $data);
 
     if ($updated) {
@@ -1401,6 +1445,7 @@ public function updateOfficial()
         ]);
     }
 }
+
 
 public function residentsList()
 {
