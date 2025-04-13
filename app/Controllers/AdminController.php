@@ -7,6 +7,7 @@ use App\Models\HouseModel;
 use App\Models\InventoryModel;
 use App\Models\LendingModel;
 use App\Models\OfficialModel;
+use App\Models\ComplainModel;
 class AdminController extends BaseController
 {
     public function dashboard()
@@ -1349,9 +1350,90 @@ public function updateOfficial()
     }
 }
 
+public function residentsList()
+{
+    $residentModel = new ResidentModel();
+
+    $residents = $residentModel
+        ->select('resident_id, firstname, middlename, lastname, suffix')
+        ->where('status', '1') 
+        ->findAll();
+
+    return $this->response->setJSON($residents);
+}
 
 
     
+public function createComplaint()
+{
+    $complainModel = new ComplainModel();
+    $residentModel = new ResidentModel();
+
+    $complainantId = $this->request->getPost('complainant');
+    $fileAgainstId = $this->request->getPost('file_against');
+    $date = $this->request->getPost('date');
+    $complainTitle = $this->request->getPost('complain_title');
+    $complainDetails = $this->request->getPost('complaint_details');
+    $typeOfComplaint = $this->request->getPost('type_of_complaint'); 
+
+    // Get complainant name using the complainantId
+    $complainant = $residentModel->find($complainantId);
+    $complainantName = $complainant ? $complainant['firstname'] . ' ' . $complainant['lastname'] : null;
+
+    // Get file against name using the fileAgainstId
+    $fileAgainst = $residentModel->find($fileAgainstId);
+    $fileAgainstName = $fileAgainst ? $fileAgainst['firstname'] . ' ' . $fileAgainst['lastname'] : null;
+
+    $data = [
+        'complainant_id' => $complainantId,
+        'complainant_name' => $complainantName,
+        'complain_against' => $fileAgainstName,
+        'complain_aganst_id' => $fileAgainstId,
+        'date' => $date,
+        'complain_title' => $complainTitle,
+        'complain_details' => $complainDetails,
+        'type_of_complaint' => $typeOfComplaint, 
+        'status' => 0
+    ];
+
+    $complainModel->save($data);
+
+    return $this->response->setJSON([
+        'status' => 'success',
+        'message' => 'Complaint filed successfully!'
+    ]);
+}
+
+public function getComplaints() {
+    $complainModel = new ComplainModel();
     
+    $complaints = $complainModel->findAll();
+  
+    return $this->response->setJSON([
+      'data' => $complaints
+    ]);
+  }
+  public function viewComplaint($complaintId)
+{
+    $complainModel = new ComplainModel();
+
+    $complaint = $complainModel->find($complaintId);
+
+    if ($complaint) {
+        return $this->response->setJSON(['status' => 'success', 'data' => $complaint]);
+    } else {
+        return $this->response->setJSON(['status' => 'error', 'message' => 'Complaint not found']);
+    }
+}
+public function markAsSolved()
+{
+    $complaintId = $this->request->getPost('complaint_id');
+    $complainModel = new ComplainModel();
+
+    $complainModel->update($complaintId, ['status' => 1]);
+
+    return $this->response->setJSON(['status' => 'success']);
+}
+
 }
 

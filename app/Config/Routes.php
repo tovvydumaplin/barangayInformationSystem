@@ -96,3 +96,9 @@ $routes->post('admin/create-official', 'AdminController::createOfficial');
 $routes->get('admin/load-officials', 'AdminController::loadOfficials');
 $routes->get('admin/get-official', 'AdminController::getOfficial');
 $routes->post('admin/update-official', 'AdminController::updateOfficial');
+// Compaints
+$routes->post('admin/create-complaint', 'AdminController::createComplaint');
+$routes->get('admin/residents-list', 'AdminController::residentsList');
+$routes->get('admin/get-complaints', 'AdminController::getComplaints');
+$routes->get('admin/view-complain/(:num)', 'AdminController::viewComplaint/$1');
+$routes->post('admin/mark-as-solved', 'AdminController::markAsSolved');

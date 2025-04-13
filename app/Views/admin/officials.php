@@ -73,8 +73,7 @@
                     <div class="input__box">
                         <span class="input__title">Suffix<span class="red__dot">*</span></span>
                         <select class="information__input" name="suffix">
-                            <option value="" disabled selected>Choose Suffix</option>
-                            <option value="">None</option>
+                            <option value="" selected>None</option>
                             <option value="Jr.">Jr.</option>
                             <option value="Sr.">Sr.</option>
                             <option value="II">II</option>
@@ -189,7 +188,7 @@
                     </div>
                 </div>
                 <div class="btn__box__modal">
-                   <button type="submit" class="btn__primary active" id="submitUserBtn">Update Official</button>
+                   <button type="submit" class="btn__primary active" id="submitUserBtn">Save Changes</button>
                 </div>
             </div>
         </form>
@@ -311,8 +310,9 @@
                     alert('Official created successfully!');
                     $('#createUserForm')[0].reset();
                     $('#createEventModal').removeClass('open'); // Close the modal
+                    $('.wrapper').removeClass('open'); // Close the modal
                     // Optionally reload a list
-                    // loadOfficials();
+                    loadOfficials();
                 } else {
                     alert(response.message || 'Something went wrong!');
                 }
@@ -413,10 +413,12 @@ loadOfficials();
             dataType: "json",
             success: function (response) {
                 if (response.success) {
-                    if (response.image_url) {
-                        $("#viewImagePreview").attr("src", response.image_url);
-                    }
-                    alert("Success!");
+                  $(".wrapper").removeClass("open");
+                  $("#createEventModal").removeClass("open");
+                  $("#viewEventModal").removeClass("open");
+                  alert("Official details updated!");
+                  loadOfficials();
+
                 } else {
                     alert("Error: " + response.message);
                 }
@@ -506,7 +508,6 @@ $("#submitUserBtn").on("click", function (e) {
           $(".wrapper").removeClass("open");
           $("#createEventModal").removeClass("open");
           $("#viewEventModal").removeClass("open");
-          loadOfficials();
         }
       });
 

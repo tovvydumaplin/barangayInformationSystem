@@ -37,105 +37,32 @@
     <main>
     <?= view('includes/header.php') ?>
       <div class="wrapper"></div>
-      <div id="viewReportModal" class="modal">
-        <div class="modal__header">
-          <p class="modal__heading">Viewing Complaint</p>
-          <button class="btn__secondary active">Edit Info</button>
-        </div>
-        <form class="modal__body community__modal">
-          <div class="row flex__d__col">
-            <!-- 1 -->
-            <div class="input__box">
-              <input
-                class="information__input"
-                value=""
-                placeholder="Enter fullname"
-                name="firstname"
-                readonly
-              />
-              <span class="input__title"
-                >Complainant<span class="red__dot">*</span></span
-              >
-              <p class="text-danger"></p>
-            </div>
-            <!-- 1 -->
-            <div class="input__box">
-              <input
-                class="information__input"
-                value=""
-                placeholder="Enter lastname"
-                name="lastname"
-                readonly
-              />
-              <span class="input__title"
-                >File Against<span class="red__dot">*</span></span
-              >
-              <p class="text-danger"></p>
-            </div>
-            <!-- 1 -->
-            <div class="input__box">
-              <input
-                class="information__input"
-                value=""
-                placeholder="Enter middlename"
-                name="middlename"
-                readonly
-              />
-              <span class="input__title"
-                >Start Date/Time<span class="red__dot">*</span></span
-              >
-              <p class="text-danger"></p>
-            </div>
-            <div class="input__box">
-              <input
-                class="information__input"
-                value=""
-                placeholder="Enter suffix"
-                name="suffix"
-                readonly
-              />
-              <span class="input__title"
-                >Complain<span class="red__dot">*</span></span
-              >
-              <p class="text-danger"></p>
-            </div>
-            <div class="input__box">
-              <textarea
-                class="information__input"
-                value=""
-                placeholder="Enter contact-no"
-                name="contact-no"
-                readonly
-              >
-              </textarea>
-              <span class="input__title"
-                >Complain Details<span class="red__dot">*</span></span
-              >
-              <p class="text-danger"></p>
-            </div>
-          </div>
-
-          <div class="btn__box__modal">
-            <span class="btn__secondary active btn__close">Close</span>
-          </div>
-        </form>
-      </div>
       <div id="addReportModal" class="modal">
         <div class="modal__header">
           <p class="modal__heading">File a Complaint</p>
           <button class="btn__secondary active">X</button>
         </div>
-        <form class="modal__body community__modal">
+        <form id="createComplainForm" class="modal__body community__modal">
           <div class="row flex__d__col">
             <!-- 1 -->
             <div class="input__box">
-              <input
+                <select class="information__input" name="type_of_complaint">
+                  <option value="">Select one</option>
+                  <option value="blotter">Blotter</option>
+                  <option value="complaint">Complaint</option>
+                </select>
+                <span class="input__title">Type of Concern<span class="red__dot">*</span></span>
+                <p class="text-danger"></p>
+            </div>
+            <!-- 2 -->
+            <div class="input__box">
+              <select
                 class="information__input"
                 value=""
                 placeholder="Enter fullname"
-                name="firstname"
-                readonly
-              />
+                name="complainant"
+                
+              ></select>
               <span class="input__title"
                 >Complainant<span class="red__dot">*</span></span
               >
@@ -143,13 +70,13 @@
             </div>
             <!-- 1 -->
             <div class="input__box">
-              <input
+              <select
                 class="information__input"
                 value=""
                 placeholder="Enter lastname"
-                name="lastname"
-                readonly
-              />
+                name="file_against"
+                
+              ></select>
               <span class="input__title"
                 >File Against<span class="red__dot">*</span></span
               >
@@ -161,11 +88,11 @@
                 class="information__input"
                 value=""
                 placeholder="Enter middlename"
-                name="middlename"
-                readonly
+                name="date"
+                type="date"
               />
               <span class="input__title"
-                >Start Date/Time<span class="red__dot">*</span></span
+                >Date<span class="red__dot">*</span></span
               >
               <p class="text-danger"></p>
             </div>
@@ -174,11 +101,11 @@
                 class="information__input"
                 value=""
                 placeholder="Enter suffix"
-                name="suffix"
-                readonly
+                name="complain_title"
+                
               />
               <span class="input__title"
-                >Complain<span class="red__dot">*</span></span
+                >Complain Title<span class="red__dot">*</span></span
               >
               <p class="text-danger"></p>
             </div>
@@ -187,8 +114,8 @@
                 class="information__input"
                 value=""
                 placeholder="Enter contact-no"
-                name="contact-no"
-                readonly
+                name="complaint_details"
+                
               >
               </textarea>
               <span class="input__title"
@@ -198,13 +125,72 @@
             </div>
           </div>
           <div class="btn__box__modal">
-            <button class="btn__primary active btn__close">
+            <button class="btn__primary active btn__close" id="createComplain">
               File Complain
             </button>
             <span class="btn__secondary active btn__close">Close</span>
           </div>
         </form>
       </div>
+      <!-- View Complaint -->
+      <div id="viewReportModal" class="modal">
+        <div class="modal__header">
+            <p class="modal__heading">View Complaint</p>
+            <button class="btn__secondary active">X</button>
+        </div>
+        <form id="viewComplainForm" class="modal__body community__modal">
+        <div class="row flex__d__col">
+          <!-- Hidden ID -->
+          <input type="hidden" name="view_complaint_id" />
+          <div class="input__box">
+                <input class="information__input" name="view_type_of_complaint"/>
+                <span class="input__title">Type of Concern<span class="red__dot">*</span></span>
+                <p class="text-danger"></p>
+            </div>
+            <!-- Complainant -->
+            <div class="input__box">
+                <input class="information__input" name="view_complainant"/>
+                <span class="input__title">Complainant<span class="red__dot">*</span></span>
+                <p class="text-danger"></p>
+            </div>
+
+            <!-- File Against -->
+            <div class="input__box">
+                <input class="information__input" name="view_file_against"/>
+                <span class="input__title">File Against<span class="red__dot">*</span></span>
+                <p class="text-danger"></p>
+            </div>
+
+            <!-- Date -->
+            <div class="input__box">
+                <input class="information__input" name="view_date" type="date" readonly />
+                <span class="input__title">Date<span class="red__dot">*</span></span>
+                <p class="text-danger"></p>
+            </div>
+
+            <!-- Complain Title -->
+            <div class="input__box">
+                <input class="information__input" name="view_complain_title" readonly />
+                <span class="input__title">Complain Title<span class="red__dot">*</span></span>
+                <p class="text-danger"></p>
+            </div>
+
+            <!-- Complaint Details -->
+            <div class="input__box">
+                <textarea class="information__input" name="view_complaint_details" readonly></textarea>
+                <span class="input__title">Complaint Details<span class="red__dot">*</span></span>
+                <p class="text-danger"></p>
+            </div>
+        </div>
+        <div class="btn__box__modal">
+            <button class="btn__primary active" id="markAsCompleted">
+                Mark as Solved
+            </button>
+            <span class="btn__secondary active">Close</span>
+        </div>
+        </form>
+     </div>
+
       <div class="container">
         <div class="heading__box">
           <div class="tab__container">
@@ -212,10 +198,10 @@
               <button class="tab__btn">Complains</button>
               <div class="active__tab"></div>
             </div>
-            <div class="btn__container tab__2">
+            <!-- <div class="btn__container tab__2">
               <button class="tab__btn">Blotter</button>
               <div class="active__tab"></div>
-            </div>
+            </div> -->
           </div>
         </div>
         <div class="card">
@@ -278,10 +264,11 @@
             </div>
           </div>
           <div class="container">
-            <table id="example" class="display">
+            <table id="complainTable" class="display">
               <thead class="thead">
                 <tr>
                   <th>#</th>
+                  <th>Type of Issue</th>
                   <th>Complainant</th>
                   <th>Defendant</th>
                   <th>Status</th>
@@ -291,105 +278,6 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>0001</td>
-                  <td>Walter White</td>
-                  <td>Jesse Pinkman</td>
-                  <td class="stat__indicator">In Progress</td>
-                  <td>Theft or Lost Item Report</td>
-                  <td>12-31-93</td>
-                  <td>
-                    <button class="btn__primary table__button">View</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>0001</td>
-                  <td>Walter White</td>
-                  <td>Jesse Pinkman</td>
-                  <td class="stat__indicator">In Progress</td>
-                  <td>Theft or Lost Item Report</td>
-                  <td>12-31-93</td>
-                  <td>
-                    <button class="btn__primary table__button">View</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>0001</td>
-                  <td>Walter White</td>
-                  <td>Jesse Pinkman</td>
-                  <td class="stat__indicator">In Progress</td>
-                  <td>Theft or Lost Item Report</td>
-                  <td>12-31-93</td>
-                  <td>
-                    <button class="btn__primary table__button">View</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>0001</td>
-                  <td>Walter White</td>
-                  <td>Jesse Pinkman</td>
-                  <td class="stat__indicator">In Progress</td>
-                  <td>Theft or Lost Item Report</td>
-                  <td>12-31-93</td>
-                  <td>
-                    <button class="btn__primary table__button">View</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>0001</td>
-                  <td>Walter White</td>
-                  <td>Jesse Pinkman</td>
-                  <td class="stat__indicator">In Progress</td>
-                  <td>Theft or Lost Item Report</td>
-                  <td>12-31-93</td>
-                  <td>
-                    <button class="btn__primary table__button">View</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>0001</td>
-                  <td>Walter White</td>
-                  <td>Jesse Pinkman</td>
-                  <td class="stat__indicator">In Progress</td>
-                  <td>Theft or Lost Item Report</td>
-                  <td>12-31-93</td>
-                  <td>
-                    <button class="btn__primary table__button">View</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>0001</td>
-                  <td>Walter White</td>
-                  <td>Jesse Pinkman</td>
-                  <td class="stat__indicator">In Progress</td>
-                  <td>Theft or Lost Item Report</td>
-                  <td>12-31-93</td>
-                  <td>
-                    <button class="btn__primary table__button">View</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>0001</td>
-                  <td>Walter White</td>
-                  <td>Jesse Pinkman</td>
-                  <td class="stat__indicator">In Progress</td>
-                  <td>Theft or Lost Item Report</td>
-                  <td>12-31-93</td>
-                  <td>
-                    <button class="btn__primary table__button">View</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>0001</td>
-                  <td>Walter White</td>
-                  <td>Jesse Pinkman</td>
-                  <td class="stat__indicator">In Progress</td>
-                  <td>Theft or Lost Item Report</td>
-                  <td>12-31-93</td>
-                  <td>
-                    <button class="btn__primary table__button">View</button>
-                  </td>
-                </tr>
               </tbody>
             </table>
           </div>
@@ -411,65 +299,229 @@
     ></script>
 
     <script>
-      document.querySelectorAll(".table__button").forEach((button) => {
-        button.addEventListener("click", () => {
-          document.querySelector(".wrapper").classList.add("open");
-          document.getElementById("viewReportModal").classList.add("open");
+$(document).ready(function () {
+  // DataTables initialization
+  $("#complainTable").DataTable();
+// LOAD RESIDENTS
+  function loadResidents() {
+    $.ajax({
+      url: "/admin/residents-list",
+      method: "GET",
+      dataType: "json",
+      success: function (residents) {
+        let options = '<option value="">Choose...</option>';
+        residents.forEach(function (resident) {
+          let fullName = `${resident.firstname} ${resident.middlename} ${resident.lastname} ${resident.suffix || ''}`.trim();
+          options += `<option value="${resident.resident_id}">${fullName}</option>`;
         });
-      });
 
-      document
-        .querySelector(".btn__add__resident")
-        .addEventListener("click", function () {
-          document.querySelector(".wrapper").classList.add("open");
-          document.getElementById("addReportModal").classList.add("open");
-        });
+        $('select[name="complainant"]').html(options);
+        $('select[name="file_against"]').html(options);
+      },
+      error: function (xhr, status, error) {
+        console.error("Failed to load residents:", error);
+      }
+    });
+  }
 
-      document.querySelector(".wrapper").addEventListener("click", function () {
-        document.querySelector(".wrapper").classList.remove("open");
-        document.getElementById("viewReportModal").classList.remove("open");
-        document.getElementById("addReportModal").classList.remove("open");
-      });
+  loadResidents();
 
-      document
-        .querySelector(".btn__close")
-        .addEventListener("click", function () {
-          document.querySelector(".wrapper").classList.remove("open");
-          document.getElementById("viewReportModal").classList.remove("open");
-          document.getElementById("addReportModal").classList.remove("open");
-        });
-      addReportModal;
-      document.addEventListener("keydown", (event) => {
-        if (event.key === "Escape") {
-          document.querySelector(".wrapper").classList.remove("open");
-          document.getElementById("viewReportModal").classList.remove("open");
-          document.getElementById("addReportModal").classList.remove("open");
+
+const loadComplaints = function() {
+    if ($.fn.dataTable.isDataTable('#complainTable')) {
+        $('#complainTable').DataTable().clear().destroy();
+    }
+
+    $('#complainTable').DataTable({
+        ajax: {
+            url: '<?= site_url('admin/get-complaints') ?>',
+            type: 'GET',
+            dataSrc: 'data'  
+        },
+        columns: [
+            { data: 'complaint_id' },
+            { data: 'type_of_complaint' },
+            { data: 'complainant_name' },
+            { data: 'complain_against' },
+            {
+                data: 'status',
+                render: function(data, type, row) {
+                    if (data == 0) {
+                        return 'In Progress';
+                    } else if (data == 1) {
+                        return 'Completed';
+                    }
+                    return 'Unknown';  
+                }
+            },
+            { data: 'complain_title' },
+            { data: 'date' },
+            {
+                data: 'complaint_id',
+                render: function(data, type, row) {
+                    return '<button class="btn__view__complaint" data-id="' + data + '">View</button>';
+                }
+            }
+        ]
+    });
+}
+
+$(document).on('click', '.btn__view__complaint', function() {
+  const complaintId = $(this).data('id'); 
+  viewComplaint(complaintId); 
+  $(".wrapper").addClass("open");
+  
+});
+
+
+loadComplaints();
+
+
+
+$('#createComplainForm').on('submit', function (e) {
+    e.preventDefault(); 
+
+    $.ajax({
+        url: '<?= site_url('admin/create-complaint') ?>',
+        type: 'POST',
+        data: $(this).serialize(),
+        dataType: 'json', 
+        success: function (response) {
+            if (response.status === 'success') {
+                alert('Complaint filed successfully!');
+                $('#createComplainForm')[0].reset();
+                $(".wrapper, #addReportModal").removeClass("open");
+            } else {
+                alert('Something went wrong: ' + response.message);
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error(xhr.responseText);
+            alert('An error occurred while submitting the form.');
         }
-      });
+    });
+});
 
-      document
-        .querySelector(".menu__icon")
-        .addEventListener("click", function () {
-          document.querySelector("body").classList.toggle("hide__sidebar");
-          document.querySelector(".nav__heading").classList.toggle("d__none");
-        });
 
-      document
-        .querySelector(".user__box")
-        .addEventListener("click", function () {
-          document.querySelector(".dropdown__menu").classList.toggle("show");
-        });
-      document.querySelector(".tab__1").addEventListener("click", function () {
-        document.querySelector(".tab__1").classList.add("visible");
-        document.querySelector(".tab__2").classList.remove("visible");
-      });
-      document.querySelector(".tab__2").addEventListener("click", function () {
-        document.querySelector(".tab__2").classList.add("visible");
-        document.querySelector(".tab__1").classList.remove("visible");
-      });
-      $(document).ready(function () {
-        $("#example").DataTable();
-      });
+
+const viewComplaint = function(complaintId) {
+    $.ajax({
+        url: '<?= site_url('admin/view-complain') ?>/' + complaintId,
+        type: 'GET',
+        dataType: 'json',
+        success: function(response) {
+            if (response.status === 'success') {
+                const complaint = response.data; 
+
+                $('input[name="view_type_of_complaint"]').val(complaint.type_of_complaint);
+                $('input[name="view_complainant"]').val(complaint.complainant_name);
+                $('input[name="view_file_against"]').val(complaint.complain_against);
+                $('input[name="view_date"]').val(complaint.date);
+                $('input[name="view_complain_title"]').val(complaint.complain_title);
+                $('textarea[name="view_complaint_details"]').val(complaint.complain_details);
+                $('input[name="view_complaint_id"]').val(complaint.complaint_id);
+                // Show the modal
+                $("#viewReportModal").addClass("open");
+                $(".wrapper").addClass("open");
+
+            } else {
+                alert('Failed to load complaint details');
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error(xhr.responseText);
+            alert('An error occurred while fetching the complaint details.');
+        }
+    });
+}
+$('#markAsCompleted').on('click', function(e) {
+    e.preventDefault();
+
+    const complaintId = $('input[name="view_complaint_id"]').val();
+
+    $.ajax({
+        url: '<?= site_url('admin/mark-as-solved') ?>',
+        method: 'POST',
+        data: {
+            complaint_id: complaintId
+        },
+        success: function(response) {
+            if (response.status === 'success') {
+                $('#viewReportModal').modal('hide');
+                loadComplaints();
+            } else {
+                alert('Failed to mark as completed.');
+            }
+        },
+        error: function(xhr) {
+            console.error(xhr.responseText);
+            alert('An error occurred.');
+        }
+    });
+});
+
+
+
+  // Table button click
+  $(".table__button").on("click", function () {
+    $(".wrapper").addClass("open");
+    $("#viewReportModal").addClass("open");
+  });
+
+  // Add resident button click
+  $(".btn__add__resident").on("click", function () {
+    $(".wrapper").addClass("open");
+    $("#addReportModal").addClass("open");
+  });
+
+  // Wrapper click to close modals
+  $(".wrapper").on("click", function () {
+    $(".wrapper").removeClass("open");
+    $("#viewReportModal").removeClass("open");
+    $("#addReportModal").removeClass("open");
+  });
+
+  // Close button click
+  $(".btn__close").on("click", function () {
+    $(".wrapper").removeClass("open");
+    $("#viewReportModal").removeClass("open");
+    $("#addReportModal").removeClass("open");
+  });
+
+  // Escape key press
+  $(document).on("keydown", function (event) {
+    if (event.key === "Escape") {
+      $(".wrapper").removeClass("open");
+      $("#viewReportModal").removeClass("open");
+      $("#addReportModal").removeClass("open");
+    }
+  });
+
+  // Menu icon toggle sidebar
+  $(".menu__icon").on("click", function () {
+    $("body").toggleClass("hide__sidebar");
+    $(".nav__heading").toggleClass("d__none");
+  });
+
+  // User box dropdown toggle
+  $(".user__box").on("click", function () {
+    $(".dropdown__menu").toggleClass("show");
+  });
+
+  // Tab switching
+  $(".tab__1").on("click", function () {
+    $(".tab__1").addClass("visible");
+    $(".tab__2").removeClass("visible");
+  });
+
+  $(".tab__2").on("click", function () {
+    $(".tab__2").addClass("visible");
+    $(".tab__1").removeClass("visible");
+  });
+
+
+});
+
     </script>
   </body>
 </html>
