@@ -266,27 +266,27 @@
             <div class="profile__photo__container">
               <div class="profile__photo">
                 <div class="img__profile__box">
-                  <img src="<?= esc($image) ?>" class="profile__image__account" />
-                  
+                  <img src="<?= esc($image) ?>" id="imagePreview" class="profile__image__account" />
                 </div>
                 <div>
                   <p class="profile__heading">Profile Photo</p>
                   <p class="profile__subheading">PNG, JPEG under 15MB</p>
                 </div>
                 <div class="action__btn__box">
-                  <button class="btn__secondary">Upload New Photo</button>
-                  <button class="btn__delete">Delete</button>
+                  <input type="file" id="photoInput" accept="image/png, image/jpeg" hidden />
+                  <button type="button" class="btn__secondary" id="uploadBtn">Upload New Photo</button>
+                  <button type="button" class="btn__delete" id="deleteBtn">Delete</button>
                 </div>
               </div>
             </div>
           </div>
           <div class="modal__heading">
             <p class="modal__header">Fullname</p>
-            <button class="btn__primary">Edit Personal Info</button>
+            <button id="editPersonalInfo" class="btn__primary">Edit Personal Info</button>
           </div>
           <div class="modal__content">
             <div class="input__box">
-            <input class="information__input" value="<?= esc($firstname) ?>" readonly />
+            <input class="information__input" name="firstname" value="<?= esc($firstname) ?>" readonly />
               <span class="input__title"
                 >Firstname<span class="red__dot">*</span></span
               >
@@ -295,8 +295,8 @@
             <div class="input__box">
               <input
                 class="information__input"
-                value=""
-                name="street"
+                value="<?= esc($lastname) ?>"
+                name="lastname"
                 readonly
               />
               <span class="input__title"
@@ -307,8 +307,8 @@
             <div class="input__box">
               <input
                 class="information__input"
-                value=""
-                name="street"
+                value="<?= esc($middlename) ?>"
+                name="middlename"
                 readonly
               />
               <span class="input__title"
@@ -319,8 +319,8 @@
             <div class="input__box">
               <input
                 class="information__input"
-                value=""
-                name="street"
+                value="<?= esc($suffix) ?>"
+                name="suffix"
                 readonly
               />
               <span class="input__title"
@@ -328,33 +328,15 @@
               >
               <p class="text-danger"></p>
             </div>
-          </div>
-          <div class="modal__heading">
-            <p class="modal__header">Contact Details</p>
-            <button class="btn__primary">Edit Contact Details</button>
-          </div>
-          <div class="modal__content">
             <div class="input__box">
               <input
                 class="information__input"
-                value=""
-                name="email"
+                value="<?= esc($username) ?>"
+                name="username"
                 readonly
               />
               <span class="input__title"
                 >Email Address<span class="red__dot">*</span></span
-              >
-              <p class="text-danger"></p>
-            </div>
-            <div class="input__box">
-              <input
-                class="information__input"
-                value=""
-                name="contact_no"
-                readonly
-              />
-              <span class="input__title"
-                >Contact No.<span class="red__dot">*</span></span
               >
               <p class="text-danger"></p>
             </div>
@@ -363,43 +345,23 @@
         <div class="card">
           <div class="modal__heading">
             <p class="modal__header">Modify Password</p>
-            <button class="btn__primary">Edit Personal Info</button>
+            <button id="editAccountPassword" class="btn__primary">Update Account Password</button>
           </div>
           <div class="modal__content password__section">
             <div class="input__box">
-              <input
-                class="information__input"
-                value=""
-                name="current_password"
-                readonly
-              />
-              <span class="input__title"
-                >Current Password<span class="red__dot">*</span></span
-              >
-              <p class="text-danger"></p>
+              <input class="information__input" type="password" name="current_password" id="current_password" readonly />
+              <span class="input__title">Current Password<span class="red__dot">*</span></span>
+              <p class="text-danger" id="current_password_error"></p>
             </div>
             <div class="input__box">
-              <input
-                class="information__input"
-                value=""
-                name="new_password"
-                readonly
-              />
-              <span class="input__title"
-                >New Password<span class="red__dot">*</span></span
-              >
-              <p class="text-danger"></p>
+              <input class="information__input" type="password" name="new_password" id="new_password" readonly />
+              <span class="input__title">New Password<span class="red__dot">*</span></span>
+              <p class="text-danger" id="new_password_error"></p>
             </div>
             <div class="input__box">
-              <input
-                class="information__input"
-                value=""
-                readonly
-              />
-              <span class="input__title"
-                >Confirm Password<span class="red__dot">*</span></span
-              >
-              <p class="text-danger"></p>
+              <input class="information__input" type="password" name="confirm_password" id="confirm_password" readonly />
+              <span class="input__title">Confirm Password<span class="red__dot">*</span></span>
+              <p class="text-danger" id="confirm_password_error"></p>
             </div>
           </div>
         </div>
@@ -410,6 +372,8 @@
         </p>
       </footer>
     </main>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <script
       type="module"
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
@@ -420,6 +384,187 @@
     ></script>
 
     <script>
+
+$(document).ready(function () {
+  // Preview the image
+  const previewImage = function (event) {
+    let reader = new FileReader();
+    reader.onload = function () {
+      $("#imagePreview").attr("src", reader.result);
+    };
+    reader.readAsDataURL(event.target.files[0]);
+  };
+
+  // Click to trigger file input
+  $("#uploadBtn").on("click", function () {
+    $("#photoInput").click();
+  });
+
+  // Handle image change and upload
+  $("#photoInput").on("change", function (event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    previewImage(event);
+
+    let formData = new FormData();
+    formData.append("view_profile_image", file); // Only sending the file now
+
+    $.ajax({
+      url: "<?= site_url('/admin/update-user-image') ?>",
+      type: "POST",
+      data: formData,
+      processData: false,
+      contentType: false,
+      dataType: "json",
+      success: function (response) {
+        if (response.success) {
+          if (response.image_url) {
+            $("#imagePreview").attr("src", response.image_url);
+            alert("Image has been updated!");
+          }
+          $(".success__indicator").removeClass("hide").find(".indicator__text").html('Photo Updated!');
+          setTimeout(() => $(".success__indicator").addClass("hide"), 3000);
+        } else {
+          alert("Upload failed: " + response.message);
+        }
+      },
+      error: function (xhr, status, error) {
+        console.error("Upload Error:", error);
+        alert("An error occurred while uploading.");
+      }
+    });
+  });
+
+  $("#deleteBtn").on("click", function () {
+  if (!confirm("Are you sure you want to delete your profile photo?")) return;
+
+  $.ajax({
+    url: "<?= site_url('admin/delete-user-image') ?>",
+    type: "POST",
+    data: {
+      token: "<?= session('token') ?>", // Send session token to validate
+    },
+    success: function (response) {
+      if (response.success) {
+        $("#imagePreview").attr("src", "<?= base_url('assets/images/default-avatar.png') ?>"); // fallback image
+        $(".success__indicator").removeClass("hide");
+        $(".indicator__text").html("Profile photo deleted.");
+        setTimeout(() => {
+          $(".success__indicator").addClass("hide");
+        }, 3000);
+      } else {
+        alert("Failed to delete photo.");
+      }
+    },
+    error: function () {
+      alert("Something went wrong while deleting the image.");
+    }
+  });
+});
+
+// Edit personal information
+$('#editPersonalInfo').click(function () {
+    var isReadOnly = $('.information__input').attr('readonly');
+    
+    if (isReadOnly) {
+      // Remove readonly and change button text to 'Save'
+      $('.information__input').removeAttr('readonly');
+      $('#editPersonalInfo').text('Save');
+    } else {
+      // Collect form data to update
+      var formData = {
+        firstname: $('input[name="firstname"]').val(),
+        lastname: $('input[name="lastname"]').val(),
+        middlename: $('input[name="middlename"]').val(),
+        suffix: $('input[name="suffix"]').val(),
+        username: $('input[name="username"]').val(),
+      };
+
+      // Perform AJAX request to save data
+      $.ajax({
+        url: '/admin/update-user-information', // Your route for updating the information
+        type: 'POST',
+        data: formData,
+        success: function (response) {
+          if (response.success) {
+            // Update UI with the new values
+            $('input[name="firstname"]').val(formData.firstname);
+            $('input[name="lastname"]').val(formData.lastname);
+            $('input[name="middlename"]').val(formData.middlename);
+            $('input[name="suffix"]').val(formData.suffix);
+            $('input[name="username"]').val(formData.username); 
+
+            // Set the fields back to readonly and update the button text to 'Edit'
+            $('.information__input').attr('readonly', 'readonly');
+            $('#editPersonalInfo').text('Edit Personal Info');
+            
+            alert(response.message); // Display success message
+          } else {
+            alert(response.message); // Display error message
+          }
+        }
+      });
+    }
+  });
+
+  $('#editAccountPassword').click(function () {
+    var isReadOnly = $('.information__input').attr('readonly');
+    
+    if (isReadOnly) {
+      // Enable editing and change button text to 'Save'
+      $('.information__input').removeAttr('readonly');
+      $('#editAccountPassword').text('Save');
+    } else {
+      // Validate fields
+      var currentPassword = $('#current_password').val();
+      var newPassword = $('#new_password').val();
+      var confirmPassword = $('#confirm_password').val();
+      var errors = false;
+
+      // Clear previous errors
+      $('.text-danger').text('');
+
+      // Validate password match
+      if (newPassword !== confirmPassword) {
+        $('#confirm_password_error').text('Passwords do not match.');
+        errors = true;
+      }
+
+      // Validate if current password is entered
+      if (!currentPassword) {
+        $('#current_password_error').text('Current password is required.');
+        errors = true;
+      }
+
+      if (errors) return;
+
+      // Perform AJAX request to update password
+      var formData = {
+        current_password: currentPassword,
+        new_password: newPassword,
+        confirm_password: confirmPassword,
+      };
+
+      $.ajax({
+        url: '/admin/update-password', // Your route for updating the password
+        type: 'POST',
+        data: formData,
+        success: function (response) {
+          if (response.success) {
+            alert(response.message); // Show success message
+            $('.information__input').attr('readonly', 'readonly');
+            $('#editAccountPassword').text('Update Account Password');
+          } else {
+            alert(response.message); // Show error message
+          }
+        }
+      });
+    }
+  });
+
+});
+
       document.querySelectorAll(".table__button").forEach((button) => {
         button.addEventListener("click", () => {
           document.querySelector(".wrapper").classList.add("open");
@@ -465,5 +610,17 @@
         $("#example").DataTable();
       });
     </script>
+    <script>
+    $(document).ready(function () {
+      $(".menu__icon").on("click", function () {
+        $("body").toggleClass("hide__sidebar");
+        $(".nav__heading").toggleClass("d__none");
+      });
+
+      $(".user__box").on("click", function () {
+        $(".dropdown__menu").toggleClass("show");
+      });
+    });
+  </script>
   </body>
 </html>

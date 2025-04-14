@@ -1062,5 +1062,17 @@ $(document).ready(function () {
 });
 
     </script>
+  <script>
+    $(document).ready(function () {
+      $(".menu__icon").on("click", function () {
+        $("body").toggleClass("hide__sidebar");
+        $(".nav__heading").toggleClass("d__none");
+      });
+
+      $(".user__box").on("click", function () {
+        $(".dropdown__menu").toggleClass("show");
+      });
+    });
+  </script>
   </body>
 </html>

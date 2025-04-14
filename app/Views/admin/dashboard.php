@@ -424,6 +424,8 @@
         </p>
       </footer>
     </main>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         const options = {
@@ -502,18 +504,16 @@
       });
     </script>
     <script>
-      document
-        .querySelector(".menu__icon")
-        .addEventListener("click", function () {
-          document.querySelector("body").classList.toggle("hide__sidebar");
-          document.querySelector(".nav__heading").classList.toggle("d__none");
+      $(document).ready(function () {
+        $(".menu__icon").on("click", function () {
+          $("body").toggleClass("hide__sidebar");
+          $(".nav__heading").toggleClass("d__none");
         });
 
-      document
-        .querySelector(".user__box")
-        .addEventListener("click", function () {
-          document.querySelector(".dropdown__menu").classList.toggle("show");
+        $(".user__box").on("click", function () {
+          $(".dropdown__menu").toggleClass("show");
         });
+      });
     </script>
   </body>
 </html>

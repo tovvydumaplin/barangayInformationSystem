@@ -106,3 +106,9 @@ $routes->get('admin/residents-list', 'AdminController::residentsList');
 $routes->get('admin/get-complaints', 'AdminController::getComplaints');
 $routes->get('admin/view-complain/(:num)', 'AdminController::viewComplaint/$1');
 $routes->post('admin/mark-as-solved', 'AdminController::markAsSolved');
+
+// User account
+$routes->post('admin/update-user-image', 'AdminController::updateUserImage');
+$routes->post('admin/delete-user-image', 'AdminController::deleteUserImage');
+$routes->post('admin/update-user-information', 'AdminController::updateUserInformation');
+$routes->post('admin/update-password', 'AdminController::updatePassword');

@@ -1574,6 +1574,160 @@ public function markAsSolved()
     return $this->response->setJSON(['status' => 'success']);
 }
 
+// User Account
+public function updateUserImage()
+{
+    $session = session();
+    $token = $session->get('token');
+
+    if (empty($token)) {
+        return $this->response->setJSON(['success' => false, 'message' => 'Session expired or token missing']);
+    }
+
+    $data = [
+        'updated_at' => date('Y-m-d H:i:s')
+    ];
+
+    $file = $this->request->getFile('view_profile_image');
+    if ($file && $file->isValid() && !$file->hasMoved()) {
+        $newName = $file->getRandomName();
+        $file->move('uploads/', $newName);
+        $data['image'] = 'uploads/' . $newName;
+        $session->set('image', $data['image']);
+    } else {
+        return $this->response->setJSON(['success' => false, 'message' => 'Invalid or missing file']);
+    }
+
+    $userModel = new UserModel();
+    $update = $userModel->where('token', $token)->set($data)->update();
+
+    if ($update) {
+        return $this->response->setJSON([
+            'success' => true,
+            'message' => 'User image updated successfully',
+            'image_url' => base_url($data['image'])
+        ]);
+    } else {
+        return $this->response->setJSON([
+            'success' => false,
+            'message' => 'Failed to update image'
+        ]);
+    }
+}
+public function deleteUserImage()
+{
+    $token = $this->request->getPost('token');
+
+    if (empty($token)) {
+        return $this->response->setJSON(['success' => false, 'message' => 'Token is missing']);
+    }
+
+    $userModel = new UserModel();
+    $user = $userModel->where('token', $token)->first();
+
+    if ($user && !empty($user['image'])) {
+        $imagePath = WRITEPATH . '../public/' . $user['image']; // safe path reference
+        if (is_file($imagePath)) {
+            unlink($imagePath); // delete from storage
+        }
+
+        $userModel->where('token', $token)->set(['image' => null])->update();
+
+        // Update session image value
+        session()->set('image', null);
+
+        return $this->response->setJSON(['success' => true]);
+    }
+
+    return $this->response->setJSON(['success' => false, 'message' => 'User not found or no image to delete']);
+}
+
+public function updateUserInformation()
+{
+    $session = session();
+    $token = $session->get('token');
+    
+    if (empty($token)) {
+        return $this->response->setJSON(['success' => false, 'message' => 'Token is missing']);
+    }
+
+    $data = [
+        'firstname'  => $this->request->getPost('firstname'),
+        'lastname'   => $this->request->getPost('lastname'),
+        'middlename' => $this->request->getPost('middlename'),
+        'suffix'     => $this->request->getPost('suffix'),
+        'username'   => $this->request->getPost('username'),
+        'updated_at' => date('Y-m-d H:i:s'),
+    ];
+
+    $userModel = new UserModel();
+    $update = $userModel->where('token', $token)->set($data)->update();
+
+    if ($update) {
+        // Update session data with new user info
+        $session->set('firstname', $data['firstname']);
+        $session->set('lastname', $data['lastname']);
+        $session->set('middlename', $data['middlename']);
+        $session->set('suffix', $data['suffix']);
+        $session->set('username', $data['username']);
+        
+        return $this->response->setJSON(['success' => true, 'message' => 'User information updated successfully']);
+    } else {
+        return $this->response->setJSON(['success' => false, 'message' => 'Failed to update user information']);
+    }
+}
+
+public function updatePassword()
+{
+    $session = session();
+    $userModel = new UserModel();
+    $validation = \Config\Services::validation();
+
+    // Fetch the current user's data using session token
+    $user = $userModel->where('token', $session->get('token'))->first();
+    if (!$user) {
+        return $this->response->setJSON(['success' => false, 'message' => 'User not found.']);
+    }
+
+    // Define validation rules
+    $rules = [
+        'current_password' => 'required',
+        'new_password' => 'required|min_length[6]',
+        'confirm_password' => 'required|matches[new_password]'
+    ];
+
+    if (!$this->validate($rules)) {
+        return $this->response->setJSON([
+            'success' => false,
+            'message' => 'Validation failed.',
+            'errors' => $validation->getErrors()
+        ]);
+    }
+
+    $currentPassword = $this->request->getPost('current_password');
+    $newPassword = $this->request->getPost('new_password');
+
+    // Check if the current password matches the stored hashed password
+    if (!password_verify($currentPassword, $user['password'])) {
+        return $this->response->setJSON(['success' => false, 'message' => 'Current password is incorrect.']);
+    }
+
+    // Hash the new password
+    $hashedNewPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+
+    // Update the password in the database
+    $data = [
+        'password' => $hashedNewPassword,
+        'updated_at' => date('Y-m-d H:i:s')
+    ];
+
+    if ($userModel->where('token', $session->get('token'))->set($data)->update()) {
+        return $this->response->setJSON(['success' => true, 'message' => 'Password updated successfully.']);
+    } else {
+        return $this->response->setJSON(['success' => false, 'message' => 'Failed to update password.']);
+    }
+}
+
 
 }
 
