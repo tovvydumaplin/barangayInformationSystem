@@ -1779,7 +1779,7 @@ const saveResidents = function() {
         data: { members: membersData }, // Send all members at once
         dataType: "json",
         beforeSend: function () {
-            $(".button__submit").prop("disabled", true).text("Submitting...");
+            $(".create__residents__btn").prop("disabled", true).text("Submitting...");
             $("#addResidentModal :input").prop("disabled", true); // To disabled all inputs when confirmation is up
         },
         success: function (response) {
@@ -1810,7 +1810,7 @@ const saveResidents = function() {
             alert("Something went wrong. Please try again.");
         },
         complete: function() {
-            $(".button__submit").prop("disabled", false).text("Submit");
+            $(".create__residents__btn").prop("disabled", false).text("Submit");
             $("#addResidentModal :input").prop("disabled", false);
             closeValidator();
 

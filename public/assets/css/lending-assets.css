@@ -106,3 +106,17 @@
 .borrow__textarea {
   height: 15rem;
 }
+
+.img__placeholder {
+  cursor: pointer;
+  object-fit: cover;
+  height: 5rem;
+  width: 5rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.img__placeholder.hide {
+  opacity: 0;
+  visibility: hidden;
+}

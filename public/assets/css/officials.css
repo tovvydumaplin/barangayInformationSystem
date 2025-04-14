@@ -34,3 +34,6 @@
 .grid__2__cols__modified {
   grid-template-columns: 1fr 1fr;
 }
+.img__box.pos__rel {
+  cursor: pointer;
+}

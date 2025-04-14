@@ -190,9 +190,11 @@
           <?= csrf_field() ?>
           <div class="row flex__d__col">
               <div class="row grid grid__2__cols__modified">
-              <div class="img__box" onclick="document.getElementById('profile_image').click()">
+              <div class="img__box pos__rel" onclick="document.getElementById('profile_image').click()">
                   <input type="file" name="profile_image" id="profile_image" accept="image/*" onchange="previewImage(event)" style="display: none;">
-                  <img class="img__profile" id="imagePreview" src="<?= base_url('assets/images/img__default.png')?>" alt="  " style="width: 100%; max-height: 15rem; cursor: pointer;">
+                  <img class="img__profile" id="imagePreview" src="" style="width: 100%; object-fit: cover; max-height: 15rem; cursor: pointer;">
+                  
+                  <img class="img__placeholder pos__abs" src="<?= base_url('assets/images/img__default.png')?>" alt="">
               </div>
                   <div class="input__box__container">
                       <div class="input__box margin__bottom__2">
@@ -655,6 +657,8 @@ const previewImage = function(event) {
         preview.src = reader.result;
     };
     reader.readAsDataURL(event.target.files[0]);
+    $('.img__placeholder').addClass("hide");
+
 }
 const hideModal = function() {
     $(".wrapper").removeClass("open");
@@ -676,7 +680,7 @@ const loadData = function() {
             { 
                 "data": "profile_image", 
                 "render": function(data, type, row) {
-                    return `<img src="${data}" width="50" height="50" style="border-radius: 50%;">`;
+                    return `<img src="${data}" width="50" height="50"; object-fit: cover; style="border-radius: 50%;">`;
                 }
               },
               { "data": "account_id" },  

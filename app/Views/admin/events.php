@@ -255,7 +255,8 @@
           </div>
           <div class="btn__box__modal">
             <span class="btn__primary event__edit active">Edit Event</span>
-            <span class="btn__primary event__disable">Archive this event</span>
+            <span class="btn__primary event__disable">Archive</span>
+            <span class="btn__primary event__enable d__none">Reactivate</span>
           </div>
         </form>
       </div>
@@ -447,7 +448,7 @@ const updateEvent = function(saveBtn) {                       // Update Event Fu
               console.log(xhr.responseText); // Debugging
           },
           complete: function () {
-              saveBtn.prop("disabled", false).text("Save Event"); // Re-enable button
+              saveBtn.prop("disabled", false).text("Edit Event"); // Re-enable button
           }
       });
 }
@@ -653,13 +654,48 @@ const deactivateEvent = function() {
         }
     });
 }
+const reactivateEvent = function() {
+    let status = 1;
+    let id = $("#viewEventModal").data("id");
+  console.log(id);
+    $.ajax({
+        url: "<?= site_url('/admin/reactivate-event') ?>",
+        type: "POST",
+        data: {
+            status: status,
+            id: id
+        },
+        dataType: "json", 
+        success: function(response) {
+            if (response.success) {
+              loadEventData(0); 
+                $(".success__indicator").removeClass("hide");
+                $(".indicator__text").html('Event reactivated!');
+                setTimeout(function () {
+                    $(".success__indicator").addClass("hide");
+                }, 2000);
+                closeModal(); 
+            } else {
+                alert("Error: " + response.message);
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error("Deactivation Error:", error);
+            alert("Failed to deactivate user.");
+        }
+    });
+}
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~ ⚡ Event Listeners ⚡ ~~~~~~~~~~~~~~~~~~~~~~~~ //
 $('.tab__event__btn').on('click', function(){               
     loadEventData(0);
+    $('.event__enable ').removeClass("d__none");
+    $('.event__disable ').addClass("d__none");
 })
 $('.tab__event__btn__active').on('click', function(){               
     loadEventData(1);
+    $('.event__enable ').addClass("d__none");
+    $('.event__disable ').removeClass("d__none");
 })
 // TAB
 $(".tab__1").on("click", function () {
@@ -682,6 +718,10 @@ $('.error__close').on('click', function(){
 })
 $('.event__disable').on('click', function(){
   deactivateEvent();
+
+});
+$('.event__enable').on('click', function(){
+  reactivateEvent();
 });
 $('.create__event__btn').on('click', function(){                // Event Creation Validation
     openValidator();

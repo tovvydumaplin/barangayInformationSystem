@@ -259,7 +259,7 @@
                     />
                   </svg>
                 </div>
-                Add Resident
+                File complaint
               </button>
             </div>
           </div>

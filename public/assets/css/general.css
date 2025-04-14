@@ -458,6 +458,9 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
 .pos__rel {
   position: relative;
 }
+.pos__abs {
+  position: absolute;
+}
 
 .select__chev__down {
   width: 2rem;
@@ -530,6 +533,19 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
 .pl__ring--d {
   animation-name: ringD;
   stroke: #f42582;
+}
+.img__placeholder {
+  cursor: pointer;
+  object-fit: cover;
+  height: 5rem;
+  width: 5rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.img__placeholder.hide {
+  opacity: 0;
+  visibility: hidden;
 }
 
 /* Data Tables */
@@ -1095,3 +1111,5 @@ td {
 .input__group .information__input {
   padding: 2rem;
 }
+
+/* Hiding of broken images icon for blank src*/

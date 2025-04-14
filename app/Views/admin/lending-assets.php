@@ -64,10 +64,10 @@
         </div>
         <form class="modal__body community__modal">
           <div class="row flex__d__col">
-            <div class="row modal__register__modified">
-            <input type="file" id="fileInput" accept="image/*" style="display: none;" />
-            <img class="img__upload" src="<?= base_url("assets/images/img__default.png");?>"  style="cursor: pointer;" />
-
+            <div class="row modal__register__modified pos__rel">
+              <input type="file" id="fileInput" accept="image/*" style="display: none;" />
+              <img class="img__upload" src=""  style="cursor: pointer; object-fit: cover;" />
+              <img class="img__placeholder show pos__abs" src="<?= base_url("assets/images/img__default.png");?>"  style="" />
             </div>
             <div class="row">
               <div class="input__box">
@@ -433,6 +433,7 @@ $(document).ready(function () {
                 $imgUpload.attr('src', e.target.result);
             };
             reader.readAsDataURL(file);
+            $('.img__placeholder').addClass("hide");
         }
     });
 

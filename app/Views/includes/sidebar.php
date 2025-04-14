@@ -86,8 +86,8 @@
                     <span class="link__title">Events</span>
                 </a>
             </li>
-            <li class="list <?= ($segment == 'services') ? 'active' : '' ?>">
-                <a href="<?= base_url('admin/services') ?>" class="link">
+            <!-- <li class="list ">
+                <a href="" class="link">
                     <div class="icon__link">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                             <circle cx="256" cy="352" r="112" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/>
@@ -96,7 +96,7 @@
                     </div>
                     <span class="link__title">List of Services</span>
                 </a>
-            </li>
+            </li> -->
             <li class="list <?= ($segment == 'officials') ? 'active' : '' ?>">
                 <a href="<?= base_url('admin/officials') ?>" class="link">
                       <div class="icon__link">

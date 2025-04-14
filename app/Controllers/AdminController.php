@@ -325,6 +325,20 @@ public function createUser()
         }
 
     }
+    public function reactivateEvent()
+    {
+        $status = $this->request->getPost('status');
+        $id = $this->request->getPost('id');
+    
+        $eventModel = new EventModel();
+        $update = $eventModel->where('event_id', $id)->set('status', $status)->update();
+        if ($update) {
+            return $this->response->setStatusCode(200)->setJSON(['success' => true, 'message' => 'Event Reactivated!']);
+        } else {
+            return $this->response->setStatusCode(500)->setJSON(['error' => 'Failed to update user status']);
+        }
+
+    }
 
     public function viewEvents()
     {
