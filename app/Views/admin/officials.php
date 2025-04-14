@@ -44,6 +44,14 @@
         </div>
           <form id="createUserForm" action="<?= site_url('/admin/create-user') ?>" method="POST" class="modal__body community__modal" enctype="multipart/form-data">
             <?= csrf_field() ?>
+            <div class="row">
+                <div class="input__box">
+                    <span class="input__title">Select via Resident's List<span class="red__dot"> (Optional)</span></span>
+                    <select class="information__input" id="residentsList" name="residents__list">
+                    </select>
+                    <p class="text-danger"></p>
+                </div>
+            </div>
             <div class="row flex__d__col">
                 <div class="row grid grid__2__cols__modified">
                 <div class="img__box pos__rel" onclick="document.getElementById('profile_image').click()">
@@ -471,6 +479,43 @@ loadOfficials();
     }
 };
 
+const residentsMap = {};
+
+const loadResidentList = function () {
+  $.ajax({
+    url: '<?= base_url("admin/fetch-residents") ?>',
+    method: 'GET',
+    dataType: 'json',
+    success: function (data) {
+      const $select = $('#residentsList');
+      $select.append('<option value="">Choose a resident</option>');
+
+      data.forEach(function (resident) {
+        $select.append(`<option value="${resident.resident_id}">${resident.fullname}</option>`);
+        residentsMap[resident.resident_id] = resident;
+      });
+    },
+    error: function () {
+      console.error('Failed to fetch residents.');
+    }
+  });
+};
+
+loadResidentList();
+
+$('#residentsList').on('change', function () {
+  const selectedID = $(this).val();
+  const resident = residentsMap[selectedID];
+
+  if (resident) {
+    $('[name="firstname"]').val(resident.firstname);
+    $('[name="middlename"]').val(resident.middlename);
+    $('[name="lastname"]').val(resident.lastname);
+    $('[name="suffix"]').val(resident.suffix ?? '');
+  } else {
+    $('[name="firstname"], [name="middlename"], [name="lastname"], [name="suffix"]').val('');
+  }
+});
 
 $("#submitUserBtn").on("click", function (e) {
     e.preventDefault(); 

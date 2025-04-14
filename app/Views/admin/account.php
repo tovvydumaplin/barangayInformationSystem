@@ -266,7 +266,8 @@
             <div class="profile__photo__container">
               <div class="profile__photo">
                 <div class="img__profile__box">
-                  <img src="" class="profile__image__account" />
+                  <img src="<?= esc($image) ?>" class="profile__image__account" />
+                  
                 </div>
                 <div>
                   <p class="profile__heading">Profile Photo</p>
@@ -285,12 +286,7 @@
           </div>
           <div class="modal__content">
             <div class="input__box">
-              <input
-                class="information__input"
-                value=""
-                name="street"
-                readonly
-              />
+            <input class="information__input" value="<?= esc($firstname) ?>" readonly />
               <span class="input__title"
                 >Firstname<span class="red__dot">*</span></span
               >
@@ -342,12 +338,11 @@
               <input
                 class="information__input"
                 value=""
-                name="street"
+                name="email"
                 readonly
-                type="date"
               />
               <span class="input__title"
-                >Firstname<span class="red__dot">*</span></span
+                >Email Address<span class="red__dot">*</span></span
               >
               <p class="text-danger"></p>
             </div>
@@ -355,12 +350,11 @@
               <input
                 class="information__input"
                 value=""
-                name="street"
+                name="contact_no"
                 readonly
-                type="date"
               />
               <span class="input__title"
-                >Firstname<span class="red__dot">*</span></span
+                >Contact No.<span class="red__dot">*</span></span
               >
               <p class="text-danger"></p>
             </div>
@@ -368,20 +362,19 @@
         </div>
         <div class="card">
           <div class="modal__heading">
-            <p class="modal__header">Fullname</p>
+            <p class="modal__header">Modify Password</p>
             <button class="btn__primary">Edit Personal Info</button>
           </div>
-          <div class="modal__content">
+          <div class="modal__content password__section">
             <div class="input__box">
               <input
                 class="information__input"
                 value=""
-                name="street"
+                name="current_password"
                 readonly
-                type="date"
               />
               <span class="input__title"
-                >Firstname<span class="red__dot">*</span></span
+                >Current Password<span class="red__dot">*</span></span
               >
               <p class="text-danger"></p>
             </div>
@@ -389,12 +382,11 @@
               <input
                 class="information__input"
                 value=""
-                name="street"
+                name="new_password"
                 readonly
-                type="date"
               />
               <span class="input__title"
-                >Lastname<span class="red__dot">*</span></span
+                >New Password<span class="red__dot">*</span></span
               >
               <p class="text-danger"></p>
             </div>
@@ -402,25 +394,10 @@
               <input
                 class="information__input"
                 value=""
-                name="street"
                 readonly
-                type="date"
               />
               <span class="input__title"
-                >Middlename<span class="red__dot">*</span></span
-              >
-              <p class="text-danger"></p>
-            </div>
-            <div class="input__box">
-              <input
-                class="information__input"
-                value=""
-                name="street"
-                readonly
-                type="date"
-              />
-              <span class="input__title"
-                >Suffix<span class="red__dot">*</span></span
+                >Confirm Password<span class="red__dot">*</span></span
               >
               <p class="text-danger"></p>
             </div>

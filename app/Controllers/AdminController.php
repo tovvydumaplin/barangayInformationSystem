@@ -46,8 +46,25 @@ class AdminController extends BaseController
     }
     public function accountSettings()
     {
-        return view('admin/account'); 
+        $session = session();
+    
+        $imagePath = $session->get('image') 
+            ? base_url($session->get('image')) 
+            : base_url('assets/images/img__default.png');
+    
+        $data = [
+            'firstname'  => $session->get('firstname'),
+            'lastname'   => $session->get('lastname'),
+            'middlename' => $session->get('middlename'),
+            'suffix'     => $session->get('suffix'),
+            'username'   => $session->get('username'),
+            'role'       => $session->get('role'),
+            'image'      => $imagePath, 
+        ];
+    
+        return view('admin/account', $data);
     }
+    
     public function getUsers()
     {
         $model = new UserModel();
@@ -633,7 +650,7 @@ public function createUser()
                 r.resident_id
             FROM tbl_house h
             LEFT JOIN tbl_residents r ON h.house_no = r.house_no
-            WHERE h.status = 1
+            WHERE h.status = 1 AND (r.status = 1 OR r.status IS NULL)
         ");
     
         $houses = [];
@@ -1003,12 +1020,13 @@ public function createUser()
         $residentModel = new ResidentModel();
     
         $residents = $residentModel
-            ->select("resident_id, CONCAT_WS(' ', firstname, middlename, lastname, suffix) as fullname")
-            ->where('status', 1) // optional: only active residents
+            ->select("resident_id, firstname, middlename, lastname, suffix, CONCAT_WS(' ', firstname, middlename, lastname, suffix) as fullname")
+            ->where('status', 1)
             ->findAll();
     
         return $this->response->setJSON($residents);
     }
+    
     
     
     public function fetchItems()
@@ -1249,7 +1267,9 @@ public function createOfficial()
     // Check if the position exists in the limits array
     if (isset($positionLimits[$position])) {
         // Check how many officials already have this position
-        $existingOfficials = $model->where('position', $position)->countAllResults();
+        $existingOfficials = $model->where('position', $position)
+                                    ->where('status','1')
+                                    ->countAllResults();
 
         // Compare with the limit
         if ($existingOfficials >= $positionLimits[$position]) {
@@ -1411,6 +1431,8 @@ public function updateOfficial()
         $currentCount = $officialModel
             ->where('position', $position)
             ->where('official_id !=', $id)
+            ->where('status','1')
+
             ->countAllResults();
 
         // Compare with limit
