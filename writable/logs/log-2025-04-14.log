@@ -417,3 +417,41 @@ DEBUG - 2025-04-14 09:57:48 --> Received Data: Array
 
 )
 
+DEBUG - 2025-04-14 09:58:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-14 09:59:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-14 09:59:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-14 10:00:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-14 10:00:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-14 10:00:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-14 10:01:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-14 10:01:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-14 10:04:13 --> Received Data: Array
+(
+    [0] => Array
+        (
+            [firstname] => Sean
+            [lastname] => Paton
+            [middlename] => G
+            [suffix] => 
+            [contact_no] => 633213123
+            [birthdate] => 2025-04-14
+            [birthplace] => Binan Laguna
+            [citizenship] => Filipino
+            [gender] => Male
+            [civil_status] => Single
+            [occupation] => Developer
+            [religion] => Catholic
+            [is_pwd] => 0
+            [is_voter_of_barangay] => 0
+            [is_family_head] => 0
+            [household_name] => Paton
+            [house_no] => 50
+            [street] => Champaca Street
+            [contact_name] => Jane Doe
+            [emergency_contact_no] => 093233876554
+            [contact_relationship] => Friend
+            [status] => 1
+        )
+
+)
+
