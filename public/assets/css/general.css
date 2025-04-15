@@ -208,6 +208,7 @@ hr {
   justify-content: space-between;
   align-items: center;
   padding-right: 1rem;
+  padding-bottom: 2rem;
 }
 .modal__body {
   display: flex;
