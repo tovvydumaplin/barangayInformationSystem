@@ -4,6 +4,9 @@
     $firstName = $session->get('firstname');
     $fullName = $session->get('firstname') . ' ' . $session->get('lastname');
     $image = $session->get('image') ? base_url($session->get('image')) : base_url('assets/images/img__default.png');
+
+    $segment = service('uri')->getSegment(2); 
+    $pageTitle = $segment ? ucwords(str_replace('-', ' ', $segment)) : 'Dashboard';
 ?>
 <header class="header">
     <div class="section__title__container">
@@ -19,7 +22,8 @@
                 />
             </svg>
         </div>
-        <h2 class="heading__secondary">Dashboard</h2>
+        <h2 class="heading__secondary"><?= $pageTitle ?></h2>
+
     </div>
     
     <div class="user__box">

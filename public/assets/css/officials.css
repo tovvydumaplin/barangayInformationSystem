@@ -37,3 +37,6 @@
 .img__box.pos__rel {
   cursor: pointer;
 }
+.input__title.not__capitalized {
+  text-transform: unset;
+}

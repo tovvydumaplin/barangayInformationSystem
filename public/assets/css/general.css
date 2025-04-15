@@ -187,6 +187,7 @@ hr {
   border: 1px solid gray;
   display: inline-block;
   width: 100%;
+  font-family: "Roboto", sans-serif;
 }
 .red__dot {
   color: #ef4949;
@@ -206,7 +207,6 @@ hr {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 3rem;
   padding-right: 1rem;
 }
 .modal__body {
@@ -1113,3 +1113,8 @@ td {
 }
 
 /* Hiding of broken images icon for blank src*/
+.user__name {
+  font-size: 1.6rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}

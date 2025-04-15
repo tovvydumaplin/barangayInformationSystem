@@ -72,8 +72,7 @@
 }
 .event {
   display: flex;
-  justify-content: space-between;
-  gap: 1rem;
+  gap: 3rem;
   margin-right: 2rem;
   align-items: center;
 }
@@ -113,7 +112,7 @@
   margin-top: 2rem;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 2rem;
 }
 
 .birthday__item {
@@ -157,4 +156,19 @@
 
 .month {
   color: #626262;
+}
+.user__img__display {
+  width: 7rem;
+  height: 7rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user__name {
+  font-size: 1.6rem;
+}
+
+.useruser__name,
+.position {
+  text-transform: capitalize;
 }

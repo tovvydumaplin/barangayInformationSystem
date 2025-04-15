@@ -318,7 +318,7 @@ public function createUser()
             'event_description' => $request['event_description'],
             'start_date'        => $request['date_start'],
             'end_date'          => $request['date_end'],
-            'status'            => 1
+            'status'            => 0
         ];
 
         if ($eventModel->insert($eventData)) {
@@ -337,6 +337,34 @@ public function createUser()
         $update = $eventModel->where('event_id', $id)->set('status', $status)->update();
         if ($update) {
             return $this->response->setStatusCode(200)->setJSON(['success' => true, 'message' => 'Event Deactivated!']);
+        } else {
+            return $this->response->setStatusCode(500)->setJSON(['error' => 'Failed to update user status']);
+        }
+
+    }
+    public function approveEvent()
+    {
+        $status = $this->request->getPost('status');
+        $id = $this->request->getPost('id');
+    
+        $eventModel = new EventModel();
+        $update = $eventModel->where('event_id', $id)->set('status', $status)->update();
+        if ($update) {
+            return $this->response->setStatusCode(200)->setJSON(['success' => true, 'message' => 'Event Reactivated!']);
+        } else {
+            return $this->response->setStatusCode(500)->setJSON(['error' => 'Failed to update user status']);
+        }
+
+    }
+    public function disapproveEvent()
+    {
+        $status = $this->request->getPost('status');
+        $id = $this->request->getPost('id');
+    
+        $eventModel = new EventModel();
+        $update = $eventModel->where('event_id', $id)->set('status', $status)->update();
+        if ($update) {
+            return $this->response->setStatusCode(200)->setJSON(['success' => true, 'message' => 'Event Reactivated!']);
         } else {
             return $this->response->setStatusCode(500)->setJSON(['error' => 'Failed to update user status']);
         }
@@ -1626,14 +1654,13 @@ public function deleteUserImage()
     $user = $userModel->where('token', $token)->first();
 
     if ($user && !empty($user['image'])) {
-        $imagePath = WRITEPATH . '../public/' . $user['image']; // safe path reference
+        $imagePath = WRITEPATH . '../public/' . $user['image']; 
         if (is_file($imagePath)) {
-            unlink($imagePath); // delete from storage
+            unlink($imagePath);
         }
 
         $userModel->where('token', $token)->set(['image' => null])->update();
 
-        // Update session image value
         session()->set('image', null);
 
         return $this->response->setJSON(['success' => true]);
@@ -1664,7 +1691,6 @@ public function updateUserInformation()
     $update = $userModel->where('token', $token)->set($data)->update();
 
     if ($update) {
-        // Update session data with new user info
         $session->set('firstname', $data['firstname']);
         $session->set('lastname', $data['lastname']);
         $session->set('middlename', $data['middlename']);
@@ -1683,13 +1709,11 @@ public function updatePassword()
     $userModel = new UserModel();
     $validation = \Config\Services::validation();
 
-    // Fetch the current user's data using session token
     $user = $userModel->where('token', $session->get('token'))->first();
     if (!$user) {
         return $this->response->setJSON(['success' => false, 'message' => 'User not found.']);
     }
 
-    // Define validation rules
     $rules = [
         'current_password' => 'required',
         'new_password' => 'required|min_length[6]',
@@ -1707,15 +1731,12 @@ public function updatePassword()
     $currentPassword = $this->request->getPost('current_password');
     $newPassword = $this->request->getPost('new_password');
 
-    // Check if the current password matches the stored hashed password
     if (!password_verify($currentPassword, $user['password'])) {
         return $this->response->setJSON(['success' => false, 'message' => 'Current password is incorrect.']);
     }
 
-    // Hash the new password
     $hashedNewPassword = password_hash($newPassword, PASSWORD_DEFAULT);
 
-    // Update the password in the database
     $data = [
         'password' => $hashedNewPassword,
         'updated_at' => date('Y-m-d H:i:s')
@@ -1728,6 +1749,92 @@ public function updatePassword()
     }
 }
 
+public function countHouseWithStatus()
+{
+    $houseModel = new HouseModel();
+
+    $count = $houseModel->where('status', 1)->countAllResults();
+
+    return $this->response->setJSON(['count' => $count]);
+}
+public function countResidents()
+{
+    $residentModel = new ResidentModel(); 
+
+    $count = $residentModel->where('status', 1)->countAllResults();
+
+    return $this->response->setJSON(['count' => $count]);
+}
+public function countCompletedComplaints()
+{
+    $complainModel = new ComplainModel();
+
+    $count = $complainModel->where('status', 1)->countAllResults();
+
+    return $this->response->setJSON(['count' => $count]);
+}
+public function countPendingComplaints()
+{
+    $complainModel = new ComplainModel();
+
+    $count = $complainModel->where('status', 0)->countAllResults();
+
+    return $this->response->setJSON(['count' => $count]);
+}
+
+public function getResidentStats()
+{
+    $residentModel = new ResidentModel();
+
+    $today = date('Y-m-d');
+    $minorDate = date('Y-m-d', strtotime('-18 years'));
+
+    $data = [
+        'male' => $residentModel->where(['gender' => 'Male', 'status' => 1])->countAllResults(),
+        'female' => $residentModel->where(['gender' => 'Female', 'status' => 1])->countAllResults(),
+        'minors' => $residentModel->where('birthdate >=', $minorDate)->where('status', 1)->countAllResults(),
+        'non_voters' => $residentModel->where(['is_voter_of_barangay' => 'No', 'status' => 1])->countAllResults(),
+        'non_head' => $residentModel->where(['is_family_head' => 'No', 'status' => 1])->countAllResults(),
+        'head_of_family' => $residentModel->where(['is_family_head' => 'Yes', 'status' => 1])->countAllResults(),
+        'archived' => $residentModel->where('status', 0)->countAllResults(),
+        'pwd' => $residentModel->where(['is_pwd' => 'Yes', 'status' => 1])->countAllResults(),
+        'voters' => $residentModel->where(['is_voter_of_barangay' => 'Yes', 'status' => 1])->countAllResults(),
+    ];
+
+    return $this->response->setJSON($data);
+}
+public function getEventsDashboard()
+{
+    $eventModel = new EventModel();
+    
+    $events = $eventModel
+        ->where('status', 1)
+        ->orderBy('start_date', 'ASC') 
+        ->findAll();
+
+    return $this->response->setJSON($events);
+}
+
+public function getNewUsers()
+{
+    $userModel = new UserModel();
+    
+    $newUsers = $userModel->orderBy('created_at', 'DESC')->findAll(25); 
+
+    $data = [];
+    foreach ($newUsers as $user) {
+        $data[] = [
+            'firstname' => $user['firstname'],
+            'lastname' => $user['lastname'],
+            'role' => $user['role'] ?? 'N/A', 
+            'created_at' => $user['created_at'],
+            'image' => $user['image'] ?? 'default-image.png', 
+        ];
+    }
+
+    // Return the data as JSON
+    return $this->response->setJSON($data);
+}
 
 }
 

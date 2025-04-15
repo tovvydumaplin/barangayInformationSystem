@@ -257,6 +257,8 @@
             <span class="btn__primary event__edit active">Edit Event</span>
             <span class="btn__primary event__disable">Archive</span>
             <span class="btn__primary event__enable d__none">Reactivate</span>
+            <span class="btn__primary event__approval d__none">Approve</span>
+            <span class="btn__primary event__disapproval d__none">Disapprove</span>
           </div>
         </form>
       </div>
@@ -271,6 +273,12 @@
               <button class="tab__btn tab__event__btn">Archived Events</button>
               <div class="active__tab"></div>
             </div>
+            <?php if (session()->get('role') == 'administrator'): ?>
+              <div class="btn__container tab__3">
+                <button class="tab__btn tab__event__approval">For Approval</button>
+                <div class="active__tab"></div>
+              </div>
+            <?php endif; ?>
           </div>
         </div>
         <div class="card">
@@ -453,16 +461,17 @@ const updateEvent = function(saveBtn) {                       // Update Event Fu
       });
 }
 const loadEventData = function (status = 1) {
-  customLoaderOn();
+    customLoaderOn();
+
     const $eventTable = $("#eventTable");
     const $tableBody = $eventTable.find("tbody");
 
-    // Destroy DataTable if it exists
+    // Always destroy before loading new data
     if ($.fn.DataTable.isDataTable($eventTable)) {
-        $eventTable.DataTable().destroy();
+        $eventTable.DataTable().clear().destroy();
     }
 
-    // Show loading message
+    // Show loading
     $tableBody.html('<tr><td colspan="6" class="text-center">Loading...</td></tr>');
 
     $.ajax({
@@ -472,66 +481,49 @@ const loadEventData = function (status = 1) {
         dataType: "json",
         cache: false,
         success: function (response) {
-            if (response.success && Array.isArray(response.data) && response.data.length) {
-                const tableData = response.data.map((event, index) => [
-                    index + 1,
-                    `<span class="truncate__text" title="${event.event_title}">${event.event_title}</span>`, // Title with tooltip
-                    `<span class="truncate__text" title="${event.event_description}">${event.event_description}</span>`, // Description with tooltip
-                    formatDate(event.start_date), // Formatted Start Date
-                    formatDate(event.end_date),   // Formatted End Date
-                    `<button class="btn__primary table__button" data-id="${event.event_id}">View</button>`
-                ]);
+            const hasData = response.success && Array.isArray(response.data) && response.data.length;
 
-                // Initialize DataTable with data
-                $eventTable.DataTable({
-                    "processing": true,
-                    "serverSide": false,
-                    "data": tableData,
-                    "autoWidth": false,
-                    "columns": [
-                        { "title": "#" },
-                        { "title": "Title" },
-                        { "title": "Description" },
-                        { "title": "Start Date" },
-                        { "title": "End Date" },
-                        { "title": "Action", "orderable": false }
-                    ],
-                    "columnDefs": [
-                        { "width": "5%", "targets": 0 },
-                        { "width": "10%", "targets": 1 },
-                        { "width": "20%", "targets": 2 },
-                        { "width": "15%", "targets": 3 },
-                        { "width": "15%", "targets": 4 },
-                        { "width": "10%", "targets": 5 }
-                    ],
-                    "order": [[0, "desc"]],
-                    "language": {
-                        "emptyTable": "No events available"
-                    },
-                    "pagingType": "simple_numbers"
-                });
-                customLoaderOff();
-            } else {
-                // Initialize empty DataTable if no data
-                $eventTable.DataTable({
-                    "processing": true,
-                    "serverSide": false,
-                    "data": [],
-                    "columns": [
-                        { "title": "#" },
-                        { "title": "Title" },
-                        { "title": "Description" },
-                        { "title": "Start Date" },
-                        { "title": "End Date" },
-                        { "title": "Action", "orderable": false }
-                    ],
-                    "language": {
-                        "emptyTable": "No events available"
-                    },
-                    "pagingType": "simple_numbers"
-                });
-                customLoaderOff();
-            }
+            const tableData = hasData
+                ? response.data.map((event, index) => [
+                    index + 1,
+                    `<span class="truncate__text" title="${event.event_title}">${event.event_title}</span>`,
+                    `<span class="truncate__text" title="${event.event_description}">${event.event_description}</span>`,
+                    formatDate(event.start_date),
+                    formatDate(event.end_date),
+                    `<button class="btn__primary table__button" data-id="${event.event_id}">View</button>`
+                ])
+                : [];
+
+            // Initialize the DataTable, whether with data or empty
+            $eventTable.DataTable({
+                processing: true,
+                serverSide: false,
+                data: tableData,
+                autoWidth: false,
+                columns: [
+                    { title: "#" },
+                    { title: "Title" },
+                    { title: "Description" },
+                    { title: "Start Date" },
+                    { title: "End Date" },
+                    { title: "Action", orderable: false }
+                ],
+                columnDefs: [
+                    { width: "5%", targets: 0 },
+                    { width: "10%", targets: 1 },
+                    { width: "20%", targets: 2 },
+                    { width: "15%", targets: 3 },
+                    { width: "15%", targets: 4 },
+                    { width: "10%", targets: 5 }
+                ],
+                order: [[0, "desc"]],
+                language: {
+                    emptyTable: "No events available"
+                },
+                pagingType: "simple_numbers"
+            });
+
+            customLoaderOff();
         },
         error: function (xhr, status, error) {
             $tableBody.html('<tr><td colspan="6" class="text-center">Error loading events</td></tr>');
@@ -540,6 +532,8 @@ const loadEventData = function (status = 1) {
         }
     });
 };
+
+
 
 // Function to Format Date
 const formatDate = (dateString) => {
@@ -624,7 +618,7 @@ const createEvent = function() {                              // Create Events
 }
 
 const deactivateEvent = function() {
-    let status = 0;
+    let status = 2;
     let id = $("#viewEventModal").data("id");
   console.log(id);
     $.ajax({
@@ -655,7 +649,7 @@ const deactivateEvent = function() {
     });
 }
 const reactivateEvent = function() {
-    let status = 1;
+    let status = 0;
     let id = $("#viewEventModal").data("id");
   console.log(id);
     $.ajax({
@@ -668,9 +662,71 @@ const reactivateEvent = function() {
         dataType: "json", 
         success: function(response) {
             if (response.success) {
-              loadEventData(0); 
+              loadEventData(2); 
                 $(".success__indicator").removeClass("hide");
                 $(".indicator__text").html('Event reactivated!');
+                setTimeout(function () {
+                    $(".success__indicator").addClass("hide");
+                }, 2000);
+                closeModal(); 
+            } else {
+                alert("Error: " + response.message);
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error("Deactivation Error:", error);
+            alert("Failed to deactivate user.");
+        }
+    });
+}
+const approveEvent = function() {
+    let status = 1;
+    let id = $("#viewEventModal").data("id");
+  console.log(id);
+    $.ajax({
+        url: "<?= site_url('/admin/approve-event') ?>",
+        type: "POST",
+        data: {
+            status: status,
+            id: id
+        },
+        dataType: "json", 
+        success: function(response) {
+            if (response.success) {
+              loadEventData(0); 
+                $(".success__indicator").removeClass("hide");
+                $(".indicator__text").html('Event approved!');
+                setTimeout(function () {
+                    $(".success__indicator").addClass("hide");
+                }, 2000);
+                closeModal(); 
+            } else {
+                alert("Error: " + response.message);
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error("Deactivation Error:", error);
+            alert("Failed to deactivate user.");
+        }
+    });
+}
+const disapprovedEvent = function() {
+    let status = 2;
+    let id = $("#viewEventModal").data("id");
+  console.log(id);
+    $.ajax({
+        url: "<?= site_url('/admin/disapprove-event') ?>",
+        type: "POST",
+        data: {
+            status: status,
+            id: id
+        },
+        dataType: "json", 
+        success: function(response) {
+            if (response.success) {
+              loadEventData(0); 
+                $(".success__indicator").removeClass("hide");
+                $(".indicator__text").html('Event moved to archives!');
                 setTimeout(function () {
                     $(".success__indicator").addClass("hide");
                 }, 2000);
@@ -688,24 +744,44 @@ const reactivateEvent = function() {
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~ ⚡ Event Listeners ⚡ ~~~~~~~~~~~~~~~~~~~~~~~~ //
 $('.tab__event__btn').on('click', function(){               
-    loadEventData(0);
+    loadEventData(2);
     $('.event__enable ').removeClass("d__none");
     $('.event__disable ').addClass("d__none");
+    $('.event__approval ').addClass("d__none");
+    $('.event__disapproval ').addClass("d__none");
 })
 $('.tab__event__btn__active').on('click', function(){               
     loadEventData(1);
     $('.event__enable ').addClass("d__none");
     $('.event__disable ').removeClass("d__none");
+    $('.event__approval ').addClass("d__none");
+    $('.event__disapproval ').addClass("d__none");
+})
+$('.tab__event__approval').on('click', function(){               
+    loadEventData(0);
+    $('.event__enable ').addClass("d__none");
+    $('.event__disable ').addClass("d__none");
+    $('.event__approval ').removeClass("d__none");
+    $('.event__disapproval ').removeClass("d__none");
 })
 // TAB
 $(".tab__1").on("click", function () {
   $(".tab__1").addClass("visible");
   $(".tab__2").removeClass("visible");
+  $(".tab__3").removeClass("visible");
+
 });
 
 $(".tab__2").on("click", function () {
   $(".tab__2").addClass("visible");
   $(".tab__1").removeClass("visible");
+  $(".tab__3").removeClass("visible");
+
+});
+$(".tab__3").on("click", function () {
+  $(".tab__2").removeClass("visible");
+  $(".tab__1").removeClass("visible");
+  $(".tab__3").addClass("visible");
 });
 // TAB END
 $('.icon__close').on('click', function(){
@@ -716,13 +792,30 @@ $('.icon__close').on('click', function(){
 $('.error__close').on('click', function(){
     closeErrorDisplay();
 })
-$('.event__disable').on('click', function(){
-  deactivateEvent();
+$('.event__disable').on('click', function () {
+  if (confirm("Are you sure you want to deactivate this event?")) {
+    deactivateEvent();
+  }
+});
 
+$('.event__approval').on('click', function () {
+  if (confirm("Are you sure you want to approve this event?")) {
+    approveEvent();
+  }
 });
-$('.event__enable').on('click', function(){
-  reactivateEvent();
+
+$('.event__disapproval').on('click', function () {
+  if (confirm("Are you sure you want to disapprove this event?")) {
+    disapprovedEvent();
+  }
 });
+
+$('.event__enable').on('click', function () {
+  if (confirm("Are you sure you want to reactivate this event?")) {
+    reactivateEvent();
+  }
+});
+
 $('.create__event__btn').on('click', function(){                // Event Creation Validation
     openValidator();
 })

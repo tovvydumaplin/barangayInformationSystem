@@ -135,3 +135,6 @@
   font-weight: 600;
   margin-bottom: 1rem;
 }
+.modal__header {
+  padding: 0 1rem 2rem 1rem;
+}

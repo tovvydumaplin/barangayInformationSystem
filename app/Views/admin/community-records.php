@@ -1085,7 +1085,7 @@
         <div class="card card__table hidden">
           <div class="heading__container">
             <p class="subheading">List of Residents</p>
-            <div class="button__box">
+            <div class="button__box button__container__table">
               <div class="filter__container">            
                 <button class="btn__secondary filter__btn">
                   <div class="icon__link">
@@ -1149,44 +1149,7 @@
                 </div>
                 Export to Excel
               </button>
-              <button class="btn__secondary">
-                <div class="icon__link">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="ionicon"
-                    viewBox="0 0 512 512"
-                  >
-                    <path
-                      d="M384 368h24a40.12 40.12 0 0040-40V168a40.12 40.12 0 00-40-40H104a40.12 40.12 0 00-40 40v160a40.12 40.12 0 0040 40h24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-linejoin="round"
-                      stroke-width="32"
-                    />
-                    <rect
-                      x="128"
-                      y="240"
-                      width="256"
-                      height="208"
-                      rx="24.32"
-                      ry="24.32"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-linejoin="round"
-                      stroke-width="32"
-                    />
-                    <path
-                      d="M384 128v-24a40.12 40.12 0 00-40-40H168a40.12 40.12 0 00-40 40v24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-linejoin="round"
-                      stroke-width="32"
-                    />
-                    <circle cx="392" cy="184" r="24" />
-                  </svg>
-                </div>
-                Print
-              </button>
+
               <button class="btn__secondary active btn__add__resident">
                 <div class="icon__link">
                   <svg
@@ -2671,12 +2634,20 @@ loadNationality();
 
   $(".tab__1").on("click", function() {
     loadHouseMarkers();
+    $('.subheading').text("Barangay House Mapping")
+
   })
   $(".tab__2").on("click", function() {
     loadResidents();
+    $('.button__container__table').show();
+    $('.subheading').text("List of Residents")
+
+
   })
   $(".tab__4").on("click", function() {
     loadArchivedResidents();
+    $('.button__container__table').hide();
+    $('.subheading').text("Archived Residents")
   })
   $(".btn__edit__mode").on("click", function () {
     if (isEditMode) {

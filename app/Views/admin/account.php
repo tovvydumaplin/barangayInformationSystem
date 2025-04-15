@@ -281,7 +281,7 @@
             </div>
           </div>
           <div class="modal__heading">
-            <p class="modal__header">Fullname</p>
+            <p class="modal__header">General Information</p>
             <button id="editPersonalInfo" class="btn__primary">Edit Personal Info</button>
           </div>
           <div class="modal__content">
@@ -345,7 +345,7 @@
         <div class="card">
           <div class="modal__heading">
             <p class="modal__header">Modify Password</p>
-            <button id="editAccountPassword" class="btn__primary">Update Account Password</button>
+            <button id="editAccountPassword" class="btn__primary">Update Password</button>
           </div>
           <div class="modal__content password__section">
             <div class="input__box">

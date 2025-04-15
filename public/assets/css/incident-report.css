@@ -89,3 +89,6 @@
   display: flex;
   justify-content: center;
 }
+.modal__header {
+  padding: 0 1rem 2rem 1rem;
+}

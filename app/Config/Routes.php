@@ -48,6 +48,10 @@ $routes->post('admin/update-event', 'AdminController::updateEventDetails');
 $routes->post('/admin/deactivate-event', 'AdminController::deactivateEvent');
 // Reactivate Event
 $routes->post('/admin/reactivate-event', 'AdminController::reactivateEvent');
+// Approve Event
+$routes->post('/admin/approve-event', 'AdminController::approveEvent');
+// Disapprove Event
+$routes->post('/admin/disapprove-event', 'AdminController::disapproveEvent');
 
 // Create Resident
 $routes->post('/admin/create-resident','AdminController::createResident');
@@ -112,3 +116,13 @@ $routes->post('admin/update-user-image', 'AdminController::updateUserImage');
 $routes->post('admin/delete-user-image', 'AdminController::deleteUserImage');
 $routes->post('admin/update-user-information', 'AdminController::updateUserInformation');
 $routes->post('admin/update-password', 'AdminController::updatePassword');
+
+// Dashboard
+$routes->get('admin/count-house-status', 'AdminController::countHouseWithStatus');
+$routes->get('admin/count-residents', 'AdminController::countResidents');
+$routes->get('admin/count-completed-complaints', 'AdminController::countCompletedComplaints');
+$routes->get('admin/count-pending-complaints', 'AdminController::countPendingComplaints');
+$routes->get('admin/get-resident-stats', 'AdminController::getResidentStats');
+$routes->get('admin/get-events-dashboard', 'AdminController::getEventsDashboard');
+$routes->get('admin/get-new-users', 'AdminController::getNewUsers');
+

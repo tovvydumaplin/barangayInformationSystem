@@ -70,7 +70,7 @@
                 </svg>
               </div>
             </div>
-            <p class="count">2942</p>
+            <p id="countHouseHold" class="count">2942</p>
           </div>
           <!-- 2 -->
           <div class="card">
@@ -116,7 +116,7 @@
                 </svg>
               </div>
             </div>
-            <p class="count">249</p>
+            <p id="countResidents" class="count">Loading...</p>
           </div>
           <!-- 3 -->
           <div class="card">
@@ -151,7 +151,7 @@
                 </svg>
               </div>
             </div>
-            <p class="count">2943</p>
+            <p id="countCompletedComplaints" class="count">Loading...</p>
           </div>
           <!-- 4 -->
           <div class="card">
@@ -177,243 +177,21 @@
                 </svg>
               </div>
             </div>
-            <p class="count">29</p>
+            <p id="countPendingComplaints" class="count">Loading...</p>
           </div>
         </div>
         <div class="container__bottom">
           <div id="chart" class="card"></div>
           <div class="events__container card">
             <h3 class="heading__tertiary">List of Events</h3>
-            <div class="events">
-              <!-- For each -->
-              <div class="event">
-                <div class="event__date">
-                  <p class="day">25</p>
-                  <p class="month">Oct</p>
-                </div>
-                <div class="event__title__box">
-                  <p class="event__title">
-                    Barangay Fiesta 2024: Unity in celebration
-                  </p>
-                </div>
-              </div>
-              <!-- For Each -->
-              <!-- Remove later -->
-              <div class="event">
-                <div class="event__date">
-                  <p class="day">25</p>
-                  <p class="month">Oct</p>
-                </div>
-                <div class="event__title__box">
-                  <p class="event__title">
-                    Barangay Fiesta 2024: Unity in celebration
-                  </p>
-                </div>
-              </div>
-              <div class="event">
-                <div class="event__date">
-                  <p class="day">25</p>
-                  <p class="month">Oct</p>
-                </div>
-                <div class="event__title__box">
-                  <p class="event__title">
-                    Barangay Fiesta 2024: Unity in celebration
-                  </p>
-                </div>
-              </div>
-              <div class="event">
-                <div class="event__date">
-                  <p class="day">25</p>
-                  <p class="month">Oct</p>
-                </div>
-                <div class="event__title__box">
-                  <p class="event__title">
-                    Barangay Fiesta 2024: Unity in celebration
-                  </p>
-                </div>
-              </div>
-              <div class="event">
-                <div class="event__date">
-                  <p class="day">25</p>
-                  <p class="month">Oct</p>
-                </div>
-                <div class="event__title__box">
-                  <p class="event__title">
-                    Barangay Fiesta 2024: Unity in celebration
-                  </p>
-                </div>
-              </div>
-              <div class="event">
-                <div class="event__date">
-                  <p class="day">25</p>
-                  <p class="month">Oct</p>
-                </div>
-                <div class="event__title__box">
-                  <p class="event__title">
-                    Barangay Fiesta 2024: Unity in celebration
-                  </p>
-                </div>
-              </div>
-              <div class="event">
-                <div class="event__date">
-                  <p class="day">25</p>
-                  <p class="month">Oct</p>
-                </div>
-                <div class="event__title__box">
-                  <p class="event__title">
-                    Barangay Fiesta 2024: Unity in celebration
-                  </p>
-                </div>
-              </div>
-              <div class="event">
-                <div class="event__date">
-                  <p class="day">25</p>
-                  <p class="month">Oct</p>
-                </div>
-                <div class="event__title__box">
-                  <p class="event__title">
-                    Barangay Fiesta 2024: Unity in celebration
-                  </p>
-                </div>
-              </div>
-              <div class="event">
-                <div class="event__date">
-                  <p class="day">25</p>
-                  <p class="month">Oct</p>
-                </div>
-                <div class="event__title__box">
-                  <p class="event__title">
-                    Barangay Fiesta 2024: Unity in celebration
-                  </p>
-                </div>
-              </div>
-              <!-- Remove later -->
+            <div class="events" id="events-container">
+                  <!-- events -->
             </div>
           </div>
           <div class="birthdays__container card">
-            <h3 class="heading__tertiary">List of Birthdays</h3>
-            <div class="birthday__container__card">
-              <!-- foreach -->
-              <div class="birthday__item">
-                <div class="img__box__birthday">
-                  <img src="<?= base_url('assets/images/circle.png')?>" alt="User image" />
-                  <div class="user__details">
-                    <p class="user__name">John Smith</p>
-                    <p class="position">Admin</p>
-                  </div>
-                </div>
-                <div class="birthday__box">
-                  <p class="birthday__day">28</p>
-                  <p class="birthday__month">Jun</p>
-                </div>
-              </div>
-              <!-- foreach -->
-              <!-- Remove later -->
-              <div class="birthday__item">
-                <div class="img__box__birthday">
-                  <img src="<?= base_url('assets/images/circle.png')?>" alt="User image" />
-                  <div class="user__details">
-                    <p class="user__name">John Smith</p>
-                    <p class="position">Admin</p>
-                  </div>
-                </div>
-                <div class="birthday__box">
-                  <p class="birthday__day">28</p>
-                  <p class="birthday__month">Jun</p>
-                </div>
-              </div>
-              <div class="birthday__item">
-                <div class="img__box__birthday">
-                  <img src="<?= base_url('assets/images/circle.png')?>" alt="User image" />
-                  <div class="user__details">
-                    <p class="user__name">John Smith</p>
-                    <p class="position">Admin</p>
-                  </div>
-                </div>
-                <div class="birthday__box">
-                  <p class="birthday__day">28</p>
-                  <p class="birthday__month">Jun</p>
-                </div>
-              </div>
-              <div class="birthday__item">
-                <div class="img__box__birthday">
-                  <img src="<?= base_url('assets/images/circle.png')?>" alt="User image" />
-                  <div class="user__details">
-                    <p class="user__name">John Smith</p>
-                    <p class="position">Admin</p>
-                  </div>
-                </div>
-                <div class="birthday__box">
-                  <p class="birthday__day">28</p>
-                  <p class="birthday__month">Jun</p>
-                </div>
-              </div>
-              <div class="birthday__item">
-                <div class="img__box__birthday">
-                  <img src="<?= base_url('assets/images/circle.png')?>" alt="User image" />
-                  <div class="user__details">
-                    <p class="user__name">John Smith</p>
-                    <p class="position">Admin</p>
-                  </div>
-                </div>
-                <div class="birthday__box">
-                  <p class="birthday__day">28</p>
-                  <p class="birthday__month">Jun</p>
-                </div>
-              </div>
-              <div class="birthday__item">
-                <div class="img__box__birthday">
-                  <img src="<?= base_url('assets/images/circle.png')?>" alt="User image" />
-                  <div class="user__details">
-                    <p class="user__name">John Smith</p>
-                    <p class="position">Admin</p>
-                  </div>
-                </div>
-                <div class="birthday__box">
-                  <p class="birthday__day">28</p>
-                  <p class="birthday__month">Jun</p>
-                </div>
-              </div>
-              <div class="birthday__item">
-                <div class="img__box__birthday">
-                  <img src="<?= base_url('assets/images/circle.png')?>" alt="User image" />
-                  <div class="user__details">
-                    <p class="user__name">John Smith</p>
-                    <p class="position">Admin</p>
-                  </div>
-                </div>
-                <div class="birthday__box">
-                  <p class="birthday__day">28</p>
-                  <p class="birthday__month">Jun</p>
-                </div>
-              </div>
-              <div class="birthday__item">
-                <div class="img__box__birthday">
-                  <img src="<?= base_url('assets/images/circle.png')?>" alt="User image" />
-                  <div class="user__details">
-                    <p class="user__name">John Smith</p>
-                    <p class="position">Admin</p>
-                  </div>
-                </div>
-                <div class="birthday__box">
-                  <p class="birthday__day">28</p>
-                  <p class="birthday__month">Jun</p>
-                </div>
-              </div>
-              <div class="birthday__item">
-                <div class="img__box__birthday">
-                  <img src="<?= base_url('assets/images/circle.png')?>" alt="User image" />
-                  <div class="user__details">
-                    <p class="user__name">John Smith</p>
-                    <p class="position">Admin</p>
-                  </div>
-                </div>
-                <div class="birthday__box">
-                  <p class="birthday__day">28</p>
-                  <p class="birthday__month">Jun</p>
-                </div>
-              </div>
-              <!-- Remove later -->
+            <h3 class="heading__tertiary">New Accounts</h3>
+            <div id="newAccounts" class="birthday__container__card">
+                  <!-- new accounts -->
             </div>
           </div>
         </div>
@@ -427,81 +205,260 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const options = {
-          series: [25, 15, 5, 35, 10, 5, 3, 2],
-          labels: [
-            "Male",
-            "Female",
-            "Minors",
-            "Non Voters",
-            "Non Head of the Family",
-            "Archived",
-            "PWD",
-            "Voters",
-          ],
-          chart: {
-            type: "donut",
-            height: 380,
-          },
-          colors: [
-            "#2196F3",
-            "#9C27B0",
-            "#F44336",
-            "#009688",
-            "#FF9800",
-            "#00BCD4",
-            "#4CAF50",
-            "#FFC107",
-          ],
-          legend: {
-            position: "left",
-            offsetY: 20,
-          },
-          plotOptions: {
-            pie: {
-              donut: {
-                size: "65%",
-                labels: {
-                  show: true,
-                  total: {
-                    show: true,
-                    showAlways: true,
-                    label: "Total",
-                    fontSize: "22px",
-                    fontFamily: "Helvetica, Arial, sans-serif",
-                    fontWeight: 600,
-                    color: "#373d3f",
-                  },
-                },
-              },
-            },
-          },
-          responsive: [
-            {
-              breakpoint: 480,
-              options: {
-                chart: {
-                  height: 300,
-                },
-                legend: {
-                  position: "bottom",
-                },
-              },
-            },
-          ],
-          tooltip: {
-            y: {
-              formatter: function (value) {
-                return value + "%";
-              },
-            },
-          },
-        };
 
-        const chart = new ApexCharts(document.querySelector("#chart"), options);
-        chart.render();
-      });
+const countHouseHold = function() {
+    $('#countHouseHold').text('Loading...'); 
+
+    $.ajax({
+        url: '<?= base_url("admin/count-house-status") ?>',
+        method: 'GET',
+        dataType: 'json',
+        success: function(response) {
+            $('#countHouseHold').text(response.count);
+        },
+        error: function(xhr, status, error) {
+            console.error("AJAX error:", error);
+            $('#countHouseHold').text('Error'); 
+        }
+    });
+};
+const countResidents = function() {
+    $('#countResidents').text('Loading...');
+
+    $.ajax({
+        url: '<?= base_url("admin/count-residents") ?>',
+        method: 'GET',
+        dataType: 'json',
+        success: function(response) {
+            $('#countResidents').text(response.count);
+        },
+        error: function(xhr, status, error) {
+            console.error("AJAX error:", error);
+            $('#countResidents').text('Error');
+        }
+    });
+};
+
+const countCompletedComplaints = function() {
+    $('#countCompletedComplaints').text('Loading...');
+
+    $.ajax({
+        url: '<?= base_url("admin/count-completed-complaints") ?>',
+        method: 'GET',
+        dataType: 'json',
+        success: function(response) {
+            $('#countCompletedComplaints').text(response.count);
+        },
+        error: function(xhr, status, error) {
+            console.error("AJAX error:", error);
+            $('#countCompletedComplaints').text('Error');
+        }
+    });
+};
+
+const countPendingComplaints = function() {
+    $('#countPendingComplaints').text('Loading...');
+
+    $.ajax({
+        url: '<?= base_url("admin/count-pending-complaints") ?>',
+        method: 'GET',
+        dataType: 'json',
+        success: function(response) {
+            $('#countPendingComplaints').text(response.count);
+        },
+        error: function(xhr, status, error) {
+            console.error("AJAX error:", error);
+            $('#countPendingComplaints').text('Error');
+        }
+    });
+};
+
+const loadEvents = function() {
+    $.ajax({
+        url: "<?= base_url('admin/get-events-dashboard') ?>",  
+        method: "GET",
+        dataType: "json",
+        success: function(events) {
+            const eventsContainer = $('#events-container');
+            eventsContainer.empty(); 
+
+            events.forEach(function(event) {
+                const startDate = new Date(event.start_date);
+                const day = startDate.getDate();
+                const month = startDate.toLocaleString('default', { month: 'short' });
+
+                const eventHtml = `
+                    <div class="event">
+                        <div class="event__date">
+                            <p class="day">${day}</p>
+                            <p class="month">${month}</p>
+                        </div>
+                        <div class="event__title__box">
+                            <p class="event__title">${event.event_title}</p>
+                        </div>
+                    </div>
+                `;
+
+                eventsContainer.append(eventHtml);
+            });
+        },
+        error: function(xhr, status, error) {
+            console.error("Error loading events:", error);
+        }
+    });
+};
+const loadNewUsers = function() {
+    $.ajax({
+        url: '<?= base_url("admin/get-new-users") ?>',  // URL for the AJAX request
+        method: 'GET',
+        dataType: 'json',
+        success: function(response) {
+            let newAccountsContainer = $('#newAccounts');
+            newAccountsContainer.empty();  // Clear the container before appending new data
+
+            // Loop through each user and generate HTML
+            $.each(response, function(index, user) {
+                let userItem = `
+                    <div class="birthday__item">
+                        <div class="img__box__birthday">
+                            <!-- Check if image exists and prepend 'assets/' to image path -->
+                            <img class="user__img__display" src="<?= base_url('') ?>${user.image ? user.image : 'assets/images/default.png'}" alt="User image" />
+                            <div class="user__details">
+                                <p class="user__name">${user.firstname} ${user.lastname}</p>
+                                <p class="position">${user.role}</p>
+                            </div>
+                        </div>
+                        <div class="birthday__box">
+                            <p class="birthday__day">${new Date(user.created_at).getDate()}</p>
+                            <p class="birthday__month">${new Date(user.created_at).toLocaleString('default', { month: 'short' })}</p>
+                        </div>
+                    </div>
+                `;
+                newAccountsContainer.append(userItem);  // Add each user to the container
+            });
+        },
+        error: function(xhr, status, error) {
+            console.error("Error loading new users:", error);
+        }
+    });
+};
+
+$('.heading__name').on("click", function() {
+  loadNewUsers();
+})
+// Call the function to load new users when the document is ready
+$(document).ready(function() {
+    loadNewUsers();
+});
+
+// Call it on page load if needed
+$(document).ready(function() {
+    countHouseHold();
+    countResidents();
+    countCompletedComplaints();
+    countPendingComplaints();
+    loadEvents();
+    loadNewUsers();
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  $.ajax({
+    url: "<?= base_url('admin/get-resident-stats') ?>",
+    method: "GET",
+    dataType: "json",
+    success: function (data) {
+      const options = {
+        series: [
+          data.male,
+          data.female,
+          data.minors,
+          data.non_voters,
+          data.non_head,
+          data.head_of_family,  // Added head of family
+          data.archived,
+          data.pwd,
+          data.voters,
+        ],
+        labels: [
+          "Male",
+          "Female",
+          "Minors",
+          "Non Voters",
+          "Non Head of the Family",
+          "Head of the Family",  // Added label
+          "Archived",
+          "PWD",
+          "Voters",
+        ],
+        chart: {
+          type: "donut",
+          height: 380,
+        },
+        colors: [
+          "#2196F3", // Male
+          "#9C27B0", // Female
+          "#F44336", // Minors
+          "#009688", // Non Voters
+          "#FF9800", // Non Head
+          "#8E44AD", // Head of the Family (NEW)
+          "#00BCD4", // Archived
+          "#4CAF50", // PWD
+          "#FFC107", // Voters
+        ],
+        legend: {
+          position: "left",
+          offsetY: 20,
+        },
+        plotOptions: {
+          pie: {
+            donut: {
+              size: "65%",
+              labels: {
+                show: true,
+                total: {
+                  show: true,
+                  showAlways: true,
+                  label: "Total",
+                  fontSize: "22px",
+                  fontFamily: "Helvetica, Arial, sans-serif",
+                  fontWeight: 600,
+                  color: "#373d3f",
+                },
+              },
+            },
+          },
+        },
+        responsive: [
+          {
+            breakpoint: 480,
+            options: {
+              chart: {
+                height: 300,
+              },
+              legend: {
+                position: "bottom",
+              },
+            },
+          },
+        ],
+        tooltip: {
+          y: {
+            formatter: function (value) {
+              return value; // Value as is
+            },
+          },
+        },
+      };
+
+      const chart = new ApexCharts(document.querySelector("#chart"), options);
+      chart.render();
+    },
+    error: function (xhr, status, error) {
+      console.error("Error loading chart data:", error);
+    }
+  });
+});
     </script>
     <script>
       $(document).ready(function () {

@@ -75,7 +75,6 @@
                 value=""
                 placeholder="Enter lastname"
                 name="file_against"
-                
               ></select>
               <span class="input__title"
                 >File Against<span class="red__dot">*</span></span
@@ -115,6 +114,7 @@
                 value=""
                 placeholder="Enter contact-no"
                 name="complaint_details"
+                style="height: 15rem;"
                 
               >
               </textarea>
@@ -177,7 +177,7 @@
 
             <!-- Complaint Details -->
             <div class="input__box">
-                <textarea class="information__input" name="view_complaint_details" readonly></textarea>
+                <textarea class="information__input" name="view_complaint_details" style="height: 15rem;"  readonly></textarea>
                 <span class="input__title">Complaint Details<span class="red__dot">*</span></span>
                 <p class="text-danger"></p>
             </div>
@@ -208,7 +208,7 @@
           <div class="heading__container">
             <p class="subheading">List of Complains</p>
             <div class="button__box">
-              <button class="btn__secondary">
+              <!-- <button class="btn__secondary">
                 <div class="icon__link">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -226,7 +226,7 @@
                   </svg>
                 </div>
                 Filter
-              </button>
+              </button> -->
               <button class="btn__secondary active btn__add__resident">
                 <div class="icon__link">
                   <svg
@@ -448,35 +448,39 @@ $('#markAsCompleted').on('click', function () {
     const complaintId = $('input[name="view_complaint_id"]').val();
     const isSolved = $(this).hasClass('unsolve');
     const newStatus = isSolved ? 0 : 1;
+    const actionText = newStatus === 1 ? 'mark this complaint as solved' : 'mark this complaint as unsolved';
 
-    $.ajax({
-        url: '<?= site_url('admin/mark-as-solved') ?>',
-        type: 'POST',
-        data: {
-            complaint_id: complaintId,
-            status: newStatus
-        },
-        dataType: 'json',
-        success: function (response) {
-            if (response.status === 'success') {
-                if (newStatus === 1) {
-                    $('#markAsCompleted').text('Mark as Unsolved').addClass('unsolve').removeClass('solve');
+    if (confirm(`Are you sure you want to ${actionText}?`)) {
+        $.ajax({
+            url: '<?= site_url('admin/mark-as-solved') ?>',
+            type: 'POST',
+            data: {
+                complaint_id: complaintId,
+                status: newStatus
+            },
+            dataType: 'json',
+            success: function (response) {
+                if (response.status === 'success') {
+                    if (newStatus === 1) {
+                        $('#markAsCompleted').text('Mark as Unsolved').addClass('unsolve').removeClass('solve');
+                    } else {
+                        $('#markAsCompleted').text('Mark as Solved').addClass('solve').removeClass('unsolve');
+                    }
+                    $("#viewReportModal").removeClass("open");
+                    $(".wrapper").removeClass("open");
+                    loadComplaints(); // refresh table
                 } else {
-                    $('#markAsCompleted').text('Mark as Solved').addClass('solve').removeClass('unsolve');
+                    alert('Error: ' + response.message);
                 }
-                $("#viewReportModal").removeClass("open");
-                $(".wrapper").removeClass("open");
-                loadComplaints(); // refresh table
-            } else {
-                alert('Error: ' + response.message);
+            },
+            error: function (xhr) {
+                console.error(xhr.responseText);
+                alert('Something went wrong.');
             }
-        },
-        error: function (xhr) {
-            console.error(xhr.responseText);
-            alert('Something went wrong.');
-        }
-    });
+        });
+    }
 });
+
 
 
 

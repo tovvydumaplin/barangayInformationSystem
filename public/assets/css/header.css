@@ -44,6 +44,7 @@
   width: 5.9rem;
   border-radius: 50%;
   background-color: var(--gray-color);
+  object-fit: cover;
 }
 
 .user__name__menu {

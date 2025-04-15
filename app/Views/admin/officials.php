@@ -46,7 +46,7 @@
             <?= csrf_field() ?>
             <div class="row">
                 <div class="input__box">
-                    <span class="input__title">Select via Resident's List<span class="red__dot"> (Optional)</span></span>
+                    <span class="input__title not__capitalized">Select via Resident's List<span class="red__dot"> (Optional)</span></span>
                     <select class="information__input" id="residentsList" name="residents__list">
                     </select>
                     <p class="text-danger"></p>
@@ -244,7 +244,7 @@
           <div class="heading__container">
             <p class="subheading">List of Officials</p>
             <div class="button__box">
-              <button class="btn__secondary">
+              <!-- <button class="btn__secondary">
                 <div class="icon__link">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -262,7 +262,7 @@
                   </svg>
                 </div>
                 Filter
-              </button>
+              </button> -->
               <button class="btn__secondary active btn__add__item">
                 <div class="icon__link">
                   <svg
@@ -518,9 +518,13 @@ $('#residentsList').on('change', function () {
 });
 
 $("#submitUserBtn").on("click", function (e) {
-    e.preventDefault(); 
-    updateOfficial(); 
+    e.preventDefault();
+
+    if (confirm("Are you sure you want to update this official's information?")) {
+        updateOfficial();
+    }
 });
+
 
     $('.btn__create__official').on('click', function () {
         createOfficial();

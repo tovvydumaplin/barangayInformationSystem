@@ -280,8 +280,8 @@
             <p class="modal__heading">View Official</p>
             <div class="modal__btn__container">
               <button class="btn__secondary__edit">Edit</button>
-              <button id="" class="btn__secondary__deactivate" onClick="deactivateUser()">Deactivate</button>
-              <button id="" class="btn__secondary__reactivate" onClick="reactivateUser()">Reactivate</button>
+              <button class="btn__secondary__deactivate">Deactivate</button>
+              <button class="btn__secondary__reactivate">Reactivate</button>
             </div>
         </div>
         <form class="modal__body community__modal">
@@ -680,7 +680,7 @@ const loadData = function() {
             { 
                 "data": "profile_image", 
                 "render": function(data, type, row) {
-                    return `<img src="${data}" width="50" height="50"; object-fit: cover; style="border-radius: 50%;">`;
+                    return `<img src="${data}" width="50" height="50"; style="border-radius: 50%; object-fit: cover;">`;
                 }
               },
               { "data": "account_id" },  
@@ -797,6 +797,19 @@ $(document).on("keydown", function (event) {                          // Hide mo
         closeErrorDisplay();
     }
 });
+
+$(document).on('click', '.btn__secondary__deactivate', function () {
+    if (confirm("Are you sure you want to deactivate this user?")) {
+        deactivateUser();
+    }
+});
+
+$(document).on('click', '.btn__secondary__reactivate', function () {
+    if (confirm("Are you sure you want to reactivate this user?")) {
+        reactivateUser();
+    }
+});
+
 // Close modal event
 $(document).on("click", ".closeModalBtn", function () {                  
     document.querySelector(".wrapper").classList.remove("open");
