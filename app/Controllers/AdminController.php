@@ -1071,6 +1071,8 @@ public function createUser()
         $quantity   = $this->request->getPost('lendQuantity');     // Quantity from the form
         $itemName   = $this->request->getPost('item_name');        // Item name passed via AJAX
         $borrowDesc   = $this->request->getPost('borrowDesc');        // Item name passed via AJAX
+        $borrowDate   = $this->request->getPost('borrowDate');        // Item name passed via AJAX
+        $returnDate   = $this->request->getPost('returnDate');        // Item name passed via AJAX
     
         if (!$borrowerID || !$itemID || !$quantity || !$itemName || !$borrowDesc) {
             return $this->response->setJSON([
@@ -1106,8 +1108,9 @@ public function createUser()
             'borrower_id'       => $borrowerID,
             'borrowed_quantity' => $quantity,
             'borrower_desc' => $borrowDesc,
-            'status'            => '1',  // assuming '1' means active or borrowed
-            'date_borrowed'     => date('Y-m-d'),  
+            'status'            => '1',  
+            'date_borrowed'     => $borrowDate,  
+            'date_of_return'     => $returnDate,  
         ];
     
         // Save the lending record
@@ -1530,33 +1533,48 @@ public function createComplaint()
     $complainModel = new ComplainModel();
     $residentModel = new ResidentModel();
 
-    $complainantId = $this->request->getPost('complainant');
-    $fileAgainstId = $this->request->getPost('file_against');
+    $complainantFullName = $this->request->getPost('complainant');
+    $fileAgainstFullName = $this->request->getPost('file_against');
     $date = $this->request->getPost('date');
     $complainTitle = $this->request->getPost('complain_title');
     $complainDetails = $this->request->getPost('complaint_details');
-    $typeOfComplaint = $this->request->getPost('type_of_complaint'); 
+    $typeOfComplaint = $this->request->getPost('type_of_complaint');
 
-    // Get complainant name using the complainantId
-    $complainant = $residentModel->find($complainantId);
-    $complainantName = $complainant ? $complainant['firstname'] . ' ' . $complainant['lastname'] : null;
+    $complainantAge = $this->request->getPost('complainant_age');
+    $complainantAddress = $this->request->getPost('complainant_address');
+    $incidentLocation = $this->request->getPost('incident_location');
+    $barangayAction = $this->request->getPost('barangay_action');
 
-    // Get file against name using the fileAgainstId
-    $fileAgainst = $residentModel->find($fileAgainstId);
-    $fileAgainstName = $fileAgainst ? $fileAgainst['firstname'] . ' ' . $fileAgainst['lastname'] : null;
+    // Look up complainant by full name (case-insensitive)
+    $complainant = $residentModel
+        ->where("LOWER(CONCAT(firstname, ' ', lastname))", strtolower($complainantFullName))
+        ->first();
+
+    $complainantId = ($complainant) ? $complainant['resident_id'] : null;
+
+    $fileAgainst = $residentModel
+        ->where("LOWER(CONCAT(firstname, ' ', lastname))", strtolower($fileAgainstFullName))
+        ->first();
+
+    $fileAgainstId = ($fileAgainst) ? $fileAgainst['resident_id'] : null;
 
     $data = [
         'complainant_id' => $complainantId,
-        'complainant_name' => $complainantName,
-        'complain_against' => $fileAgainstName,
+        'complainant_name' => $complainantFullName,
+        'complain_against' => $fileAgainstFullName,
         'complain_against_id' => $fileAgainstId,
         'date' => $date,
         'complain_title' => $complainTitle,
         'complain_details' => $complainDetails,
-        'type_of_complaint' => $typeOfComplaint, 
+        'type_of_complaint' => $typeOfComplaint,
+        'complainant_age' => $complainantAge,
+        'complainant_address' => $complainantAddress,
+        'location_of_incident' => $incidentLocation,
+        'barangay_action' => $barangayAction,
         'status' => 0
     ];
 
+    // Save complaint data
     $complainModel->save($data);
 
     return $this->response->setJSON([
@@ -1564,6 +1582,58 @@ public function createComplaint()
         'message' => 'Complaint filed successfully!'
     ]);
 }
+
+
+
+// Back up with complainant name as select
+// public function createComplaint()
+// {
+//     $complainModel = new ComplainModel();
+//     $residentModel = new ResidentModel();
+
+//     $complainantId = $this->request->getPost('complainant');
+//     $fileAgainstId = $this->request->getPost('file_against');
+//     $date = $this->request->getPost('date');
+//     $complainTitle = $this->request->getPost('complain_title');
+//     $complainDetails = $this->request->getPost('complaint_details');
+//     $typeOfComplaint = $this->request->getPost('type_of_complaint'); 
+
+//     $complainantAge = $this->request->getPost('complainant_age'); 
+//     $complainantAddress = $this->request->getPost('complainant_address'); 
+//     $incidentLocation = $this->request->getPost('incident_location'); 
+//     $barangayAction = $this->request->getPost('barangay_action'); 
+
+//     // Get complainant name using the complainantId
+//     $complainant = $residentModel->find($complainantId);
+//     $complainantName = $complainant ? $complainant['firstname'] . ' ' . $complainant['lastname'] : null;
+
+//     // Get file against name using the fileAgainstId
+//     $fileAgainst = $residentModel->find($fileAgainstId);
+//     $fileAgainstName = $fileAgainst ? $fileAgainst['firstname'] . ' ' . $fileAgainst['lastname'] : null;
+
+//     $data = [
+//         'complainant_id' => $complainantId,
+//         'complainant_name' => $complainantName,
+//         'complain_against' => $fileAgainstName,
+//         'complain_against_id' => $fileAgainstId,
+//         'date' => $date,
+//         'complain_title' => $complainTitle,
+//         'complain_details' => $complainDetails,
+//         'type_of_complaint' => $typeOfComplaint, 
+//         'complainant_age' => $complainantAge, 
+//         'complainant_address' => $complainantAddress, 
+//         'location_of_incident' => $incidentLocation, 
+//         'barangay_action' => $barangayAction, 
+//         'status' => 0
+//     ];
+
+//     $complainModel->save($data);
+
+//     return $this->response->setJSON([
+//         'status' => 'success',
+//         'message' => 'Complaint filed successfully!'
+//     ]);
+// }
 
 public function getComplaints() {
     $complainModel = new ComplainModel();

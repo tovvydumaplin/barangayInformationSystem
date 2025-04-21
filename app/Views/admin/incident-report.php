@@ -40,13 +40,12 @@
       <div id="addReportModal" class="modal">
         <div class="modal__header">
           <p class="modal__heading">File a Complaint</p>
-          <button class="btn__secondary active">X</button>
         </div>
         <form id="createComplainForm" class="modal__body community__modal">
           <div class="row flex__d__col">
             <!-- 1 -->
             <div class="input__box">
-                <select class="information__input" name="type_of_complaint">
+                <select class="information__input" id="typeOfComplaint" name="type_of_complaint">
                   <option value="">Select one</option>
                   <option value="blotter">Blotter</option>
                   <option value="complaint">Complaint</option>
@@ -54,46 +53,89 @@
                 <span class="input__title">Type of Concern<span class="red__dot">*</span></span>
                 <p class="text-danger"></p>
             </div>
+      
             <!-- 2 -->
-            <div class="input__box">
-              <select
+            <div class="row">
+              <div class="input__box">
+                <input
+                  class="information__input"
+                  value=""
+                  placeholder="Enter fullname"
+                  name="complainant"
+                  
+                />
+                <span class="input__title"
+                  >Complainant<span class="red__dot">*</span></span
+                >
+                <p class="text-danger"></p>
+              </div>
+              <!-- 1 -->
+              <div class="input__box blotter__input d__none">
+                <input
+                  class="information__input"
+                  value=""
+                  placeholder="Enter age"
+                  name="complainant_age"
+                />
+                <span class="input__title"
+                  >Complainant Age<span class="red__dot">*</span></span
+                >
+                <p class="text-danger"></p>
+              </div>
+            </div>
+            <!--  -->
+            <div class="input__box blotter__input d__none">
+              <input
                 class="information__input"
                 value=""
-                placeholder="Enter fullname"
-                name="complainant"
-                
-              ></select>
+                placeholder="Enter Address"
+                name="complainant_address"
+              />
               <span class="input__title"
-                >Complainant<span class="red__dot">*</span></span
+                >Complainant Address<span class="red__dot">*</span></span
               >
               <p class="text-danger"></p>
             </div>
-            <!-- 1 -->
             <div class="input__box">
-              <select
+              <input
                 class="information__input"
                 value=""
-                placeholder="Enter lastname"
+                placeholder="Enter fullname"
                 name="file_against"
-              ></select>
+              />
               <span class="input__title"
                 >File Against<span class="red__dot">*</span></span
               >
               <p class="text-danger"></p>
             </div>
             <!-- 1 -->
-            <div class="input__box">
-              <input
-                class="information__input"
-                value=""
-                placeholder="Enter middlename"
-                name="date"
-                type="date"
-              />
-              <span class="input__title"
-                >Date<span class="red__dot">*</span></span
-              >
-              <p class="text-danger"></p>
+            <div class="row">
+              <div class="input__box">
+                <input
+                  class="information__input"
+                  value=""
+                  placeholder="Enter middlename"
+                  name="date"
+                  type="date"
+                />
+                <span class="input__title"
+                  >Date of Incident<span class="red__dot">*</span></span
+                >
+                <p class="text-danger"></p>
+              </div>
+              <!--  -->
+              <div class="input__box blotter__input d__none">
+                <input
+                  class="information__input"
+                  value=""
+                  placeholder="Enter place of incident"
+                  name="incident_location"
+                />
+                <span class="input__title"
+                  >Location of Incident<span class="red__dot">*</span></span
+                >
+                <p class="text-danger"></p>
+              </div>
             </div>
             <div class="input__box">
               <input
@@ -112,14 +154,24 @@
               <textarea
                 class="information__input"
                 value=""
-                placeholder="Enter contact-no"
+                placeholder="Enter details"
                 name="complaint_details"
-                style="height: 15rem;"
-                
-              >
-              </textarea>
+                style="height: 15rem;"></textarea>
               <span class="input__title"
                 >Complain Details<span class="red__dot">*</span></span
+              >
+              <p class="text-danger"></p>
+            </div>
+            <!--  -->
+            <div class="input__box blotter__input d__none">
+              <input
+                class="information__input"
+                value=""
+                placeholder="Enter barangay's action"
+                name="barangay_action"
+              />
+              <span class="input__title"
+                >Barangay Action<span class="red__dot">*</span></span
               >
               <p class="text-danger"></p>
             </div>
@@ -128,7 +180,6 @@
             <button class="btn__primary active btn__close" id="createComplain">
               File Complain
             </button>
-            <span class="btn__secondary active btn__close">Close</span>
           </div>
         </form>
       </div>
@@ -136,58 +187,87 @@
       <div id="viewReportModal" class="modal">
         <div class="modal__header">
             <p class="modal__heading">View Complaint</p>
-            <button class="btn__secondary active">X</button>
         </div>
         <form id="viewComplainForm" class="modal__body community__modal">
-        <div class="row flex__d__col">
-          <!-- Hidden ID -->
-          <input type="hidden" name="view_complaint_id" />
-          <div class="input__box">
-                <input class="information__input" name="view_type_of_complaint"/>
-                <span class="input__title">Type of Concern<span class="red__dot">*</span></span>
-                <p class="text-danger"></p>
-            </div>
-            <!-- Complainant -->
+          <div class="row flex__d__col">
+            <!-- Type of Concern -->
             <div class="input__box">
-                <input class="information__input" name="view_complainant"/>
+              <input class="information__input" name="view_type_of_complaint" readonly />
+              <span class="input__title">Type of Concern<span class="red__dot">*</span></span>
+              <p class="text-danger"></p>
+            </div>
+
+            <!-- Complainant + Age -->
+            <div class="row">
+              <div class="input__box">
+                <input class="information__input" name="view_complainant" readonly />
                 <span class="input__title">Complainant<span class="red__dot">*</span></span>
                 <p class="text-danger"></p>
+              </div>
+
+              <div class="input__box blotter__input d__none">
+                <input class="information__input" name="view_complainant_age" readonly />
+                <span class="input__title">Complainant Age<span class="red__dot">*</span></span>
+                <p class="text-danger"></p>
+              </div>
+            </div>
+
+            <!-- Complainant Address -->
+            <div class="input__box blotter__input d__none">
+              <input class="information__input" name="view_complainant_address" readonly />
+              <span class="input__title">Complainant Address<span class="red__dot">*</span></span>
+              <p class="text-danger"></p>
             </div>
 
             <!-- File Against -->
             <div class="input__box">
-                <input class="information__input" name="view_file_against"/>
-                <span class="input__title">File Against<span class="red__dot">*</span></span>
-                <p class="text-danger"></p>
+              <input class="information__input" name="view_file_against" readonly />
+              <span class="input__title">File Against<span class="red__dot">*</span></span>
+              <p class="text-danger"></p>
             </div>
 
-            <!-- Date -->
-            <div class="input__box">
+            <!-- Date + Incident Location -->
+            <div class="row">
+              <div class="input__box">
                 <input class="information__input" name="view_date" type="date" readonly />
-                <span class="input__title">Date<span class="red__dot">*</span></span>
+                <span class="input__title">Date of Incident<span class="red__dot">*</span></span>
                 <p class="text-danger"></p>
+              </div>
+
+              <div class="input__box blotter__input d__none">
+                <input class="information__input" name="view_incident_location" readonly />
+                <span class="input__title">Location of Incident<span class="red__dot">*</span></span>
+                <p class="text-danger"></p>
+              </div>
             </div>
 
             <!-- Complain Title -->
             <div class="input__box">
-                <input class="information__input" name="view_complain_title" readonly />
-                <span class="input__title">Complain Title<span class="red__dot">*</span></span>
-                <p class="text-danger"></p>
+              <input class="information__input" name="view_complain_title" readonly />
+              <span class="input__title">Complain Title<span class="red__dot">*</span></span>
+              <p class="text-danger"></p>
             </div>
 
             <!-- Complaint Details -->
             <div class="input__box">
-                <textarea class="information__input" name="view_complaint_details" style="height: 15rem;"  readonly></textarea>
-                <span class="input__title">Complaint Details<span class="red__dot">*</span></span>
-                <p class="text-danger"></p>
+              <textarea class="information__input" name="view_complaint_details" readonly style="height: 15rem;"></textarea>
+              <span class="input__title">Complain Details<span class="red__dot">*</span></span>
+              <p class="text-danger"></p>
             </div>
-        </div>
-        <div class="btn__box__modal">
+
+            <!-- Barangay Action -->
+            <div class="input__box blotter__input d__none">
+              <input class="information__input" name="view_barangay_action" readonly />
+              <span class="input__title">Barangay Action<span class="red__dot">*</span></span>
+              <p class="text-danger"></p>
+            </div>
+          </div>
+
+          <div class="btn__box__modal">
             <button type="button" class="btn__primary active" id="markAsCompleted">
-                Mark as Solved
+              Mark as Solved
             </button>
-            <span class="btn__secondary active">Close</span>
-        </div>
+          </div>
         </form>
      </div>
 
@@ -302,29 +382,29 @@
 $(document).ready(function () {
   // DataTables initialization
   $("#complainTable").DataTable();
-// LOAD RESIDENTS
-  function loadResidents() {
-    $.ajax({
-      url: "/admin/residents-list",
-      method: "GET",
-      dataType: "json",
-      success: function (residents) {
-        let options = '<option value="">Choose...</option>';
-        residents.forEach(function (resident) {
-          let fullName = `${resident.firstname} ${resident.middlename} ${resident.lastname} ${resident.suffix || ''}`.trim();
-          options += `<option value="${resident.resident_id}">${fullName}</option>`;
-        });
+// LOAD RESIDENTS (HOLD. Select are changed to inputs)
+  // function loadResidents() {
+  //   $.ajax({
+  //     url: "/admin/residents-list",
+  //     method: "GET",
+  //     dataType: "json",
+  //     success: function (residents) {
+  //       let options = '<option value="">Choose...</option>';
+  //       residents.forEach(function (resident) {
+  //         let fullName = `${resident.firstname} ${resident.middlename} ${resident.lastname} ${resident.suffix || ''}`.trim();
+  //         options += `<option value="${resident.resident_id}">${fullName}</option>`;
+  //       });
 
-        $('select[name="complainant"]').html(options);
-        $('select[name="file_against"]').html(options);
-      },
-      error: function (xhr, status, error) {
-        console.error("Failed to load residents:", error);
-      }
-    });
-  }
+  //       $('select[name="complainant"]').html(options);
+  //       $('select[name="file_against"]').html(options);
+  //     },
+  //     error: function (xhr, status, error) {
+  //       console.error("Failed to load residents:", error);
+  //     }
+  //   });
+  // }
 
-  loadResidents();
+  // loadResidents();
 
 
 const loadComplaints = function() {
@@ -415,22 +495,41 @@ const viewComplaint = function(complaintId) {
         dataType: 'json',
         success: function(response) {
             if (response.status === 'success') {
-                const complaint = response.data; 
+                const complaint = response.data;
 
-                $('input[name="view_type_of_complaint"]').val(complaint.type_of_complaint);
-                $('input[name="view_complainant"]').val(complaint.complainant_name);
-                $('input[name="view_file_against"]').val(complaint.complain_against);
-                $('input[name="view_date"]').val(complaint.date);
-                $('input[name="view_complain_title"]').val(complaint.complain_title);
-                $('textarea[name="view_complaint_details"]').val(complaint.complain_details);
-                $('input[name="view_complaint_id"]').val(complaint.complaint_id);
-                // Show the modal
-                if (complaint.status == 1) {
-                    $('#markAsCompleted').text('Mark as Unsolved').addClass('unsolve').removeClass('solve');
+                $('[name="view_type_of_complaint"]').val(complaint.type_of_complaint);
+                $('[name="view_complainant"]').val(complaint.complainant_name);
+                $('[name="view_complainant_age"]').val(complaint.complainant_age);
+                $('[name="view_complainant_address"]').val(complaint.complainant_address);
+                $('[name="view_file_against"]').val(complaint.complain_against);
+                $('[name="view_date"]').val(complaint.date);
+                $('[name="view_incident_location"]').val(complaint.location_of_incident);
+                $('[name="view_complain_title"]').val(complaint.complain_title);
+                $('[name="view_complaint_details"]').val(complaint.complain_details);
+                $('[name="view_barangay_action"]').val(complaint.barangay_action);
+                $('[name="view_complaint_id"]').val(complaint.complaint_id);
+
+                // Toggle blotter inputs
+                if (complaint.type_of_complaint === 'blotter') {
+                    $('.blotter__input').removeClass('d__none');
                 } else {
-                    $('#markAsCompleted').text('Mark as Solved').addClass('solve').removeClass('unsolve');
+                    $('.blotter__input').addClass('d__none');
                 }
 
+                // Status button
+                if (complaint.status == 1) {
+                    $('#markAsCompleted')
+                        .text('Mark as Unsolved')
+                        .addClass('unsolve')
+                        .removeClass('solve');
+                } else {
+                    $('#markAsCompleted')
+                        .text('Mark as Solved')
+                        .addClass('solve')
+                        .removeClass('unsolve');
+                }
+
+                // Show modal
                 $("#viewReportModal").addClass("open");
                 $(".wrapper").addClass("open");
 
@@ -444,6 +543,8 @@ const viewComplaint = function(complaintId) {
         }
     });
 }
+
+
 $('#markAsCompleted').on('click', function () {
     const complaintId = $('input[name="view_complaint_id"]').val();
     const isSolved = $(this).hasClass('unsolve');
@@ -542,8 +643,14 @@ $('#markAsCompleted').on('click', function () {
     $(".tab__2").addClass("visible");
     $(".tab__1").removeClass("visible");
   });
+$('#typeOfComplaint').on("change", function() {
+  if ($('#typeOfComplaint').val() == "blotter") {
+    $('.blotter__input').removeClass("d__none");
 
-
+  } else {
+    $('.blotter__input').addClass("d__none");
+  }
+});
 });
 
     </script>

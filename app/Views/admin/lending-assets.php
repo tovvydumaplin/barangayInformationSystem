@@ -202,6 +202,20 @@
                       <p class="text-danger"></p>
                     </div>
                   </div>
+                  <div class="row">                      
+                    <div class="input__box">
+                      <input id="borrowDate" class="information__input" value="" placeholder="Enter quantity" name="borrowDate" type="date" />
+                      <span class="input__title">Borrow Date<span class="red__dot">*</span></span>
+                      <p class="text-danger"></p>
+                    </div>
+                  </div>
+                  <div class="row">                      
+                    <div class="input__box">
+                      <input id="returnDate" class="information__input" value="" placeholder="Enter quantity" name="returnDate" type="date" />
+                      <span class="input__title">Return Date<span class="red__dot">*</span></span>
+                      <p class="text-danger"></p>
+                    </div>
+                  </div>
               </div>
               <div class="btn__box__modal">
                   <span class="btn__primary" id="lendBtn">Submit</span>
@@ -263,6 +277,13 @@
                     <div class="input__box">
                         <input id="viewDateBorrowed" class="information__input" value="" placeholder="Enter quantity" name="lendDate" />
                         <span class="input__title">Date Borrowed<span class="red__dot">*</span></span>
+                        <p class="text-danger"></p>
+                    </div>
+                </div>
+                <div class="row">                      
+                    <div class="input__box">
+                        <input id="viewDateReturn" class="information__input" value="" placeholder="Enter quantity" name="lendDateReturn" />
+                        <span class="input__title">Date of Return<span class="red__dot">*</span></span>
                         <p class="text-danger"></p>
                     </div>
                 </div>
@@ -647,6 +668,7 @@ const loadLendingHistory = function() {
             { data: 'item_name', title: 'Item Name' },
             { data: 'borrowed_quantity', title: 'Quantity' },
             { data: 'date_borrowed', title: 'Date Borrowed' },
+            { data: 'date_of_return', title: 'Date of Return' },
             { data: 'house_no', title: 'House No' },  
             {
                 data: null,
@@ -758,6 +780,7 @@ $(document).on("click", ".view__lending__btn", function () {
       $('#viewListOfItems').val(res.item_name).prop('disabled', true);
       $('#viewLendQuantity').val(res.borrowed_quantity).prop('readonly', true);
       $('#viewDateBorrowed').val(res.date_borrowed).prop('readonly', true);
+      $('#viewDateReturn').val(res.date_of_return).prop('readonly', true);
       $('#viewBorrowDesc').val(res.borrower_desc).prop('readonly', true);
 
       // $('#viewLendBtn').hide();
