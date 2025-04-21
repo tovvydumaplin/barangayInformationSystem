@@ -189,8 +189,8 @@
             </div>
           </div>
           <div class="birthdays__container card">
-            <h3 class="heading__tertiary">New Accounts</h3>
-            <div id="newAccounts" class="birthday__container__card">
+            <h3 class="heading__tertiary">Upcoming Birthdays</h3>
+            <div id="birthdayList" class="birthday__container__card">
                   <!-- new accounts -->
             </div>
           </div>
@@ -343,12 +343,44 @@ const loadNewUsers = function() {
     });
 };
 
-$('.heading__name').on("click", function() {
-  loadNewUsers();
-})
+const loadUpcomingBirthdays = function () {
+    $.ajax({
+        url: '<?= base_url("admin/get-upcoming-birthdays") ?>',
+        method: 'GET',
+        dataType: 'json',
+        success: function (response) {
+            let birthdayContainer = $('#birthdayList');
+            birthdayContainer.empty();
+
+            $.each(response, function (index, resident) {
+                let birthdate = new Date(resident.birthdate);
+
+                let birthdayItem = `
+                    <div class="birthday__item">
+                        <div class="img__box__birthday">
+                            <div class="user__details">
+                                <p class="user__name">${resident.full_name}</p>
+                                <p class="position">Birthday</p>
+                            </div>
+                        </div>
+                        <div class="birthday__box">
+                            <p class="birthday__day">${birthdate.getDate()}</p>
+                            <p class="birthday__month">${birthdate.toLocaleString('default', { month: 'short' })}</p>
+                        </div>
+                    </div>
+                `;
+                birthdayContainer.append(birthdayItem);
+            });
+        },
+        error: function (xhr, status, error) {
+            console.error("Error loading birthdays:", error);
+        }
+    });
+};
+
 // Call the function to load new users when the document is ready
 $(document).ready(function() {
-    loadNewUsers();
+  loadUpcomingBirthdays();
 });
 
 // Call it on page load if needed

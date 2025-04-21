@@ -175,6 +175,8 @@
          <ion-icon class="icon__close" name="close-outline"></ion-icon>
         </div>
         <?php endif; ?>
+                    <!-- Add this element somewhere on your page, e.g., near the button -->
+        <div id="loading-message" style="display: none; margin-top: 10px; color: #333; font-size: 1.8rem;">Sending email...</div>
         <div class="card">
           <div class="heading__card">
             <p class="sign__in__heading text__align__center">Sign In</p>
@@ -216,7 +218,7 @@
                     >Remember me?</label
                   >
                 </div>
-                <a href="#">Forgot Password?</a>
+                <a href="#" id="forgot-password">Forgot Password?</a>
               </div>
 
               <button class="sign__in__btn mg__top__3">Sign In</button>
@@ -225,7 +227,33 @@
         </div>
       </div>
     </main>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+$('#forgot-password').on('click', function(e) {
+  e.preventDefault();
+  const username = prompt("Enter your username:");
+  if (username) {
+    $('#loading-message').show(); // Show loading
 
+    $.ajax({
+      url: '<?= site_url('admin/reset-password') ?>',
+      method: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify({ username }),
+      success: function(response) {
+        alert(response.message);
+      },
+      error: function(xhr) {
+        alert(xhr.responseJSON?.message || 'Something went wrong.');
+      },
+      complete: function() {
+        $('#loading-message').hide(); // Hide loading when done
+      }
+    });
+  }
+});
+
+    </script>
     <script>
       document.querySelector('.icon__close').addEventListener("click", function() {
           document.querySelector('.error__handler').classList.add("hide");

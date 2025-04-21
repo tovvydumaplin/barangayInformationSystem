@@ -125,4 +125,11 @@ $routes->get('admin/count-pending-complaints', 'AdminController::countPendingCom
 $routes->get('admin/get-resident-stats', 'AdminController::getResidentStats');
 $routes->get('admin/get-events-dashboard', 'AdminController::getEventsDashboard');
 $routes->get('admin/get-new-users', 'AdminController::getNewUsers');
+$routes->get('admin/get-upcoming-birthdays', 'AdminController::getUpcomingBirthdays');
 
+// Certificates
+$routes->get('admin/indigency', 'AdminController::indigencyCert');
+
+// Pw reset
+$routes->post('admin/reset-password', 'AdminController::ResetPassword');
+$routes->get('reset-password', 'AdminController::ResetNow');

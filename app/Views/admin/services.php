@@ -109,6 +109,121 @@
       .icon__close, .btn__cancel__services, .btn__save__services {
         cursor: pointer;
       }
+
+ /* CERT TABLE*/ 
+    #certification-document {
+        font-size: 12px; /* Base font size */
+    }
+    
+    #certification-document h1 {
+        font-size: 16px;
+    }
+    
+    #certification-document h2 {
+        font-size: 16px;
+    }
+    
+    #certification-document h3 {
+        font-size: 14px;
+    }
+    
+    #certification-document h4 {
+        font-size: 13px;
+    }
+    
+    #certification-document p {
+        font-size: 12px;
+        margin: 5px 0;
+    }
+    
+    /* Officials section specific styles */
+    #certification-document .official-name {
+        font-size: 11px;
+        font-weight: bold;
+        margin: 3px 0;
+    }
+    
+    #certification-document .official-title {
+        font-size: 9px;
+        font-style: italic;
+        margin: 0 0 10px 0;
+    }
+    
+    @media print {
+        .no-print, 
+        .sidebar, 
+        .navbar, 
+        .card-header, 
+        .footer, 
+        #certification-form, 
+        .no-print * {
+            display: none !important;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        #certification-document {
+            margin: 0;
+            padding: 0;
+        }
+    }
+    
+    .certification-table {
+        max-width: 210mm; /* A4 width */
+        margin: 0 auto;
+        box-sizing: border-box;
+    }
+    tr{
+      background-color: #fff;
+    }
+    .btn__container {
+      margin-bottom: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    #residentFullname {
+      text-transform: capitalize;
+    }
+    .btn-download {
+      padding: 2rem;
+      border-radius: 1rem;
+      border: none;
+      background-color: var(--main-color);
+      color: #fff;
+      font-family: 'Roboto', sans-serif;
+      font-weight: 600;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    .btn__form__container {
+      display: flex;
+      gap: 1rem;
+    }
+    .btn__form {
+      border: none;
+      font-family: 'Roboto', sans-serif;
+      font-size: 1.5rem;
+      color: #3b3b3b;
+      padding: 1rem;
+      border-radius: 1rem;
+      font-weight: 600;
+    }
+    .btn__form.active {
+      background-color: var(--main-color);
+      color: #fff;
+    }
+    .red__bg__page {
+      background: linear-gradient(to bottom,
+    rgb(199, 0, 0),         /* Top red */
+    rgb(255, 87, 34),       /* Orange */
+    rgb(255, 235, 59),      /* Yellow */
+    rgb(76, 175, 80),       /* Green */
+    rgb(199, 0, 0)          /* Bottom red again */
+);
+
+    }
     </style>
   </head>
   <body>
@@ -343,60 +458,248 @@
         </form>
       </div>
       <div class="container">
-        <div class="map__box">
-          <div class="map" id="map"></div>
-          <div class="btn__group">        
-            <button type="button" class="btn__edit__mode">
-            <div class="icon__bs">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
-                <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325"/>
-              </svg>
-            </div>
-            Edit Mode
-            </button>
-            <button type="button" class="btn__hide__markers">
-              <div class="icon__bs">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-slash" viewBox="0 0 16 16">
-                  <path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7 7 0 0 0-2.79.588l.77.771A6 6 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755q-.247.248-.517.486z"/>
-                  <path d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829"/>
-                  <path d="M3.35 5.47q-.27.24-.518.487A13 13 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7 7 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12z"/>
-                </svg>
-              </div>  
-            Hide Markers</button>
-            <div class="search__box">
-              <input type="text" id="searchHouseInput" placeholder="Enter House Number">
-              <button id="searchHouseButton">Search</button>
-            </div>
-          </div>
-        </div>
-              <!-- Family Name Input Modal -->
-      <div id="familyModal" class="pin__modal">
-        <form id="formData" class="form__data">
-          <div class="heading__box">
-             <h3 class="modal__heading">Register a House</h3>
-             <ion-icon class="icon__close" name="close-outline"></ion-icon>
-          </div>
-          <div class="input__group">
-            <select class="select__input" name="type">
-              <option disabled selected>Select one</option>
-              <option value="residential">Residential</option>
-              <option value="government">Government Building</option>
-              <option value="commercial">Commercial Establishment</option>
-              <option value="healthcare">Healthcare Facility</option>
-              <option value="education">Educational Institution</option>
-              <option value="transport">Transport Hub</option>
-            </select>
-            <input class="information__input" type="text" id="houseNumberInput" placeholder="Input House Number">
-            <input class="information__input" type="text" name="house_street" placeholder="Input Street">
-            <input class="information__input" type="hidden" id="latInput">
-            <input class="information__input" type="hidden" id="lngInput">
-          </div>
-          <div class="btn__box">
-            <button class="btn btn__save__services" type="button" id="saveHouseNumber">Save</button>
-            <button class="btn btn__cancel__services" type="button" id="closeModalServices">Cancel</button>
-           </div>
-        <form>
+      <div class="btn__container">
+      <p class="">Select an option:</p>
+      <div class="btn__form__container">
+          <button id="btnBarangayClearance" class="btn__form active">Barangay Certificate</button>
+          <button id="btnIndigency" class="btn__form">Indigency</button>
       </div>
+        <select id="residentSelect" class="information__input">
+            <option value="">Choose a resident</option>
+        </select>
+      <button id="download-pdf-btn" class="btn-download d__none">Download as PDF</button>
+      <button id="download-pdf-btn-cert" class="btn-download">Download as PDF</button>
+
+      </div>
+
+      <table class="certification-table d__none" id="certification-document" style="font-size: 1.4rem;border-collapse: collapse;border: 1px solid #3b3b3b;margin-right: 2rem;margin-left: 2rem;">
+          <!-- Header Row -->
+          <tr>
+              <td style="width: 20%; text-align: center; border-bottom: 1px solid #000; padding: 2rem;">
+                  <img src="/assets/images/logo_barangay.png" alt="Barangay Logo" style="width: 80px; height: 80px;">
+              </td>
+              <td style="width: 60%; text-align: center; border-bottom: 1px solid #000;">
+                  <p style="margin: 0 0 1rem 0; font-size: 14px;">Republic of the Philippines</p>
+                  <p style="margin: 0 0 1rem 0; font-size: 14px; font-weight: bold;">Office of the Barangay Captain</p>
+                  <p style="margin: 0 0 1rem 0; font-size: 14px;">Barangay 42C- Pinagbuklod Zone-5</p>
+                  <p style="margin: 0 0 1rem 0; font-size: 14px;">San Antonio, Cavite City</p>
+              </td>
+              <td style="width: 20%; text-align: center; border-bottom: 1px solid #000; padding: 2rem">
+                  <img src="/assets/images/cavite-logo.png" alt="Cavite Logo" style="width: 80px; height: 80px;">
+              </td>
+          </tr>
+          <!-- Document No -->
+          <tr>
+              <td colspan="3" style="padding: 5px 10px; border-bottom: 1px solid #000;">
+                  <p style="margin: 0; font-size: 12px;">No: 2024-0215</p>
+              </td>
+          </tr>
+          <!-- Main Content -->
+          <tr>
+              <!-- Officials Column -->
+              <td style="width: 30%; vertical-align: top; padding: 0;">
+                  <div style="background-color: #cc0000; padding: 5px; color: white; font-weight: bold; text-align: center;">
+                      BRGY. OFFICIALS
+                  </div>
+                  
+                  <div  style="padding: 10px; background-color: #dddddd; color: #3b3b3b;">
+                      <p style="text-align: center; font-weight: bold; margin: 5px 0;">YOLANDA DC. CHI</p>
+                      <p style="text-align: center; font-style: italic; font-size: 12px; margin: 0 0 30px 0;">Punong Barangay</p>
+
+                      <p style="text-align: center; font-weight: bold; margin: 5px 0;">JAY-AR L. HERNANDEZ</p>
+                      <p style="text-align: center; font-style: italic; font-size: 12px; margin: 0 0 30px 0;">Comm. On Peace & Order and Public Safety</p>
+
+                      <p style="text-align: center; font-weight: bold; margin: 5px 0;">GERALD LOYOLA</p>
+                      <p style="text-align: center; font-style: italic; font-size: 12px; margin: 0 0 30px 0;">Comm. On Public Works and Infrastructure</p>
+
+                      <p style="text-align: center; font-weight: bold; margin: 5px 0;">JENNIE DARNELL P. DONES</p>
+                      <p style="text-align: center; font-style: italic; font-size: 12px; margin: 0 0 30px 0;">Comm. On Social Welfare Management and Development</p>
+
+                      <p style="text-align: center; font-weight: bold; margin: 5px 0;">DARYL A. HINZ L. ADIES</p>
+                      <p style="text-align: center; font-style: italic; font-size: 12px; margin: 0 0 30px 0;">Comm. On Health & Sanitation</p>
+
+                      <p style="text-align: center; font-weight: bold; margin: 5px 0;">MELISSA S. QUIAMBEL</p>
+                      <p style="text-align: center; font-style: italic; font-size: 12px; margin: 0 0 30px 0;">Comm. On Women & Children Affairs</p>
+
+                      <p style="text-align: center; font-weight: bold; margin: 5px 0;">ARIEL M. ADRIANO JR.</p>
+                      <p style="text-align: center; font-style: italic; font-size: 12px; margin: 0 0 30px 0;">Comm. On Disaster Preparedness</p>
+
+                      <p style="text-align: center; font-weight: bold; margin: 5px 0;">JANA VIEL M. ORCAS</p>
+                      <p style="text-align: center; font-style: italic; font-size: 12px; margin: 0 0 30px 0;">Comm. On Youth and Sports Development</p>
+
+                      <p style="text-align: center; font-weight: bold; margin: 5px 0;">ANNA VIANCA T. ORCAS</p>
+                      <p style="text-align: center; font-style: italic; font-size: 12px; margin: 0 0 30px 0;">Secretary</p>
+
+                      <p style="text-align: center; font-weight: bold; margin: 5px 0;">NANETTE R. CORDURA</p>
+                      <p style="text-align: center; font-style: italic; font-size: 12px; margin: 0 0 30px 0;">Treasurer</p>
+                  </div>
+              </td>
+              
+              <!-- Certification Content -->
+              <td colspan="2" style="vertical-align: top; padding: 0;">
+                  <!-- Title -->
+                  <div style="background-color: #fff; text-align: center; padding: 10px; border-bottom: 1px solid #000;">
+                      <h2 style="margin: 0; color: #3b3b3b; font-size: 18px;">CERTIFICATION OF<br>INDIGENCY</h2>
+                  </div>
+                  
+                  <!-- Content -->
+                  <div style="padding: 15px 20px;">
+                      <p style="text-align: justify; line-height: 1.5;">
+                          This is to certify that <input id="residentFullname" placeholder="Fullname" readonly style="padding-left: 0.5rem; border: none; border-bottom: 1px solid gray; background-color: #fff;"/>
+                          of <input id="residentAddress" placeholder="Address" style="border: none; border-bottom: 1px solid gray; background-color: #fff;"/> San Antonio Cavite City has been 
+                          found to belong to an Indigent Family after interview and 
+                          validation has been made.
+                      </p>
+                      
+                      <p style="text-align: justify; line-height: 1.5; margin-top: 20px;">
+                          This certification is being issued upon request of the said 
+                          person above for <input placeholder="Reason" style="padding-left: 0.5rem; border: none; border-bottom: 1px solid gray; background-color: #fff;"/>.
+                      </p>
+                      
+                      <p style="text-align: justify; line-height: 1.5; margin-top: 20px;">
+                          Given this <input placeholder="Month" style="padding-left: 0.5rem; border: none; border-bottom: 1px solid gray; background-color: #fff;"/> day of <input placeholder="Day" style="padding-left: 0.5rem; border: none; border-bottom: 1px solid gray; background-color: #fff;"/>, 2024.
+                      </p>
+                      
+                      <div style="margin-top: 260px; text-align: right; padding-right: 40px;">
+                          <p style="margin-bottom: 0; font-weight: bold;">YOLANDA DC. CHI</p>
+                          <p style="margin-top: 0; font-style: italic;">Punong Barangay</p>
+                      </div>
+                      
+                      <div style="font-size: 8px; margin-top: 40px;">
+                          <p>Not valid without<br>Official seal</p>
+                      </div>
+                  </div>
+              </td>
+          </tr>
+      </table>
+      <!-- Barangay Cert -->
+
+      <table class="certification-table" id="certification-barangay" style="font-size: 1.4rem;border-collapse: collapse;border: 1px solid #3b3b3b;margin-right: 2rem;margin-left: 2rem;">
+          <!-- Header Row -->
+          <tr>
+              <td style="width: 20%; text-align: center; border-bottom: 1px solid #000; padding: 2rem;">
+                  <img src="/assets/images/logo_barangay.png" alt="Barangay Logo" style="width: 80px; height: 80px;">
+              </td>
+              <td style="width: 60%; text-align: center; border-bottom: 1px solid #000;">
+                  <p style="margin: 0 0 1rem 0; font-size: 14px;">Republic of the Philippines</p>
+                  <p style="margin: 0 0 1rem 0; font-size: 14px; font-weight: bold;">Office of the Barangay Captain</p>
+                  <p style="margin: 0 0 1rem 0; font-size: 14px;">Barangay 42C- Pinagbuklod Zone-5</p>
+                  <p style="margin: 0 0 1rem 0; font-size: 14px;">San Antonio, Cavite City</p>
+              </td>
+              <td style="width: 20%; text-align: center; border-bottom: 1px solid #000; padding: 2rem">
+                  <img src="/assets/images/cavite-logo.png" alt="Cavite Logo" style="width: 80px; height: 80px;">
+              </td>
+          </tr>
+          <!-- Document No -->
+          <tr>
+              <td colspan="3" style="padding: 5px 10px; border-bottom: 1px solid #000;">
+                  <p style="margin: 0; font-size: 12px;">No: 2024-0520</p>
+              </td>
+          </tr>
+          <!-- Main Content -->
+          <tr>
+              <!-- Officials Column -->
+              <td style="width: 30%; vertical-align: top; padding: 0;">
+                  <div  style="background-color: #cc0000; padding: 5px; color: white; font-weight: bold; text-align: center;">
+                      BRGY. OFFICIALS
+                  </div>
+                  
+                  <div class="red__bg__page" style="padding: 10px; color: #000;">
+                      <p style="text-align: center; font-weight: bold; margin: 5px 0;">YOLANDA DC. CHI</p>
+                      <p style="text-align: center; font-style: italic; font-size: 12px; margin: 0 0 30px 0;">Punong Barangay</p>
+
+                      <p style="text-align: center; font-weight: bold; margin: 5px 0;">JAY-AR L. HERNANDEZ</p>
+                      <p style="text-align: center; font-style: italic; font-size: 12px; margin: 0 0 30px 0;">Comm. On Peace & Order and Public Safety</p>
+
+                      <p style="text-align: center; font-weight: bold; margin: 5px 0;">GERALD LOYOLA</p>
+                      <p style="text-align: center; font-style: italic; font-size: 12px; margin: 0 0 30px 0;">Comm. On Public Works and Infrastructure</p>
+
+                      <p style="text-align: center; font-weight: bold; margin: 5px 0;">JENNIE DARNELL P. DONES</p>
+                      <p style="text-align: center; font-style: italic; font-size: 12px; margin: 0 0 30px 0;">Comm. On Social Welfare Management and Development</p>
+
+                      <p style="text-align: center; font-weight: bold; margin: 5px 0;">DARYL A. HINZ L. ADIES</p>
+                      <p style="text-align: center; font-style: italic; font-size: 12px; margin: 0 0 30px 0;">Comm. On Health & Sanitation</p>
+
+                      <p style="text-align: center; font-weight: bold; margin: 5px 0;">MELISSA S. QUIAMBEL</p>
+                      <p style="text-align: center; font-style: italic; font-size: 12px; margin: 0 0 30px 0;">Comm. On Women & Children Affairs</p>
+
+                      <p style="text-align: center; font-weight: bold; margin: 5px 0;">ARIEL M. ADRIANO JR.</p>
+                      <p style="text-align: center; font-style: italic; font-size: 12px; margin: 0 0 30px 0;">Comm. On Disaster Preparedness</p>
+
+                      <p style="text-align: center; font-weight: bold; margin: 5px 0;">JANA VIEL M. ORCAS</p>
+                      <p style="text-align: center; font-style: italic; font-size: 12px; margin: 0 0 30px 0;">Comm. On Youth and Sports Development</p>
+
+                      <p style="text-align: center; font-weight: bold; margin: 5px 0;">ANNA VIANCA T. ORCAS</p>
+                      <p style="text-align: center; font-style: italic; font-size: 12px; margin: 0 0 30px 0;">Secretary</p>
+
+                      <p style="text-align: center; font-weight: bold; margin: 5px 0;">NANETTE R. CORDURA</p>
+                      <p style="text-align: center; font-style: italic; font-size: 12px; margin: 0 0 30px 0;">Treasurer</p>
+                  </div>
+              </td>
+              
+              <!-- Certification Content -->
+              <td colspan="2" style="vertical-align: top; padding: 0;">
+                  <!-- Title -->
+                  <div style="background-color: #fff; text-align: center; padding: 10px; border-bottom: 1px solid #000;">
+                      <h2 style="margin: 0; color: #3b3b3b; font-size: 18px;">CERTIFICATE</h2>
+                  </div>
+                  
+                  <!-- Content -->
+                  <div style="padding: 15px 20px;">
+                      <p style="text-align: justify; line-height: 1.5;">
+                      This is certified that person who is name and signature appear here has request a Certification from this office
+                      </p>
+                      
+                      <p style="text-align: justify; line-height: 1.5; margin-top: 10px;">
+                          NAME: <input id="barangayCertFullName" style="width: 60%; padding-left: 0.5rem; border: none; border-bottom: 1px solid gray; background-color: #fff;"/>.
+                      </p>
+                      <p style="text-align: justify; line-height: 1.5;">
+                          ADDRESS: <input id="barangayCertAddress" style="width: 60%; padding-left: 0.5rem; border: none; border-bottom: 1px solid gray; background-color: #fff;"/>.
+                      </p>
+                      <p style="text-align: justify; line-height: 1.5;">
+                          DATE OF BIRTH: <input id="barangayCertBirthdate" style="width: 60%; padding-left: 0.5rem; border: none; border-bottom: 1px solid gray; background-color: #fff;"/>.
+                      </p>
+                      <p style="text-align: justify; line-height: 1.5;">
+                          PLACE OF BIRTH: <input id="barangayCertBirthplace" style="width: 60%; padding-left: 0.5rem; border: none; border-bottom: 1px solid gray; background-color: #fff;"/>.
+                      </p>
+                      <p style="text-align: justify; line-height: 1.5;">
+                          PURPOSES: <input id="barangayCertFullName" placeholder="Insert purpose" style="padding-left: 0.5rem; border: none; border-bottom: 1px solid gray; background-color: #fff;"/>.
+                      </p>
+                      <div style="width: 100%; text-align: right; margin-top: 20px;">
+                        <p style="display: inline-block; width: 20%; border-top: 1px solid #3b3b3b; padding-top: 5px; text-align: center;">
+                          Signature
+                        </p>
+                      </div>
+                      <div style="width: 100%; text-align: left; margin-top: 20px;">
+                        <p style="display: inline-block; width: 20%; border-top: 1px solid #3b3b3b; padding-top: 5px; text-align: center;">
+                          Left Thumb
+                        </p>
+                        <p style="display: inline-block; width: 20%; border-top: 1px solid #3b3b3b; padding-top: 5px; text-align: center;">
+                          Right Thumb
+                        </p>
+                      </div>
+                      <p style="text-align: justify; line-height: 1.5; margin-top: 20px;">
+                      This is to further certify that the above person is a resident and registered voter of our barangay, a good moral character and that he/she has no derogatory record in our office.
+                      </p>
+                      <p style="text-align: justify; line-height: 1.5; margin-top: 20px;">
+                          Issued this <input placeholder="Month" style="padding-left: 0.5rem; border: none; border-bottom: 1px solid gray; background-color: #fff;"/> day of <input placeholder="Day" style="padding-left: 0.5rem; border: none; border-bottom: 1px solid gray; background-color: #fff;"/>, 2024.  at the office of the Punong Barangay, Barangay 42C- Pinagbuklod Cavite City.
+                      </p>
+                      
+                      <div style="margin-top: 60px; text-align: right; padding-right: 40px;">
+                          <p style="margin-bottom: 0; font-weight: bold;">YOLANDA DC. CHI</p>
+                          <p style="margin-top: 0; font-style: italic;">Punong Barangay</p>
+                      </div>
+                      
+                      <div style="font-size: 8px; margin-top: 40px;">
+                          <p>Not valid without<br>Official seal</p>
+                      </div>
+                  </div>
+              </td>
+          </tr>
+      </table>
+
+
+
       </div>
       <footer class="footer">
         <p class="copyright">
@@ -407,11 +710,148 @@
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="<?= base_url('assets/js/map.js') ?>"></script>
     <script>
+
+$('.btn__form').on('click', function() {
+      // Handle active state
+      $('.btn__form').removeClass('active');
+      $(this).addClass('active');
+
+      // Show/hide the corresponding table
+      if ($(this).attr('id') === 'btnBarangayClearance') {
+        $('#certification-barangay').removeClass('d__none');
+        $('#download-pdf-btn-cert').removeClass('d__none');
+        $('#certification-document').addClass('d__none');
+        $('#download-pdf-btn').addClass('d__none');
+
+      } else if ($(this).attr('id') === 'btnIndigency') {
+        $('#certification-document').removeClass('d__none');
+        $('#certification-barangay').addClass('d__none');
+        $('#download-pdf-btn-cert').addClass('d__none');
+        $('#download-pdf-btn').removeClass('d__none');
+      }
+    });
+
+
+
+    $.ajax({
+    url: '<?= base_url("admin/get-residents") ?>',
+    type: 'GET',
+    dataType: 'json',
+    success: function (response) {
+        if (response.success) {
+            const select = $('#residentSelect');
+            residentsData = response.data; // store data globally
+            response.data.forEach(function (resident) {
+                const fullName = `${resident.firstname} ${resident.middlename ?? ''} ${resident.lastname} ${resident.suffix ?? ''}`.trim();
+                const street = resident.street ?? 'N/A';  // Default value if no address
+                const birthplace = resident.birthplace ?? 'N/A';  // Correct reference to birthplace
+                const birthdate = resident.birthdate ?? 'N/A';  // Default value if no birthdate
+
+                // Append option with only full name visible, but hide birthplace and birthdate in data-* attributes
+                select.append(`
+                    <option value="${resident.resident_id}" 
+                            data-address="${street}" 
+                            data-birthplace="${birthplace}" 
+                            data-birthdate="${birthdate}">
+                        ${fullName}
+                    </option>
+                `);
+            });
+        } else {
+            alert('No active residents found.');
+        }
+    },
+    error: function (xhr, status, error) {
+        console.error('AJAX Error:', error);
+    }
+});
+
+
+
+    // When a resident is selected
+// When a resident is selected
+// When a resident is selected
+$('#residentSelect').on('change', function () {
+    const selectedID = $(this).val();
+    const selectedResident = residentsData.find(res => res.resident_id == selectedID);
+
+    if (selectedResident) {
+        const fullName = `${selectedResident.firstname} ${selectedResident.middlename ?? ''} ${selectedResident.lastname} ${selectedResident.suffix ?? ''}`.trim();
+        const street = selectedResident.street ?? 'N/A';  // Default value if no address
+        const birthdate = selectedResident.birthdate ?? 'N/A';  // Default value if no birthdate
+        const birthplace = selectedResident.birthplace ?? 'N/A';  // Default value if no birthplace
+
+        // Populate the corresponding input fields
+        $('#residentFullname').val(fullName);
+        $('#residentAddress').val(street);
+
+        // Populate barangay cert fields
+        $('#barangayCertFullName').val(fullName);
+        $('#barangayCertAddress').val(street);
+        $('#barangayCertBirthdate').val(birthdate);
+        $('#barangayCertBirthplace').val(birthplace);
+    } else {
+        // Clear the fields if no resident is selected
+        $('#residentFullname').val('');
+        $('#residentAddress').val('');
+        $('#barangayCertFullName').val('');
+        $('#barangayCertAddress').val('');
+        $('#barangayCertBirthdate').val('');
+        $('#barangayCertBirthplace').val('');
+    }
+});
+
+
+
+      /**
+       * Function to generate and download a PDF from a DOM element
+       * @param {string} elementId - ID of the element to convert to PDF
+       * @param {string} filename - Name of the PDF file to download
+       */
+// Function to generate and download PDF
+function generatePDF(elementId, filename) {
+    // Get the HTML element
+    const element = document.getElementById(elementId);
+    
+    // Define PDF generation options
+    const opt = {
+      margin: [10, 10, 10, 10],
+      // [top, right, bottom, left] - reduced margins
+        filename: filename,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { 
+            scale: 1.2, // Reduced scale to prevent right cutoff
+            useCORS: true,
+            letterRendering: true
+        },
+        jsPDF: { 
+            unit: 'mm', 
+            format: 'a4', 
+            orientation: 'portrait',
+            compress: true
+        }
+    };
+    
+    // Generate and download PDF
+    html2pdf()
+        .from(element)
+        .set(opt)
+        .save();
+}
+
+      // Example usage
+      document.getElementById('download-pdf-btn').addEventListener('click', function() {
+          generatePDF('certification-document', 'Certification_of_Indigency.pdf');
+      });
+      document.getElementById('download-pdf-btn-cert').addEventListener('click', function() {
+          generatePDF('certification-barangay', 'Certification_of_Barangay.pdf');
+      });
+
       $(document).ready(function () {
         $(".table__button").on("click", function () {
           $(".wrapper, #viewEventModal").addClass("open");

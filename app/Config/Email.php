@@ -6,9 +6,10 @@ use CodeIgniter\Config\BaseConfig;
 
 class Email extends BaseConfig
 {
-    public string $fromEmail  = '';
-    public string $fromName   = '';
-    public string $recipients = '';
+    // Set these fields to your details
+    public string $fromEmail  = 'vinmogate@gmail.com'; // Your email address (the one that will be sending the emails)
+    public string $fromName   = 'Barangay Pinagbuklod'; // The name that will appear as the sender
+    public string $recipients = ''; // (Optional) default recipients if any, leave empty
 
     /**
      * The "user agent"
@@ -18,32 +19,27 @@ class Email extends BaseConfig
     /**
      * The mail sending protocol: mail, sendmail, smtp
      */
-    public string $protocol = 'mail';
-
-    /**
-     * The server path to Sendmail.
-     */
-    public string $mailPath = '/usr/sbin/sendmail';
+    public string $protocol = 'smtp'; // Use smtp for sending emails
 
     /**
      * SMTP Server Hostname
      */
-    public string $SMTPHost = '';
+    public string $SMTPHost = 'smtp.gmail.com'; // Gmail SMTP server
 
     /**
      * SMTP Username
      */
-    public string $SMTPUser = '';
+    public string $SMTPUser = 'vinmogate@gmail.com'; // Your Gmail address (same as $fromEmail)
 
     /**
      * SMTP Password
      */
-    public string $SMTPPass = '';
+    public string $SMTPPass = 'ddhaboeqiwwrtzpj'; // Your app password generated in Gmail
 
     /**
      * SMTP Port
      */
-    public int $SMTPPort = 25;
+    public int $SMTPPort = 587; // Port for TLS (587)
 
     /**
      * SMTP Timeout (in seconds)
@@ -53,16 +49,16 @@ class Email extends BaseConfig
     /**
      * Enable persistent SMTP connections
      */
-    public bool $SMTPKeepAlive = false;
+    public bool $SMTPKeepAlive = true;
 
     /**
      * SMTP Encryption.
      *
      * @var string '', 'tls' or 'ssl'. 'tls' will issue a STARTTLS command
      *             to the server. 'ssl' means implicit SSL. Connection on port
-     *             465 should set this to ''.
+     *             465 should set this to 'ssl'.
      */
-    public string $SMTPCrypto = 'tls';
+    public string $SMTPCrypto = 'tls'; // Use TLS encryption
 
     /**
      * Enable word-wrap
@@ -77,7 +73,7 @@ class Email extends BaseConfig
     /**
      * Type of mail, either 'text' or 'html'
      */
-    public string $mailType = 'text';
+    public string $mailType = 'html'; // Use HTML email content
 
     /**
      * Character set (utf-8, iso-8859-1, etc.)

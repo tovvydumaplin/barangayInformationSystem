@@ -1786,7 +1786,7 @@ public function updatePassword()
 
     $rules = [
         'current_password' => 'required',
-        'new_password' => 'required|min_length[6]',
+        'new_password' => 'required|min_length[5]',
         'confirm_password' => 'required|matches[new_password]'
     ];
 
@@ -1905,6 +1905,113 @@ public function getNewUsers()
     // Return the data as JSON
     return $this->response->setJSON($data);
 }
+public function getUpcomingBirthdays()
+{
+    $residentModel = new \App\Models\ResidentModel();
+
+    $today = date('m-d');
+
+    $builder = $residentModel->where('status', 1)
+        ->select("resident_id, firstname, middlename, lastname, suffix, birthdate, 
+            DATE_FORMAT(birthdate, '%m-%d') as bday,
+            (DATE_FORMAT(birthdate, '%m-%d') >= '$today') as upcoming")
+        ->orderBy('upcoming', 'DESC')  // Prioritize birthdays later in the year
+        ->orderBy('bday', 'ASC')       // Sort by month and day
+        ->limit(10);
+
+    $residents = $builder->findAll();
+
+    $data = [];
+    foreach ($residents as $res) {
+        $fullName = trim("{$res['firstname']} {$res['middlename']} {$res['lastname']} {$res['suffix']}");
+        $data[] = [
+            'full_name' => $fullName,
+            'birthdate' => $res['birthdate'],
+        ];
+    }
+
+    return $this->response->setJSON($data);
+}
+
+
+
+public function indigencyCert()
+{
+    // You can pass data to the view here if needed
+    $data = [
+        'certificationNo' => $this->request->getGet('ref_no') ?? '2024-0215',
+        'leftLogoPath' => base_url('assets/images/left-logo.png'),
+        'rightLogoPath' => base_url('assets/images/right-logo.png'),
+        'title' => 'Indigency Certificate',
+        // Add other dynamic data here
+    ];
+    
+    return view('certification/indigency', $data);
+}
+
+public function ResetPassword()
+{
+    $request = $this->request->getJSON();
+    $username = $request->username ?? '';  // The username here is actually the email
+
+    $model = new UserModel();
+    
+    // Searching for the email inside the 'username' column
+    $user = $model->where('username', $username)->first();
+
+    if (!$user) {
+        return $this->response->setStatusCode(404)->setJSON(['message' => 'User not found.']);
+    }
+
+    // Create the reset link
+    $resetLink = site_url('reset-password?username=' . urlencode($username));
+
+    // Send the email with reset link
+    $email = \Config\Services::email();
+    $email->setTo($user['username']);  // 'username' holds the email
+    $email->setSubject('Reset Your Password');
+    $email->setMessage("
+        Hi {$user['username']},<br><br>
+        Click the button below to reset your password to <b>default123</b>:<br><br>
+        <a href='$resetLink' style='padding:10px 20px; background:#007bff; color:#fff; text-decoration:none; border-radius:5px;'>Reset Password</a>
+        <br><br>After logging in, you can change your password anytime.
+    ");
+
+    if ($email->send()) {
+        return $this->response->setJSON(['message' => 'Reset link sent to your email.']);
+    } else {
+        return $this->response->setStatusCode(500)->setJSON(['message' => 'Failed to send email.']);
+    }
+}
+
+
+public function ResetNow()
+{
+    $username = $this->request->getGet('username');
+    if (!$username) {
+        return redirect()->to('/')->with('error', 'Invalid reset link.');
+    }
+
+    $model = new UserModel();
+    // Fetch the user based on the username
+    $user = $model->where('username', $username)->first();
+
+    if (!$user) {
+        return redirect()->to('/')->with('error', 'User not found.');
+    }
+
+    // Hash the new password
+    $hashedPassword = password_hash('default123', PASSWORD_DEFAULT);
+    
+    // Update the password directly using the username
+    $model->set('password', $hashedPassword)
+          ->where('username', $username)
+          ->update();
+
+    return redirect()->to('/')->with('success', 'Password has been reset to default123. Please log in.');
+}
+
+
 
 }
 
