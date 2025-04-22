@@ -199,7 +199,7 @@ public function updateUser()
         'suffix'     => $this->request->getPost('suffix'),
         'position'   => $this->request->getPost('position'),
         'role'       => $this->request->getPost('role'),
-        'email'      => $this->request->getPost('email'),
+        'username'      => $this->request->getPost('email'),
         'updated_at' => date('Y-m-d H:i:s') 
     ];
 
