@@ -178,7 +178,7 @@
       <div class="wrapper"></div>
       <div id="createEventModal" class="modal">
         <div class="modal__header">
-          <p class="modal__heading">Add Official</p>
+          <p class="modal__heading">Add User</p>
         </div>
         <?php if (session()->getFlashdata('success')): ?>
             <p style="color: green;"><?= session()->getFlashdata('success') ?></p>
@@ -231,7 +231,7 @@
                   </div>
               </div>
               <div class="row">
-                  <div class="input__box">
+                  <!-- <div class="input__box">
                       <span class="input__title">Position<span class="red__dot">*</span></span>
                       <select class="information__input" name="position" required>
                           <option value="" disabled selected>Choose Position</option>
@@ -242,7 +242,7 @@
                           <option value="Barangay Officer 3">Barangay Officer 3</option>
                       </select>
                       <p class="text-danger"></p>
-                  </div>
+                  </div> -->
                   <div class="input__box">
                       <span class="input__title">Role<span class="red__dot">*</span></span>
                       <select name="role" class="information__input" required>
@@ -277,7 +277,7 @@
       </div>
       <div id="viewEventModal" class="modal">
         <div class="modal__header">
-            <p class="modal__heading">View Official</p>
+            <p class="modal__heading">View User</p>
             <div class="modal__btn__container">
               <button class="btn__secondary__edit">Edit</button>
               <button class="btn__secondary__deactivate">Deactivate</button>
@@ -351,10 +351,10 @@
                         <input class="information__input" name="view_email" type="email"  />
                         <span class="input__title">Email</span>
                     </div>
-                    <div class="input__box">
+                    <!-- <div class="input__box">
                         <input class="information__input" name="view_password" type="password" value="********"  />
                         <span class="input__title">Password</span>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="btn__box__modal">
                     <button type="button" class="btn__secondary__close active closeModalBtn">Close</button>

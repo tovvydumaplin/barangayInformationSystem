@@ -716,6 +716,8 @@
     <script src="<?= base_url('assets/js/map.js') ?>"></script>
     <script>
 
+
+
 $('.btn__form').on('click', function() {
       // Handle active state
       $('.btn__form').removeClass('active');
@@ -845,12 +847,24 @@ function generatePDF(elementId, filename) {
 }
 
       // Example usage
-      document.getElementById('download-pdf-btn').addEventListener('click', function() {
+      document.getElementById('download-pdf-btn').addEventListener('click', function () {
+          if ($(window).scrollTop() > 0) {
+              $(window).scrollTop(0); 
+              alert('Please scroll to the top before downloading the PDF.');
+              return;
+          }
           generatePDF('certification-document', 'Certification_of_Indigency.pdf');
       });
-      document.getElementById('download-pdf-btn-cert').addEventListener('click', function() {
+
+      document.getElementById('download-pdf-btn-cert').addEventListener('click', function () {
+          if ($(window).scrollTop() > 0) {
+              $(window).scrollTop(0); 
+              alert('Please scroll to the top before downloading the PDF.');
+              return;
+          }
           generatePDF('certification-barangay', 'Certification_of_Barangay.pdf');
       });
+
 
       $(document).ready(function () {
         $(".table__button").on("click", function () {

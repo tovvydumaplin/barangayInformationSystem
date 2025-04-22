@@ -191,6 +191,7 @@
         <form id="viewComplainForm" class="modal__body community__modal">
           <div class="row flex__d__col">
             <!-- Type of Concern -->
+             <input name="view_complaint_id" type="hidden"/>
             <div class="input__box">
               <input class="information__input" name="view_type_of_complaint" readonly />
               <span class="input__title">Type of Concern<span class="red__dot">*</span></span>

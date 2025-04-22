@@ -231,7 +231,7 @@
     <script>
 $('#forgot-password').on('click', function(e) {
   e.preventDefault();
-  const username = prompt("Enter your username:");
+  const username = prompt("Enter your email:");
   if (username) {
     $('#loading-message').show(); // Show loading
 

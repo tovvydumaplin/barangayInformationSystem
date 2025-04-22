@@ -1661,16 +1661,22 @@ public function markAsSolved()
     $complaintId = $this->request->getPost('complaint_id');
     $newStatus = $this->request->getPost('status');
 
+    if (empty($complaintId)) {
+        return $this->response->setJSON(['status' => 'error', 'message' => 'Missing complaint ID.']);
+    }
+
     $complainModel = new ComplainModel();
 
     if (!$complainModel->find($complaintId)) {
         return $this->response->setJSON(['status' => 'error', 'message' => 'Complaint not found.']);
     }
 
+    // Safe update
     $complainModel->update($complaintId, ['status' => $newStatus]);
 
     return $this->response->setJSON(['status' => 'success']);
 }
+
 
 // User Account
 public function updateUserImage()
