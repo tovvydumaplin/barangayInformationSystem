@@ -467,7 +467,7 @@ public function createUser()
     public function createResident()
     {
         if ($this->request->isAJAX()) {
-            $data = $this->request->getPost('members'); // Get the array of members
+            $data = $this->request->getPost('members');
     
             log_message('debug', 'Received Data: ' . print_r($data, true));
     
@@ -480,7 +480,25 @@ public function createUser()
     
             $residentModel = new ResidentModel();
     
-            // Insert all members at once
+            // Check if any of the incoming members is a family head
+            foreach ($data as $member) {
+                if (isset($member['is_family_head']) && $member['is_family_head'] == 1) {
+                    // Check if house_no already has a family head
+                    $existingHead = $residentModel
+                        ->where('house_no', $member['house_no'])
+                        ->where('is_family_head', 1)
+                        ->first();
+    
+                    if ($existingHead) {
+                        return $this->response->setJSON([
+                            'status' => 'error',
+                            'message' => 'This household already has a family head.'
+                        ]);
+                    }
+                }
+            }
+    
+            // Insert all members
             if ($residentModel->insertBatch($data)) {
                 return $this->response->setJSON([
                     'status' => 'success',
@@ -494,6 +512,7 @@ public function createUser()
             ]);
         }
     }
+    
     
     public function loadResidents()
     {
@@ -812,15 +831,12 @@ public function createUser()
         $session = session();
         $model = new InventoryModel();
     
-        // Define the upload path inside a subfolder 'inventory'
         $uploadPath = FCPATH . 'uploads/inventory/';
     
-        // Ensure the uploads/inventory directory exists
         if (!is_dir($uploadPath)) {
             mkdir($uploadPath, 0777, true); // Create the folder if it doesn't exist
         }
     
-        // Get the uploaded image
         $file = $this->request->getFile('image');
         if (!$file) {
             return $this->response->setJSON([
@@ -829,19 +845,15 @@ public function createUser()
             ]);
         }
     
-        // Handle the file upload
         if ($file->isValid() && !$file->hasMoved()) {
-            // Generate a random name for the file and move it to the 'uploads/inventory' folder
             $newName = $file->getRandomName();
             $file->move($uploadPath, $newName);
     
-            // Save only the filename in the database (no path)
             $imagePath = $newName; // Store only the filename
         } else {
             $imagePath = null;
         }
     
-        // Check if image was uploaded successfully
         if (!$imagePath) {
             return $this->response->setJSON([
                 'status' => 'error',
@@ -849,11 +861,10 @@ public function createUser()
             ]);
         }
     
-        // Get form data
         $assetName = $this->request->getPost('item_name');
         $assetQuantity = $this->request->getPost('item_quantity');
+        $itemDescription = $this->request->getPost('item_description');
     
-        // Validate form data (you can add more validation as needed)
         if (empty($assetName) || empty($assetQuantity)) {
             return $this->response->setJSON([
                 'status' => 'error',
@@ -861,12 +872,12 @@ public function createUser()
             ]);
         }
     
-        // Prepare data to save
         $data = [
             'item_name' => $assetName,
             'item_quantity' => $assetQuantity,
-            'image' => $imagePath, // Store only the filename in the database
-            'status' => 1, // Assuming you are setting the status to 1
+            'item_description' => $itemDescription,
+            'image' => $imagePath, 
+            'status' => 1, 
         ];
     
         if ($model->insert($data)) {
@@ -949,6 +960,7 @@ public function createUser()
         }
     }
 
+    
     public function updateItem()
     {
         $validation = \Config\Services::validation();
@@ -957,7 +969,7 @@ public function createUser()
         // Validate input data
         $validation->setRules([
             'view_asset_name' => 'required',
-            'view_asset_quantity' => 'required|is_natural_no_zero',
+            'view_asset_quantity' => 'required|is_natural_no_zero', //Here, we are saving the new quantity. Either minus
         ]);
     
         if (!$validation->run($this->request->getPost())) {
@@ -1060,7 +1072,7 @@ public function createUser()
     public function fetchItems()
     {
         $itemModel = new InventoryModel();
-        $items = $itemModel->select('item_id, item_name')->where('item_quantity >', 0)->findAll();
+        $items = $itemModel->select('item_id, item_name, item_quantity')->where('item_quantity >', 0)->findAll();
         return $this->response->setJSON($items);
     }
 

@@ -101,6 +101,22 @@
                 <p class="text-danger"></p>
               </div>
             </div>
+            <div class="row">
+              <div class="input__box">
+                <textarea
+                  id="assetDescription"
+                  class="information__input"
+                  value=""
+                  placeholder="Enter Description"
+                  name="asset_description"
+                ></textarea>
+
+                <span class="input__title"
+                  >Description<span class="red__dot">*</span></span
+                >
+                <p class="text-danger"></p>
+              </div>
+            </div>
           </div>
           <div class="btn__box__modal">
             <span class="btn__primary active btn__register__item">Register Item</span>
@@ -136,7 +152,23 @@
                       </div>
                   </div>
                   <div class="row">
-                      <div class="input__box asset__qty">
+                    <div class="input__box">
+                      <textarea
+                        id="viewAssetDescription"
+                        class="information__input"
+                        value=""
+                        placeholder="Enter Description"
+                        name="view_asset_description"
+                      ></textarea>
+
+                      <span class="input__title"
+                        >Description<span class="red__dot">*</span></span
+                      >
+                      <p class="text-danger"></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                      <div class="input__box">
                           <input
                               id="viewAssetQuantity"
                               class="information__input"
@@ -146,9 +178,43 @@
                               type="number"
                               readonly
                           />
-                          <i class="icon__counter btn__remove__qty bi bi-dash-lg"></i>
-                          <i class="icon__counter btn__add__qty bi bi-plus"></i>
+
                           <span class="input__title">Quantity<span class="red__dot">*</span></span>
+                          <p class="text-danger"></p>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <label>Stock Action</label>
+                      <input type="radio" class="btn__stock__in" name="stock_in_out" value="in"> Stock In
+                      <input type="radio" class="btn__stock__out" name="stock_in_out" value="out"> Stock Out
+                  </div>
+
+                  <div class="row stock__desc d__none">
+                      <div class="input__box">
+                          <input
+                              id="viewAssetQuantityUpdate"
+                              class="information__input"
+                              value=""
+                              placeholder="Enter quantity"
+                              name="view_asset_quantity_update"
+                              type="number"
+                          />
+
+                          <span class="input__title in__out__quantity">Stock-in Quantity<span class="red__dot">*</span></span>
+                          <p class="text-danger"></p>
+                      </div>
+                  </div>
+                  <div class="row stock__desc d__none">
+                      <div class="input__box">
+                          <textarea
+                              id="viewAssetQuantityDesc"
+                              class="information__input"
+                              value=""
+                              placeholder="Enter quantity"
+                              name="view_asset_quantity_desc"
+                              type="number"
+                          ></textarea>
+                          <span class="input__title stock__title">Reason for Stock-In<span class="red__dot">*</span></span>
                           <p class="text-danger"></p>
                       </div>
                   </div>
@@ -184,6 +250,7 @@
                   <div class="row">
                     <div class="input__box">
                       <select id="listOfItems" class="information__input" value="" placeholder="Enter name" name="listOfItems"></select>
+                      <p id="stockCount" class="mini__text"></p>
                       <span class="input__title">Item<span class="red__dot">*</span></span>
                       <p class="text-danger"></p>
                     </div>
@@ -481,15 +548,20 @@ $(document).ready(function () {
 
     const listOfItems = function () {
         $.ajax({
-            url: '<?= site_url('admin/fetch-items') ?>', // your route to fetch items
+            url: '<?= site_url('admin/fetch-items') ?>',
             type: 'GET',
             dataType: 'json',
             success: function (data) {
                 const $select = $('#listOfItems');
-                $select.empty(); // clear existing options
+                $select.empty();
                 $select.append('<option value="">Choose an item</option>');
+
                 data.forEach(item => {
-                    $select.append(`<option value="${item.item_id}">${item.item_name}</option>`);
+                    $select.append(`
+                        <option value="${item.item_id}" data-stock="${item.item_quantity}">
+                            ${item.item_name}
+                        </option>
+                    `);
                 });
             },
             error: function (xhr, status, error) {
@@ -497,6 +569,33 @@ $(document).ready(function () {
             }
         });
     };
+
+    $('#listOfItems').on('change', function () {
+      $('#stockCount').show();
+        const selected = $(this).find(':selected');
+        const stock = parseInt(selected.attr('data-stock'));
+        const $stockCount = $('#stockCount');
+
+        if (!isNaN(stock)) {
+            $stockCount.text(`Stocks left: ${stock}`);
+            
+            // Reset previous classes
+            $stockCount.removeClass('low-stock medium-stock high-stock');
+
+            // Apply color class
+            if (stock <= 5) {
+                $stockCount.addClass('low-stock'); // red
+            } else if (stock <= 15) {
+                $stockCount.addClass('medium-stock'); // orange
+            } else {
+                $stockCount.addClass('high-stock'); // green
+            }
+        } else {
+            $stockCount.text('');
+        }
+    });
+
+
 
     $(document).ready(function () {
         listOfResidents();
@@ -513,17 +612,16 @@ $(document).ready(function () {
         const file = $fileInput[0].files[0];
         const assetName = $('#assetName').val();  // Change to #assetName, since that's the ID in your HTML
         const assetQuantity = $('#assetQuantity').val();
+        const assetDescription = $('#assetDescription').val();
         
         if (!file) { openErrorDisplay('Please select an image before proceeding.'); return; }
         if (!assetName) { openErrorDisplay('Item name is missing!.'); return }
         if (!assetQuantity) { openErrorDisplay('Item quantity is required!.'); return }
+        if (!assetDescription) { openErrorDisplay('Item description is required!.'); return }
         
-        createItem(file, assetName, assetQuantity);
+        createItem(file, assetName, assetQuantity, assetDescription);
     });
 
-
-
-    // Open modal and populate data (this should be defined before DataTable initialization)
     function viewItem(itemId) {
     $.ajax({
         url: '<?= site_url('admin/get-item-details') ?>',
@@ -531,25 +629,78 @@ $(document).ready(function () {
         data: { item_id: itemId },
         success: function(response) {
             if (response.status === 'success') {
+                // Populate the form fields with data from the server
                 $('#item_id').val(response.data.item_id);
                 $('#viewAssetName').val(response.data.item_name);
-                $('#viewAssetQuantity').val(response.data.item_quantity);
+                $('#viewAssetDescription').val(response.data.item_description);
+                $('#viewAssetQuantity').val(response.data.item_quantity);  // Set the initial stock quantity
                 $('#viewItemImage').attr('src', '/uploads/inventory/' + response.data.image);
-                $('#current_image').val(response.data.image);
+
+                // Store the original stock value
+                let originalStock = parseInt(response.data.item_quantity) || 0;
+                let currentStock = originalStock;  // Start with the original stock value
                 
-                // Reset the file input to make sure it's clear
-                $('#viewFileInput').val('');
-                
-                $('#viewItemModal').show();
+                // When the user changes the value in the update field
+                $('#viewAssetQuantityUpdate').on('input', function() {
+                    let enteredValue = parseInt($(this).val()) || 0;  // Get the entered value (default to 0 if empty)
+                    let stockAction = $('input[name="stock_in_out"]:checked').val();  // Get selected action: 'in' or 'out'
+                    
+                    // Handle the Stock In or Stock Out action
+                    if (stockAction === 'in') {
+                        currentStock = originalStock + enteredValue;  // Add entered value to original stock
+                    } else if (stockAction === 'out') {
+                        currentStock = originalStock - enteredValue;  // Subtract entered value from original stock
+                    }
+
+                    // Update the stock value in the readonly field
+                    $('#viewAssetQuantity').val(currentStock);
+
+                    // If the user removes all input (empty field), reset to the original stock value
+                    if ($(this).val() === '') {
+                        $('#viewAssetQuantity').val(originalStock);  // Reset back to the original stock
+                        currentStock = originalStock;  // Reset the current stock to original
+                    }
+                });
             } else {
-                alert('Error: ' + response.message);
+                // Handle the case where the response status is not 'success'
+                alert('Failed to load item details');
             }
         },
-        error: function(xhr, status, error) {
-            console.log('Error fetching item details:', error);
+        error: function() {
+            // Handle any error that occurs during the AJAX request
+            alert('An error occurred while fetching the item details');
         }
     });
 }
+
+    // Open modal and populate data (this should be defined before DataTable initialization)
+//     function viewItem(itemId) {
+//     $.ajax({
+//         url: '',
+//         type: 'GET',
+//         data: { item_id: itemId },
+//         success: function(response) {
+//             if (response.status === 'success') {
+//                 $('#item_id').val(response.data.item_id);
+//                 $('#viewAssetName').val(response.data.item_name);
+//                 $('#viewAssetDescription').val(response.data.item_description);
+//                 $('#viewAssetQuantity').val(response.data.item_quantity);
+//                 $('#viewItemImage').attr('src', '/uploads/inventory/' + response.data.image);
+//                 $('#current_image').val(response.data.image);
+                
+//                 // Reset the file input to make sure it's clear
+//                 $('#viewFileInput').val('');
+                
+//                 $('#viewItemModal').show();
+//             } else {
+//                 alert('Error: ' + response.message);
+//             }
+//         },
+//         error: function(xhr, status, error) {
+//             console.log('Error fetching item details:', error);
+//         }
+//     });
+// }
 
     // Initialize DataTable
     const loadInventory = function () {
@@ -570,6 +721,7 @@ $(document).ready(function () {
         },
         columns: [
             { data: 'item_name', title: 'Item Name' },
+            { data: 'item_description', title: 'Item Desc' },
             { data: 'item_quantity', title: 'Quantity' },
             {
                 data: 'image',
@@ -757,6 +909,7 @@ $('.lending__tab').on('click', function () {
             loadLendingHistory();
             $('#borrowItemModal').removeClass("open");  // Close the modal
             $('.wrapper').removeClass("open");  // Close the wrapper
+            listOfItems();
         }
     });
 };
@@ -800,11 +953,12 @@ $('#lendBtn').on('click', function () {
 
 
         // Upload data + image
-      const createItem = function(file, assetName, assetQuantity) {
+      const createItem = function(file, assetName, assetQuantity, assetDescription) {
         let formData = new FormData();
         formData.append('image', file);
         formData.append('item_name', assetName);
         formData.append('item_quantity', assetQuantity);
+        formData.append('item_description', assetDescription); //This is a text area.
 
         $.ajax({
             url: "<?= site_url('/admin/create-item') ?>",  
@@ -864,7 +1018,17 @@ $('#lendBtn').on('click', function () {
     });
 
 
+$('.btn__stock__in').on('click', function(){
+  $('.stock__desc').removeClass("d__none");
+  $('.stock__title').html("Reason for Stock-In");
+  $('.in__out__quantity').html("Stock-in Quantity");
+});
+$('.btn__stock__out').on('click', function(){
+  $('.stock__desc').removeClass("d__none");
+  $('.stock__title').html("Reason for Stock-Out");
+  $('.in__out__quantity').html("Stock-out Quantity");
 
+});
 
 $('#editItemBtn').on('click', function(e) {
     e.preventDefault();
@@ -894,7 +1058,7 @@ $('#viewFileInput').on('change', function() {
 
 const activateAssetInputs = function () {
   $('#viewAssetName').removeAttr("readonly");
-  $('#viewAssetQuantity').removeAttr("readonly");
+  // $('#viewAssetQuantity').removeAttr("readonly");
 
   $('#viewItemImage').css({
     'pointer-events': '',
@@ -965,24 +1129,22 @@ const lessQuantity = function (inputSelector) {
         lessQuantity('#assetQuantity');
     });
 
+
+
 function updateItem() {
     // Get form elements
     const formElement = document.getElementById('updateItemForm');
     const fileInput = document.getElementById('viewFileInput');
     
-    // Create FormData object from the form
     const formData = new FormData(formElement);
     
-    // Check if a file is selected and log it
     if (fileInput.files.length > 0) {
         console.log("File selected:", fileInput.files[0].name);
-        // Make sure the file is included under the correct name
         formData.append('image_file', fileInput.files[0]);
     } else {
         console.log("No file selected");
     }
     
-    // Debug - log all form data entries
     for (const pair of formData.entries()) {
         console.log(pair[0] + ': ' + pair[1]);
     }
@@ -1029,6 +1191,7 @@ $(document).ready(function () {
   $(".btn__borrow__item").on("click", function () {
     $(".wrapper").addClass("open");
     $("#borrowItemModal").addClass("open");
+    $('#stockCount').hide();
   });
 
   // Close on wrapper click or close button

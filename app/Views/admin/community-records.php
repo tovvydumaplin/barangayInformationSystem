@@ -1763,6 +1763,10 @@ const saveResidents = function() {
                 closeModal();
                 loadHouseMarkers();
             } else {
+              if (response.message === 'This household already has a family head.') {
+                  alert(response.message);
+                  return;
+              }
                 $(".text-danger").text(""); 
                 $.each(response.errors, function(key, value) {
                     $("input[name='" + key + "']").siblings(".text-danger").text(value);
@@ -1776,6 +1780,8 @@ const saveResidents = function() {
             $(".create__residents__btn").prop("disabled", false).text("Submit");
             $("#addResidentModal :input").prop("disabled", false);
             closeValidator();
+            closeErrorDisplay();
+
 
         }
     });

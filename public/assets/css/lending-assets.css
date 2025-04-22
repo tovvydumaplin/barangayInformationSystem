@@ -144,3 +144,36 @@
   border: 1px solid red;
   color: red;
 }
+.stock__status {
+  font-weight: bold;
+  margin-top: 8px;
+}
+
+.low-stock {
+  color: #e74c3c; /* red */
+}
+
+.medium-stock {
+  color: #f39c12; /* orange */
+}
+
+.high-stock {
+  color: #27ae60; /* green */
+}
+
+.mini__text {
+  background-color: #dddddd;
+  padding: 1rem;
+  border-radius: 1rem;
+  margin-top: 1rem;
+  display: inline-block;
+  font-weight: 500;
+  position: absolute;
+  top: 0rem;
+  right: 1rem;
+}
+
+#editItemBtn {
+  text-align: center;
+  justify-content: center;
+}
