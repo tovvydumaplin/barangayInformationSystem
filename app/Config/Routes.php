@@ -86,6 +86,7 @@ $routes->post('admin/update-house-location','AdminController::updateHouseLocatio
 // Lending Items
 $routes->post('admin/create-item', 'AdminController::createItem');
 $routes->get('admin/inventory-data', 'AdminController::getInventoryData');
+$routes->get('/admin/inventory-history', 'AdminController::loadInventoryHistory');
 $routes->get('admin/get-item-details', 'AdminController::getItemDetails');
 $routes->post('admin/update-item', 'AdminController::updateItem');
 

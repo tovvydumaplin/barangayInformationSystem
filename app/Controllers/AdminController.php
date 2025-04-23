@@ -5,6 +5,7 @@ use App\Models\EventModel;
 use App\Models\ResidentModel; 
 use App\Models\HouseModel; 
 use App\Models\InventoryModel;
+use App\Models\InventoryHistoryModel;
 use App\Models\LendingModel;
 use App\Models\OfficialModel;
 use App\Models\ComplainModel;
@@ -960,16 +961,26 @@ public function createUser()
         }
     }
 
+    public function loadInventoryHistory()
+    {
+        $model = new InventoryHistoryModel();
     
+        $inventoryHistory = $model->orderBy('created_at', 'DESC')->findAll();
+    
+        return $this->response->setJSON($inventoryHistory);
+    }
+    
+
     public function updateItem()
     {
         $validation = \Config\Services::validation();
         $model = new InventoryModel();
+        $historyModel = new InventoryHistoryModel(); // Load history model
     
         // Validate input data
         $validation->setRules([
             'view_asset_name' => 'required',
-            'view_asset_quantity' => 'required|is_natural_no_zero', //Here, we are saving the new quantity. Either minus
+            'view_asset_quantity' => 'required|numeric|greater_than_equal_to[0]',
         ]);
     
         if (!$validation->run($this->request->getPost())) {
@@ -982,63 +993,68 @@ public function createUser()
         $itemId = $this->request->getPost('item_id');
         $itemName = $this->request->getPost('view_asset_name');
         $itemQuantity = $this->request->getPost('view_asset_quantity');
+        $itemQuantityDesc = $this->request->getPost('view_asset_quantity_desc');
         $currentImage = $this->request->getPost('current_image');
-        
-        // Debug information
+        $type = $this->request->getPost('stock_in_out');
+        $inOutQuantity = $this->request->getPost('view_asset_quantity_update');
+
+    
+        // Get current (old) item data
+        $existingItem = $model->find($itemId);
+        $oldQuantity = $existingItem['item_quantity'] ?? 0;
+    
         log_message('debug', 'POST data: ' . json_encode($this->request->getPost()));
         log_message('debug', 'FILES data: ' . json_encode($this->request->getFiles()));
-        
-        // Prepare the updated data
+    
+        // Prepare update data
         $data = [
             'item_name' => $itemName,
-            'item_quantity' => $itemQuantity
+            'item_quantity' => $itemQuantity,
+            'in_out_reason' => $itemQuantityDesc
         ];
-        
-        // Try to get the file from different possible input names
+    
+        // Handle image upload
         $file = $this->request->getFile('viewFileInput');
         if (!$file || !$file->isValid()) {
             $file = $this->request->getFile('image_file');
         }
-        
-        // Process file if it exists and is valid
+    
         if ($file && $file->isValid() && !$file->hasMoved()) {
-            log_message('debug', 'Valid file found: ' . $file->getName());
-            
-            // Generate a new random file name
             $newName = $file->getRandomName();
-            
-            // Define upload paths
             $uploadPath = 'uploads/inventory/';
             $fullPath = FCPATH . $uploadPath;
-            
-            // Check if directory exists
+    
             if (!is_dir($fullPath)) {
                 mkdir($fullPath, 0777, true);
             }
-            
-            // Move the file
+    
             if ($file->move($fullPath, $newName)) {
-                // Set the new image name in data
                 $data['image'] = $newName;
-                
-                log_message('debug', 'File moved successfully: ' . $newName);
             } else {
-                log_message('error', 'Failed to move file: ' . $file->getErrorString());
                 return $this->response->setJSON([
                     'status' => 'error',
                     'message' => 'File upload failed: ' . $file->getErrorString()
                 ]);
             }
-        } else {
-            log_message('debug', 'No valid file uploaded, keeping current image');
         }
-        
-        // Update the database
+    
         try {
             if ($model->update($itemId, $data)) {
+                // Save to history
+                $historyData = [
+                    'item_name'     => $itemName,
+                    'type'          => $type,
+                    'old_quantity'  => $oldQuantity,
+                    'quantity'      => $inOutQuantity,
+                    'new_quantity'      => $itemQuantity,
+                    'updated_by'    => session()->get('firstname') . ' ' . session()->get('lastname'),
+                    'in_out_reason' => $itemQuantityDesc,
+                ];
+                $historyModel->insert($historyData);
+    
                 return $this->response->setJSON([
                     'status' => 'success',
-                    'message' => 'Item updated successfully!'
+                    'message' => 'Item updated and history recorded!'
                 ]);
             } else {
                 return $this->response->setJSON([
@@ -1054,6 +1070,7 @@ public function createUser()
             ]);
         }
     }
+    
 
     public function fetchResidents()
     {

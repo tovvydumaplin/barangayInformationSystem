@@ -183,12 +183,15 @@
                           <p class="text-danger"></p>
                       </div>
                   </div>
-                  <div class="row">
-                      <label>Stock Action</label>
-                      <input type="radio" class="btn__stock__in" name="stock_in_out" value="in"> Stock In
-                      <input type="radio" class="btn__stock__out" name="stock_in_out" value="out"> Stock Out
+                  <div class="row flex stock__radio d__none">
+                      <label style="font-weight: 600">Stock Action:</label>
+                      <div>
+                        <input type="radio" class="btn__stock__in" name="stock_in_out" value="in"> Stock In
+                      </div>
+                      <div>
+                        <input type="radio" class="btn__stock__out" name="stock_in_out" value="out"> Stock Out
+                      </div>
                   </div>
-
                   <div class="row stock__desc d__none">
                       <div class="input__box">
                           <input
@@ -374,6 +377,10 @@
               <button class="tab__btn lending__tab">Lending Item</button>
               <div class="active__tab"></div>
             </div>
+            <div class="btn__container tab__3">
+              <button class="tab__btn inventory__history__btn">Inventory History</button>
+              <div class="active__tab"></div>
+            </div>
           </div>
         </div>
         <div class="card card__inventory">
@@ -486,6 +493,29 @@
           </div>
         </div>
         <!-- Lending Item Tab ENDS -->
+        <!-- Inventory History Tab -->
+        <div class="card inventory__history d__none">
+          <div class="heading__container">
+            <p class="subheading">Inventory History</p>
+          </div>
+          <div class="container">
+          <table id="lendingHistory" class="display">
+            <thead>
+              <tr>
+                <th>Item Name</th>
+                <th>Type</th>
+                <th>Quantity</th>
+                <th>Previous Quantity</th>
+                <th>New Quantity</th>
+                <th>Updated By</th>
+                <th>Reason</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+          </div>
+        </div>
+        <!-- Inventory history Tab ENDS -->
       </div>
       <footer class="footer">
         <p class="copyright">
@@ -629,49 +659,56 @@ $(document).ready(function () {
         data: { item_id: itemId },
         success: function(response) {
             if (response.status === 'success') {
-                // Populate the form fields with data from the server
                 $('#item_id').val(response.data.item_id);
                 $('#viewAssetName').val(response.data.item_name);
                 $('#viewAssetDescription').val(response.data.item_description);
-                $('#viewAssetQuantity').val(response.data.item_quantity);  // Set the initial stock quantity
+                $('#viewAssetQuantity').val(response.data.item_quantity); 
                 $('#viewItemImage').attr('src', '/uploads/inventory/' + response.data.image);
 
-                // Store the original stock value
                 let originalStock = parseInt(response.data.item_quantity) || 0;
-                let currentStock = originalStock;  // Start with the original stock value
-                
-                // When the user changes the value in the update field
-                $('#viewAssetQuantityUpdate').on('input', function() {
-                    let enteredValue = parseInt($(this).val()) || 0;  // Get the entered value (default to 0 if empty)
-                    let stockAction = $('input[name="stock_in_out"]:checked').val();  // Get selected action: 'in' or 'out'
-                    
-                    // Handle the Stock In or Stock Out action
-                    if (stockAction === 'in') {
-                        currentStock = originalStock + enteredValue;  // Add entered value to original stock
-                    } else if (stockAction === 'out') {
-                        currentStock = originalStock - enteredValue;  // Subtract entered value from original stock
+                let currentStock = originalStock;
+
+                $('#viewAssetQuantityUpdate').off('input').on('input', function() {
+                    let rawValue = $(this).val().replace(/[^0-9]/g, '');
+                    $(this).val(rawValue); // restrict to digits only
+
+                    let enteredValue = rawValue === '' ? 0 : parseInt(rawValue);
+                    if (isNaN(enteredValue)) enteredValue = 0;
+
+                    let stockAction = $('input[name="stock_in_out"]:checked').val();
+
+                    if (stockAction === 'out' && enteredValue > originalStock) {
+                        $(this).val(originalStock);
+                        enteredValue = originalStock;
+                        alert('Cannot stock out more than available quantity.');
                     }
 
-                    // Update the stock value in the readonly field
+                    if (stockAction === 'in') {
+                        currentStock = originalStock + enteredValue;
+                    } else if (stockAction === 'out') {
+                        currentStock = originalStock - enteredValue;
+                    }
+
                     $('#viewAssetQuantity').val(currentStock);
 
-                    // If the user removes all input (empty field), reset to the original stock value
-                    if ($(this).val() === '') {
-                        $('#viewAssetQuantity').val(originalStock);  // Reset back to the original stock
-                        currentStock = originalStock;  // Reset the current stock to original
+                    if (rawValue === '') {
+                        $('#viewAssetQuantity').val(originalStock);
+                        currentStock = originalStock;
                     }
                 });
             } else {
-                // Handle the case where the response status is not 'success'
                 alert('Failed to load item details');
             }
         },
         error: function() {
-            // Handle any error that occurs during the AJAX request
             alert('An error occurred while fetching the item details');
         }
     });
 }
+
+
+
+
 
     // Open modal and populate data (this should be defined before DataTable initialization)
 //     function viewItem(itemId) {
@@ -836,11 +873,7 @@ const loadLendingHistory = function() {
 
 
 
-// Lending table
-$('.lending__tab').on('click', function () {
-  console.log('Tab clicked');
-  loadLendingHistory();
-});
+
 
 
 
@@ -1012,6 +1045,11 @@ $('#lendBtn').on('click', function () {
         viewItem(itemId);  
         $('#viewItemModal').addClass('open');
         $('.wrapper').addClass('open');
+        $('.stock__radio').addClass("d__none");
+        $('#editItemBtn').addClass("d__none");
+        $('.stock__desc').addClass("d__none");
+        $('.btn__edit__asset').removeClass("d__none");
+        
     });
     $('.close').on('click', function() {
         $('#viewItemModal').hide();
@@ -1079,7 +1117,10 @@ const restrictAssetInputs = function() {
 }
 $('.btn__edit__asset').on("click", function(){
   $('.btn__save__asset').removeClass("d__none");
+  $('.stock__radio').removeClass("d__none");
+  $('.stock__desc').removeClass("d__none");
   $('.btn__edit__asset').addClass("d__none");
+  
   activateAssetInputs();
 });
 
@@ -1178,6 +1219,65 @@ function updateItem() {
     });
 }
 
+const inventoryHistory = function() {
+    // Make an AJAX request to fetch inventory history data
+    $.ajax({
+        url: '/admin/inventory-history', // Endpoint to get the inventory history
+        type: 'GET', // HTTP method
+        dataType: 'json', // Expect JSON data in response
+        success: function(response) {
+            // Check if there is any data to display
+            if (response.length > 0) {
+                // Destroy and re-initialize DataTable to avoid duplication on refresh
+                if ($.fn.dataTable.isDataTable('#lendingHistory')) {
+                    $('#lendingHistory').DataTable().clear().destroy();
+                }
+
+                // Empty the table body before appending new rows
+                $('#lendingHistory tbody').empty();
+
+                // Loop through the response data and create table rows
+                response.forEach(item => {
+                    const row = `
+                        <tr>
+                            <td>${item.item_name}</td>
+                            <td>${item.type}</td>
+                            <td>${item.quantity}</td>
+                            <td>${item.old_quantity}</td>
+                            <td>${item.new_quantity}</td>
+                            <td>${item.updated_by}</td>
+                            <td>${item.in_out_reason}</td>
+                        </tr>
+                    `;
+                    $('#lendingHistory tbody').append(row);
+                });
+
+                // Re-initialize DataTable to apply features like sorting, pagination, etc.
+                $('#lendingHistory').DataTable();
+            } else {
+                // Show a message when no data is found
+                $('#lendingHistory tbody').append('<tr><td colspan="6">No data found.</td></tr>');
+            }
+        },
+        error: function(xhr, status, error) {
+            // Log any errors that occur during the AJAX request
+            console.error('Error fetching inventory history: ', error);
+        }
+    });
+};
+
+
+
+// Lending table
+$('.lending__tab').on('click', function () {
+  loadLendingHistory();
+});
+// Lending table
+$('.inventory__history__btn').on('click', function () {
+  inventoryHistory();
+});
+
+
 
 });
 
@@ -1231,17 +1331,31 @@ $(document).ready(function () {
   $(".tab__1").on("click", function () {
     $(".tab__1").addClass("visible");
     $(".tab__2").removeClass("visible");
+    $(".tab__3").removeClass("visible");
     $('.lending__items ').addClass('d__none');
+    $('.inventory__history').addClass('d__none');
     $('.card__inventory ').removeClass('d__none');
   });
 
   $(".tab__2").on("click", function () {
     $(".tab__2").addClass("visible");
     $(".tab__1").removeClass("visible");
+    $(".tab__3").removeClass("visible");
     $('.lending__items ').removeClass('d__none');
+    $('.inventory__history').addClass('d__none');
     $('.card__inventory ').addClass('d__none');
-    
   });
+  $(".tab__3").on("click", function () {
+    $(".tab__2").removeClass("visible");
+    $(".tab__1").removeClass("visible");
+    $(".tab__3").addClass("visible");
+    $('.lending__items ').addClass('d__none');
+    $('.card__inventory ').addClass('d__none');
+    $('.inventory__history').removeClass('d__none');
+    inventoryHistory();
+  });
+
+
 
   // Initialize DataTable
   $("#example").DataTable();

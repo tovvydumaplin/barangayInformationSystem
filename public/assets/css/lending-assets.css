@@ -27,7 +27,7 @@
   visibility: hidden;
   opacity: 0;
   transition: all 0.3s ease;
-  height: auto;
+  height: 95%;
   max-width: 50rem;
   min-width: 50rem;
 }
