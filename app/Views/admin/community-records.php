@@ -1109,24 +1109,37 @@
               <div class="filter__items hide">
                 <p class="filter__subheading">Add Filter</p>
                 <div class="filter__items__box">
-                  <div class="filter__item" data-filter="Single">
-                      <i class="bi bi__custom bi-person"></i><span class="filter__title">Single</span>
+                    <div class="filter__item" data-filter="Head">
+                      <i class="bi bi__custom bi-person-badge"></i><span class="filter__title">Head of Family</span>
                     </div>
-                    <div class="filter__item" data-filter="Married">
-                      <i class="bi bi__custom bi-heart"></i><span class="filter__title">Married</span>
+                    <div class="filter__item" data-filter="NonHead">
+                      <i class="bi bi__custom bi-people"></i><span class="filter__title">Non Head</span>
                     </div>
-                    <div class="filter__item" data-filter="Divorced">
-                      <i class="bi bi__custom bi-house-door"></i><span class="filter__title">Divorced</span>
+                    <div class="filter__item" data-filter="Voter">
+                      <i class="bi bi__custom bi-check2-square"></i><span class="filter__title">Barangay Voter</span>
                     </div>
-                    <div class="filter__item" data-filter="Male">
-                      <i class="bi bi__custom bi-gender-male"></i><span class="filter__title">Male</span>
+                    <div class="filter__item" data-filter="NonVoter">
+                      <i class="bi bi__custom bi-x-square"></i><span class="filter__title">Non Voter</span>
                     </div>
-                    <div class="filter__item" data-filter="Female">
-                      <i class="bi bi__custom bi-gender-female"></i><span class="filter__title">Female</span>
+                    <div class="filter__item" data-filter="Senior">
+                      <i class="bi bi__custom bi-person-lines-fill"></i><span class="filter__title">Senior Citizen</span>
+                    </div>
+                    <div class="filter__item" data-filter="Minor">
+                      <i class="bi bi__custom bi-person-dash"></i><span class="filter__title">Minor</span>
+                    </div>
+                    <div class="filter__item" data-filter="ByFamily">
+                      <i class="bi bi__custom bi-house"></i><span class="filter__title">By Family</span>
+                    </div>
+                    <div class="filter__item" data-filter="Archived">
+                      <i class="bi bi__custom bi-archive"></i><span class="filter__title">Archived</span>
+                    </div>
+                    <div class="filter__item" data-filter="PWD">
+                      <i class="bi bi__custom bi-universal-access"></i><span class="filter__title">PWD</span>
                     </div>
                     <div class="filter__item" data-filter="All">
-                      <i class="bi bi__custom bi-gender-female"></i><span class="filter__title">All</span>
+                      <i class="bi bi__custom bi-universal-access"></i><span class="filter__title">All</span>
                     </div>
+
                   </div>
                 </div>
               </div>
@@ -1958,24 +1971,58 @@ const loadFilteredResidents = function(filter) {
 
     $residentsTable.find("tbody").html('<tr><td colspan="7" class="text-center">Loading...</td></tr>');
     console.log(filter);
+
     $.ajax({
         url: "/admin/filter-residents",
         type: "GET",
-        data: { filter }, // pass the clicked filter
+        data: { filter },
         dataType: "json",
         cache: false,
         success: function(response) {
             if (response.success && Array.isArray(response.data) && response.data.length) {
                 const residents = response.data;
-                const tableData = residents.map(resident => [
-                    resident.resident_id,
-                    `${resident.firstname} ${resident.middlename ? resident.middlename.charAt(0) + '.' : ''} ${resident.lastname} ${resident.suffix || ''}`,
-                    resident.birthdate ? calculateAge(resident.birthdate) : 'N/A',
-                    resident.civil_status || 'N/A',
-                    resident.gender || 'N/A',
-                    resident.house_no || 'N/A',
-                    `<button class="btn__primary view__resident__btn action-btn" data-id="${resident.resident_id}">View</button>`
-                ]);
+                let tableData = [];
+
+                if (filter === "ByFamily") {
+                    const grouped = {};
+
+                    residents.forEach(resident => {
+                        const houseNo = resident.house_no || "N/A";
+                        if (!grouped[houseNo]) {
+                            grouped[houseNo] = [];
+                        }
+                        grouped[houseNo].push(resident);
+                    });
+
+                    Object.entries(grouped).forEach(([houseNo, members]) => {
+                        // Add a label row
+                        tableData.push([
+                            "", `<strong>🏠 House No: ${houseNo}</strong>`, "", "", "", "", ""
+                        ]);
+
+                        members.forEach(resident => {
+                            tableData.push([
+                                resident.resident_id,
+                                `${resident.firstname} ${resident.middlename ? resident.middlename.charAt(0) + '.' : ''} ${resident.lastname} ${resident.suffix || ''}`,
+                                resident.birthdate ? calculateAge(resident.birthdate) : 'N/A',
+                                resident.civil_status || 'N/A',
+                                resident.gender || 'N/A',
+                                resident.house_no || 'N/A',
+                                `<button class="btn__primary view__resident__btn action-btn" data-id="${resident.resident_id}">View</button>`
+                            ]);
+                        });
+                    });
+                } else {
+                    tableData = residents.map(resident => [
+                        resident.resident_id,
+                        `${resident.firstname} ${resident.middlename ? resident.middlename.charAt(0) + '.' : ''} ${resident.lastname} ${resident.suffix || ''}`,
+                        resident.birthdate ? calculateAge(resident.birthdate) : 'N/A',
+                        resident.civil_status || 'N/A',
+                        resident.gender || 'N/A',
+                        resident.house_no || 'N/A',
+                        `<button class="btn__primary view__resident__btn action-btn" data-id="${resident.resident_id}">View</button>`
+                    ]);
+                }
 
                 $residentsTable.DataTable({
                     destroy: true,
@@ -1992,11 +2039,19 @@ const loadFilteredResidents = function(filter) {
                         { title: "Action", orderable: false }
                     ],
                     columnDefs: [{ width: "80px", targets: -1 }],
-                    order: [[0, "desc"]],
+                    order: [],
                     language: { emptyTable: "No residents found" },
                     pagingType: "simple_numbers",
                     autoWidth: false,
-                    responsive: true
+                    responsive: true,
+                    rowCallback: function(row, data) {
+                        if (data[0] === "") {
+                            $(row).addClass("table-group-label").css({
+                                backgroundColor: "#f0f0f0",
+                                fontWeight: "bold"
+                            });
+                        }
+                    }
                 });
             } else {
                 $residentsTable.DataTable({
@@ -2025,6 +2080,7 @@ const loadFilteredResidents = function(filter) {
         }
     });
 };
+
 
 const loadNationality = function() {
     const nationalities = [

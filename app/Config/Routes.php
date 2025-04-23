@@ -111,6 +111,7 @@ $routes->get('admin/residents-list', 'AdminController::residentsList');
 $routes->get('admin/get-complaints', 'AdminController::getComplaints');
 $routes->get('admin/view-complain/(:num)', 'AdminController::viewComplaint/$1');
 $routes->post('admin/mark-as-solved', 'AdminController::markAsSolved');
+$routes->get('admin/get-complaint/(:num)', 'AdminController::getComplaint/$1');
 
 // User account
 $routes->post('admin/update-user-image', 'AdminController::updateUserImage');

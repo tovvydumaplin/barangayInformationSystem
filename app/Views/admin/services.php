@@ -17,14 +17,18 @@
     <link rel="stylesheet" href="<?= base_url('assets/css/officials.css') ?>" />
     <link rel="stylesheet" href="<?= base_url('assets/css/table.css') ?>" />
     <link href="<?= base_url('assets/DataTables/datatables.min.css') ?>" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
     <!-- Leaflet CSS -->
     <link
       rel="stylesheet"
       href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
     />
-
+    <!-- Select search -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <!-- Datatables -->
     <script src="<?= base_url('assets/DataTables/datatables.min.js') ?>"></script>
+    <!-- apex -->
     <script src="<?= base_url('assets/js/apexcharts.min.js') ?>"></script>
 
     <style>
@@ -200,6 +204,7 @@
     .btn__form__container {
       display: flex;
       gap: 1rem;
+      margin-bottom: 2rem;
     }
     .btn__form {
       border: none;
@@ -209,6 +214,12 @@
       padding: 1rem;
       border-radius: 1rem;
       font-weight: 600;
+      max-width: 20rem;
+      min-width: 20rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
     }
     .btn__form.active {
       background-color: var(--main-color);
@@ -224,6 +235,38 @@
 );
 
     }
+    .container__grid {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 2rem;
+    }
+    .heading__primary {
+        font-size: 3rem;
+        font-weight: 600;
+    }
+    .subtext {
+      margin-bottom: 2rem;
+      color:#71717A;
+    }
+    .btn__container {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+    border-radius: 1rem;
+    border: 1px solid rgb(221, 221, 221);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+.chevy__down {
+  position: absolute;
+    top: 50%;
+    right: 2rem;
+    transform: translateY(-50%);
+}
+#residentSelect {
+  margin-bottom: 2rem;
+}
     </style>
   </head>
   <body>
@@ -457,18 +500,23 @@
           </div>
         </form>
       </div>
-      <div class="container">
+      <div class="container container__grid">
       <div class="btn__container">
-      <p class="">Select an option:</p>
+        <p class="heading__primary">Form Printing</p>
+        <span class="subtext">Select document type and resident information</span>
+        <p style="font-weight: 600;">Select document type:</p>
       <div class="btn__form__container">
-          <button id="btnBarangayClearance" class="btn__form active">Barangay Certificate</button>
-          <button id="btnIndigency" class="btn__form">Indigency</button>
+          <button id="btnBarangayClearance" class="btn__form active"><i class="check__clearance bi bi-check2"></i>Barangay Certificate</button>
+          <button id="btnIndigency" class="btn__form"><i class="check__indigent bi bi-check2 d__none"></i>Indigency</button>
       </div>
+      <div class="pos__rel">
+        <p style="font-weight: 600; margin-bottom: 1rem;">Select a resident:</p>
         <select id="residentSelect" class="information__input">
             <option value="">Choose a resident</option>
         </select>
-      <button id="download-pdf-btn" class="btn-download d__none">Download as PDF</button>
-      <button id="download-pdf-btn-cert" class="btn-download">Download as PDF</button>
+      </div>
+      <button id="download-pdf-btn" class="btn-download d__none"><i style="margin-right: 1rem" class="bi bi-download"></i> Download as PDF</button>
+      <button id="download-pdf-btn-cert" class="btn-download"><i style="margin-right: 1rem" class="bi bi-download"></i> Download as PDF</button>
 
       </div>
 
@@ -714,6 +762,8 @@
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="<?= base_url('assets/js/map.js') ?>"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
     <script>
 
 
@@ -729,12 +779,17 @@ $('.btn__form').on('click', function() {
         $('#download-pdf-btn-cert').removeClass('d__none');
         $('#certification-document').addClass('d__none');
         $('#download-pdf-btn').addClass('d__none');
+        $('.check__clearance').removeClass('d__none');
+        $('.check__indigent').addClass('d__none');
 
       } else if ($(this).attr('id') === 'btnIndigency') {
         $('#certification-document').removeClass('d__none');
         $('#certification-barangay').addClass('d__none');
         $('#download-pdf-btn-cert').addClass('d__none');
         $('#download-pdf-btn').removeClass('d__none');
+        $('.check__clearance').addClass('d__none');
+        $('.check__indigent').removeClass('d__none');
+
       }
     });
 
@@ -774,7 +829,10 @@ $('.btn__form').on('click', function() {
 });
 
 
-
+$('#residentSelect').select2({
+        placeholder: "Choose a resident",
+        allowClear: true
+    });
     // When a resident is selected
 // When a resident is selected
 // When a resident is selected

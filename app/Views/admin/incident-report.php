@@ -27,10 +27,15 @@
     <link rel="stylesheet" href="<?= base_url('assets/css/incident-report.css') ?>" />
     <link rel="stylesheet" href="<?= base_url('assets/css/table.css') ?>" />
     <link href="<?= base_url('assets/DataTables/datatables.min.css') ?>" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
     <script src="<?= base_url('assets/DataTables/datatables.min.js') ?>"></script>
     <script src="<?= base_url('assets/js/apexcharts.min.js') ?>"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
 
+<script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
   </head>
   <body>
    <?= view ('includes/sidebar') ?>
@@ -177,6 +182,7 @@
             </div>
           </div>
           <div class="btn__box__modal">
+
             <button class="btn__primary active btn__close" id="createComplain">
               File Complain
             </button>
@@ -308,7 +314,11 @@
                 </div>
                 Filter
               </button> -->
+              <button class="btn__secondary export__excel__btn" id="exportExcel">
+              <i style="margin-right: 1rem" class="bi bi-download"></i>Export to Excel
+              </button>
               <button class="btn__secondary active btn__add__resident">
+              
                 <div class="icon__link">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -378,6 +388,9 @@
       nomodule
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
     ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.min.js"></script>
 
     <script>
 $(document).ready(function () {
@@ -408,17 +421,39 @@ $(document).ready(function () {
   // loadResidents();
 
 
-const loadComplaints = function() {
-    if ($.fn.dataTable.isDataTable('#complainTable')) {
-        $('#complainTable').DataTable().clear().destroy();
+  const loadComplaints = function() {
+    const $complainTable = $('#complainTable');
+
+    if ($.fn.DataTable.isDataTable($complainTable)) {
+        $complainTable.DataTable().clear().destroy();
     }
 
-    $('#complainTable').DataTable({
+    $complainTable.DataTable({
         ajax: {
             url: '<?= site_url('admin/get-complaints') ?>',
             type: 'GET',
-            dataSrc: 'data'  
+            dataSrc: function(json) {
+                return Array.isArray(json.data) && json.data.length ? json.data : [];
+            }
         },
+        dom: 'frtip',
+        buttons: [
+            {
+                extend: 'excelHtml5',
+                text: 'Export to Excel',
+                className: 'd-none',
+                filename: function() {
+                    const today = new Date();
+                    const yyyy = today.getFullYear();
+                    const mm = String(today.getMonth() + 1).padStart(2, '0');
+                    const dd = String(today.getDate()).padStart(2, '0');
+                    return `pinagbuklod-incident-${yyyy}-${mm}-${dd}`;
+                },
+                exportOptions: {
+                    columns: ':not(:last-child)' // skip the action column
+                }
+            }
+        ],
         order: [[0, 'desc']],
         columns: [
             { data: 'complaint_id' },
@@ -427,7 +462,7 @@ const loadComplaints = function() {
             { data: 'complain_against' },
             {
                 data: 'status',
-                render: function(data, type, row) {
+                render: function(data) {
                     if (data == 0) {
                         return '<span class="status__badge badge__inprogress">In Progress</span>';
                     } else if (data == 1) {
@@ -441,12 +476,118 @@ const loadComplaints = function() {
             {
                 data: 'complaint_id',
                 render: function(data, type, row) {
-                    return '<button class="btn__view__complaint" data-id="' + data + '">View</button>';
+                    return `
+                        <button class="btn__view__complaint" data-id="${data}">View</button>
+                        <button class="btn__export__pdf" data-id="${data}">Export PDF</button>
+                    `;
                 }
             }
-        ]
+        ],
+        language: { emptyTable: "No complaints found" },
+        pagingType: "simple_numbers"
     });
+};
+
+// Handle Export to PDF click
+$(document).on('click', '.btn__export__pdf', function() {
+    const complaintId = $(this).data('id');
+    const complaintData = getComplaintDataById(complaintId);
+
+    if (complaintData) {
+        exportComplaintToPDF(complaintData);
+    }
+});
+
+// Function to fetch complaint data by ID (you can modify this to get data from your source)
+function getComplaintDataById(id) {
+    let complaintData = null;
+
+    $.ajax({
+        url: `<?= site_url('admin/get-complaint') ?>/${id}`,  // Modify this URL based on your endpoint
+        type: 'GET',
+        async: false,
+        success: function(response) {
+            complaintData = response.data;  // Assuming the data is in 'data' key
+        }
+    });
+
+    return complaintData;
 }
+
+// Function to export complaint data to PDF
+function exportComplaintToPDF(complaintData) {
+    const { complainant_name, complain_against, complain_title, complainant_age, complainant_address, location_of_incident, date, status } = complaintData;
+
+    const docDefinition = {
+        content: [
+            // Header Text
+            { 
+                text: 'Republic of the Philippines', 
+                style: 'headerText', 
+                alignment: 'center' 
+            },
+            { 
+                text: 'Office of the Barangay Captain', 
+                style: 'headerText', 
+                alignment: 'center' 
+            },
+            { 
+                text: 'Barangay 42C- Pinagbuklod Zone-5', 
+                style: 'headerText', 
+                alignment: 'center' 
+            },
+            { 
+                text: 'San Antonio, Cavite City', 
+                style: 'headerText', 
+                alignment: 'center' 
+            },
+            { text: '--------------------------------------------------------------', style: 'divider' },
+            { text: 'Complaint Report', style: 'mainHeader' },
+            { 
+                text: [
+                    { text: `On ${date}, `, bold: true },
+                    ` ${complainant_name}, aged ${complainant_age}, from ${complainant_address}, reported an incident regarding ${complain_title}. `,
+                    `The complainant accused ${complain_against} of the following: ${complain_title}. `,
+                    `The incident took place at ${location_of_incident}. `,
+                    `The status of the complaint is currently: `,
+                    { text: status == 0 ? 'In Progress' : (status == 1 ? 'Completed' : 'Unknown'), bold: true },
+                    `.`
+                ],
+                style: 'subheader',
+                lineHeight: 1.5  // This sets the line height to 1.5, which adds spacing between lines
+            }
+        ],
+        styles: {
+            mainHeader: { fontSize: 18, bold: true, alignment: 'center', margin: [0, 10] },
+            headerText: { fontSize: 14, bold: true, alignment: 'center', margin: [0, 5] },
+            subheader: { fontSize: 14, margin: [0, 5] },
+            divider: { fontSize: 10, margin: [0, 10], color: 'gray', alignment: 'center' }
+        }
+    };
+
+    // Generate PDF with the defined content and styles
+    pdfMake.createPdf(docDefinition).download('complaint-report.pdf');
+}
+
+
+
+
+
+$(document).on('click', '.btn__export__pdf', function() {
+    const complaintId = $(this).data('id');
+    const complaintData = getComplaintDataById(complaintId);
+
+    if (complaintData) {
+        exportComplaintToPDF(complaintData);
+    }
+});
+
+
+
+$('#exportExcel').on('click', function() {
+    $('#complainTable').DataTable().button('.buttons-excel').trigger();
+});
+
 
 $(document).on('click', '.btn__view__complaint', function() {
   const complaintId = $(this).data('id'); 

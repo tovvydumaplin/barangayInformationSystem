@@ -531,13 +531,89 @@ public function createUser()
         $residentModel = new ResidentModel();
         $filter = $this->request->getGet('filter');
     
-        $residentModel->where('status', '1');
+        // Default: show only active residents unless filtering for 'Archived'
+        if ($filter !== 'Archived') {
+            $residentModel->where('status', '1');
+        }
     
         if (!empty($filter)) {
-            $residentModel->groupStart()
-                ->where('gender', $filter)
-                ->orWhere('civil_status', $filter)
-                ->groupEnd();
+            switch ($filter) {
+                case 'Male':
+                case 'Female':
+                    $residentModel->where('gender', $filter);
+                    break;
+    
+                case 'Single':
+                case 'Married':
+                case 'Divorced':
+                    $residentModel->where('civil_status', $filter);
+                    break;
+    
+                case 'Head':
+                    $residentModel->where('is_family_head', 1);
+                    break;
+    
+                case 'NonHead':
+                    $residentModel->where('is_family_head', 0);
+                    break;
+    
+                case 'Voter':
+                    $residentModel->where('is_voter_of_barangay', 1);
+                    break;
+    
+                case 'NonVoter':
+                    $residentModel->where('is_voter_of_barangay', 0);
+                    break;
+    
+                case 'Senior':
+                    // Get current date minus 60 years
+                    $cutoff = date('Y-m-d', strtotime('-60 years'));
+                    $residentModel->where('birthdate <=', $cutoff);
+                    break;
+    
+                case 'Minor':
+                    // Get current date minus 18 years
+                    $cutoff = date('Y-m-d', strtotime('-18 years'));
+                    $residentModel->where('birthdate >', $cutoff);
+                    break;
+    
+                case 'ByFamily':
+                    // Fetch and group manually after
+                    $residents = $residentModel
+                        ->select('*')
+                        ->where('status', '1')
+                        ->findAll();
+    
+                    $grouped = [];
+                    foreach ($residents as $resident) {
+                        $houseNo = $resident['house_no'] ?? 'N/A';
+                        if (!isset($grouped[$houseNo])) {
+                            $grouped[$houseNo] = $resident;
+                        }
+                    }
+    
+                    return $this->response->setJSON([
+                        'success' => count($grouped) > 0,
+                        'data' => array_values($grouped)
+                    ]);
+    
+                case 'Archived':
+                    $residentModel->where('status', '0');
+                    break;
+    
+                case 'PWD':
+                    $residentModel->where('is_pwd', 1);
+                    break;
+    
+                case 'All':
+                    // Don't apply any specific filter, just show active
+                    $residentModel->where('status', '1');
+                    break;
+    
+                default:
+                    // Handle unexpected filters or custom future ones
+                    break;
+            }
         }
     
         $residents = $residentModel->findAll();
@@ -548,6 +624,23 @@ public function createUser()
         ]);
     }
     
+    public function getComplaint($id)
+    {
+        // Directly instantiate the ComplainModel
+        $complainModel = new ComplainModel();
+
+        // Fetch the complaint data using the model
+        $complaintData = $complainModel->find($id);  // `find()` is a shortcut for getting a record by its primary key
+
+        if ($complaintData) {
+            // Return the complaint data in JSON format
+            return $this->response->setJSON(['data' => $complaintData]);
+        } else {
+            // Return a 404 error if the complaint is not found
+            return $this->response->setStatusCode(404, 'Complaint Not Found');
+        }
+    }
+
 
     public function getArchivedResidents() {
         $residentModel = new ResidentModel();

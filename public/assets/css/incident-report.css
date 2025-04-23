@@ -96,3 +96,15 @@
 .input__box {
   width: 100%;
 }
+.dt-search {
+  margin-bottom: 2rem !important;
+}
+.btn__export__pdf {
+  padding: 1rem;
+  border: none;
+  margin-top: 1rem;
+  border-radius: 0.5rem;
+  font-family: "Roboto", sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+}
