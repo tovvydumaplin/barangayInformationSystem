@@ -10,6 +10,7 @@ use App\Models\LendingModel;
 use App\Models\OfficialModel;
 use App\Models\ComplainModel;
 use App\Models\SuffixModel;
+use App\Models\PositionModel;
 class AdminController extends BaseController
 {
     public function dashboard()
@@ -2185,12 +2186,169 @@ public function createSuffix()
 
 public function getSuffixes()
 {
-    $model = new \App\Models\SuffixModel();
+    $model = new SuffixModel();
     $suffixes = $model->where('status', 1)->findAll(); // Only active
 
     return $this->response->setJSON([
         'status' => 'success',
         'data' => $suffixes
+    ]);
+}
+
+public function deleteSuffix()
+{
+    $id = $this->request->getPost('id');
+
+    if (!$id) {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Invalid suffix ID.'
+        ]);
+    }
+
+    $model = new SuffixModel();
+
+    $suffix = $model->find($id);
+
+    if (!$suffix) {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Suffix not found.'
+        ]);
+    }
+
+    // Set status = 0 (soft delete)
+    $model->update($id, ['status' => 0]);
+
+    return $this->response->setJSON([
+        'status' => 'success',
+        'message' => 'Suffix deleted successfully.'
+    ]);
+}
+
+public function updateSuffix()
+{
+    $id = $this->request->getPost('id');
+    $suffix = $this->request->getPost('suffix');
+
+    if (!$id || !$suffix) {
+        return $this->response->setJSON(['status' => 'error', 'message' => 'Missing data.']);
+    }
+
+    $model = new SuffixModel();
+
+    // Check if the new suffix already exists (status = 1 and not the same ID)
+    $exists = $model->where('suffix_title', $suffix)
+                    ->where('status', 1)
+                    ->where('id !=', $id)
+                    ->first();
+
+    if ($exists) {
+        return $this->response->setJSON(['status' => 'error', 'message' => 'This suffix already exists.']);
+    }
+
+    $model->update($id, ['suffix_title' => $suffix]);
+    return $this->response->setJSON(['status' => 'success']);
+}
+
+public function createPosition()
+{
+  $positionName = $this->request->getPost('position');
+
+  if (!$positionName) {
+    return $this->response->setJSON([
+      'status' => 'error',
+      'message' => 'Position name is required.'
+    ]);
+  }
+
+  $positionModel = new PositionModel();
+
+  // Check for duplicate with status = 1
+  $existing = $positionModel
+    ->where('position_name', $positionName)
+    ->where('status', 1)
+    ->first();
+
+  if ($existing) {
+    return $this->response->setJSON([
+      'status' => 'error',
+      'message' => 'This position already exists.'
+    ]);
+  }
+
+  // Insert new
+  $positionModel->save([
+    'position_name' => $positionName,
+    'status' => 1
+  ]);
+
+  return $this->response->setJSON([
+    'status' => 'success',
+    'message' => 'Position created successfully.'
+  ]);
+}
+    // Fetch existing positions
+    public function getPositions()
+    {
+        $model = new PositionModel();
+        $positions = $model->where('status', 1)->findAll(); // Fetch only active positions (status = 1)
+        return $this->response->setJSON([
+            'status' => 'success',
+            'data' => $positions
+        ]);
+    }
+
+    // Create a new position
+
+
+    // Delete (soft delete) a position (set status to 0)
+    public function deletePosition()
+    {
+        $positionID = $this->request->getPost('id');
+
+        if (!$positionID) {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'Position ID is required.']);
+        }
+
+        $model = new PositionModel();
+
+        // Update the status to 0 to mark as deleted
+        $model->update($positionID, ['status' => 0]);
+
+        return $this->response->setJSON(['status' => 'success', 'message' => 'Position deleted successfully.']);
+    }
+
+    public function updatePosition()
+{
+    $id = $this->request->getPost('id');
+    $position = $this->request->getPost('position');
+
+    if (!$id || !$position) {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Position and ID are required.'
+        ]);
+    }
+
+    $model = new PositionModel();
+    $existing = $model->where('position_name', $position)
+                      ->where('id !=', $id)
+                      ->where('status', 1)
+                      ->first();
+
+    if ($existing) {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'This position already exists.'
+        ]);
+    }
+
+    $updated = $model->update($id, ['position_name' => $position]);
+
+    return $this->response->setJSON([
+        'status' => $updated ? 'success' : 'error',
+        'message' => $updated ? 'Updated successfully' : 'Update failed.'
     ]);
 }
 

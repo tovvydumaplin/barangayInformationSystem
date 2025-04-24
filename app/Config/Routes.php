@@ -141,3 +141,18 @@ $routes->get('reset-password', 'AdminController::ResetNow');
 $routes->post('admin/create-suffix', 'AdminController::createSuffix');
 // View Suffix
 $routes->get('admin/get-suffixes', 'AdminController::getSuffixes');
+// Delete Suffix
+$routes->post('admin/delete-suffix', 'AdminController::deleteSuffix');
+// Edit suffix
+$routes->post('admin/update-suffix', 'AdminController::updateSuffix');
+
+// Create Position
+$routes->post('admin/create-position', 'AdminController::createPosition');
+$routes->get('admin/get-positions', 'AdminController::getPositions');
+$routes->post('admin/create-position', 'AdminController::createPosition');
+$routes->post('admin/delete-position', 'AdminController::deletePosition');
+// Route to get position details for editing
+$routes->get('admin/get-position', 'AdminController::getPosition');
+
+// Route to update position
+$routes->post('admin/update-position', 'AdminController::updatePosition');

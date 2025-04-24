@@ -86,109 +86,93 @@
           </div>
         </form>
       </div>
+      <!-- Modal to View/Edit Item FOR POSITIONS-->
+      <div id="registerPositionModal" class="modal">
+        <div class="modal__header">
+          <p class="modal__heading">Create Position</p>
+          <p class="subtitle">Create position for formatting</p>
+        </div>
+        <form class="modal__body community__modal">
+          <div class="row flex__d__col">
+            <div class="row">
+              <div class="input__box">
+                <input
+                  id="positionCreate"
+                  class="information__input"
+                  value=""
+                  placeholder="Enter suffix"
+                  name="position_create"
+                />
+                <span class="input__title"
+                  >Position<span class="red__dot">*</span></span
+                >
+                <p class="text-sub">Enter the Position. Examples: Captain., Secretary, Treasurer</p>
+              </div>
+            </div>
+          </div>
+          <div class="btn__box__modal">
+            <span class="btn__primary active btn__create__position"><i class="bi bi-check"></i>Create Position</span>
+          </div>
+        </form>
+      </div>
       <!-- Modal to View/Edit Item -->
       <div id="viewItemModal" class="modal">
-          <div class="modal__header">
-              <p class="modal__heading">View Item</p>
+        <div class="modal__header">
+          <p class="modal__heading">Edit Suffix</p>
+          <p class="subtitle">Edit suffix for name formatting</p>
+        </div>
+        <form class="modal__body community__modal">
+          <div class="row flex__d__col">
+            <div class="row">
+              <div class="input__box">
+                <input
+                  id="suffixEdit"
+                  class="information__input"
+                  value=""
+                  placeholder="Enter suffix"
+                  name="suffix_edit"
+                />
+                <span class="input__title"
+                  >Suffix<span class="red__dot">*</span></span
+                >
+                <p class="text-sub">Enter the suffix abbreviation. Examples: Jr., Sr., III</p>
+              </div>
+            </div>
+            
           </div>
-          <form class="modal__body community__modal" id="updateItemForm" enctype="multipart/form-data" method="post"> 
-              <input type="hidden" id="item_id" name="item_id" />
-              <input type="hidden" id="current_image" name="current_image" />
-              <div class="row flex__d__col">
-                  <div class="row modal__register__modified">
-                      <input type="file" id="viewFileInput" accept="image/*" style="display: none" />
-                      <img class="view__img__upload" src="img__default.png" style="cursor: pointer;" id="viewItemImage" />
-                  </div>
-                  <div class="row">
-                      <div class="input__box">
-                          <input
-                              id="viewAssetName"
-                              class="information__input"
-                              value=""
-                              placeholder="Enter name"
-                              name="view_asset_name"
-                              readonly
-                          />
-                          <span class="input__title">Item name<span class="red__dot">*</span></span>
-                          <p class="text-danger"></p>
-                      </div>
-                  </div>
-                  <div class="row">
-                    <div class="input__box">
-                      <textarea
-                        id="viewAssetDescription"
-                        class="information__input"
-                        value=""
-                        placeholder="Enter Description"
-                        name="view_asset_description"
-                      ></textarea>
-
-                      <span class="input__title"
-                        >Description<span class="red__dot">*</span></span
-                      >
-                      <p class="text-danger"></p>
-                    </div>
-                  </div>
-                  <div class="row">
-                      <div class="input__box">
-                          <input
-                              id="viewAssetQuantity"
-                              class="information__input"
-                              value=""
-                              placeholder="Enter quantity"
-                              name="view_asset_quantity"
-                              type="number"
-                              readonly
-                          />
-
-                          <span class="input__title">Quantity<span class="red__dot">*</span></span>
-                          <p class="text-danger"></p>
-                      </div>
-                  </div>
-                  <div class="row flex stock__radio d__none">
-                      <label style="font-weight: 600">Stock Action:</label>
-                      <div>
-                        <input type="radio" class="btn__stock__in" name="stock_in_out" value="in"> Stock In
-                      </div>
-                      <div>
-                        <input type="radio" class="btn__stock__out" name="stock_in_out" value="out"> Stock Out
-                      </div>
-                  </div>
-                  <div class="row stock__desc d__none">
-                      <div class="input__box">
-                          <input
-                              id="viewAssetQuantityUpdate"
-                              class="information__input"
-                              value=""
-                              placeholder="Enter quantity"
-                              name="view_asset_quantity_update"
-                              type="number"
-                          />
-
-                          <span class="input__title in__out__quantity">Stock-in Quantity<span class="red__dot">*</span></span>
-                          <p class="text-danger"></p>
-                      </div>
-                  </div>
-                  <div class="row stock__desc d__none">
-                      <div class="input__box">
-                          <textarea
-                              id="viewAssetQuantityDesc"
-                              class="information__input"
-                              value=""
-                              placeholder="Enter quantity"
-                              name="view_asset_quantity_desc"
-                              type="number"
-                          ></textarea>
-                          <span class="input__title stock__title">Reason for Stock-In<span class="red__dot">*</span></span>
-                          <p class="text-danger"></p>
-                      </div>
-                  </div>
+          <div class="btn__box__modal">
+            <span class="btn__primary active btn__update__suffix"><i class="bi bi-check"></i>Update Suffix</span>
+          </div>
+        </form>
+      </div>
+      <!-- Modal to View/Edit Item FOR POSITIONS-->
+      <div id="viewPositions" class="modal">
+        <div class="modal__header">
+          <p class="modal__heading">Edit Position</p>
+          <p class="subtitle">Edit position for formatting</p>
+        </div>
+        <form class="modal__body community__modal">
+          <div class="row flex__d__col">
+            <div class="row">
+              <div class="input__box">
+                <input
+                  id="positionEdit"
+                  class="information__input"
+                  value=""
+                  placeholder="Enter suffix"
+                  name="position_edit"
+                />
+                <span class="input__title"
+                  >Position<span class="red__dot">*</span></span
+                >
+                <p class="text-sub">Enter the Position. Examples: Captain., Secretary, Treasurer</p>
               </div>
-              <div class="btn__box__modal">
-                  <span class="btn__save__asset btn__primary active d__none" id="editItemBtn">Save Changes</span>
-                  <span class="btn__edit__asset btn__primary" id="">Edit</span>
-              </div>
-          </form>
+            </div>
+          </div>
+          <div class="btn__box__modal">
+            <span class="btn__primary active btn__update__position"><i class="bi bi-check"></i>Update Position</span>
+          </div>
+        </form>
       </div>
       <div class="container">
         <div class="heading__box">
@@ -212,7 +196,8 @@
             <p class="subheading">List of Items</p>
           </div>
           <!-- Suffix Container -->
-          <div class="container">
+          <div class="container grid__suffix">
+            <!-- Variables for suffix -->
             <div class="settings__card">
               <div class="settings__card__header">
                 <div class="settings__title__box">
@@ -227,18 +212,25 @@
                 </div>
               </div>
               <div class="settings__item__box settings__list">
-                <!-- Item 1 --> <!-- This is for each item bro.-->
-                <div class="settings__item">
-                  <div class="settings__item__name">
-                    <p class="settings__indicator">Jr.</p>
-                    <p class="settings__name">Junior</p>
-                  </div>
-                  <div class="settings__btn__box">
-                    <i class="bi bi-pencil"></i>
-                    <i class="bi bi-trash red__icon__color"></i>
-                  </div>
+                <!-- For each here -->
+              </div>
+            </div>
+            <!-- Variables for Positions -->
+            <div class="settings__card">
+              <div class="settings__card__header">
+                <div class="settings__title__box">
+                  <p class="settings__title">Existing Positions</p>
+                  <p class="settings__subtitle">Manage your collection of positions</p>
                 </div>
-                <!-- Item 1 End -->
+                <div class="settings__btn__box">
+                  <button class="btn__secondary active btn__add__position">
+                    <i class="bi bi-plus"></i>
+                    Add Position
+                  </button>
+                </div>
+              </div>
+              <div class="settings__item__box position__list">
+                <!-- For each here -->
               </div>
             </div>
           </div>
@@ -340,11 +332,6 @@
     <script src="<?= base_url('assets/js/general.js') ?>"></script>
     <script>
 
-
-
-
-
-
 // Lending table
 $('.lending__tab').on('click', function () {
   loadLendingHistory();
@@ -388,6 +375,7 @@ $(document).ready(function () {
       },
       complete: function () {
         $('.btn__register__item').prop('disabled', false).html('<i class="bi bi-plus"></i> Create Suffix');
+          loadSuffixes();
       }
     });
   };
@@ -413,8 +401,8 @@ $(document).ready(function () {
                 <p class="settings__namer">${fullName}</p>
               </div>
               <div class="settings__btn__box">
-                <i class="bi bi-pencil"></i>
-                <i class="bi bi-trash red__icon__color"></i>
+                <i class="bi bi-pencil btn__edit__suffix" data-id="${item.id}" data-suffix="${suffix}"></i>
+                <i class="bi bi-trash red__icon__color btn__delete__suffix" data-id="${item.id}"></i>
               </div>
             </div>
           `;
@@ -425,7 +413,7 @@ $(document).ready(function () {
   });
 };
 
-// Optional: Map suffix to full name (you can expand this)
+
 function getFullSuffixName(short) {
   const normalized = short.trim().toLowerCase();
 
@@ -502,8 +490,211 @@ function getFullSuffixName(short) {
     .join(' ');
 }
 
-
 loadSuffixes();
+
+const deleteSuffix = function (id) {
+  $.ajax({
+    url: '/admin/delete-suffix',
+    method: 'POST',
+    data: { id },
+    success: function (response) {
+      if (response.status === 'success') {
+        alert(response.message);
+        loadSuffixes(); // Refresh the list
+      } else {
+        alert(response.message);
+      }
+    },
+    error: function () {
+      alert('Something went wrong while deleting.');
+    }
+  });
+};
+
+// Bind delete button
+$(document).on('click', '.btn__delete__suffix', function () {
+  const id = $(this).data('id');
+  if (confirm('Are you sure you want to delete this suffix?')) {
+    deleteSuffix(id);
+  }
+});
+
+$('.btn__register__item').on('click', createSuffix);
+
+$(document).on("click", ".btn__edit__suffix", function () {
+  const id = $(this).data("id");
+  const suffix = $(this).data("suffix");
+
+  editingSuffixID = id;
+  $("#suffixEdit").val(suffix);
+  $("#viewItemModal").addClass("open");
+  $(".wrapper").addClass("open");
+});
+
+// Edit suffix
+$(document).on("click", ".btn__update__suffix", function () {
+  const newSuffix = $("#suffixEdit").val().trim();
+
+  if (!newSuffix) {
+    alert("Suffix is required.");
+    return;
+  }
+
+  $.ajax({
+    url: '/admin/update-suffix',
+    method: 'POST',
+    data: {
+      id: editingSuffixID,
+      suffix: newSuffix
+    },
+    dataType: 'json',
+    success: function (response) {
+      if (response.status === 'success') {
+        $("#viewItemModal").removeClass("show");
+        loadSuffixes();
+        alert("Suffix updated successfully!");
+      } else {
+        alert(response.message || "Something went wrong.");
+      }
+    }
+  });
+});
+
+
+
+const loadPositions = function () {
+  $.ajax({
+    url: '/admin/get-positions',
+    method: 'GET',
+    dataType: 'json',
+    success: function (response) {
+      if (response.status === 'success') {
+        const container = $('.position__list'); // Container for positions
+        container.html(''); // Clear previous list
+
+        response.data.forEach(function (item) {
+          const position = item.position_name;
+          const positionShort = position.substring(0, 3).toUpperCase();
+
+          const template = `
+            <div class="settings__item">
+              <div class="settings__item__name">
+                <p class="settings__indicator">${positionShort}</p>
+                <p class="settings__namer">${position}</p>
+              </div>
+              <div class="settings__btn__box">
+                <i class="bi bi-pencil btn__edit__position" data-id="${item.id}" data-position="${position}"></i>
+                <i class="bi bi-trash red__icon__color btn__delete__position" data-id="${item.id}"></i>
+              </div>
+            </div>
+          `;
+          container.append(template);
+        });
+      }
+    }
+  });
+};
+
+loadPositions();
+
+// Position create
+const createPosition = function () {
+  const position = $("#positionCreate").val().trim();
+
+  if (!position) {
+    alert("Position is required.");
+    return;
+  }
+
+  $.ajax({
+    url: '/admin/create-position',
+    method: 'POST',
+    data: { position },
+    dataType: 'json',
+    success: function (response) {
+      if (response.status === 'success') {
+        $("#registerPositionModal").removeClass("show");
+        alert(response.message);
+        $("#positionCreate").val("");
+      } else {
+        alert(response.message || "Something went wrong.");
+      }
+    },
+    complete: function () {
+      loadPositions();
+    }
+  });
+};
+
+// Create event listener
+$(document).on("click", ".btn__create__position", createPosition);
+
+// Delete Position
+$(document).on("click", ".btn__delete__position", function () {
+  const positionID = $(this).data("id");
+
+  if (confirm("Are you sure you want to delete this position?")) {
+    $.ajax({
+      url: '/admin/delete-position',
+      method: 'POST',
+      data: { id: positionID },
+      dataType: 'json',
+      success: function (response) {
+        if (response.status === 'success') {
+          loadPositions(); // Reload the positions after deletion
+          alert("Position deleted successfully.");
+        } else {
+          alert(response.message || "Something went wrong.");
+        }
+      }
+    });
+  }
+});
+$(document).on("click", ".btn__edit__position", function () {
+  const positionID = $(this).data("id");
+  const positionName = $(this).data("position");
+
+  // Populate input
+  $("#positionEdit").val(positionName);
+
+  // Store ID on modal for use on update
+  $("#viewPositions").data("id", positionID);
+
+  // Open modal
+  $(".wrapper").addClass("open");
+  $("#viewPositions").addClass("open");
+});
+
+    // Position modal edit
+    $(document).on("click", ".btn__update__position", function () {
+        const id = $("#viewPositions").data("id");
+        const updatedPosition = $("#positionEdit").val().trim();
+
+        if (!updatedPosition) {
+          alert("Position is required.");
+          return;
+        }
+
+        $.ajax({
+          url: '/admin/update-position',
+          method: 'POST',
+          data: {
+            id: id,
+            position: updatedPosition
+          },
+          dataType: 'json',
+          success: function (response) {
+            if (response.status === 'success') {
+              alert("Position updated successfully!");
+              $("#viewPositions").removeClass("open");
+              $(".wrapper").removeClass("open");
+              loadPositions(); // Reload the list
+            } else {
+              alert(response.message || "Something went wrong.");
+            }
+          }
+        });
+      });
 
 
     // Handle table buttons
@@ -517,6 +708,12 @@ loadSuffixes();
       $("#borrowItemModal").addClass("open");
       $('#stockCount').hide();
     });
+    // Position modal create
+    $(".btn__add__position").on("click", function () {
+      $(".wrapper").addClass("open");
+      $("#registerPositionModal").addClass("open");
+    });
+
 
     // Close on wrapper click or close button
     $(".wrapper, .btn__close").on("click", function () {
@@ -525,6 +722,8 @@ loadSuffixes();
       $("#viewItemModal").removeClass("open");
       $("#borrowItemModal").removeClass("open");
       $("#viewBorrowItemModal").removeClass("open");
+      $("#registerPositionModal").removeClass("open");
+      $("#viewPositions").removeClass("open");
 
     });
 
@@ -536,12 +735,14 @@ loadSuffixes();
         $("#viewItemModal").removeClass("open");
         $("#borrowItemModal").removeClass("open");
       $("#viewBorrowItemModal").removeClass("open");
+      $("#registerPositionModal").removeClass("open");
+      $("#viewPositions").removeClass("open");
+
 
       }
     });
 
-    $('.btn__register__item').on('click', createSuffix);
-
+    
 
   // Toggle sidebar
   $(".menu__icon").on("click", function () {

@@ -4,6 +4,7 @@
   padding: 2rem;
   max-width: 80rem;
   margin: 0 auto;
+  width: 100%;
 }
 
 .settings__title {
@@ -94,4 +95,14 @@
 }
 
 .bi-plus {
+}
+.grid__suffix {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.btn__create__position,
+.btn__update__position {
+  justify-content: center;
 }
