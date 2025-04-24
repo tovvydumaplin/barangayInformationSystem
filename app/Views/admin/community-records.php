@@ -124,13 +124,18 @@
           border-bottom: 1px solid #e4e4e4;
         }
         .information__input {
-          /* padding: 2rem; */
-          font-size: 1.8rem;
-          border-radius: 1rem;
-          border: 1px solid gray;
-          display: inline-block;
-          width: 100%;
+            /* padding: 2rem; */
+            font-size: 1.6rem;
+            border-radius: 1rem;
+            border: 1px solid gray;
+            display: inline-block;
+            width: 100%;
+            padding: 4rem 0 1rem 2rem;
         }
+        .input__title {
+
+          font-size: 1.5rem;
+      }
         .icon__close {
           width: 3rem;
           height: 3rem;

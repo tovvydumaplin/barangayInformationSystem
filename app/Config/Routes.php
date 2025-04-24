@@ -22,6 +22,7 @@ $routes->group('admin', ['filter' => 'auth'], function ($routes) {
     $routes->get('incident-reports', 'AdminController::incidentReports');
     $routes->get('manage-users', 'AdminController::manageUsers');
     $routes->get('account-settings', 'AdminController::accountSettings');
+    $routes->get('settings', 'AdminController::settings');
 });
 
 // Update User
@@ -135,3 +136,8 @@ $routes->get('admin/indigency', 'AdminController::indigencyCert');
 // Pw reset
 $routes->post('admin/reset-password', 'AdminController::ResetPassword');
 $routes->get('reset-password', 'AdminController::ResetNow');
+
+// Create Suffix
+$routes->post('admin/create-suffix', 'AdminController::createSuffix');
+// View Suffix
+$routes->get('admin/get-suffixes', 'AdminController::getSuffixes');

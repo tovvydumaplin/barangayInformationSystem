@@ -1,3 +1,11 @@
+<?php 
+    $session = session();
+    $username = $session->get('username'); 
+    $firstName = $session->get('firstname');
+    $fullName = $session->get('firstname') . ' ' . $session->get('lastname');
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -498,63 +506,89 @@ $(document).on('click', '.btn__export__pdf', function() {
     }
 });
 
-// Function to fetch complaint data by ID (you can modify this to get data from your source)
 function getComplaintDataById(id) {
     let complaintData = null;
 
     $.ajax({
-        url: `<?= site_url('admin/get-complaint') ?>/${id}`,  // Modify this URL based on your endpoint
+        url: `<?= site_url('admin/get-complaint') ?>/${id}`,  
         type: 'GET',
         async: false,
         success: function(response) {
-            complaintData = response.data;  // Assuming the data is in 'data' key
+            complaintData = response.data; 
         }
     });
 
     return complaintData;
 }
 
-// Function to export complaint data to PDF
+const preparedBy = <?= json_encode($fullName) ?>;
+
 function exportComplaintToPDF(complaintData) {
-    const { complainant_name, complain_against, complain_title, complainant_age, complainant_address, location_of_incident, date, status } = complaintData;
+    const { complainant_name, complain_against, complain_title, complainant_age, complainant_address, location_of_incident, date, status, type_of_complaint, complain_details, barangay_action } = complaintData;
+
+    const reportTitle = (type_of_complaint === 'blotter') ? 'Blotter Report' : 'Complaint Report';
+
+    const complainantInfo = type_of_complaint === 'complaint' 
+        ? `${complainant_name}` 
+        : `${complainant_name}, aged ${complainant_age}, from ${complainant_address}`;
+
+    const locationText = type_of_complaint === 'complaint' ? '' : `The incident took place at ${location_of_incident}.`;
+
+    const complaintDetailsSection = complain_details ? [
+        { text: '\nComplaint Details:', style: 'subheader', margin: [0, 10, 0, 5] },
+        { text: complain_details, style: 'subheader' }
+    ] : [];
+
+    const barangayActionSection = (type_of_complaint === 'blotter' && barangay_action) ? [
+        { text: '\nBarangay Action:', style: 'subheader', margin: [0, 10, 0, 5] },
+        { text: barangay_action, style: 'subheader' }
+    ] : [];
 
     const docDefinition = {
         content: [
-            // Header Text
-            { 
-                text: 'Republic of the Philippines', 
-                style: 'headerText', 
-                alignment: 'center' 
-            },
-            { 
-                text: 'Office of the Barangay Captain', 
-                style: 'headerText', 
-                alignment: 'center' 
-            },
-            { 
-                text: 'Barangay 42C- Pinagbuklod Zone-5', 
-                style: 'headerText', 
-                alignment: 'center' 
-            },
-            { 
-                text: 'San Antonio, Cavite City', 
-                style: 'headerText', 
-                alignment: 'center' 
-            },
+            { text: 'Republic of the Philippines', style: 'headerText', alignment: 'center' },
+            { text: 'Office of the Barangay Captain', style: 'headerText', alignment: 'center' },
+            { text: 'Barangay 42C- Pinagbuklod Zone-5', style: 'headerText', alignment: 'center' },
+            { text: 'San Antonio, Cavite City', style: 'headerText', alignment: 'center' },
             { text: '--------------------------------------------------------------', style: 'divider' },
-            { text: 'Complaint Report', style: 'mainHeader' },
+
+            { text: reportTitle, style: 'mainHeader' },
+
             { 
                 text: [
                     { text: `On ${date}, `, bold: true },
-                    ` ${complainant_name}, aged ${complainant_age}, from ${complainant_address}, reported an incident regarding ${complain_title}. `,
+                    ` ${complainantInfo} reported an incident regarding ${complain_title}. `,
                     `The complainant accused ${complain_against} of the following: ${complain_title}. `,
-                    `The incident took place at ${location_of_incident}. `,
-                    `The status of the complaint is currently: `,
+                    locationText,
+                    `The status of the ${type_of_complaint === 'blotter' ? 'blotter' : 'complaint'} is currently: `,
                     { text: status == 0 ? 'In Progress' : (status == 1 ? 'Completed' : 'Unknown'), bold: true },
                     `.`
                 ],
                 style: 'subheader',
-                lineHeight: 1.5  // This sets the line height to 1.5, which adds spacing between lines
+                lineHeight: 1.5
+            },
+
+            ...complaintDetailsSection,
+
+            ...barangayActionSection,
+
+            { text: '\n\n' },
+
+            {
+                columns: [
+                    { 
+                        text: `Prepared by:\n${preparedBy}`, 
+                        style: 'subheader', 
+                        alignment: 'left', 
+                        margin: [0, 30, 0, 0] 
+                    },
+                    { 
+                        text: `Certified by:\nYolanda DC. Chi\nPunong Barangay`, 
+                        style: 'subheader', 
+                        alignment: 'right', 
+                        margin: [0, 30, 0, 0] 
+                    }
+                ]
             }
         ],
         styles: {
@@ -565,9 +599,11 @@ function exportComplaintToPDF(complaintData) {
         }
     };
 
-    // Generate PDF with the defined content and styles
-    pdfMake.createPdf(docDefinition).download('complaint-report.pdf');
+    pdfMake.createPdf(docDefinition).download(`${reportTitle.toLowerCase().replace(' ', '-')}.pdf`);
 }
+
+
+
 
 
 

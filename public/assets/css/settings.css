@@ -1,0 +1,97 @@
+.settings__card {
+  border: 1px solid #c8c8c8;
+  border-radius: 1rem;
+  padding: 2rem;
+  max-width: 80rem;
+  margin: 0 auto;
+}
+
+.settings__title {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: #323232;
+  margin-bottom: 0.5rem;
+}
+
+.settings__subtitle {
+  color: #7c7c7c;
+}
+
+.settings__card__header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 3rem;
+}
+
+.settings__item__box {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 1rem;
+}
+
+.settings__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border: 1px solid #e6e6e6;
+  border-radius: 0.8rem;
+}
+
+.settings__item__name {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.settings__indicator {
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  border: 1px solid #e6e6e6;
+  text-transform: uppercase;
+}
+
+.settings__btn__box {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  cursor: pointer;
+}
+
+.red__icon__color {
+  color: rgb(255, 30, 30);
+}
+.btn__secondary.active {
+  text-align: center;
+  justify-content: center;
+  background-color: var(--main-color);
+  color: #fff;
+}
+.modal__header {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  padding-right: 1rem;
+  padding-bottom: 2rem;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.modal__heading {
+  font-size: 2.4rem;
+  font-weight: 600;
+}
+
+.subtitle {
+  color: #939393;
+}
+.text-sub {
+  margin-top: 1rem;
+  color: #939393;
+}
+.modal {
+  height: auto;
+}
+
+.bi-plus {
+}

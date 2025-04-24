@@ -9,6 +9,7 @@ use App\Models\InventoryHistoryModel;
 use App\Models\LendingModel;
 use App\Models\OfficialModel;
 use App\Models\ComplainModel;
+use App\Models\SuffixModel;
 class AdminController extends BaseController
 {
     public function dashboard()
@@ -45,6 +46,7 @@ class AdminController extends BaseController
     {
         return view('admin/users'); 
     }
+
     public function accountSettings()
     {
         $session = session();
@@ -64,6 +66,11 @@ class AdminController extends BaseController
         ];
     
         return view('admin/account', $data);
+    }
+
+    public function settings()
+    {
+        return view('admin/settings'); 
     }
     
     public function getUsers()
@@ -2139,6 +2146,53 @@ public function ResetNow()
     return redirect()->to('/')->with('success', 'Password has been reset to default123. Please log in.');
 }
 
+public function createSuffix()
+{
+    $suffix = $this->request->getPost('suffix');
+
+    if (!$suffix) {
+        return $this->response->setJSON(['status' => 'error', 'message' => 'Suffix is required.']);
+    }
+
+    $model = new SuffixModel();
+    
+    // Check if the suffix already exists
+    $existingSuffix = $model->where('suffix_title', $suffix)->first();
+
+    if ($existingSuffix) {
+        // If the existing suffix has a status of 1 (active), don't allow creating it
+        if ($existingSuffix['status'] == 1) {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'This suffix already exists and is active.']);
+        }
+        
+        // If the status is 0 (inactive), update it to active (status = 1)
+        $model->update($existingSuffix['id'], [
+            'status' => 1,
+            'updated_at' => date('Y-m-d H:i:s')  // Optionally, update the timestamp
+        ]);
+        
+        return $this->response->setJSON(['status' => 'success', 'message' => 'Suffix created successfully.']);
+    } else {
+        $model->insert([
+            'suffix_title' => $suffix,
+            'status' => 1,  
+        ]);
+        
+        return $this->response->setJSON(['status' => 'success', 'message' => 'Suffix created successfully.']);
+    }
+}
+
+
+public function getSuffixes()
+{
+    $model = new \App\Models\SuffixModel();
+    $suffixes = $model->where('status', 1)->findAll(); // Only active
+
+    return $this->response->setJSON([
+        'status' => 'success',
+        'data' => $suffixes
+    ]);
+}
 
 
 }
