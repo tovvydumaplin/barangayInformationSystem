@@ -294,23 +294,19 @@
         <!-- Inventory History Tab -->
         <div class="card inventory__history d__none">
           <div class="heading__container">
-            <p class="subheading">Inventory History</p>
+            <p class="subheading">Database Backup</p>
           </div>
           <div class="container">
-          <table id="lendingHistory" class="display">
-            <thead>
-              <tr>
-                <th>Item Name</th>
-                <th>Type</th>
-                <th>Quantity</th>
-                <th>Previous Quantity</th>
-                <th>New Quantity</th>
-                <th>Updated By</th>
-                <th>Reason</th>
-              </tr>
-            </thead>
-            <tbody></tbody>
-          </table>
+            <button type="button" class="btn__backup" id="backupBtn">Back up now</button>
+<!-- Restore -->
+            <form id="restore-form" enctype="multipart/form-data">
+    <input type="file" name="backup_file" id="backup-file" accept=".sql" required>
+    <button type="submit">Restore Database</button>
+</form>
+
+<div id="alert"></div> <!-- This will display success/error messages -->
+
+
           </div>
         </div>
         <!-- Inventory history Tab ENDS -->
@@ -331,6 +327,66 @@
     ></script>
     <script src="<?= base_url('assets/js/general.js') ?>"></script>
     <script>
+
+$('#restore-form').on('submit', function(e) {
+    e.preventDefault();
+    
+    var formData = new FormData(this);
+    var fileInput = $('#backup-file')[0];
+    
+    // Validate file
+    if (fileInput.files.length === 0) {
+        $('#alert').html('<div class="alert alert-danger">Please select a SQL file to restore.</div>');
+        return;
+    }
+    
+    // Show loading message
+    $('#alert').html('<div class="alert alert-info">Restoring database, please wait... This may take several minutes for large files.</div>');
+    
+    // Disable the submit button
+    $(this).find('button[type="submit"]').prop('disabled', true).text('Restoring...');
+    
+    $.ajax({
+        url: '/admin/restore',
+        type: 'POST',
+        data: formData,
+        dataType: 'json',
+        processData: false,
+        contentType: false,
+        success: function(response) {
+            if (response.status === 'success') {
+                $('#alert').html('<div class="alert alert-success">' + response.message + '</div>');
+            } else {
+                $('#alert').html('<div class="alert alert-danger">Error: ' + response.message + '</div>');
+            }
+        },
+        error: function(xhr, status, error) {
+            let errorMessage = 'An unexpected error occurred.';
+            
+            try {
+                const response = JSON.parse(xhr.responseText);
+                if (response.message) {
+                    errorMessage = response.message;
+                }
+            } catch (e) {
+                // If parsing fails, use the original error
+                errorMessage = error || 'Server error';
+            }
+            
+            $('#alert').html('<div class="alert alert-danger">AJAX error: ' + errorMessage + '</div>');
+        },
+        complete: function() {
+            // Re-enable the submit button
+            $('#restore-form').find('button[type="submit"]').prop('disabled', false).text('Restore Database');
+        }
+    });
+});
+
+
+// Backup btn
+$('#backupBtn').on('click', function () {
+    window.location.href = "<?= base_url('admin/create-backup') ?>";
+});
 
 // Lending table
 $('.lending__tab').on('click', function () {
@@ -580,7 +636,7 @@ const loadPositions = function () {
             <div class="settings__item">
               <div class="settings__item__name">
                 <p class="settings__indicator">${positionShort}</p>
-                <p class="settings__namer">${position}</p>
+                <p class="settings__name" title="${position}">${position}</p>
               </div>
               <div class="settings__btn__box">
                 <i class="bi bi-pencil btn__edit__position" data-id="${item.id}" data-position="${position}"></i>
@@ -696,6 +752,7 @@ $(document).on("click", ".btn__edit__position", function () {
         });
       });
 
+    
 
     // Handle table buttons
     $(".table__button, .btn__add__item").on("click", function () {

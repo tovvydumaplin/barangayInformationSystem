@@ -345,17 +345,11 @@
                 </div>
                 <select                 
                   class="information__input"
+                  id="suffix__select"
                   value=""
                   placeholder="Enter suffix"
                   name="suffix">
-                  <option value="" selected>None</option>
-                  <option value="Jr.">Jr.</option>
-                  <option value="Sr.">Sr.</option>
-                  <option value="II">II</option>
-                  <option value="III">III</option>
-                  <option value="IV">IV</option>
-                  <option value="V">V</option>
-                  <option value="">Others</option>
+
                 </select>
                 <span class="input__title"
                   >suffix</span
@@ -737,6 +731,7 @@
                 class="information__input"
                 value=""
                 placeholder="Enter suffix"
+                id="viewSuffix"
                 name="view_suffix"
                 disabled>
                 <option disabled selected>Select one</option>
@@ -2696,6 +2691,36 @@ loadNationality();
     markers.forEach((marker) => marker.setOpacity(1));
     isHiddenMarker = false;
   }
+
+  const getSuffixes = function () {
+  $.ajax({
+    url: '/admin/get-suffixes-select',
+    method: 'GET',
+    dataType: 'json',
+    success: function (response) {
+      if (response.status === 'success') {
+        const suffixSelects = $('#suffix__select, #viewSuffix');
+
+        suffixSelects.each(function () {
+          const select = $(this);
+          select.find('option:not(:first)').remove(); // Keep only the "None" option
+
+          response.data.forEach(function (item) {
+            if (item.suffix_title && item.suffix_title.trim() !== "") {
+              select.append(`<option value="${item.suffix_title}">${item.suffix_title}</option>`);
+            }
+          });
+
+          select.append(`<option value="">None</option>`);
+        });
+      }
+    }
+  });
+};
+
+
+
+getSuffixes();
 
   // ~~~~~~~~~~~~~~~~~~~~~~~~ ⚡ Event Listeners ⚡ ~~~~~~~~~~~~~~~~~~~~~~~~ //
 

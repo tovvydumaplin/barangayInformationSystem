@@ -201,43 +201,19 @@
               <span class="link__title"> Services</span></a
             >
           </li>
-          <li class="list <?= ($segment == 'manage-users') ? 'active' : '' ?>">
-            <a href="<?= base_url('admin/manage-users')?>" class="link">
-              <!-- New user icon -->
-              <div class="icon__link">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class=""
-                  viewBox="0 0 512 512"
-                >
-                  <path
-                    d="M376 144c-3.92 52.87-44 96-88 96s-84.15-43.12-88-96c-4-55 35-96 88-96s92 42 88 96z"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="32"
-                  />
-                  <path
-                    d="M288 304c-87 0-175.3 48-191.64 138.6-2 10.92 4.21 21.4 15.65 21.4H464c11.44 0 17.62-10.48 15.65-21.4C463.3 352 375 304 288 304z"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-miterlimit="10"
-                    stroke-width="32"
-                  />
-                  <path
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="32"
-                    d="M88 176v112M144 232H32"
-                  />
-                </svg>
-              </div>
-              <span class="link__title"> Manage Users</span></a
-            >
-          </li>
+          <?php if (session()->get('role') === 'administrator'): ?>
+              <li class="list <?= ($segment == 'manage-users') ? 'active' : '' ?>">
+                  <a href="<?= base_url('admin/manage-users') ?>" class="link">
+                      <div class="icon__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                              <circle cx="256" cy="352" r="112" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/>
+                              <path d="M147 323L41.84 159.32a32 32 0 01-1.7-31.61l31-62A32 32 0 0199.78 48h312.44a32 32 0 0128.62 17.69l31 62a32 32 0 01-1.7 31.61L365 323M371 144H37M428.74 52.6L305 250M140.55 144L207 250" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/>
+                          </svg>
+                      </div>
+                      <span class="link__title">Manage Users</span>
+                  </a>
+              </li>
+          <?php endif; ?>
           <li class="list <?= ($segment == 'account-settings') ? 'active' : '' ?>">
             <a href="<?= base_url ('admin/account-settings') ?>" class="link">
               <!-- Settings outline icon -->

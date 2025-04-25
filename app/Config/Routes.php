@@ -156,3 +156,10 @@ $routes->get('admin/get-position', 'AdminController::getPosition');
 
 // Route to update position
 $routes->post('admin/update-position', 'AdminController::updatePosition');
+$routes->get('admin/get-suffixes-select', 'AdminController::getSuffixesSelect');
+$routes->get('admin/get-active-positions', 'AdminController::getActivePositions');
+
+// DB Backup
+$routes->get('admin/create-backup', 'AdminController::downloadFile');
+// DB Restore
+$routes->post('admin/restore', 'AdminController::restore');

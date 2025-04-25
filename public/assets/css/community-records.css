@@ -138,3 +138,7 @@
 .modal__header {
   padding: 0 1rem 2rem 1rem;
 }
+#suffix__select,
+#viewSuffix {
+  text-transform: uppercase;
+}

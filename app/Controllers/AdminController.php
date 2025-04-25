@@ -2277,7 +2277,6 @@ public function createPosition()
     ]);
   }
 
-  // Insert new
   $positionModel->save([
     'position_name' => $positionName,
     'status' => 1
@@ -2288,7 +2287,6 @@ public function createPosition()
     'message' => 'Position created successfully.'
   ]);
 }
-    // Fetch existing positions
     public function getPositions()
     {
         $model = new PositionModel();
@@ -2353,5 +2351,272 @@ public function createPosition()
 }
 
 
+public function getSuffixesSelect()
+{
+    $model = new SuffixModel();
+    $suffixes = $model->where('status', 1)->findAll();
+
+    return $this->response->setJSON([
+        'status' => 'success',
+        'data' => $suffixes
+    ]);
+}
+
+public function getActivePositions()
+{
+    $positionModel = new PositionModel();
+    $positions = $positionModel->where('status', 1)->orderBy('position_name', 'ASC')->findAll();
+
+    return $this->response->setJSON([
+        'status' => 'success',
+        'data' => $positions
+    ]);
+}
+
+public function createBackup()
+{
+    $host     = 'localhost';
+    $username = 'root';
+    $password = 'Fastcat_01'; 
+    $database = 'db_barangay';
+
+    $fileName = 'db_backup_' . date('Y-m-d_H-i-s') . '.sql';
+    $filePath = WRITEPATH . 'backups/' . $fileName;
+
+    if (!is_dir(WRITEPATH . 'backups')) {
+        mkdir(WRITEPATH . 'backups', 0777, true);
+    }
+
+    $command = "mysqldump --user={$username} --password=\"{$password}\" --host={$host} {$database} > {$filePath}";
+    exec($command, $output, $result);
+
+    if ($result !== 0) {
+        return $this->response->setStatusCode(500)->setBody('Backup failed. Please check credentials or mysqldump availability.');
+    }
+
+    return $this->response->download($filePath, null)->setFileName($fileName);
+}
+
+public function downloadFile()
+{
+    $database = getenv('database.default.database');
+
+    // Get connection object and set the charset
+    $db = db_connect();
+    $timestamp = date('YmdHis');
+    $backupDir = FCPATH . 'Upload';
+
+    // Ensure the directory exists, create it if it doesn't
+    if (!is_dir($backupDir)) {
+        mkdir($backupDir, 0777, true);  // Make directory with write permissions
+    }
+    $backupFileName = $backupDir.'/'.$database. $timestamp . '.sql';
+
+    // Open the backup file for writing
+    $file = fopen($backupFileName, 'w');
+
+    // Write the initial SQL for the backup
+    fwrite($file, "-- Database backup of {$database} created on {$timestamp}\n\n");
+
+    // Get all table names
+    $tables = $db->query("SHOW TABLES")->getResultArray();
+
+    // Loop through each table
+    foreach ($tables as $table) {
+        $tableName = $table["Tables_in_{$database}"];
+
+        // Write the CREATE TABLE statement
+        $createTableQuery = $db->query("SHOW CREATE TABLE `{$tableName}`")->getRow();
+        fwrite($file, "\n\n-- Creating table {$tableName} --\n");
+        fwrite($file, $createTableQuery->{'Create Table'} . ";\n");
+
+        // Write the INSERT INTO statements for each row in the table
+        fwrite($file, "\n\n-- Inserting data into {$tableName} --\n");
+
+        // Fetch the data from the table
+        $rows = $db->query("SELECT * FROM `{$tableName}`")->getResultArray();
+        foreach ($rows as $row) {
+            $columns = array_keys($row);
+            $values = array_map(function ($value) {
+                return "'" . addslashes($value) . "'"; // Escape string values
+            }, array_values($row));
+
+            $insertQuery = "INSERT INTO `{$tableName}` (" . implode(',', $columns) . ") VALUES (" . implode(',', $values) . ");\n";
+            fwrite($file, $insertQuery);
+        }
+    }
+
+    // Close the backup file
+    fclose($file);
+
+    // Serve the file for download
+    return $this->downloadBackup($backupFileName);
+}
+
+private function downloadBackup($filePath)
+{
+    // Set headers to force file download
+    return $this->response->setHeader('Content-Type', 'application/octet-stream')
+        ->setHeader('Content-Disposition', 'attachment; filename="' . basename($filePath) . '"')
+        ->setHeader('Content-Length', filesize($filePath))
+        ->setBody(file_get_contents($filePath));
+}
+
+private function deleteAllTables($db)
+{
+    // Get a list of all tables in the database
+    $tables = $db->listTables();
+
+    // Drop each table in the database
+    foreach ($tables as $table) {
+        try {
+            $db->query("DROP TABLE IF EXISTS `$table`");
+        } catch (\Exception $e) {
+            log_message('error', 'Error dropping table ' . $table . ': ' . $e->getMessage());
+            return false; // Return false if any table cannot be dropped
+        }
+    }
+
+    return true;
+}
+
+
+public function restore()
+{
+    // Check if a file has been uploaded
+    if ($this->request->getFile('backup_file')->isValid()) {
+        // Get the uploaded file
+        $uploadedFile = $this->request->getFile('backup_file');
+        $filePath = WRITEPATH . 'uploads/' . $uploadedFile->getName();
+        
+        // Ensure the directory exists
+        if (!is_dir(dirname($filePath))) {
+            mkdir(dirname($filePath), 0777, true);
+        }
+        
+        // Move the uploaded file
+        if ($uploadedFile->move(WRITEPATH . 'uploads')) {
+            // Read the contents of the SQL file
+            $sql = file_get_contents($filePath);
+            
+            if ($sql === false) {
+                log_message('error', 'Unable to read uploaded SQL file: ' . $filePath);
+                return $this->response->setJSON([
+                    'status' => 'error',
+                    'message' => 'Unable to read the uploaded SQL file.'
+                ]);
+            }
+            
+            // Access the database connection
+            $db = \Config\Database::connect();
+            
+            // Start a transaction
+            $db->transStart();
+            
+            try {
+                // Step 1: Delete all tables before restoring
+                if (!$this->deleteAllTables($db)) {
+                    throw new \Exception('Failed to delete existing tables.');
+                }
+
+                // Step 2: Execute the SQL commands from the uploaded file
+                $this->executeSqlQueries($db, $sql);
+                
+                // Commit the transaction
+                $db->transComplete();
+                
+                // Check if the transaction was successful
+                if ($db->transStatus() === false) {
+                    $error = $db->error();
+                    log_message('error', 'Database restore failed: ' . json_encode($error));
+                    return $this->response->setJSON([
+                        'status' => 'error',
+                        'message' => 'Database restore failed: ' . ($error['message'] ?? 'Unknown error')
+                    ]);
+                } else {
+                    // Optionally remove the file after processing
+                    unlink($filePath);
+                    
+                    return $this->response->setJSON([
+                        'status' => 'success',
+                        'message' => 'Database restored successfully.'
+                    ]);
+                }
+            } catch (\Exception $e) {
+                log_message('error', 'Unexpected error during restore: ' . $e->getMessage());
+                return $this->response->setJSON([
+                    'status' => 'error',
+                    'message' => 'Unexpected error during restore: ' . $e->getMessage()
+                ]);
+            }
+        } else {
+            log_message('error', 'Failed to move uploaded file.');
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'Failed to move uploaded file.'
+            ]);
+        }
+    } else {
+        $fileError = $this->request->getFile('backup_file')->getError();
+        log_message('error', 'File upload error: ' . $fileError);
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'No valid file uploaded. Error: ' . $fileError
+        ]);
+    }
+}
+
+
+private function executeSqlQueries($db, $sql)
+{
+    // Better SQL parsing that handles delimiter-based statements
+    $delimiter = ';';
+    $sql = rtrim(trim($sql), $delimiter);
+    $buffer = '';
+    $queries = [];
+    
+    // Parse SQL with potential delimiter changes
+    foreach (explode("\n", $sql) as $line) {
+        $line = trim($line);
+        
+        // Skip comments and empty lines
+        if (empty($line) || substr($line, 0, 2) == '--' || substr($line, 0, 1) == '#') {
+            continue;
+        }
+        
+        // Check for delimiter change
+        if (preg_match('/DELIMITER\s+([^\s]+)/i', $line, $matches)) {
+            $delimiter = $matches[1];
+            continue;
+        }
+        
+        // Add the line to the current query
+        $buffer .= $line . ' ';
+        
+        // If the line ends with the delimiter, execute the query
+        if (substr($line, -strlen($delimiter)) == $delimiter) {
+            $buffer = substr($buffer, 0, -strlen($delimiter));
+            $queries[] = $buffer;
+            $buffer = '';
+        }
+    }
+    
+    // Add any remaining query
+    if (!empty($buffer)) {
+        $queries[] = $buffer;
+    }
+    
+    // Execute each query
+    foreach ($queries as $query) {
+        if (trim($query)) {
+            try {
+                $db->query($query);
+            } catch (\Exception $e) {
+                log_message('error', 'Error in SQL query: ' . $e->getMessage() . "\nQuery: " . $query);
+                throw $e;
+            }
+        }
+    }
+}
 }
 

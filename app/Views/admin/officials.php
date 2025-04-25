@@ -82,12 +82,7 @@
                     <div class="input__box">
                         <span class="input__title">Suffix<span class="red__dot">*</span></span>
                         <select class="information__input" name="suffix">
-                            <option value="" selected>None</option>
-                            <option value="Jr.">Jr.</option>
-                            <option value="Sr.">Sr.</option>
-                            <option value="II">II</option>
-                            <option value="III">III</option>
-                            <option value="IV">IV</option>
+
                         </select>
                         <p class="text-danger"></p>
                     </div>
@@ -95,23 +90,7 @@
                 <div class="row">
                     <div class="input__box">
                         <select class="information__input" placeholder="Enter Position" name="position" required>
-                            <option value="" selected>Choose Position</option>
-                            <option value="Captain">Captain</option>
-                            <option value="Comm. On Peace & Order & Public Safety">Comm. On Peace & Order & Public Safety</option>
-                            <option value="Comm. On Public Works and Infrastructure">Comm. On Public Works and Infrastructure</option>
-                            <option value="Comm. On Solid Waste Management">Comm. On Solid Waste Management</option>
-                            <option value="Comm. On Appropriations">Comm. On Appropriations</option>
-                            <option value="Comm. On Nutrition">Comm. On Nutrition</option>
-                            <option value="Comm. On Women & Family Welfare">Comm. On Women & Family Welfare</option>
-                            <option value="Comm. On Disaster Preparedness">Comm. On Disaster Preparedness</option>
-                            <option value="Chief Tanod">Chief Tanod</option>
-                            <option value="Deputy Tanod">Deputy Tanod</option>
-                            <option value="Member">Member</option>
-                            <option value="Sk Kagawad">Sk Kagawad</option>
-                            <option value="Sk Chairperson">Sk Chairperson</option>
-                            <option value="Secretary">Secretary</option>
-                            <option value="Treasurer">Treasurer</option>
-                            <option value="Tanod">Tanod</option>
+                            <!-- For Each Here -->
                         </select>
                         <span class="input__title">Position<span class="red__dot">*</span></span>
                         <p class="text-danger"></p>
@@ -173,13 +152,7 @@
                     <div class="input__box">
                         <span class="input__title">Suffix<span class="red__dot">*</span></span>
                         <select class="information__input" name="view_suffix">
-                            <option value="" disabled selected>Choose Suffix</option>
-                            <option value="">None</option>
-                            <option value="Jr.">Jr.</option>
-                            <option value="Sr.">Sr.</option>
-                            <option value="II">II</option>
-                            <option value="III">III</option>
-                            <option value="IV">IV</option>
+
                         </select>
                         <p class="text-danger"></p>
                     </div>
@@ -187,23 +160,7 @@
                 <div class="row">
                     <div class="input__box">
                       <select class="information__input" placeholder="Enter Position" name="view_position" required>
-                        <option value="" selected>Choose Position</option>
-                            <option value="Captain">Captain</option>
-                            <option value="Comm. On Peace & Order & Public Safety">Comm. On Peace & Order & Public Safety</option>
-                            <option value="Comm. On Public Works and Infrastructure">Comm. On Public Works and Infrastructure</option>
-                            <option value="Comm. On Solid Waste Management">Comm. On Solid Waste Management</option>
-                            <option value="Comm. On Appropriations">Comm. On Appropriations</option>
-                            <option value="Comm. On Nutrition">Comm. On Nutrition</option>
-                            <option value="Comm. On Women & Family Welfare">Comm. On Women & Family Welfare</option>
-                            <option value="Comm. On Disaster Preparedness">Comm. On Disaster Preparedness</option>
-                            <option value="Chief Tanod">Chief Tanod</option>
-                            <option value="Deputy Tanod">Deputy Tanod</option>
-                            <option value="Member">Member</option>
-                            <option value="Sk Kagawad">Sk Kagawad</option>
-                            <option value="Sk Chairperson">Sk Chairperson</option>
-                            <option value="Secretary">Secretary</option>
-                            <option value="Treasurer">Treasurer</option>
-                            <option value="Tanod">Tanod</option>
+                          <!-- For each here -->
                         </select>
                         <span class="input__title">Position<span class="red__dot">*</span></span>
                         <p class="text-danger"></p>
@@ -568,6 +525,55 @@ $("#submitUserBtn").on("click", function (e) {
         }
     });
 });
+
+// Select for positions
+const getActivePositions = function () {
+  $.ajax({
+    url: '/admin/get-active-positions',
+    method: 'GET',
+    dataType: 'json',
+    success: function (response) {
+      if (response.status === 'success') {
+        const selects = $('select[name="view_position"], select[name="position"]');
+        selects.html('<option value="" selected>Choose Position</option>');
+
+        response.data.forEach(function (item) {
+          const pos = item.position_name;
+          selects.append(`<option value="${pos}">${pos}</option>`);
+        });
+      }
+    }
+  });
+};
+
+
+getActivePositions();
+
+const getSuffixesSelect = function () {
+  $.ajax({
+    url: '/admin/get-suffixes-select',
+    method: 'GET',
+    dataType: 'json',
+    success: function (response) {
+      if (response.status === 'success') {
+        const suffixSelects = $('select[name="view_suffix"], select[name="suffix"]');
+        
+        suffixSelects.html(`
+          <option value="" disabled selected>Choose Suffix</option>
+          <option value="">None</option>
+        `);
+
+        response.data.forEach(function (item) {
+          const suffix = item.suffix_title;
+          suffixSelects.append(`<option value="${suffix}">${suffix}</option>`);
+        });
+      }
+    }
+  });
+};
+
+
+getSuffixesSelect();
 
     $(document).ready(function () {
       // Handle table buttons click
