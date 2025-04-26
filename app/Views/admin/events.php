@@ -383,6 +383,25 @@ const closeValidator = function() {
 const closeModal = function() {                               // Close modal Function
       $(".wrapper, #createEventModal, #viewEventModal").removeClass("open");
 }
+
+
+const saveAction = function (action) {
+    $.ajax({
+        url: '/admin/save-action',
+        method: 'POST',
+        data: { action: action },
+        success: function (response) {
+            if (response.status === 'success') {
+                console.log('✅ ' + response.message);
+            } else {
+                console.error('❌ ' + response.message);
+            }
+        },
+        error: function () {
+            console.error('❌ AJAX request failed.');
+        }
+    });
+};
 const viewEventDetails = function(eventId) {                  // View Event Details on button click        
     $.ajax({
         url: "<?= base_url('admin/get-event-details') ?>", 
@@ -390,6 +409,7 @@ const viewEventDetails = function(eventId) {                  // View Event Deta
         data: { event_id: eventId }, 
         dataType: "json",
         success: function (response) {
+          saveAction("Viewed an event");
             if (response.success) {
                 // Populate modal fields
                 $("input[name='view_event_title']").val(response.data.event_title);
@@ -426,6 +446,7 @@ const updateEvent = function(saveBtn) {                       // Update Event Fu
           data: formData,
           dataType: "json",
           success: function (response) {
+            saveAction("Updated an event");
               if (response.success) {
                   alert("Event updated successfully!");
                   loadEventData(1); // Reload event list
@@ -587,6 +608,8 @@ const createEvent = function() {                              // Create Events
         data: formData,
         dataType: "json",
         success: function (response) {
+          saveAction("Created an event");
+
             if (response.success) {
               loadEventData(1); // Reload event list
               $(".indicator__text").html('Event Created!');
@@ -618,6 +641,8 @@ const createEvent = function() {                              // Create Events
 }
 
 const deactivateEvent = function() {
+  saveAction("Deactivated an event");
+
     let status = 2;
     let id = $("#viewEventModal").data("id");
   console.log(id);
@@ -661,6 +686,8 @@ const reactivateEvent = function() {
         },
         dataType: "json", 
         success: function(response) {
+          saveAction("Reactivated an event");
+
             if (response.success) {
               loadEventData(2); 
                 $(".success__indicator").removeClass("hide");
@@ -692,6 +719,8 @@ const approveEvent = function() {
         },
         dataType: "json", 
         success: function(response) {
+          saveAction("Approved an event");
+
             if (response.success) {
               loadEventData(0); 
                 $(".success__indicator").removeClass("hide");
@@ -724,6 +753,8 @@ const disapprovedEvent = function() {
         dataType: "json", 
         success: function(response) {
             if (response.success) {
+            saveAction("Disapproved an event");
+
               loadEventData(0); 
                 $(".success__indicator").removeClass("hide");
                 $(".indicator__text").html('Event moved to archives!');

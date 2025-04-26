@@ -1285,6 +1285,24 @@ if (members.length === 0) {
     $('.create__residents__btn').show(); 
 }
 // ~~~~~~~~~~~~~~~~~~~~~~~~ ⚡ Functions ⚡ ~~~~~~~~~~~~~~~~~~~~~~~~ //
+const saveAction = function (action) {
+    $.ajax({
+        url: '/admin/save-action',
+        method: 'POST',
+        data: { action: action },
+        success: function (response) {
+            if (response.status === 'success') {
+                console.log('✅ ' + response.message);
+            } else {
+                console.error('❌ ' + response.message);
+            }
+        },
+        error: function () {
+            console.error('❌ AJAX request failed.');
+        }
+    });
+};
+
 // Get House Number
 const loadHouseNumbers = function (callback) {
     $.ajax({
@@ -1417,7 +1435,7 @@ const saveMemberLocally = function (e) {
         contact_relationship: $("input[name='contact_relationship']").val(),
         status: $("input[name='status']").val()
     };
-
+    saveAction("Locally saved a member");
     console.log("Checking House No:", formData.house_no);
     console.log("Existing Members:", members);
 
@@ -1759,6 +1777,7 @@ const saveResidents = function() {
             $("#addResidentModal :input").prop("disabled", true); // To disabled all inputs when confirmation is up
         },
         success: function (response) {
+          saveAction("Added new residents");
             if (response.status === "success") { 
                 $(".success__indicator").removeClass("hide");
                 $(".indicator__text").html('Residents Created!');
@@ -1806,6 +1825,8 @@ const archiveResident = function (archiveResidentId) {
         data: { residentIdData: archiveResidentId }, 
         dataType: "json",
         success: function (response) {
+          saveAction("Archived a resident");
+
             if (response.success) {
               closeModal();
               loadResidents();
@@ -1828,6 +1849,7 @@ const reactivateResident = function(resId) {
       data: { resIdData: resId }, 
       dataType: "json",
       success: function (response) {
+        saveAction("Reactivated a resident");
           if (response.success) {
               closeModal();
               loadArchivedResidents();
@@ -1940,6 +1962,8 @@ const updateResident = function() {
       contentType: false,
       dataType: "json",
       success: function (response) {
+        saveAction("Updated a resident");
+
           if (response.success) {
               $(".success__indicator").removeClass("hide");
               $(".indicator__text").html('Resident Updated!');
@@ -2466,6 +2490,7 @@ loadNationality();
     let newLng = lng;
 
     console.log("House Type:", type); // Debugging
+    saveAction("Created a new pin point");
 
     const iconType = type ? type.toLowerCase() : "default";
 
@@ -2810,6 +2835,8 @@ getSuffixes();
       data: { resident_id: residentId, house_no: 0 },
       dataType: "json",
       success: function (response) {
+        saveAction("Removed a resident");
+
         if (response.success) {
           alert("Resident removed successfully!");
 

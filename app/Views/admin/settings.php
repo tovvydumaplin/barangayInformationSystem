@@ -29,6 +29,7 @@
     <link rel="stylesheet" href="<?= base_url('assets/css/settings.css') ?>" />
     <link href="<?= base_url('assets/DataTables/datatables.min.css') ?>" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
     <script src="<?= base_url('assets/DataTables/datatables.min.js') ?>"></script>
     <script src="<?= base_url('assets/js/apexcharts.min.js') ?>"></script>
@@ -237,76 +238,73 @@
         </div>
         <!-- Lending Item Tab -->
         <div class="card lending__items d__none">
-          <div class="heading__container">
-            <p class="subheading">Lent Items</p>
-            <div class="button__box">
-              <button class="btn__secondary active btn__borrow__item">
-                <div class="icon__link">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="ionicon"
-                    viewBox="0 0 512 512"
-                  >
-                    <path
-                      d="M376 144c-3.92 52.87-44 96-88 96s-84.15-43.12-88-96c-4-55 35-96 88-96s92 42 88 96z"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="32"
-                    />
-                    <path
-                      d="M288 304c-87 0-175.3 48-191.64 138.6-2 10.92 4.21 21.4 15.65 21.4H464c11.44 0 17.62-10.48 15.65-21.4C463.3 352 375 304 288 304z"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-miterlimit="10"
-                      stroke-width="32"
-                    />
-                    <path
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="32"
-                      d="M88 176v112M144 232H32"
-                    />
-                  </svg>
-                </div>
-                Borrow
-              </button>
-            </div>
-          </div>
-          <div class="container">
-          <table id="lendingTable" class="display">
-            <thead>
-              <tr>
-                <th>Item Name</th>
-                <th>Quantity</th>
-                <th>Date Borrowed</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody></tbody>
-          </table>
-          </div>
+        <table id="auditTrailTable">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Action</th>
+              <th>Fullname</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
         </div>
         <!-- Lending Item Tab ENDS -->
         <!-- Inventory History Tab -->
         <div class="card inventory__history d__none">
-          <div class="heading__container">
-            <p class="subheading">Database Backup</p>
+          <div class="heading__container database__header">
+            <p class="subheading"><i class="bi bi-database" style="margin-right: 0.5rem; color: green;"></i>Database Management</p>
+            <p class="settings__subtitle">Backup and restore your database with ease</p>
           </div>
-          <div class="container">
-            <button type="button" class="btn__backup" id="backupBtn">Back up now</button>
-<!-- Restore -->
+          <div class="database__tabs">
+            <div class="tab__item__db"><button class="btn__db__settings btn__backup__db active"><i class="bi bi-upload"></i>Backup</button></div>
+            <div class="tab__item__db"><button class="btn__db__settings btn__restore__db"><i class="bi bi-upload"></i>Restore</button></div>
+            <div class="tab__item__db"><button class="btn__db__settings btn__history__db"><i class="bi bi-upload"></i>History</button></div>
+          </div>
+          <div class="container backup__db">
+            <div class="container__items">
+              <div class="db__item">
+                <p class="db__text__item">Click the button to download your data</p>
+                  <button type="button" class="btn__backup" id="backupBtn">Back up now</button>
+              </div>
+            </div>
+          </div>
+          <div class="container restore__db d__none">
             <form id="restore-form" enctype="multipart/form-data">
-    <input type="file" name="backup_file" id="backup-file" accept=".sql" required>
-    <button type="submit">Restore Database</button>
-</form>
-
-<div id="alert"></div> <!-- This will display success/error messages -->
-
-
+                <div class="input__box__restore">
+                  <label>Select Backup File</label>
+                  <input type="file" name="backup_file" id="backup-file" accept=".sql" required>
+                </div>
+                <div class="warning__box">
+                  <div class="icon__box">
+                    <i class="bi bi-exclamation-circle"></i>
+                  </div>
+                  <div class="title__box">
+                    <p class="warning__title">Warning</p>
+                    <p class="warning__desc">Restoring a database will overwrite your current data. Make sure you have a backup before proceeding.</p>
+                  </div>
+                </div>
+                <div class="">
+                  <button class="restore__db__btn" type="submit" disabled>Restore Database</button>
+                </div>
+            </form>
+            <div id="alert"></div> <!-- This will display success/error messages -->
+          </div>
+          <div class="container history__db d__none">
+          <table id="tbl__db__history" class="table__history">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>User</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+            <div id="alert"></div> <!-- This will display success/error messages -->
           </div>
         </div>
         <!-- Inventory history Tab ENDS -->
@@ -328,9 +326,97 @@
     <script src="<?= base_url('assets/js/general.js') ?>"></script>
     <script>
 
+$('.btn__db__settings').on('click', function () {
+  $('.btn__db__settings').removeClass('active');
+  $(this).addClass('active');
+});
+$('.btn__backup__db').on('click', function () {
+  $('.backup__db').removeClass("d__none");
+  $('.restore__db').addClass("d__none");
+  $('.history__db').addClass("d__none");
+});
+$('.btn__restore__db').on('click', function () {
+  $('.backup__db').addClass("d__none");
+  $('.restore__db').removeClass("d__none");
+  $('.history__db').addClass("d__none");
+});
+$('.btn__history__db').on('click', function () {
+  $('.backup__db').addClass("d__none");
+  $('.restore__db').addClass("d__none");
+  $('.history__db').removeClass("d__none");
+});
+
+const saveAction = function (action) {
+    $.ajax({
+        url: '/admin/save-action',
+        method: 'POST',
+        data: { action: action },
+        success: function (response) {
+            if (response.status === 'success') {
+                console.log('✅ ' + response.message);
+            } else {
+                console.error('❌ ' + response.message);
+            }
+        },
+        error: function () {
+            console.error('❌ AJAX request failed.');
+        }
+    });
+};
+const loadAuditTrail = function () {
+    $('#auditTrailTable').DataTable({
+        destroy: true, // allow reinitialization
+        ajax: {
+            url: '/admin/load-audit-trail',
+            type: 'GET',
+            dataSrc: function (json) {
+                if (json.success) {
+                    return json.data; // DataTables expects an array
+                } else {
+                    console.error('❌ Failed to load audit trail:', json.message);
+                    return [];
+                }
+            },
+            error: function () {
+                console.error('❌ AJAX request failed.');
+            }
+        },
+        columns: [
+            { data: 'id' },
+            { data: 'action' },
+            { data: 'user' },
+            { data: 'created_at' }
+        ],
+        order: [[0, 'desc']]
+    });
+};
+
+
+loadAuditTrail();
+
+const loadDbHistory = function () {
+  $('#tbl__db__history').DataTable({
+        ajax: {
+            url: '/admin/fetch-db-history',
+            dataSrc: 'data'
+        },
+        columns: [
+            { data: 'created_at', render: function (data) {
+                const date = new Date(data);
+                return date.toLocaleString(); // Format the date to a readable format
+            }},
+            { data: 'user' },
+            { data: 'action' }
+        ],
+        order: [[0, 'desc']]  
+    });
+}
+
+loadDbHistory();
+
 $('#restore-form').on('submit', function(e) {
     e.preventDefault();
-    
+    saveAction("Database Restoration");
     var formData = new FormData(this);
     var fileInput = $('#backup-file')[0];
     
@@ -383,14 +469,47 @@ $('#restore-form').on('submit', function(e) {
 });
 
 
+const saveActionDb = function (action) {
+    $.ajax({
+        url: '/admin/save-action-db',
+        method: 'POST',
+        data: { action: action },
+        success: function (response) {
+            if (response.status === 'success') {
+                console.log('✅ ' + response.message);
+            } else {
+                console.error('❌ ' + response.message);
+            }
+        },
+        error: function () {
+            console.error('❌ AJAX request failed.');
+        }
+    });
+};
+
+
+
 // Backup btn
 $('#backupBtn').on('click', function () {
     window.location.href = "<?= base_url('admin/create-backup') ?>";
+    saveAction("Database Restoration");
+    saveActionDb("Database Backup");
 });
-
+$('.restore__db__btn').on('click', function (e) {
+    e.preventDefault();
+    saveActionDb("Database Restoration", function () {
+        $('#restore-form').submit(); // updated to match the correct ID
+    });
+});
+$('#backup-file').on("change", function(){
+  $('.restore__db__btn').removeAttr('disabled');
+});
 // Lending table
 $('.lending__tab').on('click', function () {
   loadLendingHistory();
+});
+$('.tab__2').on('click', function () {
+  loadAuditTrail();
 });
 // Lending table
 $('.inventory__history__btn').on('click', function () {
@@ -418,6 +537,7 @@ $(document).ready(function () {
         $('.btn__register__item').prop('disabled', true).html('<i class="bi bi-hourglass-split"></i> Saving...');
       },
       success: function (response) {
+        saveAction(`Created Suffix - ${suffixValue}`)
         if (response.status === 'success') {
           alert(response.message);
           $('#suffix').val('');
@@ -554,6 +674,8 @@ const deleteSuffix = function (id) {
     method: 'POST',
     data: { id },
     success: function (response) {
+      saveAction(`Deleted a Suffix`);
+
       if (response.status === 'success') {
         alert(response.message);
         loadSuffixes(); // Refresh the list
@@ -606,6 +728,8 @@ $(document).on("click", ".btn__update__suffix", function () {
     dataType: 'json',
     success: function (response) {
       if (response.status === 'success') {
+        saveAction(`Edited a Suffix to ${newSuffix}`);
+
         $("#viewItemModal").removeClass("show");
         loadSuffixes();
         alert("Suffix updated successfully!");
@@ -668,6 +792,7 @@ const createPosition = function () {
     data: { position },
     dataType: 'json',
     success: function (response) {
+      saveAction(`Created a new position - ${position}`);
       if (response.status === 'success') {
         $("#registerPositionModal").removeClass("show");
         alert(response.message);
@@ -696,6 +821,8 @@ $(document).on("click", ".btn__delete__position", function () {
       data: { id: positionID },
       dataType: 'json',
       success: function (response) {
+      saveAction(`Deleted a position`);
+
         if (response.status === 'success') {
           loadPositions(); // Reload the positions after deletion
           alert("Position deleted successfully.");
@@ -740,6 +867,8 @@ $(document).on("click", ".btn__edit__position", function () {
           },
           dataType: 'json',
           success: function (response) {
+            saveAction(`Updated a position ${updatedPosition}`);
+
             if (response.status === 'success') {
               alert("Position updated successfully!");
               $("#viewPositions").removeClass("open");

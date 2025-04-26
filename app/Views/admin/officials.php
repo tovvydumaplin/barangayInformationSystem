@@ -293,6 +293,24 @@
 
     <script>
 
+const saveAction = function (action) {
+    $.ajax({
+        url: '/admin/save-action',
+        method: 'POST',
+        data: { action: action },
+        success: function (response) {
+            if (response.status === 'success') {
+                console.log('✅ ' + response.message);
+            } else {
+                console.error('❌ ' + response.message);
+            }
+        },
+        error: function () {
+            console.error('❌ AJAX request failed.');
+        }
+    });
+};
+
 const createOfficial = function () {
     let form = $('#createUserForm')[0];
     let formData = new FormData(form);
@@ -307,6 +325,7 @@ const createOfficial = function () {
             $('.btn__create__official').prop('disabled', true).text('Submitting...');
         },
         success: function (response) {
+          saveAction("Created a new user");
             if (response.status === 'success') {
                 alert('Official created successfully!');
                 $('#createUserForm')[0].reset();
@@ -408,6 +427,7 @@ loadOfficials();
         if (file) {
             formData.append("view_profile_image", file);
         }
+        saveAction("Updated an official");
 
         $.ajax({
             url: "<?= site_url('/admin/update-official') ?>",

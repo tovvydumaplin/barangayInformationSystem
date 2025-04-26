@@ -163,3 +163,10 @@ $routes->get('admin/get-active-positions', 'AdminController::getActivePositions'
 $routes->get('admin/create-backup', 'AdminController::downloadFile');
 // DB Restore
 $routes->post('admin/restore', 'AdminController::restore');
+
+// DB Backup save action
+$routes->post('admin/save-action-db', 'AdminController::saveActionDb');
+$routes->get('admin/fetch-db-history', 'AdminController::fetchDbHistory');
+// Audit Trail
+$routes->post('admin/save-action', 'AdminController::saveAction');
+$routes->get('admin/load-audit-trail', 'AdminController::loadAuditTrail');

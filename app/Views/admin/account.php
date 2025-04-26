@@ -386,6 +386,24 @@
     <script>
 
 $(document).ready(function () {
+
+const saveAction = function (action) {
+    $.ajax({
+        url: '/admin/save-action',
+        method: 'POST',
+        data: { action: action },
+        success: function (response) {
+            if (response.status === 'success') {
+                console.log('✅ ' + response.message);
+            } else {
+                console.error('❌ ' + response.message);
+            }
+        },
+        error: function () {
+            console.error('❌ AJAX request failed.');
+        }
+    });
+};
   // Preview the image
   const previewImage = function (event) {
     let reader = new FileReader();
@@ -418,6 +436,7 @@ $(document).ready(function () {
       contentType: false,
       dataType: "json",
       success: function (response) {
+        saveAction("Updated Profile Photo");
         if (response.success) {
           if (response.image_url) {
             $("#imagePreview").attr("src", response.image_url);
@@ -446,6 +465,8 @@ $(document).ready(function () {
       token: "<?= session('token') ?>", // Send session token to validate
     },
     success: function (response) {
+      saveAction("Deleted Profile Photo");
+
       if (response.success) {
         $("#imagePreview").attr("src", "<?= base_url('assets/images/default-avatar.png') ?>"); // fallback image
         $(".success__indicator").removeClass("hide");
@@ -487,6 +508,8 @@ $('#editPersonalInfo').click(function () {
         type: 'POST',
         data: formData,
         success: function (response) {
+        saveAction("Edited profile information");
+
           if (response.success) {
             // Update UI with the new values
             $('input[name="firstname"]').val(formData.firstname);
@@ -551,6 +574,8 @@ $('#editPersonalInfo').click(function () {
         type: 'POST',
         data: formData,
         success: function (response) {
+        saveAction("Changed password");
+
           if (response.success) {
             alert(response.message); // Show success message
             $('.information__input').attr('readonly', 'readonly');

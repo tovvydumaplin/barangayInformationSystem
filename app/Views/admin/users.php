@@ -463,6 +463,10 @@ const viewUser = function(token) {
       return;
   }
 
+
+
+
+
   $.ajax({
       url: "<?= site_url('/admin/get-user') ?>",
       type: "GET",
@@ -474,7 +478,6 @@ const viewUser = function(token) {
           if (response.success) {
               document.querySelector(".wrapper").classList.add("open");
               document.getElementById("viewEventModal").classList.add("open");
-
               // Store token inside the modal for updates
               $("#viewEventModal").data("token", token);
 

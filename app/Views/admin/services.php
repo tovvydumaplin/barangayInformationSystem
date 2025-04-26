@@ -794,6 +794,23 @@ $('.btn__form').on('click', function() {
     });
 
 
+const saveAction = function (action) {
+    $.ajax({
+        url: '/admin/save-action',
+        method: 'POST',
+        data: { action: action },
+        success: function (response) {
+            if (response.status === 'success') {
+                console.log('✅ ' + response.message);
+            } else {
+                console.error('❌ ' + response.message);
+            }
+        },
+        error: function () {
+            console.error('❌ AJAX request failed.');
+        }
+    });
+};
 
     $.ajax({
     url: '<?= base_url("admin/get-residents") ?>',
@@ -875,6 +892,8 @@ $('#residentSelect').on('change', function () {
        */
 // Function to generate and download PDF
 function generatePDF(elementId, filename) {
+  saveAction("Generated a new PDF");
+
     // Get the HTML element
     const element = document.getElementById(elementId);
     
@@ -911,6 +930,8 @@ function generatePDF(elementId, filename) {
               alert('Please scroll to the top before downloading the PDF.');
               return;
           }
+          saveAction("Generated a Certification of Indigency");
+
           generatePDF('certification-document', 'Certification_of_Indigency.pdf');
       });
 
@@ -920,6 +941,8 @@ function generatePDF(elementId, filename) {
               alert('Please scroll to the top before downloading the PDF.');
               return;
           }
+           saveAction("Generated a Barangay Certificate");
+
           generatePDF('certification-barangay', 'Certification_of_Barangay.pdf');
       });
 

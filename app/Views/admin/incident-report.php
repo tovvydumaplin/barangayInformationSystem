@@ -429,6 +429,24 @@ $(document).ready(function () {
   // loadResidents();
 
 
+const saveAction = function (action) {
+  $.ajax({
+      url: '/admin/save-action',
+      method: 'POST',
+      data: { action: action },
+      success: function (response) {
+          if (response.status === 'success') {
+              console.log('✅ ' + response.message);
+          } else {
+              console.error('❌ ' + response.message);
+          }
+      },
+      error: function () {
+          console.error('❌ AJAX request failed.');
+      }
+  });
+};
+
   const loadComplaints = function() {
     const $complainTable = $('#complainTable');
 
@@ -496,15 +514,7 @@ $(document).ready(function () {
     });
 };
 
-// Handle Export to PDF click
-$(document).on('click', '.btn__export__pdf', function() {
-    const complaintId = $(this).data('id');
-    const complaintData = getComplaintDataById(complaintId);
 
-    if (complaintData) {
-        exportComplaintToPDF(complaintData);
-    }
-});
 
 function getComplaintDataById(id) {
     let complaintData = null;
@@ -524,6 +534,7 @@ function getComplaintDataById(id) {
 const preparedBy = <?= json_encode($fullName) ?>;
 
 function exportComplaintToPDF(complaintData) {
+  saveAction("Exported data to PDF");
     const { complainant_name, complain_against, complain_title, complainant_age, complainant_address, location_of_incident, date, status, type_of_complaint, complain_details, barangay_action } = complaintData;
 
     const reportTitle = (type_of_complaint === 'blotter') ? 'Blotter Report' : 'Complaint Report';
@@ -646,6 +657,7 @@ $('#createComplainForm').on('submit', function (e) {
         data: $(this).serialize(),
         dataType: 'json', 
         success: function (response) {
+          saveAction("Created a new complaint");
             if (response.status === 'success') {
                 alert('Complaint filed successfully!');
                 loadComplaints();
@@ -730,6 +742,8 @@ $('#markAsCompleted').on('click', function () {
     const actionText = newStatus === 1 ? 'mark this complaint as solved' : 'mark this complaint as unsolved';
 
     if (confirm(`Are you sure you want to ${actionText}?`)) {
+      saveAction("Complaint marked as completed");
+
         $.ajax({
             url: '<?= site_url('admin/mark-as-solved') ?>',
             type: 'POST',
@@ -739,6 +753,7 @@ $('#markAsCompleted').on('click', function () {
             },
             dataType: 'json',
             success: function (response) {
+
                 if (response.status === 'success') {
                     if (newStatus === 1) {
                         $('#markAsCompleted').text('Mark as Unsolved').addClass('unsolve').removeClass('solve');

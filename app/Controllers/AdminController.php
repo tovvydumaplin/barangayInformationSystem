@@ -11,6 +11,7 @@ use App\Models\OfficialModel;
 use App\Models\ComplainModel;
 use App\Models\SuffixModel;
 use App\Models\PositionModel;
+use App\Models\DbHistoryModel;
 class AdminController extends BaseController
 {
     public function dashboard()
@@ -1552,6 +1553,8 @@ public function getOfficial()
 
 public function updateOfficial()
 {
+    $officialModel = new OfficialModel();
+
     $id = $this->request->getPost('official_id');
 
     if (empty($id)) {
@@ -1586,7 +1589,6 @@ public function updateOfficial()
 
     // Check if position limit exists
     if (isset($positionLimits[$position])) {
-        $officialModel = new OfficialModel();
 
         // Count officials already holding this position, excluding the one being updated
         $currentCount = $officialModel
@@ -2618,5 +2620,99 @@ private function executeSqlQueries($db, $sql)
         }
     }
 }
+
+
+// DB HISTORY
+public function saveActionDb()
+{
+    $session = session();
+    $request = \Config\Services::request();
+
+    $action = $request->getPost('action') ?? 'Unknown Action';
+
+    $firstname = $session->get('firstname');
+    $lastname  = $session->get('lastname');
+    $suffix    = $session->get('suffix');
+
+    $fullname = $firstname . ' ' . $lastname . ($suffix ? ', ' . $suffix : '');
+
+    $dbModel = new DbHistoryModel();
+
+    $data = [
+        'date' => date('Y-m-d H:i:s'),
+        'type' => $action,
+        'user' => $fullname
+    ];
+
+    if ($dbModel->insert($data)) {
+        return $this->response->setJSON([
+            'status' => 'success',
+            'message' => $action . ' logged successfully.'
+        ]);
+    } else {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Failed to log action.'
+        ]);
+    }
+}
+
+public function fetchDbHistory()
+{
+    $model = new DbHistoryModel();
+
+    // Fetch the data with only the columns you need, and order by created_at in descending order
+    $data = $model->select('id, user, created_at, type AS action')
+                  ->orderBy('created_at', 'DESC')
+                  ->findAll();
+
+    return $this->response->setJSON([
+        'data' => $data
+    ]);
+}
+
+// For audit trail
+public function saveAction()
+{
+    $action = $this->request->getPost('action');
+    $session = session();
+    
+    $fullname = $session->get('firstname') . ' ' . $session->get('lastname');
+
+    $model = new \App\Models\AuditModel();
+    
+    $data = [
+        'action' => $action,
+        'user' => $fullname,
+        'date' => date('Y-m-d H:i:s')
+    ];
+
+    if ($model->insert($data)) {
+        return $this->response->setJSON([
+            'status' => 'success',
+            'message' => 'Action saved to audit trail.'
+        ]);
+    } else {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Failed to save action.'
+        ]);
+    }
+}
+
+public function loadAuditTrail()
+{
+    $auditModel = new \App\Models\AuditModel();
+
+    $audits = $auditModel
+        ->orderBy('created_at', 'DESC')
+        ->findAll();
+
+    return $this->response->setJSON([
+        'success' => true,
+        'data' => $audits
+    ]);
+}
+
 }
 

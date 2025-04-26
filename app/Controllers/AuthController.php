@@ -43,12 +43,13 @@ class AuthController extends BaseController
     {
         $session = session();
         $model = new UserModel();
-
+        $auditModel = new \App\Models\AuditModel();
+    
         $username = $this->request->getPost('username');
         $password = $this->request->getPost('password');
-
-        $user = $model->where('username',$username)->first();
-
+    
+        $user = $model->where('username', $username)->first();
+    
         if ($user) {
             if (password_verify($password, $user['password'])) {
                 $sessionData = [
@@ -59,25 +60,46 @@ class AuthController extends BaseController
                     'image'         => $user['image'],
                     'firstname'     => $user['firstname'],
                     'lastname'      => $user['lastname'],
-                    'middlename'    => $user['middlename'], 
-                    'suffix'        => $user['suffix'],     
-                    'logged_in'     => true 
+                    'middlename'    => $user['middlename'],
+                    'suffix'        => $user['suffix'],
+                    'logged_in'     => true
                 ];
                 $session->set($sessionData);
+    
+                // ✅ Save to audit trail
+                $fullname = $user['firstname'] . ' ' . $user['lastname'];
+                $auditModel->insert([
+                    'action' => 'Logged in',
+                    'user'   => $fullname,
+                    'date'   => date('Y-m-d H:i:s')
+                ]);
+    
                 return redirect()->to('admin/dashboard');
             } else {
                 $session->setFlashdata('error', 'Invalid Password');
                 return redirect()->to('/');
             }
         } else {
-                $session->setFlashdata('error','Username not found');
-                return redirect()->to('/');
-            }
+            $session->setFlashdata('error', 'Username not found');
+            return redirect()->to('/');
+        }
     }
+    
     
     public function logout() 
     {
-        session()->destroy();
+        $session = session();
+        $fullname = $session->get('firstname') . ' ' . $session->get('lastname');
+    
+        $auditModel = new \App\Models\AuditModel();
+        $auditModel->insert([
+            'action' => 'Logged out',
+            'user'   => $fullname,
+            'date'   => date('Y-m-d H:i:s')
+        ]);
+    
+        $session->destroy();
         return redirect()->to('/');
     }
+    
 }

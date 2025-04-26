@@ -555,6 +555,24 @@ $(document).ready(function () {
         }
     });
 
+    const saveAction = function (action) {
+        $.ajax({
+            url: '/admin/save-action',
+            method: 'POST',
+            data: { action: action },
+            success: function (response) {
+                if (response.status === 'success') {
+                    console.log('✅ ' + response.message);
+                } else {
+                    console.error('❌ ' + response.message);
+                }
+            },
+            error: function () {
+                console.error('❌ AJAX request failed.');
+            }
+        });
+    };
+
     // For borrower modal
     const listOfResidents = function () {
         $.ajax({
@@ -658,6 +676,7 @@ $(document).ready(function () {
         type: 'GET',
         data: { item_id: itemId },
         success: function(response) {
+          saveAction("Viewed an item");
             if (response.status === 'success') {
                 $('#item_id').val(response.data.item_id);
                 $('#viewAssetName').val(response.data.item_name);
@@ -805,6 +824,8 @@ const markAsReturned = function () {
             $('#lendBtn').prop('disabled', true).text('Processing...'); // Disable button during the request
         },
         success: function (response) {
+          saveAction("Mark as returned");
+
             console.log('Response:', response);
             if (response.status === 'success') {
                 alert('Lending marked as returned and inventory updated!');
@@ -909,6 +930,8 @@ const loadLendingHistory = function() {
             $('#lendBtn').prop('disabled', true).text('Submitting...');
         },
         success: function (response) {
+          saveAction("Created a new lending");
+
             console.log('Response:', response);
             if (response.message) {
                   alert(response.message);
@@ -1004,6 +1027,8 @@ $('#lendBtn').on('click', function () {
                 $(".text-danger").text(""); // Clear previous error messages
             },
             success: function (response) {
+              saveAction("Created an item");
+
                 if (response.status == "success") {
                   $(".success__indicator").removeClass("hide");
                     $(".indicator__text").html('Item created!');
@@ -1197,6 +1222,8 @@ function updateItem() {
         contentType: false,
         processData: false,
         success: function(response) {
+          saveAction("Updated an item");
+
             console.log("Response:", response);
             if (response.status === 'success') {
                 $('#viewItemModal').removeClass('open');
