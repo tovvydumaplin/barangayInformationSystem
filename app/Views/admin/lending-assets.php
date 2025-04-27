@@ -502,6 +502,7 @@
           <table id="lendingHistory" class="display">
             <thead>
               <tr>
+                <th>ID</th>
                 <th>Item Name</th>
                 <th>Type</th>
                 <th>Quantity</th>
@@ -1267,6 +1268,7 @@ const inventoryHistory = function() {
                 response.forEach(item => {
                     const row = `
                         <tr>
+                            <td>${item.id}</td>
                             <td>${item.item_name}</td>
                             <td>${item.type}</td>
                             <td>${item.quantity}</td>
@@ -1280,7 +1282,9 @@ const inventoryHistory = function() {
                 });
 
                 // Re-initialize DataTable to apply features like sorting, pagination, etc.
-                $('#lendingHistory').DataTable();
+                $('#lendingHistory').DataTable({
+                    "order": [[0, 'desc']] // Change 0 to the index of the column you want to sort
+                });
             } else {
                 // Show a message when no data is found
                 $('#lendingHistory tbody').append('<tr><td colspan="6">No data found.</td></tr>');

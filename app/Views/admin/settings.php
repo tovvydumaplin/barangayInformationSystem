@@ -344,6 +344,7 @@ $('.btn__history__db').on('click', function () {
   $('.backup__db').addClass("d__none");
   $('.restore__db').addClass("d__none");
   $('.history__db').removeClass("d__none");
+  loadDbHistory();
 });
 
 const saveAction = function (action) {
@@ -393,32 +394,40 @@ const loadAuditTrail = function () {
 
 
 loadAuditTrail();
-
 const loadDbHistory = function () {
-  $('#tbl__db__history').DataTable({
+    if ($.fn.DataTable.isDataTable('#tbl__db__history')) {
+        $('#tbl__db__history').DataTable().clear().destroy();
+    }
+
+    $('#tbl__db__history').DataTable({
         ajax: {
             url: '/admin/fetch-db-history',
             dataSrc: 'data'
         },
         columns: [
-            { data: 'created_at', render: function (data) {
-                const date = new Date(data);
-                return date.toLocaleString(); // Format the date to a readable format
-            }},
+            { 
+                data: 'created_at', 
+                render: function (data) {
+                    const date = new Date(data);
+                    return date.toLocaleString(); // Format the date nicely
+                }
+            },
             { data: 'user' },
             { data: 'action' }
         ],
-        order: [[0, 'desc']]  
+        order: [[0, 'desc']] // Sort by created_at DESC
     });
 }
+
 
 loadDbHistory();
 
 $('#restore-form').on('submit', function(e) {
     e.preventDefault();
-    saveAction("Database Restoration");
     var formData = new FormData(this);
     var fileInput = $('#backup-file')[0];
+    saveActionDb("Database Restoration");
+    saveAction("Database Backup");
     
     // Validate file
     if (fileInput.files.length === 0) {
@@ -442,6 +451,8 @@ $('#restore-form').on('submit', function(e) {
         success: function(response) {
             if (response.status === 'success') {
                 $('#alert').html('<div class="alert alert-success">' + response.message + '</div>');
+                 saveActionDb("Database Restoration");
+
             } else {
                 $('#alert').html('<div class="alert alert-danger">Error: ' + response.message + '</div>');
             }
@@ -496,10 +507,7 @@ $('#backupBtn').on('click', function () {
     saveActionDb("Database Backup");
 });
 $('.restore__db__btn').on('click', function (e) {
-    e.preventDefault();
-    saveActionDb("Database Restoration", function () {
         $('#restore-form').submit(); // updated to match the correct ID
-    });
 });
 $('#backup-file').on("change", function(){
   $('.restore__db__btn').removeAttr('disabled');

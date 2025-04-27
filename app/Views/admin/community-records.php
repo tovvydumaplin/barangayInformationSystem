@@ -2329,6 +2329,7 @@ $(document).on("click", ".view__resident__btn", function () {
   $("#viewResidentModal").data("id", residentId); 
   viewResidentData(residentId); 
   openModal();
+  $('.house__info').removeClass("d__none");
 });
 
 $('.icon__close').on("click", function(){
@@ -2736,7 +2737,7 @@ loadNationality();
             }
           });
 
-          select.append(`<option value="">None</option>`);
+          select.append(`<option value="" selected>None</option>`);
         });
       }
     }
