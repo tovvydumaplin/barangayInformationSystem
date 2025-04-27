@@ -23,6 +23,7 @@ $routes->group('admin', ['filter' => 'auth'], function ($routes) {
     $routes->get('manage-users', 'AdminController::manageUsers');
     $routes->get('account-settings', 'AdminController::accountSettings');
     $routes->get('settings', 'AdminController::settings');
+    $routes->get('analytics', 'AdminController::analytics');
 });
 
 // Update User
@@ -170,3 +171,4 @@ $routes->get('admin/fetch-db-history', 'AdminController::fetchDbHistory');
 // Audit Trail
 $routes->post('admin/save-action', 'AdminController::saveAction');
 $routes->get('admin/load-audit-trail', 'AdminController::loadAuditTrail');
+$routes->get('admin/get-resident-analytics', 'AdminController::getResidentAnalytics');

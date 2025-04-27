@@ -48,6 +48,10 @@ class AdminController extends BaseController
     {
         return view('admin/users'); 
     }
+    public function analytics()
+    {
+        return view('admin/analytics'); 
+    }
 
     public function accountSettings()
     {
@@ -1996,18 +2000,27 @@ public function getResidentStats()
 
     $today = date('Y-m-d');
     $minorDate = date('Y-m-d', strtotime('-18 years'));
-
+    $seniorDate = date('Y-m-d', strtotime('-60 years'));
+    
     $data = [
         'male' => $residentModel->where(['gender' => 'Male', 'status' => 1])->countAllResults(),
         'female' => $residentModel->where(['gender' => 'Female', 'status' => 1])->countAllResults(),
         'minors' => $residentModel->where('birthdate >=', $minorDate)->where('status', 1)->countAllResults(),
-        'non_voters' => $residentModel->where(['is_voter_of_barangay' => 'No', 'status' => 1])->countAllResults(),
-        'non_head' => $residentModel->where(['is_family_head' => 'No', 'status' => 1])->countAllResults(),
-        'head_of_family' => $residentModel->where(['is_family_head' => 'Yes', 'status' => 1])->countAllResults(),
+        'seniors' => $residentModel->where('birthdate <=', $seniorDate)->where('status', 1)->countAllResults(),
+        'non_voters' => $residentModel->where(['is_voter_of_barangay' => '0', 'status' => 1])->countAllResults(),
+        'voters' => $residentModel->where(['is_voter_of_barangay' => '1', 'status' => 1])->countAllResults(),
+        'pwd' => $residentModel->where(['is_pwd' => '1', 'status' => 1])->countAllResults(),
+        'non_head' => $residentModel->where(['is_family_head' => '0', 'status' => 1])->countAllResults(),
+        'head_of_family' => $residentModel->where(['is_family_head' => '1', 'status' => 1])->countAllResults(),
+        'non_head_of_family' => $residentModel->where(['is_family_head' => '0', 'status' => 1])->countAllResults(),
         'archived' => $residentModel->where('status', 0)->countAllResults(),
-        'pwd' => $residentModel->where(['is_pwd' => 'Yes', 'status' => 1])->countAllResults(),
-        'voters' => $residentModel->where(['is_voter_of_barangay' => 'Yes', 'status' => 1])->countAllResults(),
+        'single' => $residentModel->where(['civil_status' => 'single', 'status' => 1])->countAllResults(),
+        'married' => $residentModel->where(['civil_status' => 'married', 'status' => 1])->countAllResults(),
+        'divorced' => $residentModel->where(['civil_status' => 'divorced', 'status' => 1])->countAllResults(),
+        'separated' => $residentModel->where(['civil_status' => 'separated', 'status' => 1])->countAllResults(),
+        'widowed' => $residentModel->where(['civil_status' => 'widowed', 'status' => 1])->countAllResults(),
     ];
+    
 
     return $this->response->setJSON($data);
 }
@@ -2713,6 +2726,24 @@ public function loadAuditTrail()
         'data' => $audits
     ]);
 }
+
+public function getResidentAnalytics()
+{
+    $residentModel = new \App\Models\ResidentModel();
+
+    $data = [
+        'minors' => $residentModel->where('age <', 18)->countAllResults(),
+        'seniors' => $residentModel->where('age >', 60)->countAllResults(),
+        'voters' => $residentModel->where('is_voter_of_barangay', 1)->countAllResults(),
+        'pwd' => $residentModel->where('is_pwd', 1)->countAllResults(),
+        'family_heads' => $residentModel->where('is_family_head', 1)->countAllResults(),
+        'civil_status' => $residentModel->where('civil_status !=', '')->countAllResults(),
+    ];
+
+    return $this->response->setJSON($data);
+}
+
+
 
 }
 
