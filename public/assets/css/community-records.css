@@ -97,6 +97,7 @@
   z-index: 500;
   background-color: #fff;
   transition: all 0.3s ease;
+  width: 37rem;
 }
 .filter__items__box {
   display: grid;
