@@ -2407,7 +2407,7 @@ loadNationality();
   // ~~~~~~~~~~~~~~~~~~~~~~~~ ⚡ Map Initialization ⚡ ~~~~~~~~~~~~~~~~~~~~~~~~ //
 
 // Initialize map centered at Barangay Pinagbuklod, Cavite City
-const map = L.map("map").setView([14.488724501874577, 120.9034366678688], 17);
+const map = L.map("map").setView([14.488724501874577, 120.9034366678688], 17.);
 
 
 
