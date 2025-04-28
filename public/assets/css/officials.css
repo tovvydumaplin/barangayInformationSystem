@@ -27,6 +27,9 @@
   max-width: 60rem;
   min-width: 60rem;
 }
+.select2-dropdown {
+  z-index: 9999 !important;
+}
 
 .input__box__container {
   width: 100%;
