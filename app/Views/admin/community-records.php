@@ -2406,8 +2406,8 @@ loadNationality();
   let isHiddenMarker = false;
   // ~~~~~~~~~~~~~~~~~~~~~~~~ ⚡ Map Initialization ⚡ ~~~~~~~~~~~~~~~~~~~~~~~~ //
 
-// Initialize map centered at Barangay Pinagbuklod, Imus, Cavite (exact center)
-const map = L.map("map").setView([14.408444171525824, 120.94532739879858], 16);
+// Initialize map centered at Barangay Pinagbuklod, Cavite City
+const map = L.map("map").setView([14.488724501874577, 120.9034366678688], 17);
 
 
 
