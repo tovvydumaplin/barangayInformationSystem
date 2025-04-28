@@ -41,7 +41,7 @@
             <p class="user__name__menu">Welcome, <span><?= $firstName ?></span></p>
             <hr />
             
-            <a href="#" class="link">
+            <a href="<?= base_url ('admin/account-settings') ?>" class="link">
                 <div class="icon__link">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                         <path 

@@ -98,6 +98,8 @@
   background-color: #fff;
   transition: all 0.3s ease;
   width: 37rem;
+  height: 70rem;
+  overflow-y: scroll;
 }
 .filter__items__box {
   display: grid;

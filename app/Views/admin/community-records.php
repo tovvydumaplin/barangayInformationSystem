@@ -1109,6 +1109,12 @@
               <div class="filter__items hide">
                 <p class="filter__subheading">Add Filter</p>
                 <div class="filter__items__box">
+                    <div class="filter__item" data-filter="Male">
+                      <i class="bi bi__custom bi-person-badge"></i><span class="filter__title">Male</span>
+                    </div>
+                    <div class="filter__item" data-filter="Female">
+                      <i class="bi bi__custom bi-person-badge"></i><span class="filter__title">Female</span>
+                    </div>
                     <div class="filter__item" data-filter="Head">
                       <i class="bi bi__custom bi-person-badge"></i><span class="filter__title">Head of Family</span>
                     </div>
@@ -2400,8 +2406,11 @@ loadNationality();
   let isHiddenMarker = false;
   // ~~~~~~~~~~~~~~~~~~~~~~~~ ⚡ Map Initialization ⚡ ~~~~~~~~~~~~~~~~~~~~~~~~ //
 
-  // Initialize map centered at San Pedro, Laguna
-  const map = L.map("map").setView([14.3589, 121.0557], 13);
+// Initialize map centered at Barangay Pinagbuklod, Imus, Cavite (exact center)
+const map = L.map("map").setView([14.408444171525824, 120.94532739879858], 16);
+
+
+
 
   // Add OpenStreetMap tiles
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
