@@ -1541,15 +1541,14 @@ const loadResidents = function() {
                             className: 'btn__secondary',
                             title: 'Residents Data',
                             exportOptions: {
-                                columns: [0, 1, 2, 3, 4, 5] // You can specify which columns to export
+                                columns: [0, 1, 2, 3, 4, 5] 
                             }
                         }
                     ]
                 });
 
-                // Trigger the export when your custom button is clicked
                 $(".export__excel__btn").on("click", function() {
-                    table.button(0).trigger(); // Trigger the first button (Excel export)
+                    table.button(0).trigger(); 
                 });
 
             } else {
@@ -2019,7 +2018,6 @@ const loadFilteredResidents = function(filter) {
                     });
 
                     Object.entries(grouped).forEach(([houseNo, members]) => {
-                        // Add a label row
                         tableData.push([
                             "", `<strong>🏠 House No: ${houseNo}</strong>`, "", "", "", "", ""
                         ]);
@@ -2048,7 +2046,7 @@ const loadFilteredResidents = function(filter) {
                     ]);
                 }
 
-                $residentsTable.DataTable({
+                const table = $residentsTable.DataTable({
                     destroy: true,
                     processing: true,
                     serverSide: false,
@@ -2075,8 +2073,39 @@ const loadFilteredResidents = function(filter) {
                                 fontWeight: "bold"
                             });
                         }
-                    }
+                    },
+                    // 🧠 Add buttons here (same as your first code but now also Print)
+                    buttons: [
+                        {
+                            extend: 'excelHtml5',
+                            text: 'Export to Excel',
+                            className: 'btn__secondary',
+                            title: 'Residents Data',
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5] // exclude Action button
+                            }
+                        },
+                        {
+                            extend: 'print',
+                            text: 'Print',
+                            className: 'btn__secondary',
+                            title: 'Residents Data',
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5] // exclude Action button
+                            }
+                        }
+                    ]
                 });
+
+                // Same external trigger if you want
+                $(".export__excel__btn").on("click", function() {
+                    table.button(0).trigger(); // Excel Export
+                });
+
+                $(".print__table__btn").on("click", function() {
+                    table.button(1).trigger(); // Print
+                });
+
             } else {
                 $residentsTable.DataTable({
                     destroy: true,
@@ -2104,6 +2133,7 @@ const loadFilteredResidents = function(filter) {
         }
     });
 };
+
 
 
 const loadNationality = function() {

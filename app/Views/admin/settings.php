@@ -101,7 +101,7 @@
                   id="positionCreate"
                   class="information__input"
                   value=""
-                  placeholder="Enter suffix"
+                  placeholder="Enter Position"
                   name="position_create"
                 />
                 <span class="input__title"
