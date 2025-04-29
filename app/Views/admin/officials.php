@@ -28,7 +28,8 @@
     <link rel="stylesheet" href="<?= base_url('assets/css/officials.css') ?>" />
     <link rel="stylesheet" href="<?= base_url('assets/css/table.css') ?>" />
     <link href="<?= base_url('assets/DataTables/datatables.min.css') ?>" rel="stylesheet" />
-
+    <!-- Select search -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="<?= base_url('assets/DataTables/datatables.min.js') ?>"></script>
     <script src="<?= base_url('assets/js/apexcharts.min.js') ?>"></script>
 
@@ -46,7 +47,6 @@
             <?= csrf_field() ?>
             <div class="row">
                 <div class="input__box">
-                    <span class="input__title not__capitalized">Select via Resident's List<span class="red__dot"> (Optional)</span></span>
                     <select class="information__input" id="residentsList" name="residents__list">
                     </select>
                     <p class="text-danger"></p>
@@ -290,6 +290,7 @@
       nomodule
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
     ></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
     <script>
 
@@ -465,7 +466,7 @@ const loadResidentList = function () {
     dataType: 'json',
     success: function (data) {
       const $select = $('#residentsList');
-      $select.append('<option value="">Choose a resident</option>');
+      $select.append('<option value="">Select via Residents List (Optional)</option>');
 
       data.forEach(function (resident) {
         $select.append(`<option value="${resident.resident_id}">${resident.fullname}</option>`);
@@ -502,7 +503,10 @@ $("#submitUserBtn").on("click", function (e) {
     }
 });
 
-
+$('#residentsList').select2({
+    placeholder: "Select via Residents List (Optional)",
+    allowClear: true
+});
     $('.btn__create__official').on('click', function () {
         createOfficial();
     });
