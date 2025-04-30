@@ -591,7 +591,7 @@ public function createUser()
                     break;
     
                 case 'ByFamily':
-                    // Fetch and group manually after
+                    // Fetch all active residents for grouping
                     $residents = $residentModel
                         ->select('*')
                         ->where('status', '1')
@@ -601,13 +601,22 @@ public function createUser()
                     foreach ($residents as $resident) {
                         $houseNo = $resident['house_no'] ?? 'N/A';
                         if (!isset($grouped[$houseNo])) {
-                            $grouped[$houseNo] = $resident;
+                            $grouped[$houseNo] = [];
+                        }
+                        $grouped[$houseNo][] = $resident;
+                    }
+    
+                    // Flatten the grouped array
+                    $allGroupedResidents = [];
+                    foreach ($grouped as $houseResidents) {
+                        foreach ($houseResidents as $resident) {
+                            $allGroupedResidents[] = $resident;
                         }
                     }
     
                     return $this->response->setJSON([
-                        'success' => count($grouped) > 0,
-                        'data' => array_values($grouped)
+                        'success' => count($allGroupedResidents) > 0,
+                        'data' => $allGroupedResidents
                     ]);
     
                 case 'Archived':
@@ -619,12 +628,11 @@ public function createUser()
                     break;
     
                 case 'All':
-                    // Don't apply any specific filter, just show active
                     $residentModel->where('status', '1');
                     break;
     
                 default:
-                    // Handle unexpected filters or custom future ones
+                    // Unknown filter, apply no extra condition
                     break;
             }
         }
@@ -637,6 +645,22 @@ public function createUser()
         ]);
     }
     
+    public function checkFamilyHead()
+    {
+        $houseNo = $this->request->getPost('house_no');
+
+        $residentModel = new ResidentModel();
+        $exists = $residentModel
+            ->where('house_no', $houseNo)
+            ->where('is_family_head', 1)
+            ->where('status', 1) 
+            ->first();
+
+        return $this->response->setJSON([
+            'hasFamilyHead' => $exists ? true : false
+        ]);
+    }
+
     public function getComplaint($id)
     {
         // Directly instantiate the ComplainModel

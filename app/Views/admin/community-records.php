@@ -1399,7 +1399,6 @@ const saveMemberLocally = function (e) {
         return field.replace(/_/g, " ").replace(/\b\w/g, char => char.toUpperCase());
     }
 
-    // Check required text inputs and select elements
     for (let field of requiredFields) {
         let value = $(`input[name='${field}'], select[name='${field}']`).val();
         if (!value) {
@@ -1408,7 +1407,6 @@ const saveMemberLocally = function (e) {
         }
     }
 
-    // Check required radio buttons
     let radioFields = ["is_pwd", "is_voter_of_barangay", "is_family_head"];
     for (let field of radioFields) {
         if (!$(`input[name='${field}']:checked`).val()) {
@@ -1441,24 +1439,63 @@ const saveMemberLocally = function (e) {
         contact_relationship: $("input[name='contact_relationship']").val(),
         status: $("input[name='status']").val()
     };
+
     saveAction("Locally saved a member");
-    console.log("Checking House No:", formData.house_no);
-    console.log("Existing Members:", members);
 
-if (formData.is_family_head == "1") {
-    let existingHead = members.some(member => 
-        String(member.house_no) === String(formData.house_no) && member.is_family_head == "1"
-    );
+    if (formData.is_family_head === "1") {
+        let existingHead = members.some(member =>
+            String(member.house_no) === String(formData.house_no) && member.is_family_head === "1"
+        );
 
-    if (existingHead) {
-        openErrorDisplay(`A family head already exists for House No. <b>${formData.house_no}</b>.`);
-        return;
+        if (existingHead) {
+            openErrorDisplay(`A family head already exists for House No. <b>${formData.house_no}</b> (Local).`);
+            return;
+        }
+
+        // Check with the database
+        checkFamilyHeadInDatabase(formData.house_no, function (isExist) {
+            if (isExist) {
+                openErrorDisplay(`A family head already exists for House No. <b>${formData.house_no}</b>.`);
+                return;
+            }
+
+            addMemberToLocalStorage(formData); // Proceed if no head found in local or DB
+        });
+    } else {
+        addMemberToLocalStorage(formData); // Proceed if not family head
     }
+};
 
+function checkFamilyHeadInDatabase(houseNo, callback) {
+    $("#saveMemberBtn").prop("disabled", true).html("Checking...");
 
+    $.ajax({
+        url: `/admin/check-family-head`,
+        method: "POST",
+        data: { house_no: houseNo },
+        dataType: "json",
+        success: function (response) {
+            $(".row.flex__d__col.house__info").removeClass("d__none");
+
+            if (response.hasFamilyHead) {
+                console.log("Family head already exists in DB.");
+                callback(true);
+            } else {
+                console.log("No family head in DB, proceeding to save.");
+                callback(false);
+            }
+
+            $("#saveMemberBtn").prop("disabled", false).html("Save Member");
+        },
+        error: function (xhr, status, error) {
+            console.error("AJAX error:", error);
+            $("#saveMemberBtn").prop("disabled", false).html("Save Member");
+            openErrorDisplay("Failed to check family head. Please try again.");
+        }
+    });
 }
 
-    // Add member and save to localStorage
+function addMemberToLocalStorage(formData) {
     members.push(formData);
     localStorage.setItem("members", JSON.stringify(members));
 
@@ -1468,7 +1505,9 @@ if (formData.is_family_head == "1") {
 
     displayTable();
     $("form")[0].reset();
-};
+}
+
+
 const calculateAge = function(birthdate) {
     if (!birthdate) return 'N/A';
 

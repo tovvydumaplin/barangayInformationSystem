@@ -172,3 +172,4 @@ $routes->get('admin/fetch-db-history', 'AdminController::fetchDbHistory');
 $routes->post('admin/save-action', 'AdminController::saveAction');
 $routes->get('admin/load-audit-trail', 'AdminController::loadAuditTrail');
 $routes->get('admin/get-resident-analytics', 'AdminController::getResidentAnalytics');
+$routes->post('admin/check-family-head', 'AdminController::checkFamilyHead');
