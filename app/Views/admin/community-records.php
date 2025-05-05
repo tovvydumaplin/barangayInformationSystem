@@ -334,8 +334,7 @@
                   
                 />
                 <span class="input__title"
-                  >Middlename<span class="red__dot">*</span></span
-                >
+                  >Middlename
                 <p class="text-danger"></p>
               </div>
               <!-- Suffix -->
@@ -476,13 +475,10 @@
                 <p class="text-danger"></p>
               </div>
               <div class="input__box">
-                <input
-                  class="information__input"
-                  value=""
-                  placeholder="Enter Religion"
-                  name="religion"
-                  
-                />
+              <select id="religionSelect" class="information__input" name="religion">
+                  <option value="">Choose Religion</option>
+                  <!-- Religions will be appended here -->
+              </select>
                 <span class="input__title"
                   >Religion<span class="red__dot">*</span></span
                 >
@@ -885,14 +881,10 @@
               <p class="text-danger"></p>
             </div>
             <div class="input__box">
-              <input
-                class="information__input"
-                value=""
-                placeholder="Enter Religion"
-                name="view_religion"
-                readonly
-                
-              />
+            <select id="viewReligionSelect" class="information__input" name="view_religion" disabled>
+              <option value="">Choose Religion</option>
+            </select>
+
               <span class="input__title"
                 >Religion<span class="red__dot">*</span></span
               >
@@ -1388,7 +1380,7 @@ const saveMemberLocally = function (e) {
     e.preventDefault();
 
     let requiredFields = [
-        "firstname", "lastname", "middlename",
+        "firstname", "lastname",
         "contact_no", "birthdate", "birthplace", "citizenship",
         "gender", "civil_status", "occupation", "religion",
         "household_name", "house_no", "street",
@@ -1427,7 +1419,7 @@ const saveMemberLocally = function (e) {
         gender: $("select[name='gender']").val(),
         civil_status: $("select[name='civil_status']").val(),
         occupation: $("input[name='occupation']").val(),
-        religion: $("input[name='religion']").val(),
+        religion: $("select[name='religion']").val(),
         is_pwd: $("input[name='is_pwd']:checked").val(),
         is_voter_of_barangay: $("input[name='is_voter_of_barangay']:checked").val(),
         is_family_head: $("input[name='is_family_head']:checked").val(),
@@ -1908,61 +1900,57 @@ const reactivateResident = function(resId) {
       }
   }); 
 }
-const viewResidentData = function(residentId) {                  // Resident Details on button click        
-    $.ajax({
-        url: "<?= base_url('admin/get-resident-details') ?>", 
-        type: "GET",
-        data: { resident_id: residentId }, 
-        dataType: "json",
-        success: function (response) {
-            if (response.success) {
-                // Populate modal fields
-                $("input[name='view_firstname']").val(response.data.firstname);
-                $("input[name='view_lastname']").val(response.data.lastname);
-                $("input[name='view_middlename']").val(response.data.middlename);
-                $("select[name='view_suffix']").val(response.data.suffix);
-                $("input[name='view_contact_no']").val(response.data.contact_no);
-                $("input[name='view_birthdate']").val(response.data.birthdate);
-                $("input[name='view_age']").val(response.data.age);
-                $("input[name='view_birthplace']").val(response.data.birthplace);
-                $("select[name='view_citizenship']").val(response.data.citizenship);
-                $("select[name='view_gender']").val(response.data.gender);
-                $("select[name='view_civil_status']").val(response.data.civil_status);
-                $("input[name='view_occupation']").val(response.data.occupation);
-                $("input[name='view_religion']").val(response.data.religion);
-                // Set the respective radio button as selected
-                $("input[name='view_is_pwd'][value='" + response.data.is_pwd + "']").prop("checked", true);
-                $("input[name='view_is_voter_of_barangay'][value='" + response.data.is_voter_of_barangay + "']").prop("checked", true);
-                $("input[name='view_is_family_head'][value='" + response.data.is_family_head + "']").prop("checked", true);
-                $("input[name='view_household_name']").val(response.data.household_name);
-                $("input[name='view_house_no']").val(response.data.house_no);
-                $("input[name='view_street']").val(response.data.street);
-                $("input[name='view_contact_name']").val(response.data.contact_name);
-                $("input[name='view_emergency_contact_no']").val(response.data.emergency_contact_no);
-                $("input[name='view_contact_relationship']").val(response.data.contact_relationship);
-                $('#residentId').val(residentId);
-                $('#archiveButton').data('resident-id', residentId);
-                $('#reactivateButton').data('resident-id', residentId);
-                $('#residentStatus').val(response.data.status);
-                if (response.data.status == 1) {
-                  $('#archiveButton').show();
-                  $('#reactivateButton').hide();
-                } else {
-                  $('#archiveButton').hide();
-                  $('#reactivateButton').show();
-                }
-                // Open modal
-                // $(".wrapper").addClass("open");
-                // $("#viewEventModal").addClass("open");
-            } else {
-                alert("Failed to fetch resident details.");
-            }
-        },
-        error: function () {
-            alert("An error occurred while fetching resident details.");
+const viewResidentData = function (residentId) {
+  $.ajax({
+    url: "<?= base_url('admin/get-resident-details') ?>",  // Endpoint to fetch resident data
+    type: "GET",
+    data: { resident_id: residentId },
+    dataType: "json",
+    success: function (response) {
+      if (response.success) {
+        // Populate modal fields
+        $("input[name='view_firstname']").val(response.data.firstname);
+        $("input[name='view_lastname']").val(response.data.lastname);
+        $("input[name='view_middlename']").val(response.data.middlename);
+        $("input[name='view_contact_no']").val(response.data.contact_no);
+        $("input[name='view_birthdate']").val(response.data.birthdate);
+        $("input[name='view_age']").val(response.data.age);
+        $("input[name='view_birthplace']").val(response.data.birthplace);
+        $("select[name='view_suffix']").val(response.data.suffix);
+        $("select[name='view_citizenship']").val(response.data.citizenship);
+        $("select[name='view_gender']").val(response.data.gender);
+        $("select[name='view_civil_status']").val(response.data.civil_status);
+        $("input[name='view_occupation']").val(response.data.occupation);
+        $("input[name='view_household_name']").val(response.data.household_name);
+        $("input[name='view_house_no']").val(response.data.house_no);
+        $("input[name='view_street']").val(response.data.street);
+        $("input[name='view_contact_name']").val(response.data.contact_name);
+        $("input[name='view_emergency_contact_no']").val(response.data.emergency_contact_no);
+        $("input[name='view_contact_relationship']").val(response.data.contact_relationship);
+        $('#residentId').val(residentId);
+        $('#archiveButton').data('resident-id', residentId);
+        $('#reactivateButton').data('resident-id', residentId);
+        $('#residentStatus').val(response.data.status);
+        
+        // Set religion select dropdown based on the resident's religion
+        setResidentReligion(response.data.religion);
+
+        if (response.data.status == 1) {
+          $('#archiveButton').show();
+          $('#reactivateButton').hide();
+        } else {
+          $('#archiveButton').hide();
+          $('#reactivateButton').show();
         }
-    });
-}
+      } else {
+        alert("Failed to fetch resident details.");
+      }
+    },
+    error: function () {
+      alert("An error occurred while fetching resident details.");
+    }
+  });
+};
 const customLoaderOn = function() {
   $('.custom__loader').removeClass('hide');
 }
@@ -2227,6 +2215,47 @@ const loadNationality = function() {
       $viewNationalityDropdown.append(`<option value="${nationality}" ${isSelected}>${nationality}</option>`);
     });
   }
+
+  const populateReligionSelect = function () {
+  $.ajax({
+    url: '/admin/get-religions',
+    method: 'GET',
+    dataType: 'json',
+    success: function (response) {
+      if (response.status === 'success') {
+        const select = $('#religionSelect');
+        select.html('<option value="">Choose Religion</option>'); // reset
+
+        response.data.forEach(function (religion) {
+          select.append(`<option value="${religion.religion_title}">${religion.religion_title}</option>`);
+        });
+      }
+    }
+  });
+};
+
+// This function will populate the religion select dropdown on modal view or edit
+const setResidentReligion = function (religionTitle) {
+  $.ajax({
+    url: '/admin/get-religions',  // URL for fetching religions
+    method: 'GET',
+    dataType: 'json',
+    success: function (response) {
+      if (response.status === 'success') {
+        // Find the religion that matches the title and set it as selected
+        const select = $("select[name='view_religion']");
+        select.html('<option value="">Choose Religion</option>'); // reset the select dropdown
+
+        response.data.forEach(function (religion) {
+          select.append(`<option value="${religion.religion_title}" ${religion.religion_title === religionTitle ? 'selected' : ''}>${religion.religion_title}</option>`);
+        });
+      }
+    }
+  });
+};
+
+
+populateReligionSelect();
 // ~~~~~~~~~~~~~~~~~~~~~~~~ ⚡ Event Listeners ⚡ ~~~~~~~~~~~~~~~~~~~~~~~~ //
 $(document).on("click", function (event) {
     if (!$(event.target).closest(".filter__items").length) {
@@ -2569,7 +2598,6 @@ const map = L.map("map").setView([14.488724501874577, 120.9034366678688], 17.);
     let newLng = lng;
 
     console.log("House Type:", type); // Debugging
-    saveAction("Created a new pin point");
 
     const iconType = type ? type.toLowerCase() : "default";
 

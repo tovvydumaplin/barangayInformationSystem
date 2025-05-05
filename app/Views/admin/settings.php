@@ -35,6 +35,15 @@
     <script src="<?= base_url('assets/js/apexcharts.min.js') ?>"></script>
 
   </head>
+  <style>
+    .card__inventory {
+
+        overflow-y: scroll;
+    }
+    .btn__create__religion, .btn__update__religion {
+      justify-content: center;
+    }
+  </style>
   <body>
   <!-- Error handler -->
 <div class="error__display hide">
@@ -175,6 +184,65 @@
           </div>
         </form>
       </div>
+<!-- MODAL TO CREATE RELIGION -->
+      <div id="registerReligionModal" class="modal">
+        <div class="modal__header">
+          <p class="modal__heading">Create Religion</p>
+          <p class="subtitle">Create religion for formatting</p>
+        </div>
+        <form class="modal__body community__modal">
+          <div class="row flex__d__col">
+            <div class="row">
+              <div class="input__box">
+                <input
+                  id="religion_create"
+                  class="information__input"
+                  value=""
+                  placeholder="Enter Religion"
+                  name="religion_create"
+                />
+                <span class="input__title"
+                  >Religion<span class="red__dot">*</span></span
+                >
+                <p class="text-sub">Enter the Position. Examples: Catholic, Iglesia ni Cristo, etc.</p>
+              </div>
+            </div>
+          </div>
+          <div class="btn__box__modal">
+            <span class="btn__primary active btn__create__religion"><i class="bi bi-check"></i>Create Religion</span>
+          </div>
+        </form>
+      </div>
+<!-- MODAL to update religion -->
+<div id="viewReligion" class="modal">
+  <div class="modal__header">
+    <p class="modal__heading">Edit Religion</p>
+    <p class="subtitle">Edit religion for formatting</p>
+  </div>
+  <form class="modal__body community__modal">
+    <div class="row flex__d__col">
+      <div class="row">
+        <div class="input__box">
+          <input
+            id="religionEdit"
+            class="information__input"
+            value=""
+            placeholder="Enter religion"
+            name="religion_edit"
+          />
+          <span class="input__title"
+            >Religion<span class="red__dot">*</span></span
+          >
+          <p class="text-sub">Enter the Position. Examples: Catholic, Iglesia ni Cristo, etc.</p>
+        </div>
+      </div>
+    </div>
+    <div class="btn__box__modal">
+      <span class="btn__primary active btn__update__religion"><i class="bi bi-check"></i>Update Religion</span>
+    </div>
+  </form>
+</div>
+
       <div class="container">
         <div class="heading__box">
           <div class="tab__container">
@@ -231,6 +299,25 @@
                 </div>
               </div>
               <div class="settings__item__box position__list">
+                <!-- For each here -->
+              </div>
+            </div>
+            <!-- Variables for religion -->
+
+            <div class="settings__card">
+              <div class="settings__card__header">
+                <div class="settings__title__box">
+                  <p class="settings__title">Existing Religion</p>
+                  <p class="settings__subtitle">Manage available religion</p>
+                </div>
+                <div class="settings__btn__box">
+                  <button class="btn__secondary active btn__add__religion">
+                    <i class="bi bi-plus"></i>
+                    Add Religion
+                  </button>
+                </div>
+              </div>
+              <div class="settings__item__box religion__list">
                 <!-- For each here -->
               </div>
             </div>
@@ -889,7 +976,140 @@ $(document).on("click", ".btn__edit__position", function () {
         });
       });
 
-    
+
+const loadReligions = function () {
+  $.ajax({
+    url: '/admin/get-religions',
+    method: 'GET',
+    dataType: 'json',
+    success: function (response) {
+      if (response.status === 'success') {
+        const container = $('.religion__list');
+        container.html(''); // Clear the container before re-rendering
+
+        response.data.forEach(function (item) {
+          const religion = item.religion_title;
+          const religionShort = religion.substring(0, 3).toUpperCase();
+
+          const template = `
+            <div class="settings__item">
+              <div class="settings__item__name">
+                <p class="settings__indicator">${religionShort}</p>
+                <p class="settings__name" title="${religion}">${religion}</p>
+              </div>
+              <div class="settings__btn__box">
+                <i class="bi bi-pencil btn__edit__religion" data-id="${item.id}" data-religion="${religion}"></i>
+                <i class="bi bi-trash red__icon__color btn__delete__religion" data-id="${item.id}"></i>
+              </div>
+            </div>
+          `;
+
+          container.append(template);
+        });
+      }
+    }
+  });
+};
+loadReligions();
+
+
+// Religion create
+const createReligion = function () {
+  const religion = $("#religion_create").val().trim();
+
+  if (!religion) {
+    alert("Religion is required.");
+    return;
+  }
+
+  $.ajax({
+    url: '/admin/create-religion',
+    method: 'POST',
+    data: { religion },
+    dataType: 'json',
+    success: function (response) {
+      saveAction(`Created a new religion - ${religion}`);
+      if (response.status === 'success') {
+        $("#registerReligionModal").removeClass("show");
+        alert(response.message);
+        $("#religion_create").val("");
+      } else {
+        alert(response.message || "Something went wrong.");
+      }
+    },
+    complete: function () {
+      loadReligions();
+    }
+  });
+};
+$(document).on("click", ".btn__create__religion", createReligion);
+
+$(document).on('click', '.btn__edit__religion', function () {
+  const id = $(this).data('id');
+  const religion = $(this).data('religion');
+
+  $('#religionEdit').val(religion);
+$(".wrapper").addClass("open");
+  $('#viewReligion').data('religion-id', id);
+
+  $('#viewReligion').addClass('open');
+});
+
+
+// Edit religion
+$(document).on('click', '.btn__update__religion', function () {
+  const id = $('#viewReligion').data('religion-id');
+  const updatedReligion = $('#religionEdit').val().trim();
+
+  if (!updatedReligion) {
+    alert("Religion is required.");
+    return;
+  }
+
+  $.ajax({
+    url: '/admin/update-religion',
+    method: 'POST',
+    data: {
+      id: id,
+      religion: updatedReligion
+    },
+    dataType: 'json',
+    success: function (response) {
+     saveAction("Updated a religion");
+
+      if (response.status === 'success') {
+        alert(response.message);
+        $('#viewReligion').removeClass('show');
+        loadReligions();
+      } else {
+        alert(response.message || 'Something went wrong.');
+      }
+    }
+  });
+});
+$(document).on('click', '.btn__delete__religion', function () {
+  const id = $(this).data('id');
+
+  if (!confirm("Are you sure you want to delete this religion?")) return;
+
+  $.ajax({
+    url: '/admin/delete-religion',
+    method: 'POST',
+    data: { id },
+    dataType: 'json',
+    success: function (response) {
+     saveAction("Deleted a religion");
+
+      if (response.status === 'success') {
+        alert(response.message);
+        loadReligions();
+      } else {
+        alert(response.message || 'Something went wrong.');
+      }
+    }
+  });
+});
+
 
     // Handle table buttons
     $(".table__button, .btn__add__item").on("click", function () {
@@ -907,6 +1127,11 @@ $(document).on("click", ".btn__edit__position", function () {
       $(".wrapper").addClass("open");
       $("#registerPositionModal").addClass("open");
     });
+    // For creating religion
+    $(".btn__add__religion").on("click", function () {
+      $(".wrapper").addClass("open");
+      $("#registerReligionModal").addClass("open");
+    });
 
 
     // Close on wrapper click or close button
@@ -918,6 +1143,8 @@ $(document).on("click", ".btn__edit__position", function () {
       $("#viewBorrowItemModal").removeClass("open");
       $("#registerPositionModal").removeClass("open");
       $("#viewPositions").removeClass("open");
+      $("#registerReligionModal").removeClass("open");
+      $("#viewReligion").removeClass("open");
 
     });
 
@@ -931,6 +1158,8 @@ $(document).on("click", ".btn__edit__position", function () {
       $("#viewBorrowItemModal").removeClass("open");
       $("#registerPositionModal").removeClass("open");
       $("#viewPositions").removeClass("open");
+      $("#registerReligionModal").removeClass("open");
+      $("#viewReligion").removeClass("open");
 
 
       }

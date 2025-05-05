@@ -12,6 +12,7 @@ use App\Models\ComplainModel;
 use App\Models\SuffixModel;
 use App\Models\PositionModel;
 use App\Models\DbHistoryModel;
+use App\Models\ReligionModel;
 class AdminController extends BaseController
 {
     public function dashboard()
@@ -2753,7 +2754,7 @@ public function loadAuditTrail()
 
 public function getResidentAnalytics()
 {
-    $residentModel = new \App\Models\ResidentModel();
+    $residentModel = new ResidentModel();
 
     $data = [
         'minors' => $residentModel->where('age <', 18)->countAllResults(),
@@ -2765,6 +2766,156 @@ public function getResidentAnalytics()
     ];
 
     return $this->response->setJSON($data);
+}
+
+public function createReligion()
+{
+    $religionName = trim($this->request->getPost('religion'));
+
+    if (!$religionName) {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Religion is required.'
+        ]);
+    }
+
+    $religionModel = new ReligionModel();
+
+    // Check if it exists (active or inactive)
+    $existing = $religionModel->where('religion_title', $religionName)->first();
+
+    if ($existing) {
+        if ((int)$existing['status'] === 0) {
+            // Reactivate if previously deleted
+            $religionModel->update($existing['id'], ['status' => 1]);
+
+            return $this->response->setJSON([
+                'status' => 'success',
+                'message' => 'Religion restored successfully.'
+            ]);
+        }
+
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Religion already exists.'
+        ]);
+    }
+
+    // Create new religion
+    $religionModel->save([
+        'religion_title' => $religionName,
+        'status' => 1
+    ]);
+
+    return $this->response->setJSON([
+        'status' => 'success',
+        'message' => 'Religion created successfully.'
+    ]);
+}
+
+
+public function getReligions()
+{
+    $religionModel = new ReligionModel();
+
+    $religions = $religionModel->where('status', 1)
+                                ->orderBy('religion_title', 'ASC')
+                                ->findAll();
+
+    return $this->response->setJSON([
+        'status' => 'success',
+        'data' => $religions
+    ]);
+}
+public function updateReligion()
+{
+    $id = $this->request->getPost('id');
+    $religionName = $this->request->getPost('religion');
+
+    if (!$id || !$religionName) {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Both ID and Religion are required.'
+        ]);
+    }
+
+    $religionModel = new ReligionModel();
+
+    // Optional: prevent updating to an existing name
+    $exists = $religionModel->where('religion_title', $religionName)
+                            ->where('id !=', $id)
+                            ->first();
+
+    if ($exists) {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Religion already exists.'
+        ]);
+    }
+
+    $religionModel->update($id, ['religion_title' => $religionName]);
+
+    return $this->response->setJSON([
+        'status' => 'success',
+        'message' => 'Religion updated successfully.'
+    ]);
+}
+public function deleteReligion()
+{
+    $id = $this->request->getPost('id');
+
+    if (!$id) {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Religion ID is required.'
+        ]);
+    }
+
+    $religionModel = new \App\Models\ReligionModel();
+
+    $religion = $religionModel->find($id);
+    if (!$religion) {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Religion not found.'
+        ]);
+    }
+
+    $religionModel->update($id, ['status' => 0]);
+
+    return $this->response->setJSON([
+        'status' => 'success',
+        'message' => 'Religion deleted successfully.'
+    ]);
+}
+public function getReligionsSelect()
+{
+    $religionModel = new \App\Models\ReligionModel();
+
+    $religions = $religionModel
+        ->where('status', 1)
+        ->orderBy('religion_title', 'ASC')
+        ->findAll();
+
+    return $this->response->setJSON([
+        'status' => 'success',
+        'data' => $religions
+    ]);
+}
+
+public function getOfficialForForms()
+{
+    $officialModel = new OfficialModel();
+
+    $officials = $officialModel
+        ->where('status', 1)
+        ->orderBy("FIELD(position, 'Barangay Captain') DESC, position ASC")
+        ->findAll();
+
+    return $this->response->setJSON([
+        'status' => 'success',
+        'data' => $officials
+    ]);
 }
 
 

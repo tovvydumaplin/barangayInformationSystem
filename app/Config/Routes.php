@@ -173,3 +173,12 @@ $routes->post('admin/save-action', 'AdminController::saveAction');
 $routes->get('admin/load-audit-trail', 'AdminController::loadAuditTrail');
 $routes->get('admin/get-resident-analytics', 'AdminController::getResidentAnalytics');
 $routes->post('admin/check-family-head', 'AdminController::checkFamilyHead');
+// Variables for Religions
+$routes->post('/admin/create-religion', 'AdminController::createReligion');
+$routes->get('/admin/get-religions', 'AdminController::getReligions');
+$routes->post('/admin/update-religion', 'AdminController::updateReligion');
+$routes->post('/admin/delete-religion', 'AdminController::deleteReligion');
+// For select elements
+$routes->get('/admin/get-religions', 'AdminController::getReligionsSelect');
+// For Positions
+$routes->get('admin/getOfficialForForms', 'AdminController::getOfficialForForms');

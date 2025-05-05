@@ -192,7 +192,7 @@
           <div class="btn__box__modal">
 
             <button class="btn__primary active btn__close" id="createComplain">
-              File Complain
+              File Report
             </button>
           </div>
         </form>
@@ -358,7 +358,7 @@
                     />
                   </svg>
                 </div>
-                File complaint
+                File report
               </button>
             </div>
           </div>
