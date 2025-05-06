@@ -79,7 +79,6 @@ class AuthController extends BaseController
                     $auditModel->insert([
                         'action' => 'Logged in',
                         'user'   => $fullname,
-                        'token'  => $user['token'],
                         'date'   => date('Y-m-d H:i:s')
                     ]);
     
