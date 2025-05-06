@@ -432,3 +432,639 @@ DEBUG - 2025-05-06 15:03:37 --> Session: Class initialized using 'CodeIgniter\Se
 DEBUG - 2025-05-06 15:03:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 DEBUG - 2025-05-06 15:04:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 DEBUG - 2025-05-06 15:04:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-06 21:17:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-06 21:17:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-06 21:17:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-06 21:17:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-06 21:17:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-05-06 21:17:55 --> mysqli_sql_exception: Unknown column 'token' in 'field list' in C:\BarangayInformationSystem\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\BarangayInformationSystem\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `tb...', 0)
+#1 C:\BarangayInformationSystem\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tb...')
+#2 C:\BarangayInformationSystem\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tb...')
+#3 C:\BarangayInformationSystem\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tb...', Array, false)
+#4 C:\BarangayInformationSystem\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\BarangayInformationSystem\system\BaseModel.php(839): CodeIgniter\Model->doInsert(Array)
+#6 C:\BarangayInformationSystem\system\Model.php(800): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\BarangayInformationSystem\app\Controllers\AdminController.php(2730): CodeIgniter\Model->insert(Array)
+#8 C:\BarangayInformationSystem\system\CodeIgniter.php(933): App\Controllers\AdminController->saveAction()
+#9 C:\BarangayInformationSystem\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#10 C:\BarangayInformationSystem\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\BarangayInformationSystem\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#12 C:\BarangayInformationSystem\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\BarangayInformationSystem\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 C:\BarangayInformationSystem\system\rewrite.php(44): require_once('C:\\BarangayInfo...')
+#15 {main}
+CRITICAL - 2025-05-06 21:17:55 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'token' in 'field list'
+[Method: POST, Route: admin/save-action]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (:action:, :user:, :date:, :token:, :created_at:, :updated_at:)', [...], false)
+ 2 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 5 APPPATH\Controllers\AdminController.php(2730): CodeIgniter\Model->insert([...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->saveAction()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-05-06 21:17:55 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'token' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (\'Locally saved a member\', \'Tovvy Dumaplin\', \'2025-05-06 21:17:55\', \'8d6818189ad53cc7c058e1fe142a4ffd2cc5c9f16106ca00b083e21b9a1e281f\', \'2025-05-06 21:17:55\', \'2025-05-06 21:17:55\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (\'Locally saved a member\', \'Tovvy Dumaplin\', \'2025-05-06 21:17:55\', \'8d6818189ad53cc7c058e1fe142a4ffd2cc5c9f16106ca00b083e21b9a1e281f\', \'2025-05-06 21:17:55\', \'2025-05-06 21:17:55\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (:action:, :user:, :date:, :token:, :created_at:, :updated_at:)', [...], false)
+ 4 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 7 APPPATH\Controllers\AdminController.php(2730): CodeIgniter\Model->insert([...])
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->saveAction()
+ 9 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-05-06 21:17:55 --> [Caused by] mysqli_sql_exception: Unknown column 'token' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (\'Locally saved a member\', \'Tovvy Dumaplin\', \'2025-05-06 21:17:55\', \'8d6818189ad53cc7c058e1fe142a4ffd2cc5c9f16106ca00b083e21b9a1e281f\', \'2025-05-06 21:17:55\', \'2025-05-06 21:17:55\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (\'Locally saved a member\', \'Tovvy Dumaplin\', \'2025-05-06 21:17:55\', \'8d6818189ad53cc7c058e1fe142a4ffd2cc5c9f16106ca00b083e21b9a1e281f\', \'2025-05-06 21:17:55\', \'2025-05-06 21:17:55\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (\'Locally saved a member\', \'Tovvy Dumaplin\', \'2025-05-06 21:17:55\', \'8d6818189ad53cc7c058e1fe142a4ffd2cc5c9f16106ca00b083e21b9a1e281f\', \'2025-05-06 21:17:55\', \'2025-05-06 21:17:55\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (:action:, :user:, :date:, :token:, :created_at:, :updated_at:)', [...], false)
+ 5 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 8 APPPATH\Controllers\AdminController.php(2730): CodeIgniter\Model->insert([...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->saveAction()
+10 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+11 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+15 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+DEBUG - 2025-05-06 21:18:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-05-06 21:18:00 --> mysqli_sql_exception: Unknown column 'token' in 'field list' in C:\BarangayInformationSystem\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\BarangayInformationSystem\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `tb...', 0)
+#1 C:\BarangayInformationSystem\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tb...')
+#2 C:\BarangayInformationSystem\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tb...')
+#3 C:\BarangayInformationSystem\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tb...', Array, false)
+#4 C:\BarangayInformationSystem\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\BarangayInformationSystem\system\BaseModel.php(839): CodeIgniter\Model->doInsert(Array)
+#6 C:\BarangayInformationSystem\system\Model.php(800): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\BarangayInformationSystem\app\Controllers\AdminController.php(2730): CodeIgniter\Model->insert(Array)
+#8 C:\BarangayInformationSystem\system\CodeIgniter.php(933): App\Controllers\AdminController->saveAction()
+#9 C:\BarangayInformationSystem\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#10 C:\BarangayInformationSystem\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\BarangayInformationSystem\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#12 C:\BarangayInformationSystem\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\BarangayInformationSystem\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 C:\BarangayInformationSystem\system\rewrite.php(44): require_once('C:\\BarangayInfo...')
+#15 {main}
+CRITICAL - 2025-05-06 21:18:00 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'token' in 'field list'
+[Method: POST, Route: admin/save-action]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (:action:, :user:, :date:, :token:, :created_at:, :updated_at:)', [...], false)
+ 2 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 5 APPPATH\Controllers\AdminController.php(2730): CodeIgniter\Model->insert([...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->saveAction()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-05-06 21:18:00 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'token' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (\'Locally saved a member\', \'Tovvy Dumaplin\', \'2025-05-06 21:18:00\', \'8d6818189ad53cc7c058e1fe142a4ffd2cc5c9f16106ca00b083e21b9a1e281f\', \'2025-05-06 21:18:00\', \'2025-05-06 21:18:00\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (\'Locally saved a member\', \'Tovvy Dumaplin\', \'2025-05-06 21:18:00\', \'8d6818189ad53cc7c058e1fe142a4ffd2cc5c9f16106ca00b083e21b9a1e281f\', \'2025-05-06 21:18:00\', \'2025-05-06 21:18:00\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (:action:, :user:, :date:, :token:, :created_at:, :updated_at:)', [...], false)
+ 4 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 7 APPPATH\Controllers\AdminController.php(2730): CodeIgniter\Model->insert([...])
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->saveAction()
+ 9 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-05-06 21:18:00 --> [Caused by] mysqli_sql_exception: Unknown column 'token' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (\'Locally saved a member\', \'Tovvy Dumaplin\', \'2025-05-06 21:18:00\', \'8d6818189ad53cc7c058e1fe142a4ffd2cc5c9f16106ca00b083e21b9a1e281f\', \'2025-05-06 21:18:00\', \'2025-05-06 21:18:00\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (\'Locally saved a member\', \'Tovvy Dumaplin\', \'2025-05-06 21:18:00\', \'8d6818189ad53cc7c058e1fe142a4ffd2cc5c9f16106ca00b083e21b9a1e281f\', \'2025-05-06 21:18:00\', \'2025-05-06 21:18:00\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (\'Locally saved a member\', \'Tovvy Dumaplin\', \'2025-05-06 21:18:00\', \'8d6818189ad53cc7c058e1fe142a4ffd2cc5c9f16106ca00b083e21b9a1e281f\', \'2025-05-06 21:18:00\', \'2025-05-06 21:18:00\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (:action:, :user:, :date:, :token:, :created_at:, :updated_at:)', [...], false)
+ 5 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 8 APPPATH\Controllers\AdminController.php(2730): CodeIgniter\Model->insert([...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->saveAction()
+10 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+11 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+15 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+DEBUG - 2025-05-06 21:18:02 --> Received Data: Array
+(
+    [0] => Array
+        (
+            [firstname] => 123
+            [lastname] => 123
+            [middlename] => 
+            [suffix] => 
+            [contact_no] => 123
+            [birthdate] => 2025-05-07
+            [birthplace] => 123
+            [citizenship] => Filipino
+            [gender] => Male
+            [civil_status] => Single
+            [occupation] => 123
+            [religion] => Catholic
+            [is_pwd] => 0
+            [is_voter_of_barangay] => 0
+            [is_family_head] => 0
+            [household_name] => 123
+            [house_no] => 125
+            [street] => test
+            [contact_name] => 123
+            [emergency_contact_no] => 123
+            [contact_relationship] => 123
+            [status] => 1
+        )
+
+)
+
+DEBUG - 2025-05-06 21:18:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-05-06 21:18:02 --> mysqli_sql_exception: Unknown column 'token' in 'field list' in C:\BarangayInformationSystem\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\BarangayInformationSystem\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `tb...', 0)
+#1 C:\BarangayInformationSystem\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tb...')
+#2 C:\BarangayInformationSystem\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tb...')
+#3 C:\BarangayInformationSystem\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tb...', Array, false)
+#4 C:\BarangayInformationSystem\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\BarangayInformationSystem\system\BaseModel.php(839): CodeIgniter\Model->doInsert(Array)
+#6 C:\BarangayInformationSystem\system\Model.php(800): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\BarangayInformationSystem\app\Controllers\AdminController.php(2730): CodeIgniter\Model->insert(Array)
+#8 C:\BarangayInformationSystem\system\CodeIgniter.php(933): App\Controllers\AdminController->saveAction()
+#9 C:\BarangayInformationSystem\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#10 C:\BarangayInformationSystem\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\BarangayInformationSystem\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#12 C:\BarangayInformationSystem\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\BarangayInformationSystem\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 C:\BarangayInformationSystem\system\rewrite.php(44): require_once('C:\\BarangayInfo...')
+#15 {main}
+CRITICAL - 2025-05-06 21:18:02 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'token' in 'field list'
+[Method: POST, Route: admin/save-action]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (:action:, :user:, :date:, :token:, :created_at:, :updated_at:)', [...], false)
+ 2 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 5 APPPATH\Controllers\AdminController.php(2730): CodeIgniter\Model->insert([...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->saveAction()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-05-06 21:18:02 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'token' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (\'Added new residents\', \'Tovvy Dumaplin\', \'2025-05-06 21:18:02\', \'8d6818189ad53cc7c058e1fe142a4ffd2cc5c9f16106ca00b083e21b9a1e281f\', \'2025-05-06 21:18:02\', \'2025-05-06 21:18:02\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (\'Added new residents\', \'Tovvy Dumaplin\', \'2025-05-06 21:18:02\', \'8d6818189ad53cc7c058e1fe142a4ffd2cc5c9f16106ca00b083e21b9a1e281f\', \'2025-05-06 21:18:02\', \'2025-05-06 21:18:02\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (:action:, :user:, :date:, :token:, :created_at:, :updated_at:)', [...], false)
+ 4 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 7 APPPATH\Controllers\AdminController.php(2730): CodeIgniter\Model->insert([...])
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->saveAction()
+ 9 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-05-06 21:18:02 --> [Caused by] mysqli_sql_exception: Unknown column 'token' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (\'Added new residents\', \'Tovvy Dumaplin\', \'2025-05-06 21:18:02\', \'8d6818189ad53cc7c058e1fe142a4ffd2cc5c9f16106ca00b083e21b9a1e281f\', \'2025-05-06 21:18:02\', \'2025-05-06 21:18:02\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (\'Added new residents\', \'Tovvy Dumaplin\', \'2025-05-06 21:18:02\', \'8d6818189ad53cc7c058e1fe142a4ffd2cc5c9f16106ca00b083e21b9a1e281f\', \'2025-05-06 21:18:02\', \'2025-05-06 21:18:02\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (\'Added new residents\', \'Tovvy Dumaplin\', \'2025-05-06 21:18:02\', \'8d6818189ad53cc7c058e1fe142a4ffd2cc5c9f16106ca00b083e21b9a1e281f\', \'2025-05-06 21:18:02\', \'2025-05-06 21:18:02\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (:action:, :user:, :date:, :token:, :created_at:, :updated_at:)', [...], false)
+ 5 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 8 APPPATH\Controllers\AdminController.php(2730): CodeIgniter\Model->insert([...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->saveAction()
+10 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+11 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+15 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+DEBUG - 2025-05-06 21:18:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-05-06 21:18:33 --> mysqli_sql_exception: Unknown column 'token' in 'field list' in C:\BarangayInformationSystem\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\BarangayInformationSystem\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `tb...', 0)
+#1 C:\BarangayInformationSystem\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tb...')
+#2 C:\BarangayInformationSystem\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tb...')
+#3 C:\BarangayInformationSystem\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tb...', Array, false)
+#4 C:\BarangayInformationSystem\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\BarangayInformationSystem\system\BaseModel.php(839): CodeIgniter\Model->doInsert(Array)
+#6 C:\BarangayInformationSystem\system\Model.php(800): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\BarangayInformationSystem\app\Controllers\AdminController.php(2730): CodeIgniter\Model->insert(Array)
+#8 C:\BarangayInformationSystem\system\CodeIgniter.php(933): App\Controllers\AdminController->saveAction()
+#9 C:\BarangayInformationSystem\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#10 C:\BarangayInformationSystem\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\BarangayInformationSystem\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#12 C:\BarangayInformationSystem\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\BarangayInformationSystem\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 C:\BarangayInformationSystem\system\rewrite.php(44): require_once('C:\\BarangayInfo...')
+#15 {main}
+CRITICAL - 2025-05-06 21:18:33 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'token' in 'field list'
+[Method: POST, Route: admin/save-action]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (:action:, :user:, :date:, :token:, :created_at:, :updated_at:)', [...], false)
+ 2 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 5 APPPATH\Controllers\AdminController.php(2730): CodeIgniter\Model->insert([...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->saveAction()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-05-06 21:18:33 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'token' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (\'Updated a resident\', \'Tovvy Dumaplin\', \'2025-05-06 21:18:33\', \'8d6818189ad53cc7c058e1fe142a4ffd2cc5c9f16106ca00b083e21b9a1e281f\', \'2025-05-06 21:18:33\', \'2025-05-06 21:18:33\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (\'Updated a resident\', \'Tovvy Dumaplin\', \'2025-05-06 21:18:33\', \'8d6818189ad53cc7c058e1fe142a4ffd2cc5c9f16106ca00b083e21b9a1e281f\', \'2025-05-06 21:18:33\', \'2025-05-06 21:18:33\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (:action:, :user:, :date:, :token:, :created_at:, :updated_at:)', [...], false)
+ 4 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 7 APPPATH\Controllers\AdminController.php(2730): CodeIgniter\Model->insert([...])
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->saveAction()
+ 9 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-05-06 21:18:33 --> [Caused by] mysqli_sql_exception: Unknown column 'token' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (\'Updated a resident\', \'Tovvy Dumaplin\', \'2025-05-06 21:18:33\', \'8d6818189ad53cc7c058e1fe142a4ffd2cc5c9f16106ca00b083e21b9a1e281f\', \'2025-05-06 21:18:33\', \'2025-05-06 21:18:33\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (\'Updated a resident\', \'Tovvy Dumaplin\', \'2025-05-06 21:18:33\', \'8d6818189ad53cc7c058e1fe142a4ffd2cc5c9f16106ca00b083e21b9a1e281f\', \'2025-05-06 21:18:33\', \'2025-05-06 21:18:33\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (\'Updated a resident\', \'Tovvy Dumaplin\', \'2025-05-06 21:18:33\', \'8d6818189ad53cc7c058e1fe142a4ffd2cc5c9f16106ca00b083e21b9a1e281f\', \'2025-05-06 21:18:33\', \'2025-05-06 21:18:33\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (:action:, :user:, :date:, :token:, :created_at:, :updated_at:)', [...], false)
+ 5 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 8 APPPATH\Controllers\AdminController.php(2730): CodeIgniter\Model->insert([...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->saveAction()
+10 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+11 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+15 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+DEBUG - 2025-05-06 21:18:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-06 21:18:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-06 21:18:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-06 21:18:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-06 21:20:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-06 21:20:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-06 21:20:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-06 21:20:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-06 21:21:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-05-06 21:21:09 --> mysqli_sql_exception: Unknown column 'token' in 'field list' in C:\BarangayInformationSystem\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\BarangayInformationSystem\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `tb...', 0)
+#1 C:\BarangayInformationSystem\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tb...')
+#2 C:\BarangayInformationSystem\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tb...')
+#3 C:\BarangayInformationSystem\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tb...', Array, false)
+#4 C:\BarangayInformationSystem\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\BarangayInformationSystem\system\BaseModel.php(839): CodeIgniter\Model->doInsert(Array)
+#6 C:\BarangayInformationSystem\system\Model.php(800): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\BarangayInformationSystem\app\Controllers\AdminController.php(2730): CodeIgniter\Model->insert(Array)
+#8 C:\BarangayInformationSystem\system\CodeIgniter.php(933): App\Controllers\AdminController->saveAction()
+#9 C:\BarangayInformationSystem\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#10 C:\BarangayInformationSystem\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\BarangayInformationSystem\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#12 C:\BarangayInformationSystem\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\BarangayInformationSystem\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 C:\BarangayInformationSystem\system\rewrite.php(44): require_once('C:\\BarangayInfo...')
+#15 {main}
+CRITICAL - 2025-05-06 21:21:09 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'token' in 'field list'
+[Method: POST, Route: admin/save-action]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (:action:, :user:, :date:, :token:, :created_at:, :updated_at:)', [...], false)
+ 2 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 5 APPPATH\Controllers\AdminController.php(2730): CodeIgniter\Model->insert([...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->saveAction()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-05-06 21:21:09 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'token' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (\'Locally saved a member\', \'Tovvy Dumaplin\', \'2025-05-06 21:21:09\', \'8d6818189ad53cc7c058e1fe142a4ffd2cc5c9f16106ca00b083e21b9a1e281f\', \'2025-05-06 21:21:09\', \'2025-05-06 21:21:09\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (\'Locally saved a member\', \'Tovvy Dumaplin\', \'2025-05-06 21:21:09\', \'8d6818189ad53cc7c058e1fe142a4ffd2cc5c9f16106ca00b083e21b9a1e281f\', \'2025-05-06 21:21:09\', \'2025-05-06 21:21:09\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (:action:, :user:, :date:, :token:, :created_at:, :updated_at:)', [...], false)
+ 4 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 7 APPPATH\Controllers\AdminController.php(2730): CodeIgniter\Model->insert([...])
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->saveAction()
+ 9 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-05-06 21:21:09 --> [Caused by] mysqli_sql_exception: Unknown column 'token' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (\'Locally saved a member\', \'Tovvy Dumaplin\', \'2025-05-06 21:21:09\', \'8d6818189ad53cc7c058e1fe142a4ffd2cc5c9f16106ca00b083e21b9a1e281f\', \'2025-05-06 21:21:09\', \'2025-05-06 21:21:09\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (\'Locally saved a member\', \'Tovvy Dumaplin\', \'2025-05-06 21:21:09\', \'8d6818189ad53cc7c058e1fe142a4ffd2cc5c9f16106ca00b083e21b9a1e281f\', \'2025-05-06 21:21:09\', \'2025-05-06 21:21:09\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (\'Locally saved a member\', \'Tovvy Dumaplin\', \'2025-05-06 21:21:09\', \'8d6818189ad53cc7c058e1fe142a4ffd2cc5c9f16106ca00b083e21b9a1e281f\', \'2025-05-06 21:21:09\', \'2025-05-06 21:21:09\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (:action:, :user:, :date:, :token:, :created_at:, :updated_at:)', [...], false)
+ 5 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 8 APPPATH\Controllers\AdminController.php(2730): CodeIgniter\Model->insert([...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->saveAction()
+10 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+11 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+15 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+DEBUG - 2025-05-06 21:21:12 --> Received Data: Array
+(
+    [0] => Array
+        (
+            [firstname] => 1
+            [lastname] => 2
+            [middlename] => 
+            [suffix] => 
+            [contact_no] => 12
+            [birthdate] => 2025-05-06
+            [birthplace] => 2
+            [citizenship] => Filipino
+            [gender] => Male
+            [civil_status] => Single
+            [occupation] => 2
+            [religion] => Catholic
+            [is_pwd] => 0
+            [is_voter_of_barangay] => 0
+            [is_family_head] => 0
+            [household_name] => 21
+            [house_no] => 0091
+            [street] => Kyle Korver
+            [contact_name] => 12
+            [emergency_contact_no] => 12
+            [contact_relationship] => 12
+            [status] => 1
+        )
+
+)
+
+DEBUG - 2025-05-06 21:21:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-05-06 21:21:12 --> mysqli_sql_exception: Unknown column 'token' in 'field list' in C:\BarangayInformationSystem\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\BarangayInformationSystem\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `tb...', 0)
+#1 C:\BarangayInformationSystem\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tb...')
+#2 C:\BarangayInformationSystem\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tb...')
+#3 C:\BarangayInformationSystem\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tb...', Array, false)
+#4 C:\BarangayInformationSystem\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\BarangayInformationSystem\system\BaseModel.php(839): CodeIgniter\Model->doInsert(Array)
+#6 C:\BarangayInformationSystem\system\Model.php(800): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\BarangayInformationSystem\app\Controllers\AdminController.php(2730): CodeIgniter\Model->insert(Array)
+#8 C:\BarangayInformationSystem\system\CodeIgniter.php(933): App\Controllers\AdminController->saveAction()
+#9 C:\BarangayInformationSystem\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#10 C:\BarangayInformationSystem\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\BarangayInformationSystem\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#12 C:\BarangayInformationSystem\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\BarangayInformationSystem\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 C:\BarangayInformationSystem\system\rewrite.php(44): require_once('C:\\BarangayInfo...')
+#15 {main}
+CRITICAL - 2025-05-06 21:21:12 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'token' in 'field list'
+[Method: POST, Route: admin/save-action]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (:action:, :user:, :date:, :token:, :created_at:, :updated_at:)', [...], false)
+ 2 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 5 APPPATH\Controllers\AdminController.php(2730): CodeIgniter\Model->insert([...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->saveAction()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-05-06 21:21:12 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'token' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (\'Added new residents\', \'Tovvy Dumaplin\', \'2025-05-06 21:21:12\', \'8d6818189ad53cc7c058e1fe142a4ffd2cc5c9f16106ca00b083e21b9a1e281f\', \'2025-05-06 21:21:12\', \'2025-05-06 21:21:12\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (\'Added new residents\', \'Tovvy Dumaplin\', \'2025-05-06 21:21:12\', \'8d6818189ad53cc7c058e1fe142a4ffd2cc5c9f16106ca00b083e21b9a1e281f\', \'2025-05-06 21:21:12\', \'2025-05-06 21:21:12\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (:action:, :user:, :date:, :token:, :created_at:, :updated_at:)', [...], false)
+ 4 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 7 APPPATH\Controllers\AdminController.php(2730): CodeIgniter\Model->insert([...])
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->saveAction()
+ 9 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-05-06 21:21:12 --> [Caused by] mysqli_sql_exception: Unknown column 'token' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (\'Added new residents\', \'Tovvy Dumaplin\', \'2025-05-06 21:21:12\', \'8d6818189ad53cc7c058e1fe142a4ffd2cc5c9f16106ca00b083e21b9a1e281f\', \'2025-05-06 21:21:12\', \'2025-05-06 21:21:12\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (\'Added new residents\', \'Tovvy Dumaplin\', \'2025-05-06 21:21:12\', \'8d6818189ad53cc7c058e1fe142a4ffd2cc5c9f16106ca00b083e21b9a1e281f\', \'2025-05-06 21:21:12\', \'2025-05-06 21:21:12\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (\'Added new residents\', \'Tovvy Dumaplin\', \'2025-05-06 21:21:12\', \'8d6818189ad53cc7c058e1fe142a4ffd2cc5c9f16106ca00b083e21b9a1e281f\', \'2025-05-06 21:21:12\', \'2025-05-06 21:21:12\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (:action:, :user:, :date:, :token:, :created_at:, :updated_at:)', [...], false)
+ 5 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 8 APPPATH\Controllers\AdminController.php(2730): CodeIgniter\Model->insert([...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->saveAction()
+10 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+11 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+15 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+DEBUG - 2025-05-06 21:21:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-06 21:21:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-06 21:22:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-05-06 21:22:05 --> mysqli_sql_exception: Unknown column 'token' in 'field list' in C:\BarangayInformationSystem\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\BarangayInformationSystem\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `tb...', 0)
+#1 C:\BarangayInformationSystem\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tb...')
+#2 C:\BarangayInformationSystem\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tb...')
+#3 C:\BarangayInformationSystem\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tb...', Array, false)
+#4 C:\BarangayInformationSystem\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\BarangayInformationSystem\system\BaseModel.php(839): CodeIgniter\Model->doInsert(Array)
+#6 C:\BarangayInformationSystem\system\Model.php(800): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\BarangayInformationSystem\app\Controllers\AdminController.php(2730): CodeIgniter\Model->insert(Array)
+#8 C:\BarangayInformationSystem\system\CodeIgniter.php(933): App\Controllers\AdminController->saveAction()
+#9 C:\BarangayInformationSystem\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#10 C:\BarangayInformationSystem\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\BarangayInformationSystem\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#12 C:\BarangayInformationSystem\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\BarangayInformationSystem\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 C:\BarangayInformationSystem\system\rewrite.php(44): require_once('C:\\BarangayInfo...')
+#15 {main}
+CRITICAL - 2025-05-06 21:22:05 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'token' in 'field list'
+[Method: POST, Route: admin/save-action]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (:action:, :user:, :date:, :token:, :created_at:, :updated_at:)', [...], false)
+ 2 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 5 APPPATH\Controllers\AdminController.php(2730): CodeIgniter\Model->insert([...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->saveAction()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-05-06 21:22:05 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'token' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (\'Created a new user\', \'Tovvy Dumaplin\', \'2025-05-06 21:22:04\', \'8d6818189ad53cc7c058e1fe142a4ffd2cc5c9f16106ca00b083e21b9a1e281f\', \'2025-05-06 21:22:04\', \'2025-05-06 21:22:04\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (\'Created a new user\', \'Tovvy Dumaplin\', \'2025-05-06 21:22:04\', \'8d6818189ad53cc7c058e1fe142a4ffd2cc5c9f16106ca00b083e21b9a1e281f\', \'2025-05-06 21:22:04\', \'2025-05-06 21:22:04\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (:action:, :user:, :date:, :token:, :created_at:, :updated_at:)', [...], false)
+ 4 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 7 APPPATH\Controllers\AdminController.php(2730): CodeIgniter\Model->insert([...])
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->saveAction()
+ 9 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-05-06 21:22:05 --> [Caused by] mysqli_sql_exception: Unknown column 'token' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (\'Created a new user\', \'Tovvy Dumaplin\', \'2025-05-06 21:22:04\', \'8d6818189ad53cc7c058e1fe142a4ffd2cc5c9f16106ca00b083e21b9a1e281f\', \'2025-05-06 21:22:04\', \'2025-05-06 21:22:04\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (\'Created a new user\', \'Tovvy Dumaplin\', \'2025-05-06 21:22:04\', \'8d6818189ad53cc7c058e1fe142a4ffd2cc5c9f16106ca00b083e21b9a1e281f\', \'2025-05-06 21:22:04\', \'2025-05-06 21:22:04\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (\'Created a new user\', \'Tovvy Dumaplin\', \'2025-05-06 21:22:04\', \'8d6818189ad53cc7c058e1fe142a4ffd2cc5c9f16106ca00b083e21b9a1e281f\', \'2025-05-06 21:22:04\', \'2025-05-06 21:22:04\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (:action:, :user:, :date:, :token:, :created_at:, :updated_at:)', [...], false)
+ 5 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 8 APPPATH\Controllers\AdminController.php(2730): CodeIgniter\Model->insert([...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->saveAction()
+10 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+11 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+15 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+DEBUG - 2025-05-06 21:22:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-05-06 21:22:10 --> mysqli_sql_exception: Unknown column 'token' in 'field list' in C:\BarangayInformationSystem\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\BarangayInformationSystem\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `tb...', 0)
+#1 C:\BarangayInformationSystem\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tb...')
+#2 C:\BarangayInformationSystem\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tb...')
+#3 C:\BarangayInformationSystem\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tb...', Array, false)
+#4 C:\BarangayInformationSystem\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\BarangayInformationSystem\system\BaseModel.php(839): CodeIgniter\Model->doInsert(Array)
+#6 C:\BarangayInformationSystem\system\Model.php(800): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\BarangayInformationSystem\app\Controllers\AdminController.php(2730): CodeIgniter\Model->insert(Array)
+#8 C:\BarangayInformationSystem\system\CodeIgniter.php(933): App\Controllers\AdminController->saveAction()
+#9 C:\BarangayInformationSystem\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#10 C:\BarangayInformationSystem\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\BarangayInformationSystem\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#12 C:\BarangayInformationSystem\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\BarangayInformationSystem\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 C:\BarangayInformationSystem\system\rewrite.php(44): require_once('C:\\BarangayInfo...')
+#15 {main}
+CRITICAL - 2025-05-06 21:22:10 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'token' in 'field list'
+[Method: POST, Route: admin/save-action]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (:action:, :user:, :date:, :token:, :created_at:, :updated_at:)', [...], false)
+ 2 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 5 APPPATH\Controllers\AdminController.php(2730): CodeIgniter\Model->insert([...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->saveAction()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-05-06 21:22:10 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'token' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (\'Created a new user\', \'Tovvy Dumaplin\', \'2025-05-06 21:22:10\', \'8d6818189ad53cc7c058e1fe142a4ffd2cc5c9f16106ca00b083e21b9a1e281f\', \'2025-05-06 21:22:10\', \'2025-05-06 21:22:10\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (\'Created a new user\', \'Tovvy Dumaplin\', \'2025-05-06 21:22:10\', \'8d6818189ad53cc7c058e1fe142a4ffd2cc5c9f16106ca00b083e21b9a1e281f\', \'2025-05-06 21:22:10\', \'2025-05-06 21:22:10\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (:action:, :user:, :date:, :token:, :created_at:, :updated_at:)', [...], false)
+ 4 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 7 APPPATH\Controllers\AdminController.php(2730): CodeIgniter\Model->insert([...])
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->saveAction()
+ 9 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-05-06 21:22:10 --> [Caused by] mysqli_sql_exception: Unknown column 'token' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (\'Created a new user\', \'Tovvy Dumaplin\', \'2025-05-06 21:22:10\', \'8d6818189ad53cc7c058e1fe142a4ffd2cc5c9f16106ca00b083e21b9a1e281f\', \'2025-05-06 21:22:10\', \'2025-05-06 21:22:10\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (\'Created a new user\', \'Tovvy Dumaplin\', \'2025-05-06 21:22:10\', \'8d6818189ad53cc7c058e1fe142a4ffd2cc5c9f16106ca00b083e21b9a1e281f\', \'2025-05-06 21:22:10\', \'2025-05-06 21:22:10\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (\'Created a new user\', \'Tovvy Dumaplin\', \'2025-05-06 21:22:10\', \'8d6818189ad53cc7c058e1fe142a4ffd2cc5c9f16106ca00b083e21b9a1e281f\', \'2025-05-06 21:22:10\', \'2025-05-06 21:22:10\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_audit` (`action`, `user`, `date`, `token`, `created_at`, `updated_at`) VALUES (:action:, :user:, :date:, :token:, :created_at:, :updated_at:)', [...], false)
+ 5 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 8 APPPATH\Controllers\AdminController.php(2730): CodeIgniter\Model->insert([...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->saveAction()
+10 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+11 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+15 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+DEBUG - 2025-05-06 21:22:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-06 21:23:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-06 21:23:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-06 21:23:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-06 21:23:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-06 21:24:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-06 21:24:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-06 21:24:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-06 21:25:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-06 21:25:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-06 21:26:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-06 21:26:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-06 21:26:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-06 21:26:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-06 21:26:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-06 21:26:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-06 21:27:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-06 21:27:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-06 21:27:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-06 21:27:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-06 21:27:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-06 21:27:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-06 21:27:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-06 21:27:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-06 21:27:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-06 21:27:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

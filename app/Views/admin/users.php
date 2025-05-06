@@ -213,7 +213,7 @@
               <div class="row">
                   <div class="input__box">
                       <input class="information__input" placeholder="Enter Middlename" name="middlename" required />
-                      <span class="input__title">Middlename<span class="red__dot">*</span></span>
+                      <span class="input__title">Middlename</span>
                       <p class="text-danger"></p>
                   </div>
                   <div class="input__box">
@@ -328,7 +328,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="input__box">
+                    <!-- <div class="input__box">
                         <span class="input__title">Position</span>
                         <select class="information__input" name="view_position" disabled>
                             <option value="Barangay Head">Barangay Head</option>
@@ -337,7 +337,7 @@
                             <option value="Barangay Officer 2">Barangay Officer 2</option>
                             <option value="Barangay Officer 3">Barangay Officer 3</option>
                         </select>
-                    </div>
+                    </div> -->
                     <div class="input__box">
                         <span class="input__title">Role</span>
                         <select name="view_role" class="information__input" disabled>

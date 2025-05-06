@@ -1415,7 +1415,6 @@ public function createOfficial()
     // Validation rules
     $validationRules = [
         'firstname'     => 'required',
-        'middlename'    => 'required',
         'lastname'      => 'required',
         'position'      => 'required',
         'start_service' => 'required|valid_date',
@@ -2724,7 +2723,6 @@ public function saveAction()
         'action' => $action,
         'user' => $fullname,
         'date' => date('Y-m-d H:i:s'),
-        'token' => $token,
     ];
 
     if ($model->insert($data)) {

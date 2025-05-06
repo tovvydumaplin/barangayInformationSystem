@@ -76,7 +76,7 @@
                 <div class="row">
                     <div class="input__box">
                         <input class="information__input" placeholder="Enter Middlename" name="middlename" required />
-                        <span class="input__title">Middlename<span class="red__dot">*</span></span>
+                        <span class="input__title">Middlename</span>
                         <p class="text-danger"></p>
                     </div>
                     <div class="input__box">

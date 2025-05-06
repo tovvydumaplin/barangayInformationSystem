@@ -229,6 +229,17 @@
     </main>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+
+$('#iconBtn').on('click', function () {
+      const $passwordInput = $('#passwordInput');
+      const $toggleIcon = $('#toggleIcon');
+      const isPassword = $passwordInput.attr('type') === 'password';
+
+      $passwordInput.attr('type', isPassword ? 'text' : 'password');
+      $toggleIcon.attr('name', isPassword ? 'eye-outline' : 'eye-off-outline');
+    });
+
+    
 $('#forgot-password').on('click', function(e) {
   e.preventDefault();
   const username = prompt("Enter your email:");
