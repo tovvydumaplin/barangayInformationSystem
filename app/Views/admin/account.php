@@ -28,10 +28,24 @@
     <link rel="stylesheet" href="<?= base_url('assets/css/account.css') ?>" />
 
   </head>
+  <style>
+    .alert.alert-warning {
+      padding: 2rem;
+    background-color: #ffd7d7;
+    color: #e71515;
+    border-radius: 1rem;
+    width: 100%;
+    }
+  </style>
   <body>
     <?= view ('includes/sidebar') ?>
     <main>
     <?= view('includes/header.php') ?>
+    <?php if (session()->getFlashdata('first_login_alert')) : ?>
+      <div class="alert alert-warning">
+        <?= session()->getFlashdata('first_login_alert') ?>
+      </div>
+    <?php endif; ?>
       <div class="wrapper"></div>
       <div id="createEventModal" class="modal">
         <div class="modal__header">

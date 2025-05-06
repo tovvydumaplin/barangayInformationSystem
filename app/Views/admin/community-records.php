@@ -715,7 +715,7 @@
                 
               />
               <span class="input__title"
-                >Middlename<span class="red__dot">*</span></span
+                >Middlename</span
               >
               <p class="text-danger"></p>
             </div>

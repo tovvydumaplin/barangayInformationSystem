@@ -2716,13 +2716,15 @@ public function saveAction()
     $session = session();
     
     $fullname = $session->get('firstname') . ' ' . $session->get('lastname');
+    $token = $session->get('token');
 
     $model = new \App\Models\AuditModel();
     
     $data = [
         'action' => $action,
         'user' => $fullname,
-        'date' => date('Y-m-d H:i:s')
+        'date' => date('Y-m-d H:i:s'),
+        'token' => $token,
     ];
 
     if ($model->insert($data)) {

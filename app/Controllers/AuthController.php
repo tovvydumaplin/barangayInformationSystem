@@ -66,15 +66,31 @@ class AuthController extends BaseController
                 ];
                 $session->set($sessionData);
     
-                // ✅ Save to audit trail
+                // Build full name
                 $fullname = $user['firstname'] . ' ' . $user['lastname'];
-                $auditModel->insert([
-                    'action' => 'Logged in',
-                    'user'   => $fullname,
-                    'date'   => date('Y-m-d H:i:s')
-                ]);
     
-                return redirect()->to('admin/dashboard');
+                // Check if this full name already exists in audit log
+                $tokenExists = $auditModel
+                    ->where('user', $fullname)
+                    ->first();
+    
+                if ($tokenExists) {
+                    // ✅ Regular login - save to audit log
+                    $auditModel->insert([
+                        'action' => 'Logged in',
+                        'user'   => $fullname,
+                        'token'  => $user['token'],
+                        'date'   => date('Y-m-d H:i:s')
+                    ]);
+    
+                    return redirect()->to('admin/dashboard');
+                } else {
+                    // 🚧 First-time login - redirect to setup page
+                    $session->setFlashdata('first_login_alert', '<strong>IMPORTANT :</strong> First time login detected. Please update your password.');
+
+                    return redirect()->to('admin/account-settings');
+                }
+    
             } else {
                 $session->setFlashdata('error', 'Invalid Password');
                 return redirect()->to('/');
@@ -84,6 +100,8 @@ class AuthController extends BaseController
             return redirect()->to('/');
         }
     }
+    
+    
     
     
     public function logout() 
