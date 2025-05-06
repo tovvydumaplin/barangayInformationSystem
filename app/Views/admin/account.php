@@ -107,7 +107,7 @@
                   readonly
                 />
                 <span class="input__title"
-                  >Suffix<span class="red__dot">*</span></span
+                  >Suffix</span
                 >
                 <p class="text-danger"></p>
               </div>
@@ -208,7 +208,7 @@
                   readonly
                 />
                 <span class="input__title"
-                  >Middlename<span class="red__dot">*</span></span
+                  >Middlename</span
                 >
                 <p class="text-danger"></p>
               </div>
@@ -326,7 +326,7 @@
                 readonly
               />
               <span class="input__title"
-                >Middlename<span class="red__dot">*</span></span
+                >Middlename</span
               >
               <p class="text-danger"></p>
             </div>
@@ -338,7 +338,7 @@
                 readonly
               />
               <span class="input__title"
-                >Suffix<span class="red__dot">*</span></span
+                >Suffix</span
               >
               <p class="text-danger"></p>
             </div>
