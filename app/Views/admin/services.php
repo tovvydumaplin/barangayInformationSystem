@@ -633,35 +633,7 @@ max-height: 82rem;
                   </div>
                   
                   <div id="officialsContainer" class="red__bg__page barangay-officials" style="padding: 10px; color: #000; overflow: hidden;">
-                      <p style="text-align: center; font-weight: bold; margin: 5px 0;">YOLANDA DC. CHI</p>
-                      <p style="text-align: center; font-style: italic; font-size: 12px; margin: 0 0 30px 0;">Punong Barangay</p>
 
-                      <p style="text-align: center; font-weight: bold; margin: 5px 0;">JAY-AR L. HERNANDEZ</p>
-                      <p style="text-align: center; font-style: italic; font-size: 12px; margin: 0 0 30px 0;">Comm. On Peace & Order and Public Safety</p>
-
-                      <p style="text-align: center; font-weight: bold; margin: 5px 0;">GERALD LOYOLA</p>
-                      <p style="text-align: center; font-style: italic; font-size: 12px; margin: 0 0 30px 0;">Comm. On Public Works and Infrastructure</p>
-
-                      <p style="text-align: center; font-weight: bold; margin: 5px 0;">JENNIE DARNELL P. DONES</p>
-                      <p style="text-align: center; font-style: italic; font-size: 12px; margin: 0 0 30px 0;">Comm. On Social Welfare Management and Development</p>
-
-                      <p style="text-align: center; font-weight: bold; margin: 5px 0;">DARYL A. HINZ L. ADIES</p>
-                      <p style="text-align: center; font-style: italic; font-size: 12px; margin: 0 0 30px 0;">Comm. On Health & Sanitation</p>
-
-                      <p style="text-align: center; font-weight: bold; margin: 5px 0;">MELISSA S. QUIAMBEL</p>
-                      <p style="text-align: center; font-style: italic; font-size: 12px; margin: 0 0 30px 0;">Comm. On Women & Children Affairs</p>
-
-                      <p style="text-align: center; font-weight: bold; margin: 5px 0;">ARIEL M. ADRIANO JR.</p>
-                      <p style="text-align: center; font-style: italic; font-size: 12px; margin: 0 0 30px 0;">Comm. On Disaster Preparedness</p>
-
-                      <p style="text-align: center; font-weight: bold; margin: 5px 0;">JANA VIEL M. ORCAS</p>
-                      <p style="text-align: center; font-style: italic; font-size: 12px; margin: 0 0 30px 0;">Comm. On Youth and Sports Development</p>
-
-                      <p style="text-align: center; font-weight: bold; margin: 5px 0;">ANNA VIANCA T. ORCAS</p>
-                      <p style="text-align: center; font-style: italic; font-size: 12px; margin: 0 0 30px 0;">Secretary</p>
-
-                      <p style="text-align: center; font-weight: bold; margin: 5px 0;">NANETTE R. CORDURA</p>
-                      <p style="text-align: center; font-style: italic; font-size: 12px; margin: 0 0 30px 0;">Treasurer</p>
                   </div>
               </td>
               
@@ -714,7 +686,7 @@ max-height: 82rem;
                       </p>
                       
                       <div style="margin-top: 60px; text-align: right; padding-right: 40px;">
-                          <p id="captainName" style="margin-bottom: 0; font-weight: bold;">YOLANDA DC. CHI</p>
+                          <p id="captainName" style="margin-bottom: 0; font-weight: bold;"></p>
                           <p style="margin-top: 0; font-style: italic;">Punong Barangay</p>
                       </div>
                       
@@ -747,31 +719,31 @@ max-height: 82rem;
     <script>
 function loadBarangayOfficials() {
   $.ajax({
-    url: '<?= base_url("admin/getOfficialForForms") ?>',  // If this is the same API, you can reuse it
+    url: '<?= base_url("admin/getOfficialForForms") ?>', 
     method: 'GET',
     dataType: 'json',
     success: function (response) {
       if (response.status === 'success') {
-        const officialsContainer = $(".barangay-officials-container"); // For the second form
-        officialsContainer.empty(); // Clear any existing content
+        const officialsContainer = $(".barangay-officials-container"); 
+        officialsContainer.empty(); 
 
-        // Loop through the officials
         response.data.forEach(function (official) {
           const fullname = [
             official.firstname,
             official.middlename,
             official.lastname,
-            official.suffix || ''
+            official.suffix !== null ? official.suffix : ''
           ].filter(Boolean).join(' ').toUpperCase();
 
-          const positionLabel = official.position === 'Barangay Captain'
+          const positionLabel = official.position === 'Captain'
             ? 'Punong Barangay'
             : official.position;
+          const position = (official.position || '').toLowerCase();
+          if (position === 'captain' || position === 'barangay captain') {
+            $('.captainFullname').text(fullname);  
+          }            
 
-          // If the official is the Barangay Captain, update the name in the existing <p class="captainFullname">
-          if (official.position === 'Barangay Captain') {
-            $('.captainFullname').text(fullname);  // This updates only the captain's name
-          }
+
 
           // Append other officials to the container
           const officialHTML = `
@@ -779,7 +751,7 @@ function loadBarangayOfficials() {
             <p style="text-align: center; font-style: italic; font-size: 12px; margin: 0 0 30px 0;">${positionLabel}</p>
           `;
           
-          officialsContainer.append(officialHTML);  // Append the rest of the officials
+          officialsContainer.append(officialHTML);  
         });
       }
     },
@@ -802,24 +774,23 @@ function loadOfficials() {
         const container = $(".barangay-officials");
         container.empty();
         
-        // Add captain name to the #captainName element
         response.data.forEach(function (official) {
           const fullname = [
             official.firstname,
             official.middlename,
             official.lastname,
-            official.suffix || ''
+            official.suffix !== null ? official.suffix : ''
           ].filter(Boolean).join(' ').toUpperCase();
 
-          const positionLabel = official.position === 'Barangay Captain'
+          const positionLabel = official.position === 'Captain'
             ? 'Punong Barangay'
             : official.position;
 
-          // Check if this is the Barangay Captain
-          if (official.position === 'Barangay Captain') {
-            // Set the captain name dynamically
-            document.getElementById('captainName').textContent = fullname;
-          }
+            const position = (official.position || '').toLowerCase();
+
+            if (position === 'captain' || position === 'barangay captain') {
+              document.getElementById('captainName').textContent = fullname;
+            }
 
           const officialHTML = `
             <p style="text-align: center; font-weight: bold; margin: 5px 0;">${fullname}</p>
@@ -837,6 +808,8 @@ function loadOfficials() {
 }
 
 loadOfficials();
+
+
 
 $('.btn__form').on('click', function() {
       // Handle active state

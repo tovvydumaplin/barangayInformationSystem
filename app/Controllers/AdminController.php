@@ -2890,7 +2890,7 @@ public function deleteReligion()
 }
 public function getReligionsSelect()
 {
-    $religionModel = new \App\Models\ReligionModel();
+    $religionModel = new ReligionModel();
 
     $religions = $religionModel
         ->where('status', 1)
@@ -2912,11 +2912,22 @@ public function getOfficialForForms()
         ->orderBy("FIELD(position, 'Barangay Captain') DESC, position ASC")
         ->findAll();
 
+    // Sanitize "null" strings. Changing them to empty rather than null. 
+    foreach ($officials as &$official) {
+        if ($official['middlename'] === 'null') {
+            $official['middlename'] = '';
+        }
+        if ($official['suffix'] === 'null') {
+            $official['suffix'] = '';
+        }
+    }
+
     return $this->response->setJSON([
         'status' => 'success',
         'data' => $officials
     ]);
 }
+
 
 
 
