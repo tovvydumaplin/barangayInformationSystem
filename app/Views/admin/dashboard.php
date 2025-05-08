@@ -34,7 +34,7 @@
       <div class="container">
         <div class="heading__box">
           <h1 class="heading__primary">
-            Welcome, <span class="heading__name">John!</span>
+            Welcome, <span class="heading__name"><?= session()->get('firstname'); ?>!</span>
           </h1>
         </div>
         <div class="cards margin__bottom__3">
@@ -238,7 +238,6 @@ const countResidents = function() {
         }
     });
 };
-
 const countCompletedComplaints = function() {
     $('#countCompletedComplaints').text('Loading...');
 
@@ -255,7 +254,6 @@ const countCompletedComplaints = function() {
         }
     });
 };
-
 const countPendingComplaints = function() {
     $('#countPendingComplaints').text('Loading...');
 
@@ -272,7 +270,6 @@ const countPendingComplaints = function() {
         }
     });
 };
-
 const loadEvents = function() {
     $.ajax({
         url: "<?= base_url('admin/get-events-dashboard') ?>",  
@@ -342,7 +339,6 @@ const loadNewUsers = function() {
         }
     });
 };
-
 const loadUpcomingBirthdays = function () {
     $.ajax({
         url: '<?= base_url("admin/get-upcoming-birthdays") ?>',
@@ -377,7 +373,6 @@ const loadUpcomingBirthdays = function () {
         }
     });
 };
-
 // Call the function to load new users when the document is ready
 $(document).ready(function() {
   loadUpcomingBirthdays();
@@ -407,10 +402,11 @@ document.addEventListener("DOMContentLoaded", function () {
           data.minors,
           data.non_voters,
           data.non_head,
-          data.head_of_family,  // Added head of family
+          data.head_of_family,
           data.archived,
           data.pwd,
           data.voters,
+          data.seniors, // ➕ Added senior citizens
         ],
         labels: [
           "Male",
@@ -418,10 +414,11 @@ document.addEventListener("DOMContentLoaded", function () {
           "Minors",
           "Non Voters",
           "Non Head of the Family",
-          "Head of the Family",  // Added label
+          "Head of the Family",
           "Archived",
           "PWD",
           "Voters",
+          "Senior Citizens", // ➕ Added label
         ],
         chart: {
           type: "donut",
@@ -433,10 +430,11 @@ document.addEventListener("DOMContentLoaded", function () {
           "#F44336", // Minors
           "#009688", // Non Voters
           "#FF9800", // Non Head
-          "#8E44AD", // Head of the Family (NEW)
+          "#8E44AD", // Head of the Family
           "#00BCD4", // Archived
           "#4CAF50", // PWD
           "#FFC107", // Voters
+          "#795548", // ➕ New color for Senior Citizens
         ],
         legend: {
           position: "left",
@@ -477,7 +475,7 @@ document.addEventListener("DOMContentLoaded", function () {
         tooltip: {
           y: {
             formatter: function (value) {
-              return value; // Value as is
+              return value;
             },
           },
         },
@@ -491,6 +489,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+
     </script>
     <script>
       $(document).ready(function () {

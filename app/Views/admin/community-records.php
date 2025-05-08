@@ -427,7 +427,7 @@
                 <select
                   class="information__input"
                   value=""
-                  placeholder="Enter Gender"
+                  placeholder="Enter Sex"
                   name="gender"
                   >
                   <option disabled selected>Select one</option>
@@ -435,7 +435,7 @@
                   <option value="Female">Female</option>
                 </select>
                 <span class="input__title"
-                  >Gender<span class="red__dot">*</span></span
+                  >Sex<span class="red__dot">*</span></span
                 >
                 <p class="text-danger"></p>
               </div>
@@ -545,13 +545,13 @@
                     id="houseNumberList"
                     class="information__input"
                     value=""
-                    placeholder="Enter House No."
+                    placeholder="Enter Household number"
                     name="house_no"
                   >
                     <option disabled selected>Select one</option>
                    </select>
                    <span class="input__title"
-                    >House No.<span class="red__dot">*</span></span>
+                    >Household number<span class="red__dot">*</span></span>
                   <p class="text-danger"></p>
                 </div>
                 <div class="input__box">
@@ -568,13 +568,13 @@
                   <input
                     class="information__input"
                     value=""
-                    placeholder="Enter Street"
+                    placeholder="Enter Street Address"
                     name="street"
                     id="streetInput"
                     
                   />
                   <span class="input__title"
-                    >Street<span class="red__dot">*</span></span
+                    >Street Address<span class="red__dot">*</span></span
                   >
                   <p class="text-danger"></p>
                 </div>
@@ -644,7 +644,7 @@
                       <th>#</th>
                       <th>Name</th>
                       <th>Role</th>
-                      <th>Gender</th>
+                      <th>Sex</th>
                       <th>Action</th>
                     </tr>
                   </thead>
@@ -830,7 +830,7 @@
               <select
                 class="information__input"
                 value=""
-                placeholder="Enter Gender"
+                placeholder="Enter Sex"
                 name="view_gender"
                 disabled
                 >
@@ -839,7 +839,7 @@
                 <option value="Female">Female</option>
               </select>
               <span class="input__title"
-                >Gender<span class="red__dot">*</span></span
+                >Sex<span class="red__dot">*</span></span
               >
               <p class="text-danger"></p>
             </div>
@@ -962,12 +962,12 @@
                 <input
                   class="information__input"
                   value=""
-                  placeholder="Enter House No."
+                  placeholder="Enter Household number"
                   name="view_house_no"
                   readonly
                 />
                 <span class="input__title"
-                  >House No.<span class="red__dot">*</span></span
+                  >Household number<span class="red__dot">*</span></span
                 >
                 <p class="text-danger"></p>
               </div>
@@ -975,13 +975,13 @@
                 <input
                   class="information__input"
                   value=""
-                  placeholder="Enter Street"
+                  placeholder="Enter Street Address"
                   name="view_street"
                   readonly
                   
                 />
                 <span class="input__title"
-                  >Street<span class="red__dot">*</span></span
+                  >Street Address<span class="red__dot">*</span></span
                 >
                 <p class="text-danger"></p>
               </div>
@@ -1042,6 +1042,19 @@
               />
           </div>
         <!-- Emergency Contact END -->
+
+        <!-- REASON FOR ARCHIVE -->
+          <div class="input__box view_archive_reason">
+            <input
+              class="information__input"
+              value=""
+              name="view_archive_reason"
+              readonly
+            />
+            <span class="input__title"
+              >Archive Reason</span
+            >
+          </div>
         </form>
         <div class="btn__box__modal submit__box">
           <button type="button" id="editViewResident" class="btn__edit__resident">
@@ -1206,8 +1219,8 @@
                   <!-- <th>Birthdate</th> -->
                   <th>Age</th>
                   <th>Civil Status</th>
-                  <th>Gender</th>
-                  <th>House No.</th>
+                  <th>Sex</th>
+                  <th>Household Number</th>
                   <!-- <th>Voter</th>
                   <th>Family Head</th>
                   <th>Contact No.</th> -->
@@ -1350,7 +1363,7 @@ const getHouseStreet = function () {
           $('#streetInput').val(response.data.house_street);
         } else {
           $('#streetInput').val(""); 
-          alert("Street not found for this house number.");
+          alert("Street Address not found for this house number.");
         }
       },
       error: function () {
@@ -1440,14 +1453,14 @@ const saveMemberLocally = function (e) {
         );
 
         if (existingHead) {
-            openErrorDisplay(`A family head already exists for House No. <b>${formData.house_no}</b> (Local).`);
+            openErrorDisplay(`A family head already exists for Household number <b>${formData.house_no}</b> (Local).`);
             return;
         }
 
         // Check with the database
         checkFamilyHeadInDatabase(formData.house_no, function (isExist) {
             if (isExist) {
-                openErrorDisplay(`A family head already exists for House No. <b>${formData.house_no}</b>.`);
+                openErrorDisplay(`A family head already exists for Household number <b>${formData.house_no}</b>.`);
                 return;
             }
 
@@ -1537,7 +1550,7 @@ const loadResidents = function() {
                 const residents = response.data;
                 const tableData = residents.map(resident => [
                     resident.resident_id,
-                    `${resident.firstname} ${resident.middlename ? resident.middlename.charAt(0) + '.' : ''} ${resident.lastname} ${resident.suffix || ''}`,
+                    `${resident.firstname} ${resident.middlename || ''} ${resident.lastname} ${resident.suffix || ''}`,
                     resident.birthdate ? calculateAge(resident.birthdate) : 'N/A',
                     resident.civil_status || 'N/A',
                     resident.gender || 'N/A',
@@ -1556,8 +1569,8 @@ const loadResidents = function() {
                         { title: "Name" },
                         { title: "Age" },
                         { title: "Civil Status" },
-                        { title: "Gender" },
-                        { title: "House No." },
+                        { title: "Sex" },
+                        { title: "Household number" },
                         { title: "Action", orderable: false }
                     ],
                     columnDefs: [
@@ -1600,8 +1613,8 @@ const loadResidents = function() {
                         { title: "Name" },
                         { title: "Age" },
                         { title: "Civil Status" },
-                        { title: "Gender" },
-                        { title: "House No." },
+                        { title: "Sex" },
+                        { title: "Household number" },
                         { title: "Action", orderable: false }
                     ],
                     language: {
@@ -1635,79 +1648,79 @@ const loadArchivedResidents = function() {
     // Loading
     $tableBody.html('<tr><td colspan="10" class="text-center">Loading...</td></tr>');
 
-    $.ajax({
-        url: "/admin/get-archived-residents",
-        type: "GET",
-        dataType: "json",
-        cache: true,
-        success: function(response) {
-            if (response.success && Array.isArray(response.data) && response.data.length) {
-                const residents = response.data;
-                const tableData = residents.map(resident => [
-                    resident.resident_id,
-                    `${resident.firstname} ${resident.middlename ? resident.middlename.charAt(0) + '.' : ''} ${resident.lastname} ${resident.suffix || ''}`,
-                    resident.birthdate ? calculateAge(resident.birthdate) : 'N/A',
-                    resident.civil_status || 'N/A',
-                    resident.gender || 'N/A',
-                    resident.house_no || 'N/A',
-                    `<button class="btn__primary view__resident__btn action-btn" data-id="${resident.resident_id}">View</button>`
-                ]);
+      $.ajax({
+      url: "/admin/get-archived-residents",
+      type: "GET",
+      dataType: "json",
+      cache: true,
+      success: function(response) {
+          if (response.success && Array.isArray(response.data) && response.data.length) {
+              const residents = response.data;
+              const tableData = residents.map(resident => [
+                  resident.resident_id,
+                  `${resident.firstname} ${resident.middlename || ''} ${resident.lastname} ${resident.suffix || ''}`,
+                  resident.birthdate ? calculateAge(resident.birthdate) : 'N/A',
+                  resident.civil_status || 'N/A',
+                  resident.gender || 'N/A',
+                  resident.house_no || 'N/A',
+                  `<button class="btn__primary view__resident__btn action-btn" data-id="${resident.resident_id}">View</button>`
+              ]);
 
-                // Initialize DataTable
-                $residentsTable.DataTable({
-                    "processing": true,
-                    "serverSide": false,
-                    "data": tableData,
-                    "columns": [
-                        { "title": "ID" },
-                        { "title": "Name" },
-                        { "title": "Age" },
-                        { "title": "Civil Status" },
-                        { "title": "Gender" },
-                        { "title": "House No." },
+              // Initialize DataTable
+              $residentsTable.DataTable({
+                  "processing": true,
+                  "serverSide": false,
+                  "data": tableData,
+                  "columns": [
+                      { "title": "ID" },
+                      { "title": "Name" },
+                      { "title": "Age" },
+                      { "title": "Civil Status" },
+                      { "title": "Sex" },
+                      { "title": "Household number" },
+                      { "title": "Action", "orderable": false }
+                  ],
+                  "columnDefs": [
+                      { "width": "80px", "targets": -1 } // Set the width for the last column (Action)
+                  ],
+                  "order": [[0, "desc"]],
+                  "language": {
+                      "emptyTable": "No residents found"
+                  },
+                  "pagingType": "simple_numbers",
+                  "autoWidth": false, 
+                  "responsive": true  
+              });
 
-                        { "title": "Action", "orderable": false }
-                    ],
-                    "columnDefs": [
-                          { "width": "80px", "targets": -1 } // Set the width for the last column (Action)
-                      ],
-                    "order": [[0, "desc"]],
-                    "language": {
-                        "emptyTable": "No residents found"
-                    },
-                    "pagingType": "simple_numbers",
-                    "autoWidth": false, 
-                    "responsive": true  
-                });
+          } else {
+              // Initialize DataTable with empty data to prevent error
+              $residentsTable.DataTable({
+                  "processing": true,
+                  "serverSide": false,
+                  "data": [],
+                  "columns": [
+                      { "title": "ID" },
+                      { "title": "Name" },
+                      { "title": "Age" },
+                      { "title": "Civil Status" },
+                      { "title": "Sex" },
+                      { "title": "Household number" },
+                      { "title": "Action", "orderable": false }
+                  ],
+                  "language": {
+                      "emptyTable": "No residents found"
+                  },
+                  "pagingType": "simple_numbers"
+              });
+          }
+          customLoaderOff();
+      },
+      error: function(xhr, status, error) {
+          $tableBody.html('<tr><td colspan="10" class="text-center">Error loading data</td></tr>');
+          console.error("AJAX Error:", error);
+      }
+  });
 
-            } else {
-                // Initialize DataTable with empty data to prevent error
-                $residentsTable.DataTable({
-                    "processing": true,
-                    "serverSide": false,
-                    "data": [],
-                    "columns": [
-                        { "title": "ID" },
-                        { "title": "Name" },
-                        { "title": "Age" },
-                        { "title": "Civil Status" },
-                        { "title": "Gender" },
-                        { "title": "House No." },
-                        { "title": "Action", "orderable": false }
-                    ],
-                    "language": {
-                        "emptyTable": "No residents found"
-                    },
-                    "pagingType": "simple_numbers"
-                });
-            }
-            customLoaderOff();
-        },
-        error: function(xhr, status, error) {
-            $tableBody.html('<tr><td colspan="10" class="text-center">Error loading data</td></tr>');
-            console.error("AJAX Error:", error);
-        }
-    });
 };
 // not yet
 const loadHouseholdRecords = function() {
@@ -1750,7 +1763,7 @@ const loadHouseholdRecords = function() {
                         { "title": "Name" },
                         { "title": "Age" },
                         { "title": "Civil Status" },
-                        { "title": "Gender" },
+                        { "title": "Sex" },
 
                         { "title": "Action", "orderable": false }
                     ],
@@ -1777,7 +1790,7 @@ const loadHouseholdRecords = function() {
                         { "title": "Name" },
                         { "title": "Age" },
                         { "title": "Civil Status" },
-                        { "title": "Gender" },
+                        { "title": "Sex" },
                         { "title": "Action", "orderable": false }
                     ],
                     "language": {
@@ -1854,30 +1867,47 @@ const saveResidents = function() {
         }
     });
 };
-const archiveResident = function (archiveResidentId) {
+// Archive Resident
+$('#archiveButton').on('click', function () {
+    // Ask for a reason to archive
+    const reason = prompt("Please enter a reason for archiving this resident:");
+
+    if (reason !== null && reason.trim() !== "") {
+        // Proceed with archiving
+        const residentIdToArchive = $(this).data('resident-id');
+        archiveResident(residentIdToArchive, reason.trim());
+    } else {
+        // User cancelled or left reason empty
+        return;
+    }
+});
+const archiveResident = function (archiveResidentId, reason) {
   $.ajax({
-        url: "<?= base_url('admin/archive-resident') ?>", 
-        type: "POST",
-        data: { residentIdData: archiveResidentId }, 
-        dataType: "json",
-        success: function (response) {
-          saveAction("Archived a resident");
+    url: "<?= base_url('admin/archive-resident') ?>", 
+    type: "POST",
+    data: {
+      residentIdData: archiveResidentId,
+      archiveReason: reason
+    }, 
+    dataType: "json",
+    success: function (response) {
+      saveAction("Archived a resident: " + reason);
 
-            if (response.success) {
-              closeModal();
-              loadResidents();
-              $(".success__indicator").removeClass("hide").find(".indicator__text").html("Resident archived!");
-              setTimeout(() => $(".success__indicator").addClass("hide"), 3000);
-            } else {
-              openErrorDisplay(`Failed to load resident details.`);
-            }
-        },
-        error: function () {
-            openErrorDisplay(`An error occurred while fetching resident details.`);
-
-        }
-    });
+      if (response.success) {
+        closeModal();
+        loadResidents();
+        $(".success__indicator").removeClass("hide").find(".indicator__text").html("Resident archived!");
+        setTimeout(() => $(".success__indicator").addClass("hide"), 3000);
+      } else {
+        openErrorDisplay(`Failed to load resident details.`);
+      }
+    },
+    error: function () {
+      openErrorDisplay(`An error occurred while archiving resident.`);
+    }
+  });
 }
+
 const reactivateResident = function(resId) {
   $.ajax({
       url: "<?= base_url('admin/reactivate-resident') ?>", 
@@ -1914,7 +1944,6 @@ const viewResidentData = function (residentId) {
         $("input[name='view_middlename']").val(response.data.middlename);
         $("input[name='view_contact_no']").val(response.data.contact_no);
         $("input[name='view_birthdate']").val(response.data.birthdate);
-        $("input[name='view_age']").val(response.data.age);
         $("input[name='view_birthplace']").val(response.data.birthplace);
         $("select[name='view_suffix']").val(response.data.suffix);
         $("select[name='view_citizenship']").val(response.data.citizenship);
@@ -1931,16 +1960,47 @@ const viewResidentData = function (residentId) {
         $('#archiveButton').data('resident-id', residentId);
         $('#reactivateButton').data('resident-id', residentId);
         $('#residentStatus').val(response.data.status);
-        
+        $("input[name='view_archive_reason']").val(response.data.archive_reason);
+
+        // Set radio button for PWD
+        $(`input[name="view_is_pwd"][value="${response.data.is_pwd}"]`).prop('checked', true);
+
+        // Set radio button for Voter of Barangay
+        $(`input[name="view_is_voter_of_barangay"][value="${response.data.is_voter_of_barangay}"]`).prop('checked', true);
+
+        // Set radio button for Head of the Family
+        $(`input[name="view_is_family_head"][value="${response.data.is_family_head}"]`).prop('checked', true);
+
         // Set religion select dropdown based on the resident's religion
         setResidentReligion(response.data.religion);
 
+        // Calculate age from birthdate
+        const birthdate = new Date(response.data.birthdate);
+        const age = calculateAge(birthdate);
+        $("input[name='view_age']").val(age);
+
+        // Disable "Yes" for voters if age is 16 or below
+        if (age <= 16) {
+          $('input[name="view_is_voter_of_barangay"][value="1"]').prop('disabled', true).prop('checked', false);
+        } else {
+          $('input[name="view_is_voter_of_barangay"][value="1"]').prop('disabled', false);
+        }
+
+        // Archive/reactivate button logic with archive reason check
+        const archiveReason = response.data.archive_reason?.toLowerCase();
         if (response.data.status == 1) {
           $('#archiveButton').show();
           $('#reactivateButton').hide();
+          $('.view_archive_reason').hide();
         } else {
           $('#archiveButton').hide();
-          $('#reactivateButton').show();
+          $('.view_archive_reason').show();
+
+          if (archiveReason === 'deceased' || archiveReason === 'dead') {
+            $('#reactivateButton').hide(); // Do not allow reactivation for deceased
+          } else {
+            $('#reactivateButton').show();
+          }
         }
       } else {
         alert("Failed to fetch resident details.");
@@ -1951,6 +2011,11 @@ const viewResidentData = function (residentId) {
     }
   });
 };
+
+
+// Function to calculate age from birthdate
+
+
 const customLoaderOn = function() {
   $('.custom__loader').removeClass('hide');
 }
@@ -2052,7 +2117,7 @@ const loadFilteredResidents = function(filter) {
 
                     Object.entries(grouped).forEach(([houseNo, members]) => {
                         tableData.push([
-                            "", `<strong>🏠 House No: ${houseNo}</strong>`, "", "", "", "", ""
+                            "", `<strong>🏠 Household Number: ${houseNo}</strong>`, "", "", "", "", ""
                         ]);
 
                         members.forEach(resident => {
@@ -2089,8 +2154,8 @@ const loadFilteredResidents = function(filter) {
                         { title: "Name" },
                         { title: "Age" },
                         { title: "Civil Status" },
-                        { title: "Gender" },
-                        { title: "House No." },
+                        { title: "Sex" },
+                        { title: "Household number" },
                         { title: "Action", orderable: false }
                     ],
                     columnDefs: [{ width: "80px", targets: -1 }],
@@ -2150,8 +2215,8 @@ const loadFilteredResidents = function(filter) {
                         { title: "Name" },
                         { title: "Age" },
                         { title: "Civil Status" },
-                        { title: "Gender" },
-                        { title: "House No." },
+                        { title: "Sex" },
+                        { title: "Household number" },
                         { title: "Action", orderable: false }
                     ],
                     language: { emptyTable: "No residents found" },
@@ -2313,20 +2378,8 @@ $(document).on("click", "#editViewResident", function() {
 
 
 
-// Archive Resident
-$('#archiveButton').on('click', function() {
-    // Show confirmation prompt
-    const isConfirmed = confirm("Are you sure you want to archive this resident?");
 
-    if (isConfirmed) {
-        // If the user clicks "OK", proceed with archiving
-        residentIdToArchive = $(this).data('resident-id');
-        archiveResident(residentIdToArchive);
-    } else {
-        // If the user clicks "Cancel", do nothing
-        return;
-    }
-});
+
 
 
 // Reactivate Resident
@@ -3018,6 +3071,26 @@ getSuffixes();
   // ~~~~~~~~~~~~~~~~~~~~~~~~ ⚡ ON LOAD ⚡ ~~~~~~~~~~~~~~~~~~~~~~~~ //
   loadHouseMarkers();
 });    
+
+$(document).ready(function () {
+  $('input[name="birthdate"]').on('change', function () {
+    const birthdate = new Date($(this).val());
+    const today = new Date();
+    let age = today.getFullYear() - birthdate.getFullYear();
+    const m = today.getMonth() - birthdate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthdate.getDate())) {
+      age--;
+    }
+
+    if (age <= 16) {
+      // Disable and uncheck "Yes"
+      $('input[name="is_voter_of_barangay"][value="1"]').prop('checked', false).prop('disabled', true);
+    } else {
+      // Enable "Yes" if age is over 16
+      $('input[name="is_voter_of_barangay"][value="1"]').prop('disabled', false);
+    }
+  });
+});
 </script>
 
     <script>

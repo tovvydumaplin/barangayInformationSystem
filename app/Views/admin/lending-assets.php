@@ -228,6 +228,168 @@
               </div>
           </form>
       </div>
+      <!-- Modal to View/Edit Item Consumables -->
+      <div id="viewConsumablesModal" class="modal">
+          <div class="modal__header">
+              <p class="modal__heading">View Consumable Item</p>
+          </div>
+          <form class="modal__body community__modal" id="updateConsumableForm" method="post"> 
+              <div class="row flex__d__col">
+                  <div class="row">
+                  <input type="hidden" id="consumable_id" name="consumable_id" />
+
+                      <div class="input__box">
+                          <input
+                              id="viewConsumableName"
+                              class="information__input"
+                              value=""
+                              placeholder="Enter name"
+                              name="view_consumable_name"
+                              readonly
+                          />
+                          <span class="input__title">Item name<span class="red__dot">*</span></span>
+                          <p class="text-danger"></p>
+                      </div>
+                  </div>
+                  <div class="row">
+                    <div class="input__box">
+                      <textarea
+                        id="viewConsumableDescription"
+                        class="information__input"
+                        value=""
+                        placeholder="Enter Description"
+                        name="view_consumable_description"
+                      ></textarea>
+
+                      <span class="input__title"
+                        >Description<span class="red__dot">*</span></span
+                      >
+                      <p class="text-danger"></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                      <div class="input__box">
+                          <input
+                              id="viewItemQuantity"
+                              class="information__input"
+                              value=""
+                              placeholder="Enter quantity"
+                              name="view_item_quantity"
+                              type="number"
+                              readonly
+                          />
+
+                          <span class="input__title">Quantity<span class="red__dot">*</span></span>
+                          <p class="text-danger"></p>
+                      </div>
+                  </div>
+                  <div class="row flex stock__radio d__none">
+                      <label style="font-weight: 600">Stock Action:</label>
+                      <div>
+                        <input type="radio" class="btn__stock__in" name="cons_stock_in_out" value="in"> Stock In
+                      </div>
+                      <div>
+                        <input type="radio" class="btn__stock__out" name="cons_stock_in_out" value="out"> Stock Out
+                      </div>
+                  </div>
+                  <div class="row stock__desc d__none">
+                      <div class="input__box">
+                          <input
+                              id="viewItemQuantityUpdate"
+                              class="information__input"
+                              value=""
+                              placeholder="Enter quantity"
+                              name="view_item_quantity_update"
+                              type="number"
+                          />
+
+                          <span class="input__title in__out__quantity">Stock-in Quantity<span class="red__dot">*</span></span>
+                          <p class="text-danger"></p>
+                      </div>
+                  </div>
+                  <div class="row stock__desc d__none">
+                      <div class="input__box">
+                          <textarea
+                              id="viewItemQuantityDesc"
+                              class="information__input"
+                              value=""
+                              placeholder="Enter quantity"
+                              name="view_item_quantity_desc"
+                              type="number"
+                          ></textarea>
+                          <span class="input__title stock__title">Reason for Stock-In<span class="red__dot">*</span></span>
+                          <p class="text-danger"></p>
+                      </div>
+                  </div>
+              </div>
+              <div class="btn__box__modal">
+                  <span class="btn__save__consumables btn__primary active d__none" id="editItemBtnConsumable">Save Changes</span>
+                  <span class="btn__edit__consumables btn__primary" id="">Edit</span>
+              </div>
+          </form>
+      </div>
+
+      <!-- Create Consumables Modal -->
+      <div id="createConsumables" class="modal">
+        <div class="modal__header">
+          <p class="modal__heading">Register Item</p>
+        </div>
+        <form class="modal__body community__modal">
+          <div class="row flex__d__col">
+            <div class="row">
+              <div class="input__box">
+                <input
+                  id="consumableName"
+                  class="information__input"
+                  value=""
+                  placeholder="Enter name"
+                  name="item_name"
+                />
+                <span class="input__title"
+                  >Item name<span class="red__dot">*</span></span
+                >
+                <p class="text-danger"></p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input__box asset__qty">
+                <input
+                  id="itemQuantity"
+                  class="information__input"
+                  value=""
+                  placeholder="Enter quantity"
+                  name="item_quantity"
+                />
+
+                <span class="input__title"
+                  >Quantity<span class="red__dot">*</span></span
+                >
+                <p class="text-danger"></p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input__box">
+                <textarea
+                  id="itemDescription"
+                  class="information__input"
+                  value=""
+                  placeholder="Enter Description"
+                  name="item_description"
+                ></textarea>
+
+                <span class="input__title"
+                  >Description<span class="red__dot">*</span></span
+                >
+                <p class="text-danger"></p>
+              </div>
+            </div>
+          </div>
+          <div class="btn__box__modal">
+            <span class="btn__primary active btn__register__consumable">Register Item</span>
+          </div>
+        </form>
+      </div>
+      <!-- Create Consumables Modal End -->
 
       <!-- Borrow item modal -->
       <div id="borrowItemModal" class="modal">
@@ -370,7 +532,11 @@
         <div class="heading__box">
           <div class="tab__container">
             <div class="btn__container tab__1 visible">
-              <button class="tab__btn inventory__tab">Inventory</button>
+              <button class="tab__btn inventory__tab">Inventory (Non-Consumables)</button>
+              <div class="active__tab"></div>
+            </div>
+            <div class="btn__container tab__4">
+              <button class="tab__btn consumables__tab">Inventory (Consumables)</button>
               <div class="active__tab"></div>
             </div>
             <div class="btn__container tab__2">
@@ -379,6 +545,10 @@
             </div>
             <div class="btn__container tab__3">
               <button class="tab__btn inventory__history__btn">Inventory History</button>
+              <div class="active__tab"></div>
+            </div>
+            <div class="btn__container tab__5">
+              <button class="tab__btn inventory__history__cons__btn">Inventory History(Consumables)</button>
               <div class="active__tab"></div>
             </div>
           </div>
@@ -493,6 +663,62 @@
           </div>
         </div>
         <!-- Lending Item Tab ENDS -->
+        <!-- Consumables Item Tab -->
+        <div class="card consumables__item d__none">
+          <div class="heading__container">
+            <p class="subheading">Consumables Items</p>
+            <div class="button__box">
+              <button class="btn__secondary active btn__add__consumables">
+                <div class="icon__link">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="ionicon"
+                    viewBox="0 0 512 512"
+                  >
+                    <path
+                      d="M376 144c-3.92 52.87-44 96-88 96s-84.15-43.12-88-96c-4-55 35-96 88-96s92 42 88 96z"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="32"
+                    />
+                    <path
+                      d="M288 304c-87 0-175.3 48-191.64 138.6-2 10.92 4.21 21.4 15.65 21.4H464c11.44 0 17.62-10.48 15.65-21.4C463.3 352 375 304 288 304z"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-miterlimit="10"
+                      stroke-width="32"
+                    />
+                    <path
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="32"
+                      d="M88 176v112M144 232H32"
+                    />
+                  </svg>
+                </div>
+                Add Item
+              </button>
+            </div>
+          </div>
+          <div class="container">
+          <table id="consumablesTable" class="display">
+            <thead>
+              <tr>
+                <th>Item Name</th>
+                <th>Quantity</th>
+                <th>Date added</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+          </div>
+        </div>
+        <!-- Lending Item Tab ENDS -->
         <!-- Inventory History Tab -->
         <div class="card inventory__history d__none">
           <div class="heading__container">
@@ -517,6 +743,30 @@
           </div>
         </div>
         <!-- Inventory history Tab ENDS -->
+        <!-- Inventory History Cons Tab -->
+        <div class="card inventory__history__cons d__none">
+          <div class="heading__container">
+            <p class="subheading">Consumables Inventory History</p>
+          </div>
+          <div class="container">
+          <table id="historyConsumables" class="display">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Item Name</th>
+                <th>Type</th>
+                <th>Quantity</th>
+                <th>Previous Quantity</th>
+                <th>New Quantity</th>
+                <th>Updated By</th>
+                <th>Reason</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+          </div>
+        </div>
+        <!-- Inventory history Cons Tab ENDS -->
       </div>
       <footer class="footer">
         <p class="copyright">
@@ -1066,6 +1316,7 @@ $('#lendBtn').on('click', function () {
         });
     };
 
+
     $('#inventoryTable').on('click', '.view-item-btn', function() {
         const itemId = $(this).data('item-id');  
         viewItem(itemId);  
@@ -1077,6 +1328,149 @@ $('#lendBtn').on('click', function () {
         $('.btn__edit__asset').removeClass("d__none");
         
     });
+    // EDIT HERE
+    // View consumable
+    $(document).on('click', '.view__consumable__btn', function () {
+    const consumableId = $(this).data('id');
+    $('#consumable_id').val(consumableId);
+
+    $.ajax({
+        url: '/admin/get-consumable/' + consumableId,
+        type: 'GET',
+        dataType: 'json',
+        success: function (response) {
+            if (response.success) {
+                const data = response.data;
+
+                $('#viewConsumableName').val(data.item_name);
+                $('#viewConsumableDescription').val(data.item_description);
+                $('#viewItemQuantity').val(data.item_quantity);
+
+                $('#viewConsumablesModal').addClass('open');
+                $('.wrapper').addClass('open');
+                let originalStock = parseInt($('#viewItemQuantity').val()) || 0; 
+                let currentStock = originalStock; 
+                $('#viewItemQuantityUpdate').off('input').on('input', function() {
+                  let rawValue = $(this).val().replace(/[^0-9]/g, ''); 
+                  $(this).val(rawValue); 
+
+                  let enteredValue = rawValue === '' ? 0 : parseInt(rawValue);
+                  if (isNaN(enteredValue)) enteredValue = 0;
+
+                  let stockAction = $('input[name="cons_stock_in_out"]:checked').val(); 
+
+                  if (stockAction === 'out' && enteredValue > currentStock) {
+                      $(this).val(currentStock); 
+                      enteredValue = currentStock;
+                      alert('Cannot stock out more than available quantity.');
+                  }
+
+                  if (stockAction === 'in') {
+                      currentStock = originalStock + enteredValue;
+                  } else if (stockAction === 'out') {
+                      currentStock = originalStock - enteredValue;
+                  }
+
+                  $('#viewItemQuantity').val(currentStock);
+
+                  if (rawValue === '') {
+                      $('#viewItemQuantity').val(originalStock);
+                      currentStock = originalStock;
+                  }
+              });
+
+
+
+            } else {
+                alert('Item not found.');
+            }
+        },
+        error: function () {
+            alert('Failed to fetch data.');
+        }
+    });
+});
+
+
+// Update consumable
+  $('#editItemBtnConsumable').on('click', function () {
+    console.log($('#updateConsumableForm').serialize()); // Log the data being sent
+    const id = $('#consumable_id').val();
+
+    $.ajax({
+        url: '/admin/update-consumable',
+        type: 'POST',
+        dataType: 'json',
+        data: $('#updateConsumableForm').serialize(),
+        success: function (response) {
+            if (response.success) {
+                alert('Updated!');
+                $('#viewConsumablesModal').removeClass('open');
+                getConsumables(); // Refresh DataTable
+            } else {
+                alert(response.message);
+            }
+        },
+        error: function () {
+            alert('Update failed.');
+        }
+    });
+});
+// Get all consumable history
+$(document).on('click', '.inventory__history__cons__btn', function () {
+    $.ajax({
+        url: '/admin/get-all-consumable-history', 
+        type: 'GET',
+        dataType: 'json',
+        success: function (response) {
+            if (response.success) {
+                const data = response.data;
+
+                // Show the inventory history section
+                $('.inventory__history__cons').removeClass('d__none');
+
+                // Initialize the DataTable if not already initialized
+                if (!$.fn.dataTable.isDataTable('#historyConsumables')) {
+                    $('#historyConsumables').DataTable({
+                        destroy: true, // Destroy any existing instance before reinitializing
+                        data: data,    // Pass the history data to the table
+                        columns: [
+                            { data: 'id' },
+                            { data: 'item_name' },
+                            { data: 'type' },
+                            { data: 'quantity' },
+                            { data: 'old_quantity' },
+                            { data: 'new_quantity' },
+                            { data: 'updated_by' },
+                            { data: 'in_out_reason' }
+                        ],
+                        order: [[0, 'desc']] // Ensure the table is ordered by the ID (or created_at if available) in descending order
+                    });
+                } else {
+                    // If DataTable is already initialized, just update the data
+                    var table = $('#historyConsumables').DataTable();
+                    table.clear().rows.add(data).draw();
+                }
+            } else {
+                alert('No history found.');
+            }
+        },
+        error: function () {
+            alert('Failed to fetch consumable history.');
+        }
+    });
+});
+
+
+
+  $('.btn__edit__consumables').on('click', function () {
+      $('#viewConsumableName, #viewItemQuantity, #viewConsumableDescription').prop('readonly', false);
+      $('.stock__radio').removeClass('d__none');
+      $('#editItemBtnConsumable').removeClass('d__none');
+      $(this).addClass('d__none');
+  });
+
+
     $('.close').on('click', function() {
         $('#viewItemModal').hide();
     });
@@ -1297,6 +1691,92 @@ const inventoryHistory = function() {
     });
 };
 
+// Load consumables
+function getConsumables() {
+    if ($.fn.dataTable.isDataTable('#consumablesTable')) {
+        $('#consumablesTable').DataTable().destroy();
+    }
+
+    $('#consumablesTable').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: {
+            url: '/admin/get-consumables', 
+            type: 'GET',
+            dataType: 'json',
+            dataSrc: 'data', 
+        },
+        columns: [
+            { title: "Item Name", data: "item_name" },
+            { title: "Quantity", data: "item_quantity" },
+            { title: "Date Added", data: "created_at" },
+            {
+                title: "Action",
+                data: null,
+                render: function(data, type, row) {
+                    return `<button class="btn__primary view__consumable__btn action-btn" data-id="${row.id}">View</button>`;
+                },
+                orderable: false
+            }
+        ],
+        columnDefs: [
+            {
+                targets: 2,
+                render: function(data, type, row) {
+                    return new Date(data).toLocaleDateString();
+                }
+            }
+        ],
+        order: [[2, 'desc']], 
+        pagingType: "simple_numbers",
+        autoWidth: false,
+        responsive: true,
+        language: {
+            emptyTable: "No consumables found"
+        }
+    });
+};
+getConsumables();
+$('.consumables__tab').on("click", function() {
+    getConsumables();
+  })
+// Create Consumables
+
+const createConsumables = function() {
+    const consumableName = $("#consumableName").val();
+    const itemQuantity = $("#itemQuantity").val();
+    const itemDescription = $("#itemDescription").val();
+
+    $.ajax({
+        url: "/admin/create-consumables",
+        type: "POST",
+        dataType: "json",
+        data: {
+            item_name: consumableName,
+            item_quantity: itemQuantity,
+            item_description: itemDescription
+        },
+        success: function(response) {
+            if (response.success) {
+                alert(response.message); // Success message
+                // You can also reset the form or do something else here
+            } else {
+                alert(response.message); // Error message
+            }
+        },
+        error: function(xhr, status, error) {
+            alert('Error: ' + error);
+        }
+    });
+};
+
+
+// Event listener for form submission
+$(".btn__register__consumable").on("click", function() {
+    createConsumables();
+});
+
+
 
 
 // Lending table
@@ -1319,10 +1799,17 @@ $(document).ready(function () {
     $("#registerItemModal").addClass("open");
   });
 
+
+
   $(".btn__borrow__item").on("click", function () {
     $(".wrapper").addClass("open");
     $("#borrowItemModal").addClass("open");
     $('#stockCount').hide();
+  });
+
+  $(".btn__add__consumables").on("click", function () {
+    $(".wrapper").addClass("open");
+    $("#createConsumables").addClass("open");
   });
 
   // Close on wrapper click or close button
@@ -1332,6 +1819,8 @@ $(document).ready(function () {
     $("#viewItemModal").removeClass("open");
     $("#borrowItemModal").removeClass("open");
     $("#viewBorrowItemModal").removeClass("open");
+    $("#createConsumables").removeClass("open");
+    $("#viewConsumablesModal").removeClass("open");
 
   });
 
@@ -1340,6 +1829,9 @@ $(document).ready(function () {
     if (event.key === "Escape") {
       $(".wrapper").removeClass("open");
       $("#registerItemModal").removeClass("open");
+      $("#createConsumables").removeClass("open");
+    $("#viewConsumablesModal").removeClass("open");
+
       $("#viewItemModal").removeClass("open");
       $("#borrowItemModal").removeClass("open");
     $("#viewBorrowItemModal").removeClass("open");
@@ -1363,27 +1855,72 @@ $(document).ready(function () {
     $(".tab__1").addClass("visible");
     $(".tab__2").removeClass("visible");
     $(".tab__3").removeClass("visible");
+    $(".tab__4").removeClass("visible");
+    $(".tab__5").removeClass("visible");
     $('.lending__items ').addClass('d__none');
     $('.inventory__history').addClass('d__none');
     $('.card__inventory ').removeClass('d__none');
+    $('.consumables__item').addClass('d__none');
+    $('.inventory__history__cons').addClass('d__none');
+
   });
 
   $(".tab__2").on("click", function () {
     $(".tab__2").addClass("visible");
     $(".tab__1").removeClass("visible");
     $(".tab__3").removeClass("visible");
+    $(".tab__4").removeClass("visible");
+    $(".tab__5").removeClass("visible");
     $('.lending__items ').removeClass('d__none');
     $('.inventory__history').addClass('d__none');
     $('.card__inventory ').addClass('d__none');
+    $('.consumables__item').addClass('d__none');
+    $('.inventory__history__cons').addClass('d__none');
+
+
   });
   $(".tab__3").on("click", function () {
     $(".tab__2").removeClass("visible");
     $(".tab__1").removeClass("visible");
     $(".tab__3").addClass("visible");
+    $(".tab__4").removeClass("visible");
+    $(".tab__5").removeClass("visible");
+    $('.inventory__history__cons').addClass('d__none');
+
+
     $('.lending__items ').addClass('d__none');
     $('.card__inventory ').addClass('d__none');
     $('.inventory__history').removeClass('d__none');
+    $('.consumables__item').addClass('d__none');
     inventoryHistory();
+  });
+  $(".tab__4").on("click", function () {
+    $(".tab__2").removeClass("visible");
+    $(".tab__1").removeClass("visible");
+    $(".tab__3").removeClass("visible");
+    $(".tab__5").removeClass("visible");
+    $(".tab__4").addClass("visible");
+    $('.inventory__history__cons').addClass('d__none');
+
+    $('.lending__items ').addClass('d__none');
+    $('.card__inventory ').addClass('d__none');
+    $('.inventory__history').addClass('d__none');
+    $('.consumables__item').removeClass('d__none');
+  });
+  $(".tab__5").on("click", function () {
+    $(".tab__2").removeClass("visible");
+    $(".tab__1").removeClass("visible");
+    $(".tab__3").removeClass("visible");
+    $(".tab__4").removeClass("visible");
+
+    $(".tab__5").addClass("visible");
+
+    $('.lending__items ').addClass('d__none');
+    $('.card__inventory ').addClass('d__none');
+    $('.inventory__history').addClass('d__none');
+    $('.consumables__item').addClass('d__none');
+    $('.inventory__history__cons').removeClass('d__none');
+
   });
 
 
@@ -1391,6 +1928,7 @@ $(document).ready(function () {
   // Initialize DataTable
   $("#example").DataTable();
 });
+
 
     </script>
   <script>

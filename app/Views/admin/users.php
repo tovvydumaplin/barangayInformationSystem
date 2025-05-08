@@ -125,6 +125,11 @@
           gap: 1rem; 
         }
 
+        .text-danger.error-password{
+            color: red;
+            margin-top: 0.7rem;
+        }
+
         /* 1536 px */
           @media (max-width: 96em) {
             html {
@@ -263,7 +268,7 @@
                   <div class="input__box">
                       <input class="information__input error-password" placeholder="Enter Password" name="password" type="password" required />
                       <span class="input__title">Password<span class="red__dot">*</span></span>
-                      <!-- <p class="text-danger error-password"></p> -->
+                      <p class="text-danger error-password"></p>
                   </div>
               </div>
               <div class="btn__box__modal">
@@ -700,6 +705,15 @@ const loadData = function() {
 const createUser = function(e) {
     e.preventDefault(); 
 
+    const password = $('input[name="password"]').val();
+    const isAlphaNumeric = /^[a-zA-Z0-9]*$/.test(password);
+
+    // Custom frontend validation
+    if (!isAlphaNumeric) {
+        $('.error-password').text("Password must be alphanumeric.");
+        return; // Stop form submission
+    }
+
     let formData = new FormData($("#createUserForm")[0]); 
 
     $.ajax({
@@ -707,8 +721,8 @@ const createUser = function(e) {
         type: "POST",
         data: formData,
         dataType: "json",
-        contentType: false, // Required for file uploads
-        processData: false, // Prevent jQuery from processing data
+        contentType: false,
+        processData: false,
         beforeSend: function () {
             $(".text-danger").text(""); 
         },
@@ -725,24 +739,21 @@ const createUser = function(e) {
                 }, 3000);
 
             } else if (response.status == "validation_error") {
-                let firstErrorMessage = ""; // Store the first error message
+                let firstErrorMessage = "";
 
                 $.each(response.errors, function (key, value) {
-                    // $(".error-" + key).css("border", "1px solid red");
-
                     if (!firstErrorMessage) {
-                        firstErrorMessage = value; // Get the first error message
+                        firstErrorMessage = value;
                     }
+                });
 
                 if (firstErrorMessage) {
-                    openErrorDisplay(firstErrorMessage); // Show first validation error
+                    openErrorDisplay(firstErrorMessage);
                 }
-                    closeValidator();
-                });
+                closeValidator();
             } else {
                 openErrorDisplay(response.message);
                 closeValidator();
-                
             }
         },
         error: function (xhr, status, error) {
@@ -751,6 +762,7 @@ const createUser = function(e) {
         }
     });
 };
+
 
 $(document).ready(function () {
 
@@ -864,6 +876,24 @@ $("#viewImageUpload").on("change", function (event) {
 
   loadData();
 });
+
+$(document).ready(function () {
+  const $passwordInput = $('input[name="password"]');
+  const $errorMessage = $('.error-password');
+
+  $passwordInput.on('input', function () {
+    const value = $(this).val();
+    const isAlphaNumeric = /^[a-zA-Z0-9]*$/.test(value); // allows empty string too
+
+    if (!isAlphaNumeric) {
+      $errorMessage.text("Password must be alphanumeric.");
+    } else {
+      $errorMessage.text("");
+    }
+  });
+});
+
+
 </script>
   </body>
 </html>

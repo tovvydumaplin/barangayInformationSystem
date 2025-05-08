@@ -13,6 +13,9 @@ use App\Models\SuffixModel;
 use App\Models\PositionModel;
 use App\Models\DbHistoryModel;
 use App\Models\ReligionModel;
+use App\Models\ConsumableModel;
+use App\Models\ConsumableInventoryHistory;
+
 class AdminController extends BaseController
 {
     public function dashboard()
@@ -168,20 +171,36 @@ class AdminController extends BaseController
         }
     }
 
-    public function archiveResident() {
+    public function archiveResident()
+    {
         $residentIdData = $this->request->getPost('residentIdData');
+        $archiveReason = $this->request->getPost('archiveReason');
         $status = 0;
-
+    
         $residentModel = new residentModel();
-        $update = $residentModel->where('resident_id', $residentIdData)->set('status', $status)->update();
-
+    
+        $dataToUpdate = [
+            'status' => $status,
+            'archive_reason' => $archiveReason // Make sure this column exists in your table
+        ];
+    
+        $update = $residentModel
+            ->where('resident_id', $residentIdData)
+            ->set($dataToUpdate)
+            ->update();
+    
         if ($update) {
-            return $this->response->setStatusCode(200)->setJSON(['success' => true, 'message' => 'Resident Deactivated']);
+            return $this->response->setStatusCode(200)->setJSON([
+                'success' => true,
+                'message' => 'Resident Deactivated'
+            ]);
         } else {
-            return $this->response->setStatusCode(500)->setJSON(['error'=>'Failed to update resident status']);
+            return $this->response->setStatusCode(500)->setJSON([
+                'error' => 'Failed to update resident status'
+            ]);
         }
-
     }
+    
     
     public function reactivateResident() {
         $resIdData = $this->request->getPost('resIdData');
@@ -2929,6 +2948,124 @@ public function getOfficialForForms()
 }
 
 
+public function createConsumables()
+{
+    // Create an instance of the model
+    $consumableModel = new ConsumableModel();
+
+    // Get data from POST request
+    $data = [
+        'item_name' => $this->request->getPost('item_name'),
+        'item_quantity' => $this->request->getPost('item_quantity'),
+        'item_description' => $this->request->getPost('item_description'),
+        'status' => 'active' // Assuming status is 'active' when newly created
+    ];
+
+    // Insert the data into the database
+    if ($consumableModel->insert($data)) {
+        return $this->response->setJSON(['success' => true, 'message' => 'Item registered successfully']);
+    } else {
+        return $this->response->setJSON(['success' => false, 'message' => 'Failed to register item']);
+    }
+}
+
+public function getConsumables()
+{
+    $consumableModel = new ConsumableModel();
+
+    $totalRecords = $consumableModel->countAll();
+
+    $recordsFiltered = $totalRecords;
+
+    $start = $this->request->getGet('start');
+    $length = $this->request->getGet('length');
+
+    $consumables = $consumableModel
+        ->orderBy('created_at', 'desc')
+        ->findAll($length, $start);
+
+    return $this->response->setJSON([
+        'data' => $consumables,
+        'recordsTotal' => $totalRecords,
+        'recordsFiltered' => $recordsFiltered,
+    ]);
+}
+public function getConsumable($id)
+{
+    $model = new ConsumableModel();
+    $item = $model->find($id);
+
+    if ($item) {
+        return $this->response->setJSON(['success' => true, 'data' => $item]);
+    } else {
+        return $this->response->setJSON(['success' => false, 'message' => 'Not found']);
+    }
+}
+public function updateConsumable()
+{
+    $consumable_id = $this->request->getPost('consumable_id');
+    if (!$consumable_id) {
+        return $this->response->setJSON(['success' => false, 'message' => 'Consumable ID is missing']);
+    }
+
+    $itemName        = $this->request->getPost('view_consumable_name');
+    $itemDescription = $this->request->getPost('view_consumable_description');
+    $newQuantity     = $this->request->getPost('view_item_quantity');
+    $type            = $this->request->getPost('cons_stock_in_out'); // 'in' or 'out'
+    $inOutReason     = $this->request->getPost('view_item_quantity_desc');
+    $quantityUpdate  = $this->request->getPost('view_item_quantity_update');
+
+    $model = new ConsumableModel();
+    $historyModel = new \App\Models\ConsumableInventoryHistory();
+
+    // Get current/old quantity
+    $existingItem = $model->find($consumable_id);
+    $oldQuantity  = $existingItem['item_quantity'] ?? 0;
+
+    $data = [
+        'item_name'        => $itemName,
+        'item_description' => $itemDescription,
+        'item_quantity'    => $newQuantity
+    ];
+
+    if ($model->update($consumable_id, $data)) {
+        // Save to consumable history
+        $historyData = [
+            'item_name'     => $itemName,
+            'type'          => $type,
+            'quantity'      => $quantityUpdate,
+            'old_quantity'  => $oldQuantity,
+            'new_quantity'  => $newQuantity,
+            'updated_by'    => session()->get('firstname') . ' ' . session()->get('lastname'),
+            'in_out_reason' => $inOutReason,
+        ];
+        $historyModel->insert($historyData);
+
+        return $this->response->setJSON(['success' => true, 'message' => 'Consumable updated and history recorded']);
+    } else {
+        return $this->response->setJSON(['success' => false, 'message' => 'Update failed']);
+    }
+}
+
+public function getAllConsumableHistory()
+{
+    $historyModel = new ConsumableInventoryHistory();
+    
+    // Fetch all history data, ordered by created_at descending (most recent first)
+    $historyData = $historyModel->orderBy('created_at', 'DESC')->findAll();
+
+    if ($historyData) {
+        return $this->response->setJSON([
+            'success' => true,
+            'data' => $historyData
+        ]);
+    } else {
+        return $this->response->setJSON([
+            'success' => false,
+            'message' => 'No history found.'
+        ]);
+    }
+}
 
 
 }

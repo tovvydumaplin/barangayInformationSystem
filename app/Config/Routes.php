@@ -182,3 +182,10 @@ $routes->post('/admin/delete-religion', 'AdminController::deleteReligion');
 $routes->get('/admin/get-religions', 'AdminController::getReligionsSelect');
 // For Positions
 $routes->get('admin/getOfficialForForms', 'AdminController::getOfficialForForms');
+
+// Create Consumables
+$routes->post('admin/create-consumables', 'AdminController::createConsumables');
+$routes->get('/admin/get-consumables', 'AdminController::getConsumables');
+$routes->get('/admin/get-consumable/(:num)', 'AdminController::getConsumable/$1');
+$routes->post('/admin/update-consumable', 'AdminController::updateConsumable');
+$routes->get('admin/get-all-consumable-history', 'AdminController::getAllConsumableHistory');
