@@ -189,3 +189,5 @@ $routes->get('/admin/get-consumables', 'AdminController::getConsumables');
 $routes->get('/admin/get-consumable/(:num)', 'AdminController::getConsumable/$1');
 $routes->post('/admin/update-consumable', 'AdminController::updateConsumable');
 $routes->get('admin/get-all-consumable-history', 'AdminController::getAllConsumableHistory');
+// Lending History
+$routes->get('admin/get-lending-history', 'AdminController::getLendingHistory');

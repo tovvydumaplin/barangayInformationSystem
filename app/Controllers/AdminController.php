@@ -3066,6 +3066,18 @@ public function getAllConsumableHistory()
         ]);
     }
 }
+public function getLendingHistory()
+{
+    $db = \Config\Database::connect();
+    $builder = $db->table('tbl_lending');
+    $builder->select('tbl_lending.*, tbl_residents.firstname, tbl_residents.middlename, tbl_residents.lastname');
+    $builder->join('tbl_residents', 'tbl_residents.resident_id = tbl_lending.borrower_id');
+    $builder->where('tbl_lending.status', 2);
+    $query = $builder->get();
+    $data = $query->getResult();
+
+    return $this->response->setJSON($data);
+}
 
 
 }

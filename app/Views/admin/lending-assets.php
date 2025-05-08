@@ -551,6 +551,10 @@
               <button class="tab__btn inventory__history__cons__btn">Inventory History(Consumables)</button>
               <div class="active__tab"></div>
             </div>
+            <div class="btn__container tab__6">
+              <button class="tab__btn lending__history__btn">Lending History</button>
+              <div class="active__tab"></div>
+            </div>
           </div>
         </div>
         <div class="card card__inventory">
@@ -767,6 +771,30 @@
           </div>
         </div>
         <!-- Inventory history Cons Tab ENDS -->
+
+        <!-- Lending Item History Tab -->
+        <div class="card lendingTableHistory d__none">
+          <div class="heading__container">
+            <p class="subheading">Lending History</p>
+          </div>
+          <div class="container">
+          <table id="lendingTableHistory" class="display">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Item Name</th>
+                <th>Quantity</th>
+                <th>Date Borrowed</th>
+                <th>Returned Date</th>
+                <th>Borrowed By</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+          </div>
+        </div>
+        <!-- Lending Item History Tab ENDS -->
       </div>
       <footer class="footer">
         <p class="copyright">
@@ -1108,13 +1136,10 @@ $('#viewLendBtn').on("click", function () {
 });
 
 const loadLendingHistory = function() {
-    // Check if the DataTable is already initialized
     if ($.fn.DataTable.isDataTable('#lendingTable')) {
-        // Destroy the existing DataTable instance
         $('#lendingTable').DataTable().clear().destroy();
     }
 
-    // Re-initialize the DataTable with new data
     $('#lendingTable').DataTable({
         ajax: {
             url: '<?= site_url('admin/lend-items') ?>',
@@ -1125,12 +1150,35 @@ const loadLendingHistory = function() {
             }
         },
         columns: [
-            { data: 'borrower_name', title: 'Borrower' },  
+            { data: 'borrower_name', title: 'Borrower' },
             { data: 'item_name', title: 'Item Name' },
             { data: 'borrowed_quantity', title: 'Quantity' },
             { data: 'date_borrowed', title: 'Date Borrowed' },
             { data: 'date_of_return', title: 'Date of Return' },
-            { data: 'house_no', title: 'House No' },  
+            { data: 'house_no', title: 'House No' },
+            {
+                data: 'date_of_return',
+                title: 'Status',
+                render: function(data, type, row) {
+                    const today = new Date().toLocaleDateString('en-CA'); // Local date in YYYY-MM-DD
+                    const returnDate = row.date_of_return;
+                    let statusClass = '';
+                    let statusText = '';
+                    let statusValue = 2;  // Default to Ongoing
+
+                    if (returnDate === today) {
+                        statusClass = 'due__today';
+                        statusText = 'Due Today';
+                        statusValue = 1;  // "Due Today" has a higher priority
+                    } else {
+                        statusClass = 'ongoing';
+                        statusText = 'Ongoing';
+                    }
+
+                    row.statusValue = statusValue;  // Add status value for sorting
+                    return `<span class="${statusClass}">${statusText}</span>`;
+                }
+            },
             {
                 data: null,
                 render: function (data, type, row) {
@@ -1139,14 +1187,12 @@ const loadLendingHistory = function() {
                 title: 'Action'
             }
         ],
-        order: [[3, 'desc']]
+        order: [
+            [7, 'asc'], // Sort by 'statusValue' (column index 7 for custom sorting)
+            [3, 'desc'] // Then by 'Date Borrowed'
+        ]
     });
 };
-
-
-
-
-
 
 
 
@@ -1770,7 +1816,61 @@ const createConsumables = function() {
     });
 };
 
+const getLendingHistory = function () {
+  $.ajax({
+    url: '/admin/get-lending-history',
+    method: 'GET',
+    dataType: 'json',
+    success: function (response) {
+      const table = $('#lendingTableHistory');
 
+      // Destroy existing DataTable (if exists) before doing anything else
+      if ($.fn.DataTable.isDataTable('#lendingTableHistory')) {
+        table.DataTable().clear().destroy();
+      }
+
+      const tbody = table.find('tbody');
+      tbody.empty();
+
+      if (response.length === 0) {
+        tbody.append('<tr><td colspan="7">No history found.</td></tr>');
+      } else {
+        response.forEach(row => {
+          const fullName = `${row.firstname} ${row.middlename} ${row.lastname}`;
+          const returnedDate = row.updated_at ?? '—';
+          const html = `
+            <tr>
+              <td>${row.id}</td>
+              <td>${row.item_name}</td>
+              <td>${row.borrowed_quantity}</td>
+              <td>${row.date_borrowed}</td>
+              <td>${returnedDate}</td>
+              <td>${fullName}</td>
+              <td><span class="return">Returned</span></td>
+            </tr>`;
+          tbody.append(html);
+        });
+      }
+
+      // Reinitialize DataTable after content is loaded
+      table.DataTable({
+        order: [[0, 'desc']]
+      });
+    },
+    error: function () {
+      alert('Failed to fetch lending history.');
+    }
+  });
+};
+
+$('.lending__history__btn').on("click", function() {
+getLendingHistory();
+
+})
+
+
+
+getLendingHistory();
 // Event listener for form submission
 $(".btn__register__consumable").on("click", function() {
     createConsumables();
@@ -1857,11 +1957,13 @@ $(document).ready(function () {
     $(".tab__3").removeClass("visible");
     $(".tab__4").removeClass("visible");
     $(".tab__5").removeClass("visible");
+    $(".tab__6").removeClass("visible");
     $('.lending__items ').addClass('d__none');
     $('.inventory__history').addClass('d__none');
     $('.card__inventory ').removeClass('d__none');
     $('.consumables__item').addClass('d__none');
     $('.inventory__history__cons').addClass('d__none');
+    $('.lendingTableHistory ').addClass('d__none');
 
   });
 
@@ -1871,11 +1973,13 @@ $(document).ready(function () {
     $(".tab__3").removeClass("visible");
     $(".tab__4").removeClass("visible");
     $(".tab__5").removeClass("visible");
+    $(".tab__6").removeClass("visible");
     $('.lending__items ').removeClass('d__none');
     $('.inventory__history').addClass('d__none');
     $('.card__inventory ').addClass('d__none');
     $('.consumables__item').addClass('d__none');
     $('.inventory__history__cons').addClass('d__none');
+    $('.lendingTableHistory ').addClass('d__none');
 
 
   });
@@ -1885,6 +1989,7 @@ $(document).ready(function () {
     $(".tab__3").addClass("visible");
     $(".tab__4").removeClass("visible");
     $(".tab__5").removeClass("visible");
+    $(".tab__6").removeClass("visible");
     $('.inventory__history__cons').addClass('d__none');
 
 
@@ -1892,6 +1997,8 @@ $(document).ready(function () {
     $('.card__inventory ').addClass('d__none');
     $('.inventory__history').removeClass('d__none');
     $('.consumables__item').addClass('d__none');
+    $('.lendingTableHistory ').addClass('d__none');
+
     inventoryHistory();
   });
   $(".tab__4").on("click", function () {
@@ -1899,6 +2006,7 @@ $(document).ready(function () {
     $(".tab__1").removeClass("visible");
     $(".tab__3").removeClass("visible");
     $(".tab__5").removeClass("visible");
+    $(".tab__6").removeClass("visible");
     $(".tab__4").addClass("visible");
     $('.inventory__history__cons').addClass('d__none');
 
@@ -1906,12 +2014,16 @@ $(document).ready(function () {
     $('.card__inventory ').addClass('d__none');
     $('.inventory__history').addClass('d__none');
     $('.consumables__item').removeClass('d__none');
+    $('.lendingTableHistory ').addClass('d__none');
+    
+
   });
   $(".tab__5").on("click", function () {
     $(".tab__2").removeClass("visible");
     $(".tab__1").removeClass("visible");
     $(".tab__3").removeClass("visible");
     $(".tab__4").removeClass("visible");
+    $(".tab__6").removeClass("visible");
 
     $(".tab__5").addClass("visible");
 
@@ -1920,7 +2032,26 @@ $(document).ready(function () {
     $('.inventory__history').addClass('d__none');
     $('.consumables__item').addClass('d__none');
     $('.inventory__history__cons').removeClass('d__none');
+    $('.lendingTableHistory ').addClass('d__none');
 
+
+  });
+  $(".tab__6").on("click", function () {
+    $(".tab__2").removeClass("visible");
+    $(".tab__1").removeClass("visible");
+    $(".tab__3").removeClass("visible");
+    $(".tab__4").removeClass("visible");
+    $(".tab__6").removeClass("visible");
+
+    $(".tab__5").removeClass("visible");
+    $(".tab__6").addClass("visible");
+
+    $('.lending__items ').addClass('d__none');
+    $('.card__inventory ').addClass('d__none');
+    $('.inventory__history').addClass('d__none');
+    $('.consumables__item').addClass('d__none');
+    $('.inventory__history__cons').addClass('d__none');
+    $('.lendingTableHistory ').removeClass('d__none');
   });
 
 

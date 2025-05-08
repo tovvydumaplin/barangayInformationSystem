@@ -177,3 +177,23 @@
   text-align: center;
   justify-content: center;
 }
+
+.return {
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  background-color: #eaffea;
+  font-weight: 600;
+  color: #1f8b1f;
+  border: 1px solid #1f8b1f;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.due__today {
+  color: #e53935;
+  font-weight: bold;
+}
+
+.ongoing {
+  color: #f9a825;
+}
