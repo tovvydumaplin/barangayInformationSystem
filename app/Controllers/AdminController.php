@@ -265,10 +265,8 @@ public function createUser()
     $session = session();
     $model = new UserModel();
 
-    // Define the upload path
     $uploadPath = FCPATH . 'uploads/';
 
-    // Ensure the uploads directory exists
     if (!is_dir($uploadPath)) {
         mkdir($uploadPath, 0777, true); 
     }

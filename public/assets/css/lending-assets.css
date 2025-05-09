@@ -189,7 +189,8 @@
   text-transform: uppercase;
   font-weight: 600;
 }
-.due__today {
+.due__today,
+.overdue {
   color: #e53935;
   font-weight: bold;
 }

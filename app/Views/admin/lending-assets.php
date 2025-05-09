@@ -1166,13 +1166,18 @@ const loadLendingHistory = function() {
                     let statusText = '';
                     let statusValue = 2;  // Default to Ongoing
 
-                    if (returnDate === today) {
+                    if (returnDate < today) {
+                        statusClass = 'overdue';
+                        statusText = 'Overdue';
+                        statusValue = 0;  // Highest priority for overdue
+                    } else if (returnDate === today) {
                         statusClass = 'due__today';
                         statusText = 'Due Today';
-                        statusValue = 1;  // "Due Today" has a higher priority
+                        statusValue = 1;  // Medium priority
                     } else {
                         statusClass = 'ongoing';
                         statusText = 'Ongoing';
+                        statusValue = 2;  // Lowest priority
                     }
 
                     row.statusValue = statusValue;  // Add status value for sorting
@@ -1188,7 +1193,7 @@ const loadLendingHistory = function() {
             }
         ],
         order: [
-            [7, 'asc'], // Sort by 'statusValue' (column index 7 for custom sorting)
+            [6, 'asc'], // Sort by 'statusValue' (column index 6 for status sorting)
             [3, 'desc'] // Then by 'Date Borrowed'
         ]
     });
@@ -1829,39 +1834,40 @@ const getLendingHistory = function () {
         table.DataTable().clear().destroy();
       }
 
-      const tbody = table.find('tbody');
-      tbody.empty();
+      // Add fullName to the response data
+      response.forEach(row => {
+        row.fullName = `${row.firstname} ${row.middlename} ${row.lastname}`;
+      });
+
+      // Initialize DataTable with the modified data
+      table.DataTable({
+        order: [[0, 'desc']],
+        "paging": true, // Enable paging if needed
+        "searching": true, // Enable searching if needed
+        "data": response, // Set data to DataTable
+        "columns": [
+          { "data": "id" },
+          { "data": "item_name" },
+          { "data": "borrowed_quantity" },
+          { "data": "date_borrowed" },
+          { "data": "updated_at", "defaultContent": "—" }, // For returned date
+          { "data": "fullName" }, // Reference fullName
+          { "data": null, "defaultContent": '<span class="return">Returned</span>' } // Action column
+        ]
+      });
 
       if (response.length === 0) {
+        // If no data, update the message in DataTable
+        const tbody = table.find('tbody');
         tbody.append('<tr><td colspan="7">No history found.</td></tr>');
-      } else {
-        response.forEach(row => {
-          const fullName = `${row.firstname} ${row.middlename} ${row.lastname}`;
-          const returnedDate = row.updated_at ?? '—';
-          const html = `
-            <tr>
-              <td>${row.id}</td>
-              <td>${row.item_name}</td>
-              <td>${row.borrowed_quantity}</td>
-              <td>${row.date_borrowed}</td>
-              <td>${returnedDate}</td>
-              <td>${fullName}</td>
-              <td><span class="return">Returned</span></td>
-            </tr>`;
-          tbody.append(html);
-        });
       }
-
-      // Reinitialize DataTable after content is loaded
-      table.DataTable({
-        order: [[0, 'desc']]
-      });
     },
     error: function () {
       alert('Failed to fetch lending history.');
     }
   });
 };
+
 
 $('.lending__history__btn').on("click", function() {
 getLendingHistory();
