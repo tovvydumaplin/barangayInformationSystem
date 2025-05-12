@@ -878,19 +878,36 @@ $("#viewImageUpload").on("change", function (event) {
 });
 
 $(document).ready(function () {
-  const $passwordInput = $('input[name="password"]');
-  const $errorMessage = $('.error-password');
+const $passwordInput = $('input[name="password"]');
+const $errorMessage = $('.error-password');
+const $createBtn = $('.btn__create__account');
 
-  $passwordInput.on('input', function () {
-    const value = $(this).val();
-    const isAlphaNumeric = /^[a-zA-Z0-9]*$/.test(value); // allows empty string too
+// Initial state: disable button
+$createBtn.prop('disabled', true).addClass('disabled');
 
-    if (!isAlphaNumeric) {
-      $errorMessage.text("Password must be alphanumeric.");
-    } else {
-      $errorMessage.text("");
-    }
-  });
+$passwordInput.on('input', function () {
+  const value = $(this).val();
+  const isAlphaNumeric = /^[a-zA-Z0-9]*$/.test(value);
+  const hasLetter = /[a-zA-Z]/.test(value);
+  const hasNumber = /[0-9]/.test(value);
+
+  if (!isAlphaNumeric) {
+    $errorMessage.text("Password must be alphanumeric.");
+    $createBtn.prop('disabled', true).addClass('disabled');
+    return;
+  }
+
+  if (!(hasLetter && hasNumber)) {
+    $errorMessage.text("Password must contain at least one letter and one number.");
+    $createBtn.prop('disabled', true).addClass('disabled');
+    return;
+  }
+
+  // If all conditions met
+  $errorMessage.text("");
+  $createBtn.prop('disabled', false).removeClass('disabled');
+});
+
 });
 
 
