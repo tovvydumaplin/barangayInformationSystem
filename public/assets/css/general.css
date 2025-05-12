@@ -314,7 +314,7 @@ hr {
   font-size: 1.6rem;
   font-family: "Roboto", sans-serif;
   font-weight: 600;
-  color: var(--text-color);
+  color: #858585;
   cursor: pointer;
 }
 .active__tab {

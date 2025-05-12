@@ -193,3 +193,8 @@ $routes->post('/admin/update-consumable', 'AdminController::updateConsumable');
 $routes->get('admin/get-all-consumable-history', 'AdminController::getAllConsumableHistory');
 // Lending History
 $routes->get('admin/get-lending-history', 'AdminController::getLendingHistory');
+$routes->post('admin/create-distribution', 'AdminController::createDistribution');
+$routes->get('admin/fetch-consumables', 'AdminController::fetchConsumables');
+$routes->get('/admin/fetch-distributions', 'AdminController::fetchDistributions');
+$routes->get('admin/fetch-distributions', 'AdminController::fetchDistributions');
+

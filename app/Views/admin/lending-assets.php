@@ -525,30 +525,92 @@
             </div>
         </form>
     </div>
-
       <!-- Borrow item modal VIEW END -->
- 
+
+ <!-- Distribution Modal -->
+  <!-- Distribute item modal -->
+<div id="distributeItemModal" class="modal">
+    <div class="modal__header">
+        <p class="modal__heading">Distribute Item</p>
+    </div>
+    <form class="modal__body community__modal" id="distributeForm" enctype="multipart/form-data" method="post"> 
+        <div class="row flex__d__col">
+            <div class="row">
+              <div class="input__box">
+                  <select
+                      id="recipientList"
+                      class="information__input"
+                      placeholder="Select name"
+                      name="recipientList"
+                  >
+                  </select>
+                  <span class="input__title">Recipient's Fullname<span class="red__dot">*</span></span>
+                  <p class="text-danger"></p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input__box">
+                <select id="distributeItemList" class="information__input" placeholder="Select item" name="distributeItemList"></select>
+                <p id="stockCount" class="mini__text"></p>
+                <span class="input__title">Item<span class="red__dot">*</span></span>
+                <p class="text-danger"></p>
+                <p id="currentStockLabel" class="mini__text"></p>
+              </div>
+            </div>
+            <div class="row">                      
+              <div class="input__box">
+                <textarea id="distributionDesc" class="information__input distribute__textarea" placeholder="Enter description" name="distributionDesc"></textarea>
+                <span class="input__title">Purpose<span class="red__dot">*</span></span>
+                <p class="text-danger"></p>
+              </div>
+            </div>
+            <div class="row">                      
+              <div class="input__box">
+                <input id="distributionQuantity" class="information__input" placeholder="Enter quantity" name="distributionQuantity" type="number" />
+                <span class="input__title">Quantity<span class="red__dot">*</span></span>
+                <p class="text-danger"></p>
+                
+              </div>
+            </div>
+            <div class="row">                      
+              <div class="input__box">
+                <input id="distributionDate" class="information__input" placeholder="Enter date" name="distributionDate" type="date" />
+                <span class="input__title">Distribution Date<span class="red__dot">*</span></span>
+                <p class="text-danger"></p>
+              </div>
+            </div>
+        </div>
+        <div class="btn__box__modal">
+            <span class="btn__primary" id="distributeBtn">Submit</span>
+        </div>
+    </form>
+</div>
+
       <div class="container">
         <div class="heading__box">
           <div class="tab__container">
             <div class="btn__container tab__1 visible">
-              <button class="tab__btn inventory__tab">Inventory (Non-Consumables)</button>
+              <button class="tab__btn inventory__tab">Non-Consumable Inventory</button>
+              <div class="active__tab"></div>
+            </div>
+            <div class="btn__container tab__3">
+              <button class="tab__btn inventory__history__btn">Non-Consumable Inventory History</button>
               <div class="active__tab"></div>
             </div>
             <div class="btn__container tab__4">
-              <button class="tab__btn consumables__tab">Inventory (Consumables)</button>
+              <button class="tab__btn consumables__tab">Consumable Inventory</button>
+              <div class="active__tab"></div>
+            </div>
+            <div class="btn__container tab__5">
+              <button class="tab__btn inventory__history__cons__btn">Consumable Inventory History</button>
+              <div class="active__tab"></div>
+            </div>
+            <div class="btn__container tab__7">
+              <button class="tab__btn distribution__tab">Distribution</button>
               <div class="active__tab"></div>
             </div>
             <div class="btn__container tab__2">
               <button class="tab__btn lending__tab">Lending Item</button>
-              <div class="active__tab"></div>
-            </div>
-            <div class="btn__container tab__3">
-              <button class="tab__btn inventory__history__btn">Inventory History</button>
-              <div class="active__tab"></div>
-            </div>
-            <div class="btn__container tab__5">
-              <button class="tab__btn inventory__history__cons__btn">Inventory History(Consumables)</button>
               <div class="active__tab"></div>
             </div>
             <div class="btn__container tab__6">
@@ -795,6 +857,63 @@
           </div>
         </div>
         <!-- Lending Item History Tab ENDS -->
+
+        <!-- Distribution Tab -->
+                 <!-- Lending Item Tab -->
+        <div class="card distribution__items d__none">
+          <div class="heading__container">
+            <p class="subheading">Distribution</p>
+            <div class="button__box">
+              <button class="btn__secondary active btn__distribute">
+                <div class="icon__link">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="ionicon"
+                    viewBox="0 0 512 512"
+                  >
+                    <path
+                      d="M376 144c-3.92 52.87-44 96-88 96s-84.15-43.12-88-96c-4-55 35-96 88-96s92 42 88 96z"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="32"
+                    />
+                    <path
+                      d="M288 304c-87 0-175.3 48-191.64 138.6-2 10.92 4.21 21.4 15.65 21.4H464c11.44 0 17.62-10.48 15.65-21.4C463.3 352 375 304 288 304z"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-miterlimit="10"
+                      stroke-width="32"
+                    />
+                    <path
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="32"
+                      d="M88 176v112M144 232H32"
+                    />
+                  </svg>
+                </div>
+                Distribute
+              </button>
+            </div>
+          </div>
+          <div class="container">
+          <table id="distributionTable" class="display">
+            <thead>
+              <tr>
+                <th>Item Name</th>
+                <th>Quantity</th>
+                <th>Recipient</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+          </div>
+        </div>
       </div>
       <footer class="footer">
         <p class="copyright">
@@ -1455,8 +1574,9 @@ $('#lendBtn').on('click', function () {
         data: $('#updateConsumableForm').serialize(),
         success: function (response) {
             if (response.success) {
-                alert('Updated!');
+                alert('Item has been updated!');
                 $('#viewConsumablesModal').removeClass('open');
+                $('.wrapper').removeClass('open');
                 getConsumables(); // Refresh DataTable
             } else {
                 alert(response.message);
@@ -1808,6 +1928,9 @@ const createConsumables = function() {
             item_description: itemDescription
         },
         success: function(response) {
+          $('.wrapper').removeClass("open");
+          $('#createConsumables').removeClass("open");
+          getConsumables();
             if (response.success) {
                 alert(response.message); // Success message
                 // You can also reset the form or do something else here
@@ -1912,6 +2035,10 @@ $(document).ready(function () {
     $("#borrowItemModal").addClass("open");
     $('#stockCount').hide();
   });
+  $(".btn__distribute").on("click", function () {
+    $(".wrapper").addClass("open");
+    $("#distributeItemModal").addClass("open");
+  });
 
   $(".btn__add__consumables").on("click", function () {
     $(".wrapper").addClass("open");
@@ -1927,6 +2054,7 @@ $(document).ready(function () {
     $("#viewBorrowItemModal").removeClass("open");
     $("#createConsumables").removeClass("open");
     $("#viewConsumablesModal").removeClass("open");
+    $("#distributeItemModal").removeClass("open");
 
   });
 
@@ -1941,6 +2069,7 @@ $(document).ready(function () {
       $("#viewItemModal").removeClass("open");
       $("#borrowItemModal").removeClass("open");
     $("#viewBorrowItemModal").removeClass("open");
+    $("#distributeItemModal").removeClass("open");
 
     }
   });
@@ -1964,12 +2093,14 @@ $(document).ready(function () {
     $(".tab__4").removeClass("visible");
     $(".tab__5").removeClass("visible");
     $(".tab__6").removeClass("visible");
+    $(".tab__7").removeClass("visible");
     $('.lending__items ').addClass('d__none');
     $('.inventory__history').addClass('d__none');
     $('.card__inventory ').removeClass('d__none');
     $('.consumables__item').addClass('d__none');
     $('.inventory__history__cons').addClass('d__none');
-    $('.lendingTableHistory ').addClass('d__none');
+    $('.lendingTableHistory').addClass('d__none');
+    $('.distribution__items').addClass('d__none');
 
   });
 
@@ -1980,12 +2111,15 @@ $(document).ready(function () {
     $(".tab__4").removeClass("visible");
     $(".tab__5").removeClass("visible");
     $(".tab__6").removeClass("visible");
+    $(".tab__7").removeClass("visible");
+
     $('.lending__items ').removeClass('d__none');
     $('.inventory__history').addClass('d__none');
     $('.card__inventory ').addClass('d__none');
     $('.consumables__item').addClass('d__none');
     $('.inventory__history__cons').addClass('d__none');
     $('.lendingTableHistory ').addClass('d__none');
+    $('.distribution__items ').addClass('d__none');
 
 
   });
@@ -1996,6 +2130,8 @@ $(document).ready(function () {
     $(".tab__4").removeClass("visible");
     $(".tab__5").removeClass("visible");
     $(".tab__6").removeClass("visible");
+    $(".tab__7").removeClass("visible");
+
     $('.inventory__history__cons').addClass('d__none');
 
 
@@ -2004,6 +2140,7 @@ $(document).ready(function () {
     $('.inventory__history').removeClass('d__none');
     $('.consumables__item').addClass('d__none');
     $('.lendingTableHistory ').addClass('d__none');
+    $('.distribution__items ').addClass('d__none');
 
     inventoryHistory();
   });
@@ -2014,6 +2151,8 @@ $(document).ready(function () {
     $(".tab__5").removeClass("visible");
     $(".tab__6").removeClass("visible");
     $(".tab__4").addClass("visible");
+    $(".tab__7").removeClass("visible");
+
     $('.inventory__history__cons').addClass('d__none');
 
     $('.lending__items ').addClass('d__none');
@@ -2021,6 +2160,7 @@ $(document).ready(function () {
     $('.inventory__history').addClass('d__none');
     $('.consumables__item').removeClass('d__none');
     $('.lendingTableHistory ').addClass('d__none');
+    $('.distribution__items ').addClass('d__none');
     
 
   });
@@ -2032,6 +2172,7 @@ $(document).ready(function () {
     $(".tab__6").removeClass("visible");
 
     $(".tab__5").addClass("visible");
+    $(".tab__7").removeClass("visible");
 
     $('.lending__items ').addClass('d__none');
     $('.card__inventory ').addClass('d__none');
@@ -2039,6 +2180,7 @@ $(document).ready(function () {
     $('.consumables__item').addClass('d__none');
     $('.inventory__history__cons').removeClass('d__none');
     $('.lendingTableHistory ').addClass('d__none');
+    $('.distribution__items ').addClass('d__none');
 
 
   });
@@ -2050,6 +2192,7 @@ $(document).ready(function () {
     $(".tab__6").removeClass("visible");
 
     $(".tab__5").removeClass("visible");
+    $(".tab__7").removeClass("visible");
     $(".tab__6").addClass("visible");
 
     $('.lending__items ').addClass('d__none');
@@ -2058,6 +2201,27 @@ $(document).ready(function () {
     $('.consumables__item').addClass('d__none');
     $('.inventory__history__cons').addClass('d__none');
     $('.lendingTableHistory ').removeClass('d__none');
+    $('.distribution__items ').addClass('d__none');
+  });
+  $(".tab__7").on("click", function () {
+    $(".tab__2").removeClass("visible");
+    $(".tab__1").removeClass("visible");
+    $(".tab__3").removeClass("visible");
+    $(".tab__4").removeClass("visible");
+    $(".tab__6").removeClass("visible");
+
+    $(".tab__5").removeClass("visible");
+    $(".tab__6").removeClass("visible");
+    $(".tab__7").addClass("visible");
+
+    $('.lending__items ').addClass('d__none');
+    $('.card__inventory ').addClass('d__none');
+    $('.inventory__history').addClass('d__none');
+    $('.consumables__item').addClass('d__none');
+    $('.inventory__history__cons').addClass('d__none');
+    $('.lendingTableHistory').addClass('d__none');
+    $('.distribution__items').removeClass('d__none');
+
   });
 
 
@@ -2089,6 +2253,183 @@ $(document).ready(function () {
         });
     }
     setDateToToday();
+    
+
+function createDistribution() {
+  const recipientId = $('#recipientList').val();
+  const recipientFullName = $('#recipientList option:selected').data('fullname');
+  const itemName = $('#distributeItemList option:selected').text().trim(); // GET ITEM NAME
+  const description = $('#distributionDesc').val().trim();
+  const quantity = $('#distributionQuantity').val();
+  const distributionDate = $('#distributionDate').val();
+
+  // Get the current stock from the data attribute
+  const currentStock = $('#distributeItemList option:selected').data('stock'); // Assuming you store stock in 'data-stock' attribute
+
+  // Debug logs
+  console.log('Recipient ID:', recipientId);
+  console.log('Recipient Full Name:', recipientFullName);
+  console.log('Item Name:', itemName);
+  console.log('Description:', description);
+  console.log('Quantity:', quantity);
+  console.log('Distribution Date:', distributionDate);
+  console.log('Current Stock:', currentStock);
+
+  // Check if the entered quantity exceeds the available stock
+  if (quantity > currentStock) {
+    alert('Cannot distribute more than the available stock.');
+    return; // Prevent submission if quantity exceeds stock
+  }
+
+  // Send data to the server as a regular object
+  $.ajax({
+    url: '/admin/create-distribution',
+    type: 'POST',
+    data: {
+      recipientList: recipientId,
+      recipientFullName: recipientFullName,
+      itemName: itemName,
+      distributionDesc: description,
+      distributionQuantity: quantity,
+      distributionDate: distributionDate
+    },
+    success: function (response) {
+      loadDistributableItems();
+      loadDistributions();
+      $('#currentStockLabel').text('');
+
+      if (response.success) {
+        alert('Distribution recorded successfully.');
+        $('#distributeForm')[0].reset();
+        $('#distributeItemModal').removeClass("open");
+        $('.wrapper').removeClass("open");
+      } else {
+        alert(response.message || 'Something went wrong.');
+      }
+    },
+    error: function (xhr) {
+      console.error(xhr.responseText);
+      alert('AJAX error occurred.');
+    }
+  });
+}
+
+// Allow only numbers in quantity input
+$('#distributionQuantity').on('keypress', function (e) {
+  // Allow only digits (key codes for 0-9 are 48-57)
+  if (e.which < 48 || e.which > 57) {
+    e.preventDefault();
+  }
+});
+
+
+
+
+function loadDistributableItems() {
+  $.ajax({
+    url: '/admin/fetch-consumables',
+    method: 'GET',
+    dataType: 'json',
+    success: function (items) {
+      const $list = $('#distributeItemList');
+      $list.empty().append('<option value="">Choose an item</option>');
+
+      items.forEach(function (item) {
+        $list.append(
+          `<option value="${item.id}" data-stock="${item.quantity}">
+            ${item.name}
+          </option>`
+        );
+      });
+    },
+    error: function (xhr) {
+      console.error('Failed to fetch items:', xhr.responseText);
+    }
+  });
+}
+loadDistributableItems();
+$('#distributeItemList').on('change', function () {
+  const stock = $(this).find(':selected').data('stock');
+  $('#currentStockLabel').text(`Current Stock: ${stock}`);
+});
+
+function loadRecipients() {
+  $.ajax({
+    url: '/admin/fetch-residents',
+    type: 'GET',
+    dataType: 'json',
+    success: function (residents) {
+      const $recipientList = $('#recipientList');
+      $recipientList.empty(); // Clear previous options
+
+      $recipientList.append('<option value="">Choose a resident</option>');
+
+      residents.forEach(function (resident) {
+        // Ensure resident.resident_id exists and is valid
+        if (resident.resident_id) {
+          const fullName = `${resident.firstname} ${resident.middlename} ${resident.lastname} ${resident.suffix ? resident.suffix : ''}`.trim();
+          $recipientList.append(
+            `<option value="${resident.resident_id}" data-fullname="${fullName}">${fullName}</option>`
+          );
+        }
+      });
+    },
+    error: function (xhr) {
+      console.error('Failed to fetch residents:', xhr.responseText);
+    }
+  });
+}
+
+
+loadRecipients();
+$('#distributeBtn').on("click",function () {
+  createDistribution();
+})
+
+
+function loadDistributions() {
+  $.ajax({
+    url: '/admin/fetch-distributions', // Make sure this route exists in your controller
+    method: 'GET',
+    dataType: 'json',
+    success: function (data) {
+      // Destroy existing DataTable instance if it exists
+      if ($.fn.DataTable.isDataTable('#distributionTable')) {
+        $('#distributionTable').DataTable().destroy();
+      }
+
+      // Clear the table body before inserting new data
+      $('#distributionTable tbody').empty();
+
+      // Populate table rows
+      data.forEach(function (dist) {
+        $('#distributionTable tbody').append(`
+          <tr>
+            <td>${dist.item_id}</td>
+            <td>${dist.quantity}</td>
+            <td>${dist.recipient_id}</td>
+            <td>${dist.distribution_date}</td>
+
+          </tr>
+        `);
+      });
+
+      // Re-initialize DataTable with ordering by distribution_date (4th column, index 3)
+      $('#distributionTable').DataTable({
+        order: [[3, 'desc']]
+      });
+    },
+    error: function (xhr) {
+      console.error('Failed to fetch distributions:', xhr.responseText);
+    }
+  });
+}
+
+
+
+
+  // Fetch and populate the distribution table
+  loadDistributions();
   </script>
   </body>
 </html>

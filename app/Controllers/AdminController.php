@@ -15,6 +15,7 @@ use App\Models\DbHistoryModel;
 use App\Models\ReligionModel;
 use App\Models\ConsumableModel;
 use App\Models\ConsumableInventoryHistory;
+use App\Models\DistributionModel;
 
 class AdminController extends BaseController
 {
@@ -3132,6 +3133,103 @@ public function getLendingHistory()
     $builder->where('tbl_lending.status', 2);
     $query = $builder->get();
     $data = $query->getResult();
+
+    return $this->response->setJSON($data);
+}
+public function createDistribution()
+{
+    $recipientId = $this->request->getPost('recipientList');
+    $recipientFullName = $this->request->getPost('recipientFullName');
+    $itemName = $this->request->getPost('itemName');
+    $quantity = $this->request->getPost('distributionQuantity');
+    $description = $this->request->getPost('distributionDesc');
+    $distributionDate = $this->request->getPost('distributionDate');
+
+    // Save to distribution table
+    $distributionModel = new DistributionModel();
+    $distributionModel->save([
+        'recipient_id' => $recipientFullName,
+        'item_id' => $itemName, // Save item name
+        'description' => $description,
+        'quantity' => $quantity,
+        'distribution_date' => $distributionDate,
+        'created_at' => date('Y-m-d H:i:s')
+    ]);
+
+    // Deduct quantity from tbl_consumables using item_name
+    if (is_numeric($quantity) && $quantity > 0) {
+        $consumableModel = new ConsumableModel();
+
+        // Get current quantity
+        $item = $consumableModel->where('item_name', $itemName)->first();
+        if ($item) {
+            $newQty = max(0, (int)$item['item_quantity'] - (int)$quantity); // prevent negative
+            $consumableModel->where('item_name', $itemName)->set('item_quantity', $newQty)->update();
+        }
+    }
+
+    return $this->response->setJSON(['success' => true, 'message' => 'Distribution saved and quantity deducted.']);
+}
+
+
+
+
+
+
+public function fetchConsumables()
+{
+    $model = new \App\Models\ConsumableModel();
+
+    // Fetch only consumables where item_quantity > 0 (with stock)
+    $items = $model->where('item_quantity >', 0) // only items with stock
+                   ->findAll();
+
+    // Log the fetched items for debugging
+    log_message('debug', 'Fetched items: ' . print_r($items, true));
+
+    // Prepare the data to send back
+    $data = array_map(function ($item) {
+        return [
+            'id' => $item['id'],
+            'name' => $item['item_name'],
+            'quantity' => $item['item_quantity'],
+        ];
+    }, $items);
+
+    return $this->response->setJSON($data);
+}
+public function retrieveDistributions()
+{
+    $model = new \App\Models\DistributionModel();
+
+    // Fetch all distributions
+    $distributions = $model
+        ->join('tbl_consumables', 'tbl_distributions.item_id = tbl_consumables.id')
+        ->join('tbl_residents', 'tbl_distributions.recipient_id = tbl_residents.resident_id')
+        ->findAll();
+
+    // Format the response with necessary fields
+    $data = array_map(function ($distribution) {
+        return [
+            'item_name'    => $distribution['item_name'],
+            'quantity'     => $distribution['quantity'],
+            'recipient'    => $distribution['fullname'],  // Assuming 'fullname' is the column for recipient name
+            'date'         => $distribution['distribution_date'],
+        ];
+    }, $distributions);
+
+    return $this->response->setJSON($data);
+}
+
+
+public function fetchDistributions()
+{
+    $distributionModel = new \App\Models\DistributionModel();
+    
+    // Sort by distribution_date DESC
+    $data = $distributionModel
+                ->orderBy('distribution_date', 'DESC')
+                ->findAll();
 
     return $this->response->setJSON($data);
 }

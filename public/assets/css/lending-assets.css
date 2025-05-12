@@ -198,3 +198,10 @@
 .ongoing {
   color: #f9a825;
 }
+
+.btn__save__consumables,
+.btn__register__consumable,
+.btn__edit__consumables,
+#distributeBtn {
+  justify-content: center;
+}

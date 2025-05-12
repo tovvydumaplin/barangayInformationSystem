@@ -27,3 +27,726 @@ DEBUG - 2025-05-12 23:00:20 --> Session: Class initialized using 'CodeIgniter\Se
 DEBUG - 2025-05-12 23:02:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 DEBUG - 2025-05-12 23:03:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 DEBUG - 2025-05-12 23:03:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-12 23:04:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-12 23:04:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-12 23:04:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-12 23:04:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-12 23:04:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-12 23:04:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-12 23:04:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-12 23:07:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-12 23:07:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-12 23:07:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-12 23:09:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-12 23:09:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-12 23:11:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-12 23:11:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-12 23:12:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-12 23:13:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-12 23:15:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-12 23:16:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-12 23:16:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-12 23:25:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-12 23:25:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-12 23:25:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-12 23:27:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-12 23:27:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-12 23:27:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-12 23:27:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-12 23:28:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-12 23:33:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-12 23:33:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-12 23:34:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-12 23:34:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-12 23:36:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-12 23:36:44 --> TypeError: CodeIgniter\BaseModel::findAll(): Argument #2 ($offset) must be of type int, null given, called in C:\BarangayInformationSystem\app\Controllers\AdminController.php on line 3042
+[Method: GET, Route: admin/get-consumables]
+in SYSTEMPATH\BaseModel.php on line 653.
+ 1 APPPATH\Controllers\AdminController.php(3042): CodeIgniter\BaseModel->findAll(null, null)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->getConsumables()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+DEBUG - 2025-05-12 23:37:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-12 23:38:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-12 23:38:37 --> Fetched items: Array
+(
+    [0] => Array
+        (
+            [id] => 1
+            [item_name] => RiceaX
+            [item_quantity] => 180
+            [item_description] => 10kg rice123
+            [status] => active
+            [created_at] => 2025-05-08 23:22:47
+            [updated_at] => 2025-05-09 01:01:06
+        )
+
+)
+
+DEBUG - 2025-05-12 23:39:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-12 23:39:21 --> Fetched items: Array
+(
+    [0] => Array
+        (
+            [id] => 1
+            [item_name] => RiceaX
+            [item_quantity] => 180
+            [item_description] => 10kg rice123
+            [status] => active
+            [created_at] => 2025-05-08 23:22:47
+            [updated_at] => 2025-05-09 01:01:06
+        )
+
+)
+
+DEBUG - 2025-05-12 23:39:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-12 23:39:48 --> Fetched items: Array
+(
+    [0] => Array
+        (
+            [id] => 1
+            [item_name] => RiceaX
+            [item_quantity] => 180
+            [item_description] => 10kg rice123
+            [status] => active
+            [created_at] => 2025-05-08 23:22:47
+            [updated_at] => 2025-05-09 01:01:06
+        )
+
+)
+
+DEBUG - 2025-05-12 23:40:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-12 23:40:01 --> Fetched items: Array
+(
+    [0] => Array
+        (
+            [id] => 1
+            [item_name] => RiceaX
+            [item_quantity] => 180
+            [item_description] => 10kg rice123
+            [status] => active
+            [created_at] => 2025-05-08 23:22:47
+            [updated_at] => 2025-05-09 01:01:06
+        )
+
+)
+
+DEBUG - 2025-05-12 23:50:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-12 23:50:11 --> Fetched items: Array
+(
+    [0] => Array
+        (
+            [id] => 1
+            [item_name] => RiceaX
+            [item_quantity] => 180
+            [item_description] => 10kg rice123
+            [status] => active
+            [created_at] => 2025-05-08 23:22:47
+            [updated_at] => 2025-05-09 01:01:06
+        )
+
+)
+
+DEBUG - 2025-05-12 23:50:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-12 23:50:50 --> Fetched items: Array
+(
+    [0] => Array
+        (
+            [id] => 1
+            [item_name] => RiceaX
+            [item_quantity] => 180
+            [item_description] => 10kg rice123
+            [status] => active
+            [created_at] => 2025-05-08 23:22:47
+            [updated_at] => 2025-05-09 01:01:06
+        )
+
+)
+
+DEBUG - 2025-05-12 23:51:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-12 23:51:08 --> Fetched items: Array
+(
+    [0] => Array
+        (
+            [id] => 1
+            [item_name] => RiceaX
+            [item_quantity] => 180
+            [item_description] => 10kg rice123
+            [status] => active
+            [created_at] => 2025-05-08 23:22:47
+            [updated_at] => 2025-05-09 01:01:06
+        )
+
+)
+
+CRITICAL - 2025-05-12 23:51:09 --> ErrorException: Undefined array key "fullname"
+[Method: GET, Route: admin/retrieve-distributions]
+in APPPATH\Controllers\AdminController.php on line 3214.
+ 1 APPPATH\Controllers\AdminController.php(3214): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "fullname"', 'C:\\BarangayInformationSystem\\app\\Controllers\\AdminController.php', 3214)
+ 2 [internal function]: App\Controllers\AdminController->App\Controllers\{closure}([...])
+ 3 APPPATH\Controllers\AdminController.php(3210): array_map(Object(Closure), [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->retrieveDistributions()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+10 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+DEBUG - 2025-05-12 23:53:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-12 23:53:13 --> Fetched items: Array
+(
+    [0] => Array
+        (
+            [id] => 1
+            [item_name] => RiceaX
+            [item_quantity] => 180
+            [item_description] => 10kg rice123
+            [status] => active
+            [created_at] => 2025-05-08 23:22:47
+            [updated_at] => 2025-05-09 01:01:06
+        )
+
+)
+
+CRITICAL - 2025-05-12 23:53:13 --> ErrorException: Undefined array key "fullname"
+[Method: GET, Route: admin/retrieve-distributions]
+in APPPATH\Controllers\AdminController.php on line 3204.
+ 1 APPPATH\Controllers\AdminController.php(3204): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "fullname"', 'C:\\BarangayInformationSystem\\app\\Controllers\\AdminController.php', 3204)
+ 2 [internal function]: App\Controllers\AdminController->App\Controllers\{closure}([...])
+ 3 APPPATH\Controllers\AdminController.php(3200): array_map(Object(Closure), [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->retrieveDistributions()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+10 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+DEBUG - 2025-05-12 23:54:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-12 23:54:07 --> Fetched items: Array
+(
+    [0] => Array
+        (
+            [id] => 1
+            [item_name] => RiceaX
+            [item_quantity] => 180
+            [item_description] => 10kg rice123
+            [status] => active
+            [created_at] => 2025-05-08 23:22:47
+            [updated_at] => 2025-05-09 01:01:06
+        )
+
+)
+
+CRITICAL - 2025-05-12 23:54:07 --> ErrorException: Undefined array key "fullname"
+[Method: GET, Route: admin/retrieve-distributions]
+in APPPATH\Controllers\AdminController.php on line 3204.
+ 1 APPPATH\Controllers\AdminController.php(3204): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "fullname"', 'C:\\BarangayInformationSystem\\app\\Controllers\\AdminController.php', 3204)
+ 2 [internal function]: App\Controllers\AdminController->App\Controllers\{closure}([...])
+ 3 APPPATH\Controllers\AdminController.php(3200): array_map(Object(Closure), [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->retrieveDistributions()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+10 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+DEBUG - 2025-05-12 23:55:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-12 23:55:04 --> Fetched items: Array
+(
+    [0] => Array
+        (
+            [id] => 1
+            [item_name] => RiceaX
+            [item_quantity] => 180
+            [item_description] => 10kg rice123
+            [status] => active
+            [created_at] => 2025-05-08 23:22:47
+            [updated_at] => 2025-05-09 01:01:06
+        )
+
+)
+
+CRITICAL - 2025-05-12 23:55:04 --> ErrorException: Undefined array key "fullname"
+[Method: GET, Route: admin/retrieve-distributions]
+in APPPATH\Controllers\AdminController.php on line 3204.
+ 1 APPPATH\Controllers\AdminController.php(3204): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "fullname"', 'C:\\BarangayInformationSystem\\app\\Controllers\\AdminController.php', 3204)
+ 2 [internal function]: App\Controllers\AdminController->App\Controllers\{closure}([...])
+ 3 APPPATH\Controllers\AdminController.php(3200): array_map(Object(Closure), [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->retrieveDistributions()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+10 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+ERROR - 2025-05-12 23:55:11 --> mysqli_sql_exception: Column 'description' cannot be null in C:\BarangayInformationSystem\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\BarangayInformationSystem\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `tb...', 0)
+#1 C:\BarangayInformationSystem\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tb...')
+#2 C:\BarangayInformationSystem\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tb...')
+#3 C:\BarangayInformationSystem\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tb...', Array, false)
+#4 C:\BarangayInformationSystem\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\BarangayInformationSystem\system\BaseModel.php(839): CodeIgniter\Model->doInsert(Array)
+#6 C:\BarangayInformationSystem\system\Model.php(800): CodeIgniter\BaseModel->insert(Array, false)
+#7 C:\BarangayInformationSystem\system\BaseModel.php(750): CodeIgniter\Model->insert(Array, false)
+#8 C:\BarangayInformationSystem\app\Controllers\AdminController.php(3151): CodeIgniter\BaseModel->save(Array)
+#9 C:\BarangayInformationSystem\system\CodeIgniter.php(933): App\Controllers\AdminController->createDistribution()
+#10 C:\BarangayInformationSystem\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#11 C:\BarangayInformationSystem\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\BarangayInformationSystem\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#13 C:\BarangayInformationSystem\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#14 C:\BarangayInformationSystem\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#15 C:\BarangayInformationSystem\system\rewrite.php(44): require_once('C:\\BarangayInfo...')
+#16 {main}
+CRITICAL - 2025-05-12 23:55:11 --> CodeIgniter\Database\Exceptions\DatabaseException: Column 'description' cannot be null
+[Method: POST, Route: admin/create-distribution]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_distributions` (`recipient_id`, `item_id`, `description`, `quantity`, `distribution_date`, `created_at`) VALUES (:recipient_id:, :item_id:, :description:, :quantity:, :distribution_date:, :created_at:)', [...], false)
+ 2 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], false)
+ 5 SYSTEMPATH\BaseModel.php(750): CodeIgniter\Model->insert([...], false)
+ 6 APPPATH\Controllers\AdminController.php(3151): CodeIgniter\BaseModel->save([...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->createDistribution()
+ 8 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 9 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+13 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-05-12 23:55:11 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Column 'description' cannot be null
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tbl_distributions` (`recipient_id`, `item_id`, `description`, `quantity`, `distribution_date`, `created_at`) VALUES (\'undefined\', \'1\', NULL, NULL, NULL, \'2025-05-12 23:55:11\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tbl_distributions` (`recipient_id`, `item_id`, `description`, `quantity`, `distribution_date`, `created_at`) VALUES (\'undefined\', \'1\', NULL, NULL, NULL, \'2025-05-12 23:55:11\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_distributions` (`recipient_id`, `item_id`, `description`, `quantity`, `distribution_date`, `created_at`) VALUES (:recipient_id:, :item_id:, :description:, :quantity:, :distribution_date:, :created_at:)', [...], false)
+ 4 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], false)
+ 7 SYSTEMPATH\BaseModel.php(750): CodeIgniter\Model->insert([...], false)
+ 8 APPPATH\Controllers\AdminController.php(3151): CodeIgniter\BaseModel->save([...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->createDistribution()
+10 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+11 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+15 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-05-12 23:55:11 --> [Caused by] mysqli_sql_exception: Column 'description' cannot be null
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `tbl_distributions` (`recipient_id`, `item_id`, `description`, `quantity`, `distribution_date`, `created_at`) VALUES (\'undefined\', \'1\', NULL, NULL, NULL, \'2025-05-12 23:55:11\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tbl_distributions` (`recipient_id`, `item_id`, `description`, `quantity`, `distribution_date`, `created_at`) VALUES (\'undefined\', \'1\', NULL, NULL, NULL, \'2025-05-12 23:55:11\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tbl_distributions` (`recipient_id`, `item_id`, `description`, `quantity`, `distribution_date`, `created_at`) VALUES (\'undefined\', \'1\', NULL, NULL, NULL, \'2025-05-12 23:55:11\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_distributions` (`recipient_id`, `item_id`, `description`, `quantity`, `distribution_date`, `created_at`) VALUES (:recipient_id:, :item_id:, :description:, :quantity:, :distribution_date:, :created_at:)', [...], false)
+ 5 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], false)
+ 8 SYSTEMPATH\BaseModel.php(750): CodeIgniter\Model->insert([...], false)
+ 9 APPPATH\Controllers\AdminController.php(3151): CodeIgniter\BaseModel->save([...])
+10 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->createDistribution()
+11 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+12 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+14 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+15 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+16 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+DEBUG - 2025-05-12 23:55:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-12 23:55:44 --> Fetched items: Array
+(
+    [0] => Array
+        (
+            [id] => 1
+            [item_name] => RiceaX
+            [item_quantity] => 180
+            [item_description] => 10kg rice123
+            [status] => active
+            [created_at] => 2025-05-08 23:22:47
+            [updated_at] => 2025-05-09 01:01:06
+        )
+
+)
+
+CRITICAL - 2025-05-12 23:55:45 --> ErrorException: Undefined array key "fullname"
+[Method: GET, Route: admin/retrieve-distributions]
+in APPPATH\Controllers\AdminController.php on line 3204.
+ 1 APPPATH\Controllers\AdminController.php(3204): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "fullname"', 'C:\\BarangayInformationSystem\\app\\Controllers\\AdminController.php', 3204)
+ 2 [internal function]: App\Controllers\AdminController->App\Controllers\{closure}([...])
+ 3 APPPATH\Controllers\AdminController.php(3200): array_map(Object(Closure), [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->retrieveDistributions()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+10 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+ERROR - 2025-05-12 23:55:52 --> mysqli_sql_exception: Column 'description' cannot be null in C:\BarangayInformationSystem\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\BarangayInformationSystem\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `tb...', 0)
+#1 C:\BarangayInformationSystem\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tb...')
+#2 C:\BarangayInformationSystem\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tb...')
+#3 C:\BarangayInformationSystem\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tb...', Array, false)
+#4 C:\BarangayInformationSystem\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\BarangayInformationSystem\system\BaseModel.php(839): CodeIgniter\Model->doInsert(Array)
+#6 C:\BarangayInformationSystem\system\Model.php(800): CodeIgniter\BaseModel->insert(Array, false)
+#7 C:\BarangayInformationSystem\system\BaseModel.php(750): CodeIgniter\Model->insert(Array, false)
+#8 C:\BarangayInformationSystem\app\Controllers\AdminController.php(3151): CodeIgniter\BaseModel->save(Array)
+#9 C:\BarangayInformationSystem\system\CodeIgniter.php(933): App\Controllers\AdminController->createDistribution()
+#10 C:\BarangayInformationSystem\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#11 C:\BarangayInformationSystem\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\BarangayInformationSystem\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#13 C:\BarangayInformationSystem\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#14 C:\BarangayInformationSystem\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#15 C:\BarangayInformationSystem\system\rewrite.php(44): require_once('C:\\BarangayInfo...')
+#16 {main}
+CRITICAL - 2025-05-12 23:55:52 --> CodeIgniter\Database\Exceptions\DatabaseException: Column 'description' cannot be null
+[Method: POST, Route: admin/create-distribution]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_distributions` (`recipient_id`, `item_id`, `description`, `quantity`, `distribution_date`, `created_at`) VALUES (:recipient_id:, :item_id:, :description:, :quantity:, :distribution_date:, :created_at:)', [...], false)
+ 2 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], false)
+ 5 SYSTEMPATH\BaseModel.php(750): CodeIgniter\Model->insert([...], false)
+ 6 APPPATH\Controllers\AdminController.php(3151): CodeIgniter\BaseModel->save([...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->createDistribution()
+ 8 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 9 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+13 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-05-12 23:55:52 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Column 'description' cannot be null
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tbl_distributions` (`recipient_id`, `item_id`, `description`, `quantity`, `distribution_date`, `created_at`) VALUES (\'undefined\', \'1\', NULL, NULL, NULL, \'2025-05-12 23:55:52\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tbl_distributions` (`recipient_id`, `item_id`, `description`, `quantity`, `distribution_date`, `created_at`) VALUES (\'undefined\', \'1\', NULL, NULL, NULL, \'2025-05-12 23:55:52\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_distributions` (`recipient_id`, `item_id`, `description`, `quantity`, `distribution_date`, `created_at`) VALUES (:recipient_id:, :item_id:, :description:, :quantity:, :distribution_date:, :created_at:)', [...], false)
+ 4 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], false)
+ 7 SYSTEMPATH\BaseModel.php(750): CodeIgniter\Model->insert([...], false)
+ 8 APPPATH\Controllers\AdminController.php(3151): CodeIgniter\BaseModel->save([...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->createDistribution()
+10 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+11 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+15 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-05-12 23:55:52 --> [Caused by] mysqli_sql_exception: Column 'description' cannot be null
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `tbl_distributions` (`recipient_id`, `item_id`, `description`, `quantity`, `distribution_date`, `created_at`) VALUES (\'undefined\', \'1\', NULL, NULL, NULL, \'2025-05-12 23:55:52\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tbl_distributions` (`recipient_id`, `item_id`, `description`, `quantity`, `distribution_date`, `created_at`) VALUES (\'undefined\', \'1\', NULL, NULL, NULL, \'2025-05-12 23:55:52\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tbl_distributions` (`recipient_id`, `item_id`, `description`, `quantity`, `distribution_date`, `created_at`) VALUES (\'undefined\', \'1\', NULL, NULL, NULL, \'2025-05-12 23:55:52\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_distributions` (`recipient_id`, `item_id`, `description`, `quantity`, `distribution_date`, `created_at`) VALUES (:recipient_id:, :item_id:, :description:, :quantity:, :distribution_date:, :created_at:)', [...], false)
+ 5 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], false)
+ 8 SYSTEMPATH\BaseModel.php(750): CodeIgniter\Model->insert([...], false)
+ 9 APPPATH\Controllers\AdminController.php(3151): CodeIgniter\BaseModel->save([...])
+10 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->createDistribution()
+11 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+12 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+14 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+15 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+16 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+DEBUG - 2025-05-12 23:56:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-12 23:56:58 --> Fetched items: Array
+(
+    [0] => Array
+        (
+            [id] => 1
+            [item_name] => RiceaX
+            [item_quantity] => 180
+            [item_description] => 10kg rice123
+            [status] => active
+            [created_at] => 2025-05-08 23:22:47
+            [updated_at] => 2025-05-09 01:01:06
+        )
+
+)
+
+CRITICAL - 2025-05-12 23:56:58 --> ErrorException: Undefined array key "fullname"
+[Method: GET, Route: admin/retrieve-distributions]
+in APPPATH\Controllers\AdminController.php on line 3204.
+ 1 APPPATH\Controllers\AdminController.php(3204): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "fullname"', 'C:\\BarangayInformationSystem\\app\\Controllers\\AdminController.php', 3204)
+ 2 [internal function]: App\Controllers\AdminController->App\Controllers\{closure}([...])
+ 3 APPPATH\Controllers\AdminController.php(3200): array_map(Object(Closure), [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->retrieveDistributions()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+10 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+ERROR - 2025-05-12 23:57:04 --> mysqli_sql_exception: Column 'description' cannot be null in C:\BarangayInformationSystem\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\BarangayInformationSystem\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `tb...', 0)
+#1 C:\BarangayInformationSystem\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tb...')
+#2 C:\BarangayInformationSystem\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tb...')
+#3 C:\BarangayInformationSystem\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tb...', Array, false)
+#4 C:\BarangayInformationSystem\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\BarangayInformationSystem\system\BaseModel.php(839): CodeIgniter\Model->doInsert(Array)
+#6 C:\BarangayInformationSystem\system\Model.php(800): CodeIgniter\BaseModel->insert(Array, false)
+#7 C:\BarangayInformationSystem\system\BaseModel.php(750): CodeIgniter\Model->insert(Array, false)
+#8 C:\BarangayInformationSystem\app\Controllers\AdminController.php(3151): CodeIgniter\BaseModel->save(Array)
+#9 C:\BarangayInformationSystem\system\CodeIgniter.php(933): App\Controllers\AdminController->createDistribution()
+#10 C:\BarangayInformationSystem\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#11 C:\BarangayInformationSystem\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\BarangayInformationSystem\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#13 C:\BarangayInformationSystem\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#14 C:\BarangayInformationSystem\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#15 C:\BarangayInformationSystem\system\rewrite.php(44): require_once('C:\\BarangayInfo...')
+#16 {main}
+CRITICAL - 2025-05-12 23:57:04 --> CodeIgniter\Database\Exceptions\DatabaseException: Column 'description' cannot be null
+[Method: POST, Route: admin/create-distribution]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_distributions` (`recipient_id`, `item_id`, `description`, `quantity`, `distribution_date`, `created_at`) VALUES (:recipient_id:, :item_id:, :description:, :quantity:, :distribution_date:, :created_at:)', [...], false)
+ 2 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], false)
+ 5 SYSTEMPATH\BaseModel.php(750): CodeIgniter\Model->insert([...], false)
+ 6 APPPATH\Controllers\AdminController.php(3151): CodeIgniter\BaseModel->save([...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->createDistribution()
+ 8 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 9 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+13 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-05-12 23:57:04 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Column 'description' cannot be null
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tbl_distributions` (`recipient_id`, `item_id`, `description`, `quantity`, `distribution_date`, `created_at`) VALUES (\'undefined\', \'1\', NULL, NULL, NULL, \'2025-05-12 23:57:04\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tbl_distributions` (`recipient_id`, `item_id`, `description`, `quantity`, `distribution_date`, `created_at`) VALUES (\'undefined\', \'1\', NULL, NULL, NULL, \'2025-05-12 23:57:04\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_distributions` (`recipient_id`, `item_id`, `description`, `quantity`, `distribution_date`, `created_at`) VALUES (:recipient_id:, :item_id:, :description:, :quantity:, :distribution_date:, :created_at:)', [...], false)
+ 4 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], false)
+ 7 SYSTEMPATH\BaseModel.php(750): CodeIgniter\Model->insert([...], false)
+ 8 APPPATH\Controllers\AdminController.php(3151): CodeIgniter\BaseModel->save([...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->createDistribution()
+10 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+11 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+15 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-05-12 23:57:04 --> [Caused by] mysqli_sql_exception: Column 'description' cannot be null
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `tbl_distributions` (`recipient_id`, `item_id`, `description`, `quantity`, `distribution_date`, `created_at`) VALUES (\'undefined\', \'1\', NULL, NULL, NULL, \'2025-05-12 23:57:04\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tbl_distributions` (`recipient_id`, `item_id`, `description`, `quantity`, `distribution_date`, `created_at`) VALUES (\'undefined\', \'1\', NULL, NULL, NULL, \'2025-05-12 23:57:04\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tbl_distributions` (`recipient_id`, `item_id`, `description`, `quantity`, `distribution_date`, `created_at`) VALUES (\'undefined\', \'1\', NULL, NULL, NULL, \'2025-05-12 23:57:04\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_distributions` (`recipient_id`, `item_id`, `description`, `quantity`, `distribution_date`, `created_at`) VALUES (:recipient_id:, :item_id:, :description:, :quantity:, :distribution_date:, :created_at:)', [...], false)
+ 5 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], false)
+ 8 SYSTEMPATH\BaseModel.php(750): CodeIgniter\Model->insert([...], false)
+ 9 APPPATH\Controllers\AdminController.php(3151): CodeIgniter\BaseModel->save([...])
+10 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->createDistribution()
+11 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+12 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+14 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+15 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+16 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+DEBUG - 2025-05-12 23:57:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-05-12 23:57:09 --> mysqli_sql_exception: Column 'description' cannot be null in C:\BarangayInformationSystem\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\BarangayInformationSystem\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `tb...', 0)
+#1 C:\BarangayInformationSystem\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tb...')
+#2 C:\BarangayInformationSystem\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tb...')
+#3 C:\BarangayInformationSystem\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tb...', Array, false)
+#4 C:\BarangayInformationSystem\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\BarangayInformationSystem\system\BaseModel.php(839): CodeIgniter\Model->doInsert(Array)
+#6 C:\BarangayInformationSystem\system\Model.php(800): CodeIgniter\BaseModel->insert(Array, false)
+#7 C:\BarangayInformationSystem\system\BaseModel.php(750): CodeIgniter\Model->insert(Array, false)
+#8 C:\BarangayInformationSystem\app\Controllers\AdminController.php(3151): CodeIgniter\BaseModel->save(Array)
+#9 C:\BarangayInformationSystem\system\CodeIgniter.php(933): App\Controllers\AdminController->createDistribution()
+#10 C:\BarangayInformationSystem\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#11 C:\BarangayInformationSystem\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\BarangayInformationSystem\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#13 C:\BarangayInformationSystem\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#14 C:\BarangayInformationSystem\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#15 C:\BarangayInformationSystem\system\rewrite.php(44): require_once('C:\\BarangayInfo...')
+#16 {main}
+CRITICAL - 2025-05-12 23:57:09 --> CodeIgniter\Database\Exceptions\DatabaseException: Column 'description' cannot be null
+[Method: POST, Route: admin/create-distribution]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_distributions` (`recipient_id`, `item_id`, `description`, `quantity`, `distribution_date`, `created_at`) VALUES (:recipient_id:, :item_id:, :description:, :quantity:, :distribution_date:, :created_at:)', [...], false)
+ 2 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], false)
+ 5 SYSTEMPATH\BaseModel.php(750): CodeIgniter\Model->insert([...], false)
+ 6 APPPATH\Controllers\AdminController.php(3151): CodeIgniter\BaseModel->save([...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->createDistribution()
+ 8 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 9 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+13 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-05-12 23:57:09 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Column 'description' cannot be null
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tbl_distributions` (`recipient_id`, `item_id`, `description`, `quantity`, `distribution_date`, `created_at`) VALUES (\'undefined\', \'1\', NULL, NULL, NULL, \'2025-05-12 23:57:09\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tbl_distributions` (`recipient_id`, `item_id`, `description`, `quantity`, `distribution_date`, `created_at`) VALUES (\'undefined\', \'1\', NULL, NULL, NULL, \'2025-05-12 23:57:09\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_distributions` (`recipient_id`, `item_id`, `description`, `quantity`, `distribution_date`, `created_at`) VALUES (:recipient_id:, :item_id:, :description:, :quantity:, :distribution_date:, :created_at:)', [...], false)
+ 4 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], false)
+ 7 SYSTEMPATH\BaseModel.php(750): CodeIgniter\Model->insert([...], false)
+ 8 APPPATH\Controllers\AdminController.php(3151): CodeIgniter\BaseModel->save([...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->createDistribution()
+10 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+11 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+15 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-05-12 23:57:09 --> [Caused by] mysqli_sql_exception: Column 'description' cannot be null
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `tbl_distributions` (`recipient_id`, `item_id`, `description`, `quantity`, `distribution_date`, `created_at`) VALUES (\'undefined\', \'1\', NULL, NULL, NULL, \'2025-05-12 23:57:09\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tbl_distributions` (`recipient_id`, `item_id`, `description`, `quantity`, `distribution_date`, `created_at`) VALUES (\'undefined\', \'1\', NULL, NULL, NULL, \'2025-05-12 23:57:09\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tbl_distributions` (`recipient_id`, `item_id`, `description`, `quantity`, `distribution_date`, `created_at`) VALUES (\'undefined\', \'1\', NULL, NULL, NULL, \'2025-05-12 23:57:09\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_distributions` (`recipient_id`, `item_id`, `description`, `quantity`, `distribution_date`, `created_at`) VALUES (:recipient_id:, :item_id:, :description:, :quantity:, :distribution_date:, :created_at:)', [...], false)
+ 5 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], false)
+ 8 SYSTEMPATH\BaseModel.php(750): CodeIgniter\Model->insert([...], false)
+ 9 APPPATH\Controllers\AdminController.php(3151): CodeIgniter\BaseModel->save([...])
+10 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->createDistribution()
+11 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+12 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+14 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+15 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+16 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+DEBUG - 2025-05-12 23:58:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-12 23:58:18 --> Fetched items: Array
+(
+    [0] => Array
+        (
+            [id] => 1
+            [item_name] => RiceaX
+            [item_quantity] => 180
+            [item_description] => 10kg rice123
+            [status] => active
+            [created_at] => 2025-05-08 23:22:47
+            [updated_at] => 2025-05-09 01:01:06
+        )
+
+)
+
+CRITICAL - 2025-05-12 23:58:18 --> ErrorException: Undefined array key "fullname"
+[Method: GET, Route: admin/retrieve-distributions]
+in APPPATH\Controllers\AdminController.php on line 3204.
+ 1 APPPATH\Controllers\AdminController.php(3204): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "fullname"', 'C:\\BarangayInformationSystem\\app\\Controllers\\AdminController.php', 3204)
+ 2 [internal function]: App\Controllers\AdminController->App\Controllers\{closure}([...])
+ 3 APPPATH\Controllers\AdminController.php(3200): array_map(Object(Closure), [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->retrieveDistributions()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+10 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+DEBUG - 2025-05-12 23:59:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-12 23:59:11 --> Fetched items: Array
+(
+    [0] => Array
+        (
+            [id] => 1
+            [item_name] => RiceaX
+            [item_quantity] => 180
+            [item_description] => 10kg rice123
+            [status] => active
+            [created_at] => 2025-05-08 23:22:47
+            [updated_at] => 2025-05-09 01:01:06
+        )
+
+)
+
+CRITICAL - 2025-05-12 23:59:11 --> ErrorException: Undefined array key "fullname"
+[Method: GET, Route: admin/retrieve-distributions]
+in APPPATH\Controllers\AdminController.php on line 3204.
+ 1 APPPATH\Controllers\AdminController.php(3204): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "fullname"', 'C:\\BarangayInformationSystem\\app\\Controllers\\AdminController.php', 3204)
+ 2 [internal function]: App\Controllers\AdminController->App\Controllers\{closure}([...])
+ 3 APPPATH\Controllers\AdminController.php(3200): array_map(Object(Closure), [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->retrieveDistributions()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+10 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+ERROR - 2025-05-12 23:59:24 --> mysqli_sql_exception: Column 'description' cannot be null in C:\BarangayInformationSystem\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\BarangayInformationSystem\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `tb...', 0)
+#1 C:\BarangayInformationSystem\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tb...')
+#2 C:\BarangayInformationSystem\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tb...')
+#3 C:\BarangayInformationSystem\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tb...', Array, false)
+#4 C:\BarangayInformationSystem\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\BarangayInformationSystem\system\BaseModel.php(839): CodeIgniter\Model->doInsert(Array)
+#6 C:\BarangayInformationSystem\system\Model.php(800): CodeIgniter\BaseModel->insert(Array, false)
+#7 C:\BarangayInformationSystem\system\BaseModel.php(750): CodeIgniter\Model->insert(Array, false)
+#8 C:\BarangayInformationSystem\app\Controllers\AdminController.php(3151): CodeIgniter\BaseModel->save(Array)
+#9 C:\BarangayInformationSystem\system\CodeIgniter.php(933): App\Controllers\AdminController->createDistribution()
+#10 C:\BarangayInformationSystem\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#11 C:\BarangayInformationSystem\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\BarangayInformationSystem\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#13 C:\BarangayInformationSystem\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#14 C:\BarangayInformationSystem\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#15 C:\BarangayInformationSystem\system\rewrite.php(44): require_once('C:\\BarangayInfo...')
+#16 {main}
+CRITICAL - 2025-05-12 23:59:24 --> CodeIgniter\Database\Exceptions\DatabaseException: Column 'description' cannot be null
+[Method: POST, Route: admin/create-distribution]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_distributions` (`recipient_id`, `item_id`, `description`, `quantity`, `distribution_date`, `created_at`) VALUES (:recipient_id:, :item_id:, :description:, :quantity:, :distribution_date:, :created_at:)', [...], false)
+ 2 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], false)
+ 5 SYSTEMPATH\BaseModel.php(750): CodeIgniter\Model->insert([...], false)
+ 6 APPPATH\Controllers\AdminController.php(3151): CodeIgniter\BaseModel->save([...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->createDistribution()
+ 8 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 9 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+13 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-05-12 23:59:24 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Column 'description' cannot be null
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tbl_distributions` (`recipient_id`, `item_id`, `description`, `quantity`, `distribution_date`, `created_at`) VALUES (\'44\', \'1\', NULL, NULL, NULL, \'2025-05-12 23:59:24\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tbl_distributions` (`recipient_id`, `item_id`, `description`, `quantity`, `distribution_date`, `created_at`) VALUES (\'44\', \'1\', NULL, NULL, NULL, \'2025-05-12 23:59:24\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_distributions` (`recipient_id`, `item_id`, `description`, `quantity`, `distribution_date`, `created_at`) VALUES (:recipient_id:, :item_id:, :description:, :quantity:, :distribution_date:, :created_at:)', [...], false)
+ 4 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], false)
+ 7 SYSTEMPATH\BaseModel.php(750): CodeIgniter\Model->insert([...], false)
+ 8 APPPATH\Controllers\AdminController.php(3151): CodeIgniter\BaseModel->save([...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->createDistribution()
+10 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+11 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+15 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-05-12 23:59:24 --> [Caused by] mysqli_sql_exception: Column 'description' cannot be null
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `tbl_distributions` (`recipient_id`, `item_id`, `description`, `quantity`, `distribution_date`, `created_at`) VALUES (\'44\', \'1\', NULL, NULL, NULL, \'2025-05-12 23:59:24\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tbl_distributions` (`recipient_id`, `item_id`, `description`, `quantity`, `distribution_date`, `created_at`) VALUES (\'44\', \'1\', NULL, NULL, NULL, \'2025-05-12 23:59:24\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tbl_distributions` (`recipient_id`, `item_id`, `description`, `quantity`, `distribution_date`, `created_at`) VALUES (\'44\', \'1\', NULL, NULL, NULL, \'2025-05-12 23:59:24\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_distributions` (`recipient_id`, `item_id`, `description`, `quantity`, `distribution_date`, `created_at`) VALUES (:recipient_id:, :item_id:, :description:, :quantity:, :distribution_date:, :created_at:)', [...], false)
+ 5 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], false)
+ 8 SYSTEMPATH\BaseModel.php(750): CodeIgniter\Model->insert([...], false)
+ 9 APPPATH\Controllers\AdminController.php(3151): CodeIgniter\BaseModel->save([...])
+10 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->createDistribution()
+11 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+12 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+14 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+15 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+16 SYSTEMPATH\rewrite.php(44): require_once('C:\\BarangayInformationSystem\\public\\index.php')

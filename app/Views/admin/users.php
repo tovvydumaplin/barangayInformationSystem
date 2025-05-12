@@ -887,18 +887,25 @@ $createBtn.prop('disabled', true).addClass('disabled');
 
 $passwordInput.on('input', function () {
   const value = $(this).val();
-  const isAlphaNumeric = /^[a-zA-Z0-9]*$/.test(value);
-  const hasLetter = /[a-zA-Z]/.test(value);
+  
+  // Check if the value contains at least one lowercase letter, one uppercase letter, and one number
+  const hasLowerCase = /[a-z]/.test(value);
+  const hasUpperCase = /[A-Z]/.test(value);
   const hasNumber = /[0-9]/.test(value);
+  
+  // Check if the password is alphanumeric
+  const isAlphaNumeric = /^[a-zA-Z0-9]*$/.test(value);
 
+  // If it's not alphanumeric
   if (!isAlphaNumeric) {
     $errorMessage.text("Password must be alphanumeric.");
     $createBtn.prop('disabled', true).addClass('disabled');
     return;
   }
 
-  if (!(hasLetter && hasNumber)) {
-    $errorMessage.text("Password must contain at least one letter and one number.");
+  // If the password doesn't have at least one lowercase, one uppercase, and one number
+  if (!(hasLowerCase && hasUpperCase && hasNumber)) {
+    $errorMessage.text("Password must contain at least one uppercase letter, one lowercase letter, and one number.");
     $createBtn.prop('disabled', true).addClass('disabled');
     return;
   }
@@ -907,6 +914,7 @@ $passwordInput.on('input', function () {
   $errorMessage.text("");
   $createBtn.prop('disabled', false).removeClass('disabled');
 });
+
 
 });
 
