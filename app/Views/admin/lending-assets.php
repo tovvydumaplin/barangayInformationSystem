@@ -904,6 +904,7 @@
           <table id="distributionTable" class="display">
             <thead>
               <tr>
+                <th>ID</th>
                 <th>Item Name</th>
                 <th>Quantity</th>
                 <th>Recipient</th>
@@ -2405,18 +2406,18 @@ function loadDistributions() {
       data.forEach(function (dist) {
         $('#distributionTable tbody').append(`
           <tr>
+            <td>${dist.distribution_id}</td>
             <td>${dist.item_id}</td>
             <td>${dist.quantity}</td>
             <td>${dist.recipient_id}</td>
             <td>${dist.distribution_date}</td>
-
           </tr>
         `);
       });
 
       // Re-initialize DataTable with ordering by distribution_date (4th column, index 3)
       $('#distributionTable').DataTable({
-        order: [[3, 'desc']]
+        order: [[0, 'desc']]
       });
     },
     error: function (xhr) {
