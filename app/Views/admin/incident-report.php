@@ -54,7 +54,7 @@
         <div class="modal__header">
           <p class="modal__heading">File a Complaint</p>
         </div>
-        <form id="createComplainForm" class="modal__body community__modal">
+        <form id="createComplainForm" class="modal__body community__modal" enctype="multipart/form-data">
           <div class="row flex__d__col">
             <!-- 1 -->
             <div class="input__box">
@@ -117,7 +117,7 @@
                 name="file_against"
               />
               <span class="input__title"
-                >File Against<span class="red__dot">*</span></span
+                >Complainee<span class="red__dot">*</span></span
               >
               <p class="text-danger"></p>
             </div>
@@ -188,6 +188,50 @@
               >
               <p class="text-danger"></p>
             </div>
+
+                      <!-- Complainant Signature -->
+          <div class="input__box">
+            <input
+              type="file"
+              name="complainant_signature"
+              id="complainant_signature"
+              accept="image/*"
+              class="information__input"
+            />
+            <span class="input__title">Complainant Signature<span class="red__dot">*</span></span>
+            <p class="text-danger"></p>
+
+            <div id="complainantSignaturePreviewContainer" style="margin-top: 1rem;">
+              <img
+                id="complainantSignaturePreview"
+                src=""
+                alt="Complainant Signature Preview"
+                style="max-width: 10rem; height: auto; display: none;"
+              />
+            </div>
+          </div>
+
+          <!-- Complainee Signature -->
+          <div class="input__box">
+            <input
+              type="file"
+              name="complainee_signature"
+              id="complainee_signature"
+              accept="image/*"
+              class="information__input"
+            />
+            <span class="input__title">Complainee Signature<span class="red__dot">*</span></span>
+            <p class="text-danger"></p>
+
+            <div id="complaineeSignaturePreviewContainer" style="margin-top: 1rem;">
+              <img
+                id="complaineeSignaturePreview"
+                src=""
+                alt="Complainee Signature Preview"
+                style="max-width: 10rem; height: auto; display: none;"
+              />
+            </div>
+          </div>
           </div>
           <div class="btn__box__modal">
 
@@ -237,7 +281,7 @@
             <!-- File Against -->
             <div class="input__box">
               <input class="information__input" name="view_file_against" readonly />
-              <span class="input__title">File Against<span class="red__dot">*</span></span>
+              <span class="input__title">Complainee<span class="red__dot">*</span></span>
               <p class="text-danger"></p>
             </div>
 
@@ -533,86 +577,205 @@ function getComplaintDataById(id) {
 
 const preparedBy = <?= json_encode($fullName) ?>;
 
+// Function to convert image file to Base64 string
 function exportComplaintToPDF(complaintData) {
   saveAction("Exported data to PDF");
-    const { complainant_name, complain_against, complain_title, complainant_age, complainant_address, location_of_incident, date, status, type_of_complaint, complain_details, barangay_action } = complaintData;
+  
+  const { 
+    complainant_name, 
+    complain_against, 
+    complain_title, 
+    complainant_age, 
+    complainant_address, 
+    location_of_incident, 
+    date, 
+    status, 
+    type_of_complaint, 
+    complain_details, 
+    barangay_action, 
+    complainant_signature, 
+    complainee_signature 
+  } = complaintData;
 
-    const reportTitle = (type_of_complaint === 'blotter') ? 'Blotter Report' : 'Complaint Report';
+  // Missing variable declaration - add this at the top of your function
+  const preparedBy = complaintData.preparedBy || "System User"; // Default value if not provided
 
-    const complainantInfo = type_of_complaint === 'complaint' 
-        ? `${complainant_name}` 
-        : `${complainant_name}, aged ${complainant_age}, from ${complainant_address}`;
+  const reportTitle = (type_of_complaint === 'blotter') ? 'Blotter Report' : 'Complaint Report';
 
-    const locationText = type_of_complaint === 'complaint' ? '' : `The incident took place at ${location_of_incident}.`;
+  const complainantInfo = type_of_complaint === 'complaint' 
+      ? `${complainant_name}` 
+      : `${complainant_name}, aged ${complainant_age}, from ${complainant_address}`;
 
-    const complaintDetailsSection = complain_details ? [
-        { text: '\nComplaint Details:', style: 'subheader', margin: [0, 10, 0, 5] },
-        { text: complain_details, style: 'subheader' }
-    ] : [];
+  const locationText = type_of_complaint === 'complaint' ? '' : `The incident took place at ${location_of_incident}.`;
 
-    const barangayActionSection = (type_of_complaint === 'blotter' && barangay_action) ? [
-        { text: '\nBarangay Action:', style: 'subheader', margin: [0, 10, 0, 5] },
-        { text: barangay_action, style: 'subheader' }
-    ] : [];
+  const complaintDetailsSection = complain_details ? [
+      { text: '\nComplaint Details:', style: 'subheader', margin: [0, 10, 0, 5] },
+      { text: complain_details, style: 'subheader' }
+  ] : [];
 
-    const docDefinition = {
-        content: [
-            { text: 'Republic of the Philippines', style: 'headerText', alignment: 'center' },
-            { text: 'Office of the Barangay Captain', style: 'headerText', alignment: 'center' },
-            { text: 'Barangay 42C- Pinagbuklod Zone-5', style: 'headerText', alignment: 'center' },
-            { text: 'San Antonio, Cavite City', style: 'headerText', alignment: 'center' },
-            { text: '--------------------------------------------------------------', style: 'divider' },
+  const barangayActionSection = (type_of_complaint === 'blotter' && barangay_action) ? [
+      { text: '\nBarangay Action:', style: 'subheader', margin: [0, 10, 0, 5] },
+      { text: barangay_action, style: 'subheader' }
+  ] : [];
 
-            { text: reportTitle, style: 'mainHeader' },
+  // Create document definition without signatures initially
+  const docDefinition = {
+    content: [
+        { text: 'Republic of the Philippines', style: 'headerText', alignment: 'center' },
+        { text: 'Office of the Barangay Captain', style: 'headerText', alignment: 'center' },
+        { text: 'Barangay 42C- Pinagbuklod Zone-5', style: 'headerText', alignment: 'center' },
+        { text: 'San Antonio, Cavite City', style: 'headerText', alignment: 'center' },
+        { text: '--------------------------------------------------------------', style: 'divider' },
 
-            { 
-                text: [
-                    { text: `On ${date}, `, bold: true },
-                    ` ${complainantInfo} reported an incident regarding ${complain_title}. `,
-                    `The complainant accused ${complain_against} of the following: ${complain_title}. `,
-                    locationText,
-                    `The status of the ${type_of_complaint === 'blotter' ? 'blotter' : 'complaint'} is currently: `,
-                    { text: status == 0 ? 'In Progress' : (status == 1 ? 'Completed' : 'Unknown'), bold: true },
-                    `.`
-                ],
-                style: 'subheader',
-                lineHeight: 1.5
-            },
+        { text: reportTitle, style: 'mainHeader' },
 
-            ...complaintDetailsSection,
+        { 
+            text: [
+                { text: `On ${date}, `, bold: true },
+                ` ${complainantInfo} reported an incident regarding ${complain_title}. `,
+                `The complainant accused ${complain_against} of the following: ${complain_title}. `,
+                locationText,
+                `The status of the ${type_of_complaint === 'blotter' ? 'blotter' : 'complaint'} is currently: `,
+                { text: status == 0 ? 'In Progress' : (status == 1 ? 'Completed' : 'Unknown'), bold: true },
+                `.`
+            ],
+            style: 'subheader',
+            lineHeight: 1.5
+        },
 
-            ...barangayActionSection,
+        ...complaintDetailsSection,
 
-            { text: '\n\n' },
+        ...barangayActionSection,
 
-            {
-                columns: [
-                    { 
-                        text: `Prepared by:\n${preparedBy}`, 
-                        style: 'subheader', 
-                        alignment: 'left', 
-                        margin: [0, 30, 0, 0] 
-                    },
-                    { 
-                        text: `Certified by:\nYolanda DC. Chi\nPunong Barangay`, 
-                        style: 'subheader', 
-                        alignment: 'right', 
-                        margin: [0, 30, 0, 0] 
-                    }
-                ]
-            }
+        { text: '\n\n' },
+
+        // We'll add signature section later
+    ],
+    styles: {
+        mainHeader: { fontSize: 18, bold: true, alignment: 'center', margin: [0, 10] },
+        headerText: { fontSize: 14, bold: true, alignment: 'center', margin: [0, 5] },
+        subheader: { fontSize: 14, margin: [0, 5] },
+        divider: { fontSize: 10, margin: [0, 10], color: 'gray', alignment: 'center' }
+    }
+  };
+
+  // Create a function to load an image as base64
+  function loadImageAsBase64(url) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.crossOrigin = 'Anonymous'; // Enable CORS
+      img.onload = function() {
+        const canvas = document.createElement('canvas');
+        canvas.width = img.width;
+        canvas.height = img.height;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0);
+        const dataURL = canvas.toDataURL('image/png');
+        resolve(dataURL);
+      };
+      img.onerror = function() {
+        console.error('Failed to load image:', url);
+        reject(new Error('Failed to load image'));
+      };
+      img.src = url;
+    });
+  }
+
+  // Create empty objects for signatures as placeholders
+  let complainantSignatureSection = { text: '(No signature)', italics: true, alignment: 'left' };
+  let complaineeSignatureSection = { text: '(No signature)', italics: true, alignment: 'right' };
+  
+  // Promises array to track loading of images
+  const promises = [];
+  const signatureBase = '/assets/signatures/';
+
+  // Try to load complainant signature
+  if (complainant_signature && typeof complainant_signature === 'string') {
+    const complainantPromise = loadImageAsBase64(signatureBase + complainant_signature)
+      .then(dataUrl => {
+        complainantSignatureSection = { 
+          image: dataUrl, 
+          width: 100,
+          height: 50, 
+          alignment: 'left' 
+        };
+      })
+      .catch(err => {
+        console.error('Error loading complainant signature:', err);
+        // Keep the default placeholder
+      });
+    promises.push(complainantPromise);
+  }
+
+  // Try to load complainee signature
+  if (complainee_signature && typeof complainee_signature === 'string') {
+    const complaineePromise = loadImageAsBase64(signatureBase + complainee_signature)
+      .then(dataUrl => {
+        complaineeSignatureSection = { 
+          image: dataUrl, 
+          width: 100,
+          height: 50, 
+          alignment: 'right' 
+        };
+      })
+      .catch(err => {
+        console.error('Error loading complainee signature:', err);
+        // Keep the default placeholder
+      });
+    promises.push(complaineePromise);
+  }
+
+  // Wait for all image loading to complete, then generate the PDF
+  Promise.all(promises)
+    .then(() => {
+      // Add signature section with loaded images
+      docDefinition.content.push({
+        columns: [
+          { 
+            stack: [
+              complainantSignatureSection,
+              { text: complainant_name, style: 'subheader', alignment: 'left', margin: [0, 5, 0, 0] }
+            ],
+            width: '50%'
+          },
+          { 
+            stack: [
+              complaineeSignatureSection,
+              { text: complain_against, style: 'subheader', alignment: 'right', margin: [0, 5, 0, 0] }
+            ],
+            width: '50%'
+          }
         ],
-        styles: {
-            mainHeader: { fontSize: 18, bold: true, alignment: 'center', margin: [0, 10] },
-            headerText: { fontSize: 14, bold: true, alignment: 'center', margin: [0, 5] },
-            subheader: { fontSize: 14, margin: [0, 5] },
-            divider: { fontSize: 10, margin: [0, 10], color: 'gray', alignment: 'center' }
-        }
-    };
+        columnGap: 10,
+        margin: [0, 30, 0, 0]
+      });
 
-    pdfMake.createPdf(docDefinition).download(`${reportTitle.toLowerCase().replace(' ', '-')}.pdf`);
+      // Add preparer and certifier section
+      docDefinition.content.push({
+        columns: [
+          { 
+            text: `Prepared by:\n${preparedBy}`, 
+            style: 'subheader', 
+            alignment: 'left', 
+            margin: [0, 30, 0, 0] 
+          },
+          { 
+            text: `Certified by:\nYolanda DC. Chi\nPunong Barangay`, 
+            style: 'subheader', 
+            alignment: 'right', 
+            margin: [0, 30, 0, 0] 
+          }
+        ]
+      });
+      
+      // Create and download the PDF
+      pdfMake.createPdf(docDefinition).download(`${reportTitle.toLowerCase().replace(' ', '-')}.pdf`);
+    })
+    .catch(err => {
+      console.error('Error generating PDF with signatures:', err);
+      alert('There was an error generating the PDF. Please try again later.');
+    });
 }
-
 
 
 
@@ -649,32 +812,37 @@ loadComplaints();
 
 
 $('#createComplainForm').on('submit', function (e) {
-    e.preventDefault(); 
+  e.preventDefault();
 
-    $.ajax({
-        url: '<?= site_url('admin/create-complaint') ?>',
-        type: 'POST',
-        data: $(this).serialize(),
-        dataType: 'json', 
-        success: function (response) {
-          saveAction("Created a new complaint");
-            if (response.status === 'success') {
-                alert('Complaint filed successfully!');
-                loadComplaints();
-                $('#createComplainForm')[0].reset();
-                $(".wrapper, #addReportModal").removeClass("open");
-            } else {
-                alert('Something went wrong: ' + response.message);
-            }
-        },
-        error: function (xhr, status, error) {
-            console.error(xhr.responseText);
-            alert('An error occurred while submitting the form.');
-            $('#createComplainForm')[0].reset();
-            $(".wrapper, #addReportModal").removeClass("open");
-        }
-    });
+  const formData = new FormData(this);
+
+  $.ajax({
+    url: '<?= site_url('admin/create-complaint') ?>',
+    type: 'POST',
+    data: formData,
+    processData: false,
+    contentType: false,
+    dataType: 'json',
+    success: function (response) {
+      saveAction("Created a new complaint");
+      if (response.status === 'success') {
+        alert('Complaint filed successfully!');
+        loadComplaints();
+        $('#createComplainForm')[0].reset();
+        $(".wrapper, #addReportModal").removeClass("open");
+      } else {
+        alert('Something went wrong: ' + response.message);
+      }
+    },
+    error: function (xhr, status, error) {
+      console.error(xhr.responseText);
+      alert('An error occurred while submitting the form.');
+      $('#createComplainForm')[0].reset();
+      $(".wrapper, #addReportModal").removeClass("open");
+    }
+  });
 });
+
 
 
 
@@ -845,6 +1013,40 @@ $('#typeOfComplaint').on("change", function() {
   }
 });
 });
+    function setDateToToday() {
+        const today = new Date().toISOString().split('T')[0];
+
+        $('input[type="date"]').each(function () {
+            $(this).val(today);
+            $(this).attr('min', today);
+        });
+    }
+    setDateToToday();
+
+function previewSignature(inputId, previewId) {
+  const input = document.getElementById(inputId);
+  const preview = document.getElementById(previewId);
+
+  input.addEventListener("change", function () {
+    const file = this.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        preview.src = e.target.result;
+        preview.style.display = "block";
+      };
+      reader.readAsDataURL(file);
+    } else {
+      preview.src = "";
+      preview.style.display = "none";
+    }
+  });
+}
+
+// Apply preview to both inputs
+previewSignature("complainant_signature", "complainantSignaturePreview");
+previewSignature("complainee_signature", "complaineeSignaturePreview");
+
 
     </script>
   </body>

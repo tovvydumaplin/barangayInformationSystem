@@ -2079,6 +2079,16 @@ $(document).ready(function () {
         $(".dropdown__menu").toggleClass("show");
       });
     });
+
+    function setDateToToday() {
+        const today = new Date().toISOString().split('T')[0];
+
+        $('input[type="date"]').each(function () {
+            $(this).val(today);
+            $(this).attr('min', today);
+        });
+    }
+    setDateToToday();
   </script>
   </body>
 </html>

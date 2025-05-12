@@ -435,6 +435,37 @@ public function createUser()
             ]);
         }
     }
+public function updatePastEventStatus()
+{
+    // Get the current date
+    $currentDate = date('Y-m-d H:i:s');  // Format in the same way your event datetime is stored
+
+    // Load the EventModel
+    $eventModel = new EventModel();
+
+    // Get events with a start date in the past and status not equal to 2
+    $eventsToUpdate = $eventModel->where('start_date <', $currentDate)
+                                ->where('status !=', 2)
+                                ->findAll();
+
+    if (count($eventsToUpdate) > 0) {
+        // Loop through the events and update their status
+        foreach ($eventsToUpdate as $event) {
+            $eventModel->update($event['event_id'], ['status' => 2]);
+        }
+
+        return $this->response->setJSON([
+            'success' => true,
+            'message' => 'Past events successfully updated to status 2.'
+        ]);
+    } else {
+        return $this->response->setJSON([
+            'success' => true,  // Success, but no events to update
+            'message' => 'No past events found to update.'
+        ]);
+    }
+}
+
 
     public function viewEventDetails()
     {
@@ -1704,12 +1735,12 @@ public function residentsList()
 }
 
 
-    
 public function createComplaint()
 {
     $complainModel = new ComplainModel();
     $residentModel = new ResidentModel();
 
+    // Get input data
     $complainantFullName = $this->request->getPost('complainant');
     $fileAgainstFullName = $this->request->getPost('file_against');
     $date = $this->request->getPost('date');
@@ -1722,19 +1753,46 @@ public function createComplaint()
     $incidentLocation = $this->request->getPost('incident_location');
     $barangayAction = $this->request->getPost('barangay_action');
 
-    // Look up complainant by full name (case-insensitive)
+    // Lookup residents by full name
     $complainant = $residentModel
         ->where("LOWER(CONCAT(firstname, ' ', lastname))", strtolower($complainantFullName))
         ->first();
 
-    $complainantId = ($complainant) ? $complainant['resident_id'] : null;
+    $complainantId = $complainant ? $complainant['resident_id'] : null;
 
     $fileAgainst = $residentModel
         ->where("LOWER(CONCAT(firstname, ' ', lastname))", strtolower($fileAgainstFullName))
         ->first();
 
-    $fileAgainstId = ($fileAgainst) ? $fileAgainst['resident_id'] : null;
+    $fileAgainstId = $fileAgainst ? $fileAgainst['resident_id'] : null;
 
+    // Handle file uploads
+    $complainantSignature = $this->request->getFile('complainant_signature');
+    $complaineeSignature = $this->request->getFile('complainee_signature');
+
+    $signaturePath = 'assets/signatures/';
+    $fullSignaturePath = FCPATH . $signaturePath;
+    $complainantSignatureName = null;
+    $complaineeSignatureName = null;
+
+    // Create directory if it doesn't exist
+    if (!is_dir($fullSignaturePath)) {
+        mkdir($fullSignaturePath, 0755, true);
+    }
+
+    // Move complainant signature
+    if ($complainantSignature && $complainantSignature->isValid() && !$complainantSignature->hasMoved()) {
+        $complainantSignatureName = $complainantSignature->getRandomName();
+        $complainantSignature->move($fullSignaturePath, $complainantSignatureName);
+    }
+
+    // Move complainee signature
+    if ($complaineeSignature && $complaineeSignature->isValid() && !$complaineeSignature->hasMoved()) {
+        $complaineeSignatureName = $complaineeSignature->getRandomName();
+        $complaineeSignature->move($fullSignaturePath, $complaineeSignatureName);
+    }
+
+    // Save complaint data
     $data = [
         'complainant_id' => $complainantId,
         'complainant_name' => $complainantFullName,
@@ -1748,10 +1806,11 @@ public function createComplaint()
         'complainant_address' => $complainantAddress,
         'location_of_incident' => $incidentLocation,
         'barangay_action' => $barangayAction,
+        'complainant_signature' => $complainantSignatureName,
+        'complainee_signature' => $complaineeSignatureName,
         'status' => 0
     ];
 
-    // Save complaint data
     $complainModel->save($data);
 
     return $this->response->setJSON([

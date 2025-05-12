@@ -42,6 +42,8 @@ $routes->post('admin/create-user', 'AdminController::createUser');
 $routes->post('admin/create-event','AdminController::createEvent');
 // View event
 $routes->get('admin/get-events','AdminController::viewEvents');
+$routes->post('admin/update-past-event-status', 'AdminController::updatePastEventStatus');
+
 // View event details 
 $routes->get('admin/get-event-details','AdminController::viewEventDetails');
 // Update event detailss 

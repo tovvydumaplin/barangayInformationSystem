@@ -772,6 +772,32 @@ const disapprovedEvent = function() {
         }
     });
 }
+const updatePastEventStatus = function () {
+    $.ajax({
+        url: "<?= base_url('admin/update-past-event-status') ?>",  // The route that triggers the update in your controller
+        type: "POST",
+        dataType: "json",
+        success: function (response) {
+            if (response.success) {
+                if (response.message === 'Past events successfully updated to status 2.') {
+                    // DO NOTHING
+
+                } else {
+                    // DO NOTHING
+                }
+            } else {
+                    // DO NOTHING
+
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error("Error updating past events:", error);
+            alert("An error occurred while updating past events.");
+        }
+    });
+};
+
+updatePastEventStatus();
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~ ⚡ Event Listeners ⚡ ~~~~~~~~~~~~~~~~~~~~~~~~ //
 $('.tab__event__btn').on('click', function(){               
@@ -901,7 +927,86 @@ $(".icon__close").on("click", function(){                       //Closing of mod
 // ~~~~~~~~~~~~~~~~~~~~~~~~ ⚡ On Load Functions ⚡ ~~~~~~~~~~~~~~~~~~~~~~~~ //
 loadEventData(1);                                                // Load Event Data on page load
 });
+function setDateToToday() {
+    const now = new Date();
+    // Use current time for date_start (no +1 hour)
+    const startTime = new Date(now);
+    
+    const pad = n => n.toString().padStart(2, '0');
+    
+    const formattedStart = `${startTime.getFullYear()}-${pad(startTime.getMonth() + 1)}-${pad(startTime.getDate())}T${pad(startTime.getHours())}:${pad(startTime.getMinutes())}`;
+    
+    // Add 1 hour to create the gap for date_end
+    const endTime = new Date(startTime);
+    endTime.setHours(endTime.getHours() + 1);
+    
+    const formattedEnd = `${endTime.getFullYear()}-${pad(endTime.getMonth() + 1)}-${pad(endTime.getDate())}T${pad(endTime.getHours())}:${pad(endTime.getMinutes())}`;
+    
+    const $start = $('input[name="date_start"]');
+    const $end = $('input[name="date_end"]');
+    
+    // Set initial values and minimum dates
+    $start.val(formattedStart).attr('min', formattedStart);
+    $end.val(formattedEnd).attr('min', formattedStart);
+}
 
+function formatDateForInput(date) {
+    const pad = n => n.toString().padStart(2, '0');
+    return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}`;
+}
+
+function attachDateValidators() {
+    const $start = $('input[name="date_start"]');
+    const $end = $('input[name="date_end"]');
+    
+    // When start date changes
+    $start.on('change', function() {
+        const startDate = new Date($(this).val());
+        const currentTime = new Date();
+        
+        // Check if start date is at least current time (not 1 hour ahead)
+        if (startDate < currentTime) {
+            alert("Start date/time cannot be in the past.");
+            $(this).val(formatDateForInput(currentTime));
+            startDate.setTime(currentTime.getTime()); // Update startDate to the corrected value
+        }
+        
+        // Calculate minimum end date (start date + 1 hour)
+        const minEndDate = new Date(startDate);
+        minEndDate.setHours(minEndDate.getHours() + 1);
+        
+        // Update end date min attribute
+        const formattedMinEnd = formatDateForInput(minEndDate);
+        $end.attr('min', formattedMinEnd);
+        
+        // Check if current end date is now invalid (less than min end date)
+        const endDate = new Date($end.val());
+        if (endDate < minEndDate) {
+            // Update end date to be valid (start + 1 hour)
+            $end.val(formattedMinEnd);
+        }
+    });
+    
+    // When end date changes
+    $end.on('change', function() {
+        const startDate = new Date($start.val());
+        const endDate = new Date($(this).val());
+        
+        // Calculate minimum valid end date (start + 1 hour)
+        const minEndDate = new Date(startDate);
+        minEndDate.setHours(minEndDate.getHours() + 1);
+        
+        // Check if end date is valid (at least 1 hour after start)
+        if (endDate < minEndDate) {
+            alert("End date/time must be at least 1 hour after the start date/time.");
+            $(this).val(formatDateForInput(minEndDate));
+        }
+    });
+}
+
+// Initialize date fields and attach validators
+setDateToToday();
+attachDateValidators();
 </script>
   </body>
 </html>

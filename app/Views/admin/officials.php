@@ -644,7 +644,15 @@ getSuffixesSelect();
       // Initialize DataTable
       $("#example").DataTable();
     });
+    function setDateToToday() {
+        const today = new Date().toISOString().split('T')[0];
 
+        $('input[type="date"]').each(function () {
+            $(this).val(today);
+            $(this).attr('min', today);
+        });
+    }
+    setDateToToday();
     </script>
   </body>
 </html>
