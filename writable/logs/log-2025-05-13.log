@@ -1817,3 +1817,198 @@ DEBUG - 2025-05-13 00:59:43 --> Fetched items: Array
 
 )
 
+DEBUG - 2025-05-13 08:06:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 08:06:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 08:06:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 08:06:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 08:06:46 --> Fetched items: Array
+(
+    [0] => Array
+        (
+            [id] => 1
+            [item_name] => Rice
+            [item_quantity] => 1
+            [item_description] => Sacks of rice
+            [status] => active
+            [created_at] => 2025-05-12 21:56:03
+            [updated_at] => 2025-05-13 00:54:44
+        )
+
+)
+
+DEBUG - 2025-05-13 08:07:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 08:07:45 --> Fetched items: Array
+(
+    [0] => Array
+        (
+            [id] => 1
+            [item_name] => Rice
+            [item_quantity] => 1
+            [item_description] => Sacks of rice
+            [status] => active
+            [created_at] => 2025-05-12 21:56:03
+            [updated_at] => 2025-05-13 00:54:44
+        )
+
+)
+
+DEBUG - 2025-05-13 08:07:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 08:08:01 --> Fetched items: Array
+(
+    [0] => Array
+        (
+            [id] => 1
+            [item_name] => Rice
+            [item_quantity] => 7
+            [item_description] => Sacks of rice
+            [status] => active
+            [created_at] => 2025-05-12 21:56:03
+            [updated_at] => 2025-05-13 08:07:58
+        )
+
+)
+
+DEBUG - 2025-05-13 08:08:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-05-13 08:09:49 --> mysqli_sql_exception: Unknown column 'complainant_signature' in 'field list' in C:\barangayInformationSystem\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\barangayInformationSystem\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `tb...', 0)
+#1 C:\barangayInformationSystem\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tb...')
+#2 C:\barangayInformationSystem\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tb...')
+#3 C:\barangayInformationSystem\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tb...', Array, false)
+#4 C:\barangayInformationSystem\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\barangayInformationSystem\system\BaseModel.php(839): CodeIgniter\Model->doInsert(Array)
+#6 C:\barangayInformationSystem\system\Model.php(800): CodeIgniter\BaseModel->insert(Array, false)
+#7 C:\barangayInformationSystem\system\BaseModel.php(750): CodeIgniter\Model->insert(Array, false)
+#8 C:\barangayInformationSystem\app\Controllers\AdminController.php(1815): CodeIgniter\BaseModel->save(Array)
+#9 C:\barangayInformationSystem\system\CodeIgniter.php(933): App\Controllers\AdminController->createComplaint()
+#10 C:\barangayInformationSystem\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#11 C:\barangayInformationSystem\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\barangayInformationSystem\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#13 C:\barangayInformationSystem\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#14 C:\barangayInformationSystem\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#15 C:\barangayInformationSystem\system\rewrite.php(44): require_once('C:\\barangayInfo...')
+#16 {main}
+CRITICAL - 2025-05-13 08:09:49 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'complainant_signature' in 'field list'
+[Method: POST, Route: admin/create-complaint]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_complaint` (`complainant_id`, `complainant_name`, `complain_against`, `complain_against_id`, `date`, `complain_title`, `complain_details`, `type_of_complaint`, `complainant_age`, `complainant_address`, `location_of_incident`, `barangay_action`, `complainant_signature`, `complainee_signature`, `status`, `created_at`, `updated_at`) VALUES (:complainant_id:, :complainant_name:, :complain_against:, :complain_against_id:, :date:, :complain_title:, :complain_details:, :type_of_complaint:, :complainant_age:, :complainant_address:, :location_of_incident:, :barangay_action:, :complainant_signature:, :complainee_signature:, :status:, :created_at:, :updated_at:)', [...], false)
+ 2 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], false)
+ 5 SYSTEMPATH\BaseModel.php(750): CodeIgniter\Model->insert([...], false)
+ 6 APPPATH\Controllers\AdminController.php(1815): CodeIgniter\BaseModel->save([...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->createComplaint()
+ 8 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 9 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+13 SYSTEMPATH\rewrite.php(44): require_once('C:\\barangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-05-13 08:09:49 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'complainant_signature' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tbl_complaint` (`complainant_id`, `complainant_name`, `complain_against`, `complain_against_id`, `date`, `complain_title`, `complain_details`, `type_of_complaint`, `complainant_age`, `complainant_address`, `location_of_incident`, `barangay_action`, `complainant_signature`, `complainee_signature`, `status`, `created_at`, `updated_at`) VALUES (NULL, \'Johhny\', \'Jane\', NULL, \'2025-05-13\', \'Noisy Construction\', \'Midnight land development\', \'blotter\', \'29\', \'Lipata Street\', \'Lipata Street\', \'Discuss\', \'1747094989_c96fa8349d51556f494c.png\', \'1747094989_b81fd539678df548d4d2.png\', 0, \'2025-05-13 08:09:49\', \'2025-05-13 08:09:49\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tbl_complaint` (`complainant_id`, `complainant_name`, `complain_against`, `complain_against_id`, `date`, `complain_title`, `complain_details`, `type_of_complaint`, `complainant_age`, `complainant_address`, `location_of_incident`, `barangay_action`, `complainant_signature`, `complainee_signature`, `status`, `created_at`, `updated_at`) VALUES (NULL, \'Johhny\', \'Jane\', NULL, \'2025-05-13\', \'Noisy Construction\', \'Midnight land development\', \'blotter\', \'29\', \'Lipata Street\', \'Lipata Street\', \'Discuss\', \'1747094989_c96fa8349d51556f494c.png\', \'1747094989_b81fd539678df548d4d2.png\', 0, \'2025-05-13 08:09:49\', \'2025-05-13 08:09:49\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_complaint` (`complainant_id`, `complainant_name`, `complain_against`, `complain_against_id`, `date`, `complain_title`, `complain_details`, `type_of_complaint`, `complainant_age`, `complainant_address`, `location_of_incident`, `barangay_action`, `complainant_signature`, `complainee_signature`, `status`, `created_at`, `updated_at`) VALUES (:complainant_id:, :complainant_name:, :complain_against:, :complain_against_id:, :date:, :complain_title:, :complain_details:, :type_of_complaint:, :complainant_age:, :complainant_address:, :location_of_incident:, :barangay_action:, :complainant_signature:, :complainee_signature:, :status:, :created_at:, :updated_at:)', [...], false)
+ 4 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], false)
+ 7 SYSTEMPATH\BaseModel.php(750): CodeIgniter\Model->insert([...], false)
+ 8 APPPATH\Controllers\AdminController.php(1815): CodeIgniter\BaseModel->save([...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->createComplaint()
+10 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+11 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+15 SYSTEMPATH\rewrite.php(44): require_once('C:\\barangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-05-13 08:09:49 --> [Caused by] mysqli_sql_exception: Unknown column 'complainant_signature' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `tbl_complaint` (`complainant_id`, `complainant_name`, `complain_against`, `complain_against_id`, `date`, `complain_title`, `complain_details`, `type_of_complaint`, `complainant_age`, `complainant_address`, `location_of_incident`, `barangay_action`, `complainant_signature`, `complainee_signature`, `status`, `created_at`, `updated_at`) VALUES (NULL, \'Johhny\', \'Jane\', NULL, \'2025-05-13\', \'Noisy Construction\', \'Midnight land development\', \'blotter\', \'29\', \'Lipata Street\', \'Lipata Street\', \'Discuss\', \'1747094989_c96fa8349d51556f494c.png\', \'1747094989_b81fd539678df548d4d2.png\', 0, \'2025-05-13 08:09:49\', \'2025-05-13 08:09:49\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tbl_complaint` (`complainant_id`, `complainant_name`, `complain_against`, `complain_against_id`, `date`, `complain_title`, `complain_details`, `type_of_complaint`, `complainant_age`, `complainant_address`, `location_of_incident`, `barangay_action`, `complainant_signature`, `complainee_signature`, `status`, `created_at`, `updated_at`) VALUES (NULL, \'Johhny\', \'Jane\', NULL, \'2025-05-13\', \'Noisy Construction\', \'Midnight land development\', \'blotter\', \'29\', \'Lipata Street\', \'Lipata Street\', \'Discuss\', \'1747094989_c96fa8349d51556f494c.png\', \'1747094989_b81fd539678df548d4d2.png\', 0, \'2025-05-13 08:09:49\', \'2025-05-13 08:09:49\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tbl_complaint` (`complainant_id`, `complainant_name`, `complain_against`, `complain_against_id`, `date`, `complain_title`, `complain_details`, `type_of_complaint`, `complainant_age`, `complainant_address`, `location_of_incident`, `barangay_action`, `complainant_signature`, `complainee_signature`, `status`, `created_at`, `updated_at`) VALUES (NULL, \'Johhny\', \'Jane\', NULL, \'2025-05-13\', \'Noisy Construction\', \'Midnight land development\', \'blotter\', \'29\', \'Lipata Street\', \'Lipata Street\', \'Discuss\', \'1747094989_c96fa8349d51556f494c.png\', \'1747094989_b81fd539678df548d4d2.png\', 0, \'2025-05-13 08:09:49\', \'2025-05-13 08:09:49\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_complaint` (`complainant_id`, `complainant_name`, `complain_against`, `complain_against_id`, `date`, `complain_title`, `complain_details`, `type_of_complaint`, `complainant_age`, `complainant_address`, `location_of_incident`, `barangay_action`, `complainant_signature`, `complainee_signature`, `status`, `created_at`, `updated_at`) VALUES (:complainant_id:, :complainant_name:, :complain_against:, :complain_against_id:, :date:, :complain_title:, :complain_details:, :type_of_complaint:, :complainant_age:, :complainant_address:, :location_of_incident:, :barangay_action:, :complainant_signature:, :complainee_signature:, :status:, :created_at:, :updated_at:)', [...], false)
+ 5 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], false)
+ 8 SYSTEMPATH\BaseModel.php(750): CodeIgniter\Model->insert([...], false)
+ 9 APPPATH\Controllers\AdminController.php(1815): CodeIgniter\BaseModel->save([...])
+10 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->createComplaint()
+11 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+12 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+14 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+15 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+16 SYSTEMPATH\rewrite.php(44): require_once('C:\\barangayInformationSystem\\public\\index.php')
+ERROR - 2025-05-13 08:09:58 --> mysqli_sql_exception: Unknown column 'complainant_signature' in 'field list' in C:\barangayInformationSystem\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\barangayInformationSystem\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `tb...', 0)
+#1 C:\barangayInformationSystem\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tb...')
+#2 C:\barangayInformationSystem\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tb...')
+#3 C:\barangayInformationSystem\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tb...', Array, false)
+#4 C:\barangayInformationSystem\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\barangayInformationSystem\system\BaseModel.php(839): CodeIgniter\Model->doInsert(Array)
+#6 C:\barangayInformationSystem\system\Model.php(800): CodeIgniter\BaseModel->insert(Array, false)
+#7 C:\barangayInformationSystem\system\BaseModel.php(750): CodeIgniter\Model->insert(Array, false)
+#8 C:\barangayInformationSystem\app\Controllers\AdminController.php(1815): CodeIgniter\BaseModel->save(Array)
+#9 C:\barangayInformationSystem\system\CodeIgniter.php(933): App\Controllers\AdminController->createComplaint()
+#10 C:\barangayInformationSystem\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#11 C:\barangayInformationSystem\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\barangayInformationSystem\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#13 C:\barangayInformationSystem\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#14 C:\barangayInformationSystem\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#15 C:\barangayInformationSystem\system\rewrite.php(44): require_once('C:\\barangayInfo...')
+#16 {main}
+CRITICAL - 2025-05-13 08:09:58 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'complainant_signature' in 'field list'
+[Method: POST, Route: admin/create-complaint]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_complaint` (`complainant_id`, `complainant_name`, `complain_against`, `complain_against_id`, `date`, `complain_title`, `complain_details`, `type_of_complaint`, `complainant_age`, `complainant_address`, `location_of_incident`, `barangay_action`, `complainant_signature`, `complainee_signature`, `status`, `created_at`, `updated_at`) VALUES (:complainant_id:, :complainant_name:, :complain_against:, :complain_against_id:, :date:, :complain_title:, :complain_details:, :type_of_complaint:, :complainant_age:, :complainant_address:, :location_of_incident:, :barangay_action:, :complainant_signature:, :complainee_signature:, :status:, :created_at:, :updated_at:)', [...], false)
+ 2 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], false)
+ 5 SYSTEMPATH\BaseModel.php(750): CodeIgniter\Model->insert([...], false)
+ 6 APPPATH\Controllers\AdminController.php(1815): CodeIgniter\BaseModel->save([...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->createComplaint()
+ 8 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 9 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+13 SYSTEMPATH\rewrite.php(44): require_once('C:\\barangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-05-13 08:09:58 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'complainant_signature' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tbl_complaint` (`complainant_id`, `complainant_name`, `complain_against`, `complain_against_id`, `date`, `complain_title`, `complain_details`, `type_of_complaint`, `complainant_age`, `complainant_address`, `location_of_incident`, `barangay_action`, `complainant_signature`, `complainee_signature`, `status`, `created_at`, `updated_at`) VALUES (NULL, \'\', \'\', NULL, \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', NULL, NULL, 0, \'2025-05-13 08:09:58\', \'2025-05-13 08:09:58\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tbl_complaint` (`complainant_id`, `complainant_name`, `complain_against`, `complain_against_id`, `date`, `complain_title`, `complain_details`, `type_of_complaint`, `complainant_age`, `complainant_address`, `location_of_incident`, `barangay_action`, `complainant_signature`, `complainee_signature`, `status`, `created_at`, `updated_at`) VALUES (NULL, \'\', \'\', NULL, \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', NULL, NULL, 0, \'2025-05-13 08:09:58\', \'2025-05-13 08:09:58\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_complaint` (`complainant_id`, `complainant_name`, `complain_against`, `complain_against_id`, `date`, `complain_title`, `complain_details`, `type_of_complaint`, `complainant_age`, `complainant_address`, `location_of_incident`, `barangay_action`, `complainant_signature`, `complainee_signature`, `status`, `created_at`, `updated_at`) VALUES (:complainant_id:, :complainant_name:, :complain_against:, :complain_against_id:, :date:, :complain_title:, :complain_details:, :type_of_complaint:, :complainant_age:, :complainant_address:, :location_of_incident:, :barangay_action:, :complainant_signature:, :complainee_signature:, :status:, :created_at:, :updated_at:)', [...], false)
+ 4 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], false)
+ 7 SYSTEMPATH\BaseModel.php(750): CodeIgniter\Model->insert([...], false)
+ 8 APPPATH\Controllers\AdminController.php(1815): CodeIgniter\BaseModel->save([...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->createComplaint()
+10 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+11 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+15 SYSTEMPATH\rewrite.php(44): require_once('C:\\barangayInformationSystem\\public\\index.php')
+CRITICAL - 2025-05-13 08:09:58 --> [Caused by] mysqli_sql_exception: Unknown column 'complainant_signature' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `tbl_complaint` (`complainant_id`, `complainant_name`, `complain_against`, `complain_against_id`, `date`, `complain_title`, `complain_details`, `type_of_complaint`, `complainant_age`, `complainant_address`, `location_of_incident`, `barangay_action`, `complainant_signature`, `complainee_signature`, `status`, `created_at`, `updated_at`) VALUES (NULL, \'\', \'\', NULL, \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', NULL, NULL, 0, \'2025-05-13 08:09:58\', \'2025-05-13 08:09:58\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tbl_complaint` (`complainant_id`, `complainant_name`, `complain_against`, `complain_against_id`, `date`, `complain_title`, `complain_details`, `type_of_complaint`, `complainant_age`, `complainant_address`, `location_of_incident`, `barangay_action`, `complainant_signature`, `complainee_signature`, `status`, `created_at`, `updated_at`) VALUES (NULL, \'\', \'\', NULL, \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', NULL, NULL, 0, \'2025-05-13 08:09:58\', \'2025-05-13 08:09:58\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tbl_complaint` (`complainant_id`, `complainant_name`, `complain_against`, `complain_against_id`, `date`, `complain_title`, `complain_details`, `type_of_complaint`, `complainant_age`, `complainant_address`, `location_of_incident`, `barangay_action`, `complainant_signature`, `complainee_signature`, `status`, `created_at`, `updated_at`) VALUES (NULL, \'\', \'\', NULL, \'\', \'\', \'\', \'\', \'\', \'\', \'\', \'\', NULL, NULL, 0, \'2025-05-13 08:09:58\', \'2025-05-13 08:09:58\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tbl_complaint` (`complainant_id`, `complainant_name`, `complain_against`, `complain_against_id`, `date`, `complain_title`, `complain_details`, `type_of_complaint`, `complainant_age`, `complainant_address`, `location_of_incident`, `barangay_action`, `complainant_signature`, `complainee_signature`, `status`, `created_at`, `updated_at`) VALUES (:complainant_id:, :complainant_name:, :complain_against:, :complain_against_id:, :date:, :complain_title:, :complain_details:, :type_of_complaint:, :complainant_age:, :complainant_address:, :location_of_incident:, :barangay_action:, :complainant_signature:, :complainee_signature:, :status:, :created_at:, :updated_at:)', [...], false)
+ 5 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], false)
+ 8 SYSTEMPATH\BaseModel.php(750): CodeIgniter\Model->insert([...], false)
+ 9 APPPATH\Controllers\AdminController.php(1815): CodeIgniter\BaseModel->save([...])
+10 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->createComplaint()
+11 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+12 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+14 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+15 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+16 SYSTEMPATH\rewrite.php(44): require_once('C:\\barangayInformationSystem\\public\\index.php')
+DEBUG - 2025-05-13 08:11:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 08:12:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 08:12:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

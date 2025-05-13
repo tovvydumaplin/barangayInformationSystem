@@ -2222,7 +2222,7 @@ $(document).ready(function () {
     $('.inventory__history__cons').addClass('d__none');
     $('.lendingTableHistory').addClass('d__none');
     $('.distribution__items').removeClass('d__none');
-
+loadDistributableItems();
   });
 
 
