@@ -2012,3 +2012,114 @@ in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
 DEBUG - 2025-05-13 08:11:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 DEBUG - 2025-05-13 08:12:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 DEBUG - 2025-05-13 08:12:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 08:14:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 08:15:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 08:15:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 08:15:26 --> Fetched items: Array
+(
+    [0] => Array
+        (
+            [id] => 1
+            [item_name] => Rice
+            [item_quantity] => 7
+            [item_description] => Sacks of rice
+            [status] => active
+            [created_at] => 2025-05-12 21:56:03
+            [updated_at] => 2025-05-13 08:07:58
+        )
+
+)
+
+DEBUG - 2025-05-13 08:15:43 --> Fetched items: Array
+(
+    [0] => Array
+        (
+            [id] => 1
+            [item_name] => Rice
+            [item_quantity] => 7
+            [item_description] => Sacks of rice
+            [status] => active
+            [created_at] => 2025-05-12 21:56:03
+            [updated_at] => 2025-05-13 08:07:58
+        )
+
+)
+
+DEBUG - 2025-05-13 08:15:59 --> Fetched items: Array
+(
+    [0] => Array
+        (
+            [id] => 1
+            [item_name] => Rice
+            [item_quantity] => 7
+            [item_description] => Sacks of rice
+            [status] => active
+            [created_at] => 2025-05-12 21:56:03
+            [updated_at] => 2025-05-13 08:07:58
+        )
+
+    [1] => Array
+        (
+            [id] => 2
+            [item_name] => Water
+            [item_quantity] => 99
+            [item_description] => 1 Gallon per quantity
+            [status] => active
+            [created_at] => 2025-05-13 08:15:56
+            [updated_at] => 2025-05-13 08:15:56
+        )
+
+)
+
+DEBUG - 2025-05-13 08:16:12 --> Fetched items: Array
+(
+    [0] => Array
+        (
+            [id] => 1
+            [item_name] => Rice
+            [item_quantity] => 7
+            [item_description] => Sacks of rice
+            [status] => active
+            [created_at] => 2025-05-12 21:56:03
+            [updated_at] => 2025-05-13 08:07:58
+        )
+
+    [1] => Array
+        (
+            [id] => 2
+            [item_name] => Water
+            [item_quantity] => 89
+            [item_description] => 1 Gallon per quantity
+            [status] => active
+            [created_at] => 2025-05-13 08:15:56
+            [updated_at] => 2025-05-13 08:16:12
+        )
+
+)
+
+DEBUG - 2025-05-13 08:27:07 --> Fetched items: Array
+(
+    [0] => Array
+        (
+            [id] => 1
+            [item_name] => Rice
+            [item_quantity] => 7
+            [item_description] => Sacks of rice
+            [status] => active
+            [created_at] => 2025-05-12 21:56:03
+            [updated_at] => 2025-05-13 08:07:58
+        )
+
+    [1] => Array
+        (
+            [id] => 2
+            [item_name] => Water
+            [item_quantity] => 89
+            [item_description] => 1 Gallon per quantity
+            [status] => active
+            [created_at] => 2025-05-13 08:15:56
+            [updated_at] => 2025-05-13 08:16:12
+        )
+
+)
+
