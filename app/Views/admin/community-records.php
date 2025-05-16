@@ -610,13 +610,14 @@
                   <p class="text-danger"></p>
                 </div>
                 <div class="input__box">
-                  <input
+                  <select
                     class="information__input"
                     value=""
                     placeholder="Enter relationship"
                     name="contact_relationship"
                     
-                  />
+                  >
+                  </select>
                   <span class="input__title"
                     >Relationship<span class="red__dot">*</span></span
                   >
@@ -1441,7 +1442,7 @@ const saveMemberLocally = function (e) {
         street: $("input[name='street']").val(),
         contact_name: $("input[name='contact_name']").val(),
         emergency_contact_no: $("input[name='emergency_contact_no']").val(),
-        contact_relationship: $("input[name='contact_relationship']").val(),
+        contact_relationship: $("select[name='contact_relationship']").val(),
         status: $("input[name='status']").val()
     };
 
@@ -2232,7 +2233,31 @@ const loadFilteredResidents = function(filter) {
     });
 };
 
-
+const getRelationshipSelect = function () {
+  $.ajax({
+    url: '/admin/get-relationship-select',
+    method: 'GET',
+    dataType: 'json',
+    success: function (response) {
+      if (response.status === 'success') {
+        const select = $('select[name="contact_relationship"]');
+        select.html(''); 
+        
+        select.append('<option value="">Select relationship</option>');
+        
+        response.data.forEach(function(item) {
+          select.append(`<option value="${item.relationship_title}">${item.relationship_title}</option>`);
+        });
+      } else {
+        alert(response.message || 'Failed to load relationships.');
+      }
+    },
+    error: function () {
+      alert('An error occurred while loading relationships.');
+    }
+  });
+};
+getRelationshipSelect();
 
 const loadNationality = function() {
     const nationalities = [

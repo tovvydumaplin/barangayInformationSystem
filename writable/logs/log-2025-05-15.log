@@ -1,0 +1,554 @@
+DEBUG - 2025-05-15 08:20:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 08:21:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 08:21:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 08:50:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 14:00:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 14:00:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 14:00:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 14:00:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 14:04:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 14:04:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 14:04:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 14:04:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 14:04:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 14:04:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 14:08:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 14:08:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 14:10:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 14:10:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 14:10:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 14:10:13 --> Fetched items: Array
+(
+    [0] => Array
+        (
+            [id] => 1
+            [item_name] => Rice
+            [item_quantity] => 7
+            [item_description] => Sacks of rice
+            [status] => active
+            [created_at] => 2025-05-12 21:56:03
+            [updated_at] => 2025-05-13 08:07:58
+        )
+
+    [1] => Array
+        (
+            [id] => 2
+            [item_name] => Water
+            [item_quantity] => 89
+            [item_description] => 1 Gallon per quantity
+            [status] => active
+            [created_at] => 2025-05-13 08:15:56
+            [updated_at] => 2025-05-13 08:16:12
+        )
+
+)
+
+DEBUG - 2025-05-15 14:10:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 14:10:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 14:10:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 14:10:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 14:16:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 14:16:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 14:17:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 14:17:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 14:18:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 14:19:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 14:50:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 14:51:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 14:52:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 14:56:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 15:00:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 15:00:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 15:03:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 15:07:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 15:07:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 15:10:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 15:11:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 15:21:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 15:21:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 15:21:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 15:21:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 15:21:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 15:30:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 15:30:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 15:30:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 15:31:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 15:31:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 15:31:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 15:32:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 15:32:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 15:32:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 15:32:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 15:40:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 15:41:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 15:43:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 15:43:18 --> Fetched items: Array
+(
+    [0] => Array
+        (
+            [id] => 1
+            [item_name] => Rice
+            [item_quantity] => 7
+            [item_description] => Sacks of rice
+            [status] => active
+            [created_at] => 2025-05-12 21:56:03
+            [updated_at] => 2025-05-13 08:07:58
+        )
+
+    [1] => Array
+        (
+            [id] => 2
+            [item_name] => Water
+            [item_quantity] => 89
+            [item_description] => 1 Gallon per quantity
+            [status] => active
+            [created_at] => 2025-05-13 08:15:56
+            [updated_at] => 2025-05-13 08:16:12
+        )
+
+)
+
+DEBUG - 2025-05-15 15:43:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 15:44:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 15:44:06 --> Received Data: Array
+(
+    [0] => Array
+        (
+            [firstname] => Janie
+            [lastname] => Doe
+            [middlename] => C
+            [suffix] => 
+            [contact_no] => 09323876554
+            [birthdate] => 2025-05-01
+            [birthplace] => Binan Laguna
+            [citizenship] => Filipino
+            [gender] => Male
+            [civil_status] => Single
+            [occupation] => Developer
+            [religion] => INC
+            [is_pwd] => 0
+            [is_voter_of_barangay] => 0
+            [is_family_head] => 1
+            [household_name] => Doe
+            [house_no] => 42
+            [street] => Parkway II
+            [contact_name] => Jane
+            [emergency_contact_no] => Doe
+            [contact_relationship] => 1
+            [status] => 1
+        )
+
+)
+
+DEBUG - 2025-05-15 15:44:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 15:44:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 15:45:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 15:46:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 15:46:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 15:46:51 --> Received Data: Array
+(
+    [0] => Array
+        (
+            [firstname] => Johnie
+            [lastname] => Doe
+            [middlename] => A
+            [suffix] => 
+            [contact_no] => 0999999999
+            [birthdate] => 2025-05-01
+            [birthplace] => Binan Laguna
+            [citizenship] => Filipino
+            [gender] => Male
+            [civil_status] => Single
+            [occupation] => Developer
+            [religion] => INC
+            [is_pwd] => 0
+            [is_voter_of_barangay] => 0
+            [is_family_head] => 0
+            [household_name] => Doe
+            [house_no] => 42
+            [street] => Parkway II
+            [contact_name] => Jane
+            [emergency_contact_no] => Doe
+            [contact_relationship] => Friend
+            [status] => 1
+        )
+
+)
+
+DEBUG - 2025-05-15 15:46:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 15:47:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 15:47:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 15:47:18 --> Fetched items: Array
+(
+    [0] => Array
+        (
+            [id] => 1
+            [item_name] => Rice
+            [item_quantity] => 7
+            [item_description] => Sacks of rice
+            [status] => active
+            [created_at] => 2025-05-12 21:56:03
+            [updated_at] => 2025-05-13 08:07:58
+        )
+
+    [1] => Array
+        (
+            [id] => 2
+            [item_name] => Water
+            [item_quantity] => 89
+            [item_description] => 1 Gallon per quantity
+            [status] => active
+            [created_at] => 2025-05-13 08:15:56
+            [updated_at] => 2025-05-13 08:16:12
+        )
+
+)
+
+DEBUG - 2025-05-15 15:47:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 16:20:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 16:20:10 --> Fetched items: Array
+(
+    [0] => Array
+        (
+            [id] => 1
+            [item_name] => Rice
+            [item_quantity] => 7
+            [item_description] => Sacks of rice
+            [status] => active
+            [created_at] => 2025-05-12 21:56:03
+            [updated_at] => 2025-05-13 08:07:58
+        )
+
+    [1] => Array
+        (
+            [id] => 2
+            [item_name] => Water
+            [item_quantity] => 89
+            [item_description] => 1 Gallon per quantity
+            [status] => active
+            [created_at] => 2025-05-13 08:15:56
+            [updated_at] => 2025-05-13 08:16:12
+        )
+
+)
+
+DEBUG - 2025-05-15 16:20:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 16:33:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 16:33:02 --> Fetched items: Array
+(
+    [0] => Array
+        (
+            [id] => 1
+            [item_name] => Rice
+            [item_quantity] => 7
+            [item_description] => Sacks of rice
+            [status] => active
+            [created_at] => 2025-05-12 21:56:03
+            [updated_at] => 2025-05-13 08:07:58
+        )
+
+    [1] => Array
+        (
+            [id] => 2
+            [item_name] => Water
+            [item_quantity] => 89
+            [item_description] => 1 Gallon per quantity
+            [status] => active
+            [created_at] => 2025-05-13 08:15:56
+            [updated_at] => 2025-05-13 08:16:12
+        )
+
+)
+
+DEBUG - 2025-05-15 16:35:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 16:35:25 --> Fetched items: Array
+(
+    [0] => Array
+        (
+            [id] => 1
+            [item_name] => Rice
+            [item_quantity] => 7
+            [item_description] => Sacks of rice
+            [status] => active
+            [created_at] => 2025-05-12 21:56:03
+            [updated_at] => 2025-05-13 08:07:58
+        )
+
+    [1] => Array
+        (
+            [id] => 2
+            [item_name] => Water
+            [item_quantity] => 89
+            [item_description] => 1 Gallon per quantity
+            [status] => active
+            [created_at] => 2025-05-13 08:15:56
+            [updated_at] => 2025-05-13 08:16:12
+        )
+
+)
+
+DEBUG - 2025-05-15 16:35:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 16:35:48 --> Fetched items: Array
+(
+    [0] => Array
+        (
+            [id] => 1
+            [item_name] => Rice
+            [item_quantity] => 7
+            [item_description] => Sacks of rice
+            [status] => active
+            [created_at] => 2025-05-12 21:56:03
+            [updated_at] => 2025-05-13 08:07:58
+        )
+
+    [1] => Array
+        (
+            [id] => 2
+            [item_name] => Water
+            [item_quantity] => 89
+            [item_description] => 1 Gallon per quantity
+            [status] => active
+            [created_at] => 2025-05-13 08:15:56
+            [updated_at] => 2025-05-13 08:16:12
+        )
+
+)
+
+DEBUG - 2025-05-15 16:36:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 16:36:36 --> Fetched items: Array
+(
+    [0] => Array
+        (
+            [id] => 1
+            [item_name] => Rice
+            [item_quantity] => 7
+            [item_description] => Sacks of rice
+            [status] => active
+            [created_at] => 2025-05-12 21:56:03
+            [updated_at] => 2025-05-13 08:07:58
+        )
+
+    [1] => Array
+        (
+            [id] => 2
+            [item_name] => Water
+            [item_quantity] => 89
+            [item_description] => 1 Gallon per quantity
+            [status] => active
+            [created_at] => 2025-05-13 08:15:56
+            [updated_at] => 2025-05-13 08:16:12
+        )
+
+)
+
+DEBUG - 2025-05-15 16:37:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 16:37:20 --> Fetched items: Array
+(
+    [0] => Array
+        (
+            [id] => 1
+            [item_name] => Rice
+            [item_quantity] => 7
+            [item_description] => Sacks of rice
+            [status] => active
+            [created_at] => 2025-05-12 21:56:03
+            [updated_at] => 2025-05-13 08:07:58
+        )
+
+    [1] => Array
+        (
+            [id] => 2
+            [item_name] => Water
+            [item_quantity] => 89
+            [item_description] => 1 Gallon per quantity
+            [status] => active
+            [created_at] => 2025-05-13 08:15:56
+            [updated_at] => 2025-05-13 08:16:12
+        )
+
+)
+
+DEBUG - 2025-05-15 16:37:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 16:38:00 --> Fetched items: Array
+(
+    [0] => Array
+        (
+            [id] => 1
+            [item_name] => Rice
+            [item_quantity] => 7
+            [item_description] => Sacks of rice
+            [status] => active
+            [created_at] => 2025-05-12 21:56:03
+            [updated_at] => 2025-05-13 08:07:58
+        )
+
+    [1] => Array
+        (
+            [id] => 2
+            [item_name] => Water
+            [item_quantity] => 89
+            [item_description] => 1 Gallon per quantity
+            [status] => active
+            [created_at] => 2025-05-13 08:15:56
+            [updated_at] => 2025-05-13 08:16:12
+        )
+
+)
+
+DEBUG - 2025-05-15 16:38:01 --> Fetched items: Array
+(
+    [0] => Array
+        (
+            [id] => 1
+            [item_name] => Rice
+            [item_quantity] => 7
+            [item_description] => Sacks of rice
+            [status] => active
+            [created_at] => 2025-05-12 21:56:03
+            [updated_at] => 2025-05-13 08:07:58
+        )
+
+    [1] => Array
+        (
+            [id] => 2
+            [item_name] => Water
+            [item_quantity] => 89
+            [item_description] => 1 Gallon per quantity
+            [status] => active
+            [created_at] => 2025-05-13 08:15:56
+            [updated_at] => 2025-05-13 08:16:12
+        )
+
+)
+
+DEBUG - 2025-05-15 16:38:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 16:38:51 --> Fetched items: Array
+(
+    [0] => Array
+        (
+            [id] => 1
+            [item_name] => Rice
+            [item_quantity] => 7
+            [item_description] => Sacks of rice
+            [status] => active
+            [created_at] => 2025-05-12 21:56:03
+            [updated_at] => 2025-05-13 08:07:58
+        )
+
+    [1] => Array
+        (
+            [id] => 2
+            [item_name] => Water
+            [item_quantity] => 89
+            [item_description] => 1 Gallon per quantity
+            [status] => active
+            [created_at] => 2025-05-13 08:15:56
+            [updated_at] => 2025-05-13 08:16:12
+        )
+
+)
+
+DEBUG - 2025-05-15 16:40:51 --> Fetched items: Array
+(
+    [0] => Array
+        (
+            [id] => 1
+            [item_name] => Rice
+            [item_quantity] => 7
+            [item_description] => Sacks of rice
+            [status] => active
+            [created_at] => 2025-05-12 21:56:03
+            [updated_at] => 2025-05-13 08:07:58
+        )
+
+    [1] => Array
+        (
+            [id] => 2
+            [item_name] => Water
+            [item_quantity] => 89
+            [item_description] => 1 Gallon per quantity
+            [status] => active
+            [created_at] => 2025-05-13 08:15:56
+            [updated_at] => 2025-05-13 08:16:12
+        )
+
+)
+
+DEBUG - 2025-05-15 16:40:54 --> Fetched items: Array
+(
+    [0] => Array
+        (
+            [id] => 1
+            [item_name] => Rice
+            [item_quantity] => 7
+            [item_description] => Sacks of rice
+            [status] => active
+            [created_at] => 2025-05-12 21:56:03
+            [updated_at] => 2025-05-13 08:07:58
+        )
+
+    [1] => Array
+        (
+            [id] => 2
+            [item_name] => Water
+            [item_quantity] => 89
+            [item_description] => 1 Gallon per quantity
+            [status] => active
+            [created_at] => 2025-05-13 08:15:56
+            [updated_at] => 2025-05-13 08:16:12
+        )
+
+)
+
+DEBUG - 2025-05-15 16:41:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 16:41:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 16:41:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 16:41:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 16:42:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 16:46:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 16:48:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 16:50:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 16:51:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 16:51:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 16:53:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 16:54:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 16:54:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 16:57:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 16:58:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 17:10:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 17:11:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 17:19:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 17:19:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 17:20:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 17:20:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 17:20:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 17:20:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 17:20:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 17:21:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 17:21:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 17:21:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 17:21:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 17:21:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 17:21:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 17:21:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 17:21:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 17:21:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 17:21:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 17:21:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 17:21:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 17:21:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 17:21:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 17:21:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 17:22:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 17:22:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 17:30:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 17:30:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 17:30:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 17:30:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 17:30:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 17:30:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 17:30:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 17:30:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 17:30:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 17:30:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 17:30:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

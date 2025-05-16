@@ -27,8 +27,9 @@
 }
 
 .modal {
-  max-width: 60rem;
-  min-width: 60rem;
+  max-width: 115rem;
+  min-width: 115rem;
+  height: auto;
 }
 
 .input__box__container {

@@ -1,5 +1,6 @@
 <?php
 namespace App\Controllers;
+use App\Models\RelationshipModel;
 use App\Models\UserModel; 
 use App\Models\EventModel; 
 use App\Models\ResidentModel; 
@@ -2792,6 +2793,7 @@ public function saveAction()
     $session = session();
     
     $fullname = $session->get('firstname') . ' ' . $session->get('lastname');
+    $role = $session->get('role');
     $token = $session->get('token');
 
     $model = new \App\Models\AuditModel();
@@ -2799,6 +2801,7 @@ public function saveAction()
     $data = [
         'action' => $action,
         'user' => $fullname,
+        'role' => $role,
         'date' => date('Y-m-d H:i:s'),
     ];
 
@@ -2844,6 +2847,125 @@ public function getResidentAnalytics()
 
     return $this->response->setJSON($data);
 }
+
+public function createRelationship()
+{
+    $relationshipName = trim($this->request->getPost('relationship'));
+
+    if (!$relationshipName) {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Relationship is required.'
+        ]);
+    }
+
+    $relationshipModel = new RelationshipModel();
+
+    $existing = $relationshipModel->where('relationship_title', $relationshipName)->first();
+
+    if ($existing) {
+        if ((int)$existing['status'] === 0) {
+            // Reactivate if previously deactivated
+            $relationshipModel->update($existing['id'], ['status' => 1]);
+
+            return $this->response->setJSON([
+                'status' => 'success',
+                'message' => 'Relationship restored successfully.'
+            ]);
+        }
+
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Relationship already exists.'
+        ]);
+    }
+
+    // Create new relationship
+    $relationshipModel->save([
+        'relationship_title' => $relationshipName,
+        'status' => 1
+    ]);
+
+    return $this->response->setJSON([
+        'status' => 'success',
+        'message' => 'Relationship created successfully.'
+    ]);
+}
+public function getRelationship()
+{
+    $relationshipModel = new RelationshipModel();
+
+    $relationship = $relationshipModel->where('status', 1)
+                                ->orderBy('relationship_title', 'ASC')
+                                ->findAll();
+
+    return $this->response->setJSON([
+        'status' => 'success',
+        'data' => $relationship
+    ]);
+}
+
+public function updateRelationship() 
+{
+    $id = $this->request->getPost('id');
+    $relationshipName = $this->request->getPost('relationship');
+
+    if (!$id || !$relationshipName) {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Both ID and Relationship are required.'
+        ]);
+    }
+
+    $relationshipModel = new RelationshipModel();
+
+    $exists = $relationshipModel->where('relationship_title', $relationshipName)
+                                ->where('id !=', $id)
+                                ->first();
+
+    if ($exists) {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Relationship already exists.'
+        ]);
+    }
+
+    $relationshipModel->update($id, ['relationship_title' => $relationshipName]);
+
+    return $this->response->setJSON([
+        'status' => 'success',
+        'message' => 'Relationship updated successfully.'
+    ]);
+}
+public function deleteRelationship()
+{
+    $id = $this->request->getPost('id');
+
+    if (!$id) {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Relationship ID is required.'
+        ]);
+    }
+
+    $relationshipModel = new \App\Models\RelationshipModel();
+
+    $relationship = $relationshipModel->find($id);
+    if (!$relationship) {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Relationship not found.'
+        ]);
+    }
+
+    $relationshipModel->update($id, ['status' => 0]);
+
+    return $this->response->setJSON([
+        'status' => 'success',
+        'message' => 'Relationship deleted successfully.'
+    ]);
+}
+
 
 public function createReligion()
 {
@@ -3232,6 +3354,60 @@ public function fetchDistributions()
                 ->findAll();
 
     return $this->response->setJSON($data);
+}
+public function generateDocNumber()
+{
+    $db = \Config\Database::connect();
+    $year = date('Y');
+
+    $builder = $db->table('tbl_audit');
+    $builder->selectCount('id', 'total');
+    $builder->groupStart()
+        ->like('action', 'Generated a Barangay Certificate')
+        ->orLike('action', 'Generated a Certification of Indigency')
+    ->groupEnd();
+    $builder->where("YEAR(created_at)", $year); 
+
+    $query = $builder->get()->getRow();
+    $nextCount = ($query->total ?? 0) + 1;
+
+    $formatted = str_pad($nextCount, 4, '0', STR_PAD_LEFT);
+    $documentNo = "$year-$formatted";
+
+    return $this->response->setJSON(['documentNo' => $documentNo]);
+}
+
+
+public function resetUserPw()
+{
+    $status = $this->request->getPost('status');
+    $token = $this->request->getPost('token');
+    $defaultPass = 'default123';
+    
+    // Hash the default password
+    $hashedPassword = password_hash($defaultPass, PASSWORD_DEFAULT);
+    
+    $userModel = new UserModel();
+    $update = $userModel->where('token', $token)->set('password', $hashedPassword)->update();
+    if ($update) {
+        return $this->response->setStatusCode(200)->setJSON(['success' => true, 'message' => 'Account Reactivated!']);
+    } else {
+        return $this->response->setStatusCode(500)->setJSON(['error' => 'Failed to update user status']);
+    }
+}
+
+public function getRelationshipSelect()
+{
+    $relationshipModel = new \App\Models\RelationshipModel();
+
+    $relationships = $relationshipModel->where('status', 1)
+                            ->orderBy('relationship_title', 'ASC')
+                            ->findAll();
+
+    return $this->response->setJSON([
+        'status' => 'success',
+        'data' => $relationships
+    ]);
 }
 
 

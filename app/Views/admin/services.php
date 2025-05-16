@@ -547,7 +547,7 @@ max-height: 82rem;
           <!-- Document No -->
           <tr>
               <td colspan="3" style="padding: 5px 10px; border-bottom: 1px solid #000;">
-                  <p style="margin: 0; font-size: 12px;">No: 2024-0215</p>
+                  <p id="documentNo" style="margin: 0; font-size: 12px;"></p>
               </td>
           </tr>
           <!-- Main Content -->
@@ -621,7 +621,7 @@ max-height: 82rem;
           <!-- Document No -->
           <tr>
               <td colspan="3" style="padding: 5px 10px; border-bottom: 1px solid #000;">
-                  <p style="margin: 0; font-size: 12px;">No: 2024-0520</p>
+                  <p id="documentNoCert" style="margin: 0; font-size: 12px;"></p>
               </td>
           </tr>
           <!-- Main Content -->
@@ -1020,6 +1020,31 @@ function generatePDF(elementId, filename) {
           $("#familyModal").hide();
         })
       });
+
+      function loadDocumentNo() {
+          $.ajax({
+              url: '/admin/generate-doc-number',
+              method: 'GET',
+              dataType: 'json',
+              success: function(data) {
+                  const documentNo = data.documentNo;
+                  $('#documentNo').text(`No: ${documentNo}`);
+                  $('#documentNoCert').text(`No: ${documentNo}`);
+              },
+              error: function(xhr, status, error) {
+                  console.error('Error loading document number:', error);
+              }
+          });
+      }
+
+
+      $('#btnIndigency').on("click",function(){
+            loadDocumentNo();
+      })
+      $('#btnBarangayClearance').on("click",function(){
+            loadDocumentNo();
+      })
+      loadDocumentNo();
     </script>
   </body>
 </html>

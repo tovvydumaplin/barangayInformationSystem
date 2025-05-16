@@ -61,12 +61,12 @@
                 </div>
                     <div class="input__box__container">
                         <div class="input__box margin__bottom__2">
-                            <input class="information__input" placeholder="Enter Firstname" name="firstname" required />
+                            <input class="information__input" placeholder="Enter Firstname" name="firstname" required readonly/>
                             <span class="input__title">Firstname<span class="red__dot">*</span></span>
                             <p class="text-danger"></p>
                         </div>
                         <div class="input__box">
-                            <input class="information__input" placeholder="Enter Lastname" name="lastname" required />
+                            <input class="information__input" placeholder="Enter Lastname" name="lastname" required readonly/>
                             <span class="input__title">Lastname<span class="red__dot">*</span></span>
                             <p class="text-danger"></p>
                         </div>
@@ -75,7 +75,7 @@
 
                 <div class="row">
                     <div class="input__box">
-                        <input class="information__input" placeholder="Enter Middlename" name="middlename" required />
+                        <input class="information__input" placeholder="Enter Middlename" name="middlename" required readonly/>
                         <span class="input__title">Middlename</span>
                         <p class="text-danger"></p>
                     </div>

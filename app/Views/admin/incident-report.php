@@ -56,46 +56,58 @@
         </div>
         <form id="createComplainForm" class="modal__body community__modal" enctype="multipart/form-data">
           <div class="row flex__d__col">
-            <!-- 1 -->
-            <div class="input__box">
-                <select class="information__input" id="typeOfComplaint" name="type_of_complaint">
-                  <option value="">Select one</option>
-                  <option value="blotter">Blotter</option>
-                  <option value="complaint">Complaint</option>
-                </select>
-                <span class="input__title">Type of Concern<span class="red__dot">*</span></span>
-                <p class="text-danger"></p>
-            </div>
-      
-            <!-- 2 -->
             <div class="row">
-              <div class="input__box">
-                <input
-                  class="information__input"
-                  value=""
-                  placeholder="Enter fullname"
-                  name="complainant"
-                  
-                />
-                <span class="input__title"
-                  >Complainant<span class="red__dot">*</span></span
-                >
-                <p class="text-danger"></p>
-              </div>
               <!-- 1 -->
-              <div class="input__box blotter__input d__none">
-                <input
-                  class="information__input"
-                  value=""
-                  placeholder="Enter age"
-                  name="complainant_age"
-                />
-                <span class="input__title"
-                  >Complainant Age<span class="red__dot">*</span></span
-                >
-                <p class="text-danger"></p>
+              <div class="input__box">
+                  <select class="information__input" id="typeOfComplaint" name="type_of_complaint">
+                    <option value="">Select one</option>
+                    <option value="blotter">Blotter</option>
+                    <option value="complaint">Complaint</option>
+                  </select>
+                  <span class="input__title">Type of Concern<span class="red__dot">*</span></span>
+                  <p class="text-danger"></p>
               </div>
-            </div>
+              <!-- 2 -->
+                <div class="input__box">
+                  <input
+                    class="information__input"
+                    value=""
+                    placeholder="Enter fullname"
+                    name="complainant"
+                    
+                  />
+                  <span class="input__title"
+                    >Complainant<span class="red__dot">*</span></span
+                  >
+                  <p class="text-danger"></p>
+                </div>
+                <!-- 3 -->
+                <div class="input__box">
+                  <input
+                    class="information__input"
+                    value=""
+                    placeholder="Enter fullname"
+                    name="file_against"
+                  />
+                  <span class="input__title"
+                    >Complainee<span class="red__dot">*</span></span
+                  >
+                  <p class="text-danger"></p>
+                </div>
+                <!-- 4 -->
+                <div class="input__box blotter__input d__none">
+                  <input
+                    class="information__input"
+                    value=""
+                    placeholder="Enter age"
+                    name="complainant_age"
+                  />
+                  <span class="input__title"
+                    >Complainant Age<span class="red__dot">*</span></span
+                  >
+                  <p class="text-danger"></p>
+                </div>
+              </div>
             <!--  -->
             <div class="input__box blotter__input d__none">
               <input
@@ -109,18 +121,7 @@
               >
               <p class="text-danger"></p>
             </div>
-            <div class="input__box">
-              <input
-                class="information__input"
-                value=""
-                placeholder="Enter fullname"
-                name="file_against"
-              />
-              <span class="input__title"
-                >Complainee<span class="red__dot">*</span></span
-              >
-              <p class="text-danger"></p>
-            </div>
+
             <!-- 1 -->
             <div class="row">
               <div class="input__box">
@@ -149,27 +150,29 @@
                 >
                 <p class="text-danger"></p>
               </div>
+              <!-- 3 -->
+              <div class="input__box">
+                <input
+                  class="information__input"
+                  value=""
+                  placeholder="Enter suffix"
+                  name="complain_title"
+                  
+                />
+                <span class="input__title"
+                  >Complain Title<span class="red__dot">*</span></span
+                >
+                <p class="text-danger"></p>
+              </div>
             </div>
-            <div class="input__box">
-              <input
-                class="information__input"
-                value=""
-                placeholder="Enter suffix"
-                name="complain_title"
-                
-              />
-              <span class="input__title"
-                >Complain Title<span class="red__dot">*</span></span
-              >
-              <p class="text-danger"></p>
-            </div>
+
             <div class="input__box">
               <textarea
                 class="information__input"
                 value=""
                 placeholder="Enter details"
                 name="complaint_details"
-                style="height: 15rem;"></textarea>
+                style="height: 10rem;"></textarea>
               <span class="input__title"
                 >Complain Details<span class="red__dot">*</span></span
               >
@@ -188,50 +191,51 @@
               >
               <p class="text-danger"></p>
             </div>
+          <div class="row">
+            <!-- Complainant Signature -->
+              <div class="input__box">
+                <input
+                  type="file"
+                  name="complainant_signature"
+                  id="complainant_signature"
+                  accept="image/*"
+                  class="information__input"
+                />
+                <span class="input__title">Complainant Signature<span class="red__dot">*</span></span>
+                <p class="text-danger"></p>
 
-                      <!-- Complainant Signature -->
-          <div class="input__box">
-            <input
-              type="file"
-              name="complainant_signature"
-              id="complainant_signature"
-              accept="image/*"
-              class="information__input"
-            />
-            <span class="input__title">Complainant Signature<span class="red__dot">*</span></span>
-            <p class="text-danger"></p>
+                <div id="complainantSignaturePreviewContainer" style="margin-top: 1rem;">
+                  <img
+                    id="complainantSignaturePreview"
+                    src=""
+                    alt="Complainant Signature Preview"
+                    style="max-width: 10rem; height: auto; display: none;"
+                  />
+                </div>
+              </div>
 
-            <div id="complainantSignaturePreviewContainer" style="margin-top: 1rem;">
-              <img
-                id="complainantSignaturePreview"
-                src=""
-                alt="Complainant Signature Preview"
-                style="max-width: 10rem; height: auto; display: none;"
-              />
+            <!-- Complainee Signature -->
+              <div class="input__box">
+                <input
+                  type="file"
+                  name="complainee_signature"
+                  id="complainee_signature"
+                  accept="image/*"
+                  class="information__input"
+                />
+                <span class="input__title">Complainee Signature<span class="red__dot">*</span></span>
+                <p class="text-danger"></p>
+
+                <div id="complaineeSignaturePreviewContainer" style="margin-top: 1rem;">
+                  <img
+                    id="complaineeSignaturePreview"
+                    src=""
+                    alt="Complainee Signature Preview"
+                    style="max-width: 10rem; height: auto; display: none;"
+                  />
+                </div>
+              </div>
             </div>
-          </div>
-
-          <!-- Complainee Signature -->
-          <div class="input__box">
-            <input
-              type="file"
-              name="complainee_signature"
-              id="complainee_signature"
-              accept="image/*"
-              class="information__input"
-            />
-            <span class="input__title">Complainee Signature<span class="red__dot">*</span></span>
-            <p class="text-danger"></p>
-
-            <div id="complaineeSignaturePreviewContainer" style="margin-top: 1rem;">
-              <img
-                id="complaineeSignaturePreview"
-                src=""
-                alt="Complainee Signature Preview"
-                style="max-width: 10rem; height: auto; display: none;"
-              />
-            </div>
-          </div>
           </div>
           <div class="btn__box__modal">
 
@@ -250,14 +254,12 @@
           <div class="row flex__d__col">
             <!-- Type of Concern -->
              <input name="view_complaint_id" type="hidden"/>
-            <div class="input__box">
-              <input class="information__input" name="view_type_of_complaint" readonly />
-              <span class="input__title">Type of Concern<span class="red__dot">*</span></span>
-              <p class="text-danger"></p>
-            </div>
-
-            <!-- Complainant + Age -->
             <div class="row">
+              <div class="input__box">
+                <input class="information__input" name="view_type_of_complaint" readonly />
+                <span class="input__title">Type of Concern<span class="red__dot">*</span></span>
+                <p class="text-danger"></p>
+              </div>
               <div class="input__box">
                 <input class="information__input" name="view_complainant" readonly />
                 <span class="input__title">Complainant<span class="red__dot">*</span></span>
@@ -271,6 +273,7 @@
               </div>
             </div>
 
+          <div class="row">
             <!-- Complainant Address -->
             <div class="input__box blotter__input d__none">
               <input class="information__input" name="view_complainant_address" readonly />
@@ -284,7 +287,7 @@
               <span class="input__title">Complainee<span class="red__dot">*</span></span>
               <p class="text-danger"></p>
             </div>
-
+          </div>
             <!-- Date + Incident Location -->
             <div class="row">
               <div class="input__box">
@@ -309,7 +312,7 @@
 
             <!-- Complaint Details -->
             <div class="input__box">
-              <textarea class="information__input" name="view_complaint_details" readonly style="height: 15rem;"></textarea>
+              <textarea class="information__input" name="view_complaint_details" readonly style="height: 10rem;"></textarea>
               <span class="input__title">Complain Details<span class="red__dot">*</span></span>
               <p class="text-danger"></p>
             </div>

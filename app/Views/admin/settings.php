@@ -40,7 +40,7 @@
 
         overflow-y: scroll;
     }
-    .btn__create__religion, .btn__update__religion {
+    .btn__create__religion, .btn__update__religion, .btn__create__relationship, .btn__update__relationship {
       justify-content: center;
     }
   </style>
@@ -243,6 +243,70 @@
   </form>
 </div>
 
+<!-- Modal to create relationship -->
+      <div id="registerRelationshipModal" class="modal">
+        <div class="modal__header">
+          <p class="modal__heading">Create Relationship</p>
+          <p class="subtitle">Create relationship for formatting</p>
+        </div>
+        <form class="modal__body community__modal">
+          <div class="row flex__d__col">
+            <div class="row">
+              <div class="input__box">
+                <input
+                  id="relationship_create"
+                  class="information__input"
+                  value=""
+                  placeholder="Enter Relationship"
+                  name="relationship_create"
+                />
+                <span class="input__title"
+                  >Relationship<span class="red__dot">*</span></span
+                >
+                <p class="text-sub">Enter the Relationship.Examples: Spouse, Friend, etc.</p>
+              </div>
+            </div>
+          </div>
+          <div class="btn__box__modal">
+            <span class="btn__primary active btn__create__relationship"><i class="bi bi-check"></i>Create Relationship</span>
+          </div>
+        </form>
+      </div>
+<!-- Modal to update relationship -->
+<div id="viewRelationship" class="modal">
+  <div class="modal__header">
+    <p class="modal__heading">Edit Relationship</p>
+    <p class="subtitle">Edit relationship title for formatting</p>
+  </div>
+  <form class="modal__body community__modal">
+    <div class="row flex__d__col">
+      <div class="row">
+        <div class="input__box">
+          <input
+            id="relationshipEdit"
+            class="information__input"
+            value=""
+            placeholder="Enter relationship"
+            name="relationship_edit"
+          />
+          <span class="input__title">
+            Relationship<span class="red__dot">*</span>
+          </span>
+          <p class="text-sub">
+            Enter the Relationship. Examples: Father, Mother, Guardian, etc.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="btn__box__modal">
+      <span class="btn__primary active btn__update__relationship">
+        <i class="bi bi-check"></i>Update Relationship
+      </span>
+    </div>
+  </form>
+</div>
+
+<!-- End -->
       <div class="container">
         <div class="heading__box">
           <div class="tab__container">
@@ -303,7 +367,6 @@
               </div>
             </div>
             <!-- Variables for religion -->
-
             <div class="settings__card">
               <div class="settings__card__header">
                 <div class="settings__title__box">
@@ -321,6 +384,24 @@
                 <!-- For each here -->
               </div>
             </div>
+            <!-- Variables for relationship -->
+            <div class="settings__card">
+              <div class="settings__card__header">
+                <div class="settings__title__box">
+                  <p class="settings__title">Existing Relationship</p>
+                  <p class="settings__subtitle">Manage available relationship</p>
+                </div>
+                <div class="settings__btn__box">
+                  <button class="btn__secondary active btn__add__relationship">
+                    <i class="bi bi-plus"></i>
+                    Add Relationship
+                  </button>
+                </div>
+              </div>
+              <div class="settings__item__box relationship__list">
+                <!-- For each here -->
+              </div>
+            </div>
           </div>
         </div>
         <!-- Lending Item Tab -->
@@ -331,6 +412,7 @@
               <th>ID</th>
               <th>Action</th>
               <th>Fullname</th>
+              <th>Role</th>
               <th>Date</th>
             </tr>
           </thead>
@@ -473,6 +555,7 @@ const loadAuditTrail = function () {
             { data: 'id' },
             { data: 'action' },
             { data: 'user' },
+            { data: 'role' },
             { data: 'created_at' }
         ],
         order: [[0, 'desc']]
@@ -594,7 +677,7 @@ $('#backupBtn').on('click', function () {
     saveActionDb("Database Backup");
 });
 $('.restore__db__btn').on('click', function (e) {
-        $('#restore-form').submit(); // updated to match the correct ID
+    $('#restore-form').submit(); // updated to match the correct ID
 });
 $('#backup-file').on("change", function(){
   $('.restore__db__btn').removeAttr('disabled');
@@ -1045,15 +1128,16 @@ const createReligion = function () {
 $(document).on("click", ".btn__create__religion", createReligion);
 
 $(document).on('click', '.btn__edit__religion', function () {
-  const id = $(this).data('id');
-  const religion = $(this).data('religion');
+    const id = $(this).data('id');
+    const religion = $(this).data('religion');
 
-  $('#religionEdit').val(religion);
-$(".wrapper").addClass("open");
-  $('#viewReligion').data('religion-id', id);
+    $('#religionEdit').val(religion);
+    $(".wrapper").addClass("open");
+    $('#viewReligion').data('religion-id', id);
 
-  $('#viewReligion').addClass('open');
+    $('#viewReligion').addClass('open');
 });
+
 
 
 // Edit religion
@@ -1087,6 +1171,7 @@ $(document).on('click', '.btn__update__religion', function () {
     }
   });
 });
+
 $(document).on('click', '.btn__delete__religion', function () {
   const id = $(this).data('id');
 
@@ -1111,6 +1196,144 @@ $(document).on('click', '.btn__delete__religion', function () {
 });
 
 
+
+// View relationship
+$(document).on('click', '.btn__edit__relationship', function () {
+  const id = $(this).data('id');
+  const relationship = $(this).data('relationship');
+
+  $('#relationshipEdit').val(relationship);
+  $(".wrapper").addClass("open");
+  $('#viewRelationship').data('relationship-id', id);
+
+  $('#viewRelationship').addClass('open');
+});
+
+// Edit relationship
+$(document).on('click', '.btn__update__relationship', function () {
+  const id = $('#viewRelationship').data('relationship-id');
+  const updatedRelationship = $('#relationshipEdit').val().trim();
+
+  if (!updatedRelationship) {
+    alert("Relationship is required.");
+    return;
+  }
+
+  $.ajax({
+    url: '/admin/update-relationship',
+    method: 'POST',
+    data: {
+      id: id,
+      relationship: updatedRelationship
+    },
+    dataType: 'json',
+    success: function (response) {
+      saveAction("Updated a relationship");
+
+      if (response.status === 'success') {
+        alert(response.message);
+        $('#viewRelationship').removeClass('show');
+        loadRelationship();
+      } else {
+        alert(response.message || 'Something went wrong.');
+      }
+    }
+  });
+});
+
+$(document).on('click', '.btn__delete__relationship', function () {
+  const id = $(this).data('id');
+
+  if (!confirm("Are you sure you want to delete this relationship?")) return;
+
+  $.ajax({
+    url: '/admin/delete-relationship',
+    method: 'POST',
+    data: { id },
+    dataType: 'json',
+    success: function (response) {
+      saveAction("Deleted a relationship");
+
+      if (response.status === 'success') {
+        alert(response.message);
+        loadRelationship();
+      } else {
+        alert(response.message || 'Something went wrong.');
+      }
+    }
+  });
+});
+
+// Relationship
+
+const createRelationship = function () {
+  const relationship = $("#relationship_create").val().trim();
+
+  if (!relationship) {
+    alert("Relationship is required.");
+    return;
+  }
+
+  $.ajax({
+    url: '/admin/create-relationship',
+    method: 'POST',
+    data: { relationship },
+    dataType: 'json',
+    success: function (response) {
+      saveAction(`Created a new relationship - ${relationship}`);
+      if (response.status === 'success') {
+        $("#registerRelationshipModal").removeClass("show");
+        alert(response.message);
+        $("#relationship_create").val("");
+      } else {
+        alert(response.message || "Something went wrong.");
+      }
+    },
+    complete: function () {
+      loadRelationship();
+    }
+  });
+};
+
+$('.btn__create__relationship').on("click",function(){
+  createRelationship();
+});
+
+const loadRelationship = function () {
+  $.ajax({
+    url: '/admin/get-relationship',
+    method: 'GET',
+    dataType: 'json',
+    success: function (response) {
+      if (response.status === 'success') {
+        const container = $('.relationship__list');
+        container.html(''); // Clear the container before re-rendering
+
+        response.data.forEach(function (item) {
+          const relationship = item.relationship_title;
+          const relationshipShort = relationship.substring(0, 3).toUpperCase();
+
+          const template = `
+            <div class="settings__item">
+              <div class="settings__item__name">
+                <p class="settings__indicator">${relationshipShort}</p>
+                <p class="settings__name" title="${relationship}">${relationship}</p>
+              </div>
+              <div class="settings__btn__box">
+                <i class="bi bi-pencil btn__edit__relationship" data-id="${item.id}" data-relationship="${relationship}"></i>
+                <i class="bi bi-trash red__icon__color btn__delete__relationship" data-id="${item.id}"></i>
+              </div>
+            </div>
+          `;
+
+          container.append(template);
+        });
+      }
+    }
+  });
+};
+loadRelationship();
+
     // Handle table buttons
     $(".table__button, .btn__add__item").on("click", function () {
       $(".wrapper").addClass("open");
@@ -1132,6 +1355,11 @@ $(document).on('click', '.btn__delete__religion', function () {
       $(".wrapper").addClass("open");
       $("#registerReligionModal").addClass("open");
     });
+    // For creating relationship
+    $(".btn__add__relationship").on("click", function () {
+      $(".wrapper").addClass("open");
+      $("#registerRelationshipModal").addClass("open");
+    });
 
 
     // Close on wrapper click or close button
@@ -1145,6 +1373,8 @@ $(document).on('click', '.btn__delete__religion', function () {
       $("#viewPositions").removeClass("open");
       $("#registerReligionModal").removeClass("open");
       $("#viewReligion").removeClass("open");
+      $("#registerRelationshipModal").removeClass("open");
+      $('#viewRelationship').removeClass('open');
 
     });
 

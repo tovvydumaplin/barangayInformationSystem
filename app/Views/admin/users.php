@@ -130,6 +130,13 @@
             margin-top: 0.7rem;
         }
 
+        .reset__password{
+            border: none;
+            padding: 0;
+            color: #f73a3a;
+            font-weight: 600;
+        }
+
         /* 1536 px */
           @media (max-width: 96em) {
             html {
@@ -361,6 +368,14 @@
                         <span class="input__title">Password</span>
                     </div> -->
                 </div>
+
+                <!-- RESET PW -->
+                <div class="row">
+                    <!-- Hidden input to store the token -->
+                    <div class="input__box">
+                        <button id="resetPasswordBtn" type="button" class="btn__secondary__close reset__password">Reset Password</button>
+                    </div>
+                </div>
                 <div class="btn__box__modal">
                     <button type="button" class="btn__secondary__close active closeModalBtn">Close</button>
                 </div>
@@ -467,11 +482,6 @@ const viewUser = function(token) {
       console.error("Token is missing!");
       return;
   }
-
-
-
-
-
   $.ajax({
       url: "<?= site_url('/admin/get-user') ?>",
       type: "GET",
@@ -767,6 +777,46 @@ const createUser = function(e) {
 $(document).ready(function () {
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~ ⚡ Event Listeners ⚡ ~~~~~~~~~~~~~~~~~~~~~~~~ //
+
+
+    $("#resetPasswordBtn").on('click', function() {
+        let status = 1; 
+        let token = $("#viewEventModal").data("token");
+
+        if (!token) {
+            alert("Error: Token is missing!");
+            return;
+        }
+
+        $.ajax({
+            url: "<?= site_url('/admin/reset-user-pw') ?>", // Using the same API
+            type: "POST",
+            data: {
+                status: status,
+                token: token
+            },
+            dataType: "json", 
+            success: function(response) {
+                if (response.success) {
+                    loadData(); 
+                    $(".success__indicator").removeClass("hide");
+                    $(".indicator__text").html('Password has been reset to default123!');
+                    setTimeout(function () {
+                        $(".success__indicator").addClass("hide");
+                    }, 3000);
+                    hideModal(); 
+                } else {
+                    alert("Error: " + response.message);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error("Reactivation Error:", error);
+                alert("Failed to reactivate user.");
+            }
+        });
+    });
+
+
 $('.btn__create__account').on('click', function(){
     openValidator();
 });
@@ -782,6 +832,7 @@ $(document).on("click", ".btn__secondary__edit", function () {        // Update 
 });
 $(document).on("click", ".viewUserBtn", function () {                 // View User
     let token = $(this).data("token");
+    $("#resetToken").val(token);
     viewUser(token);
 });
 $(".menu__icon").on("click", function () {                            // Toggle sidebar 
@@ -917,6 +968,13 @@ $passwordInput.on('input', function () {
 
 
 });
+
+
+
+
+
+
+
 
 
 </script>

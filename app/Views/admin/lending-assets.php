@@ -434,14 +434,12 @@
                       <p class="text-danger"></p>
                     </div>
                   </div>
-                  <div class="row">                      
+                  <div class="row custom__flex">                      
                     <div class="input__box">
                       <input id="borrowDate" class="information__input" value="" placeholder="Enter quantity" name="borrowDate" type="date" />
                       <span class="input__title">Borrow Date<span class="red__dot">*</span></span>
                       <p class="text-danger"></p>
                     </div>
-                  </div>
-                  <div class="row">                      
                     <div class="input__box">
                       <input id="returnDate" class="information__input" value="" placeholder="Enter quantity" name="returnDate" type="date" />
                       <span class="input__title">Return Date<span class="red__dot">*</span></span>
@@ -505,15 +503,13 @@
                         <p class="text-danger"></p>
                     </div>
                 </div>
-                <div class="row">                      
+                <div class="row custom__flex">                      
                     <div class="input__box">
                         <input id="viewDateBorrowed" class="information__input" value="" placeholder="Enter quantity" name="lendDate" />
                         <span class="input__title">Date Borrowed<span class="red__dot">*</span></span>
                         <p class="text-danger"></p>
                     </div>
-                </div>
-                <div class="row">                      
-                    <div class="input__box">
+                      <div class="input__box">
                         <input id="viewDateReturn" class="information__input" value="" placeholder="Enter quantity" name="lendDateReturn" />
                         <span class="input__title">Date of Return<span class="red__dot">*</span></span>
                         <p class="text-danger"></p>

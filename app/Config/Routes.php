@@ -180,6 +180,11 @@ $routes->post('/admin/create-religion', 'AdminController::createReligion');
 $routes->get('/admin/get-religions', 'AdminController::getReligions');
 $routes->post('/admin/update-religion', 'AdminController::updateReligion');
 $routes->post('/admin/delete-religion', 'AdminController::deleteReligion');
+// Variables for relationships
+$routes->post('/admin/create-relationship', 'AdminController::createRelationship');
+$routes->get('/admin/get-relationship', 'AdminController::getRelationship');
+$routes->post('/admin/update-relationship', 'AdminController::updateRelationship');
+$routes->post('/admin/delete-relationship', 'AdminController::deleteRelationship');
 // For select elements
 $routes->get('/admin/get-religions', 'AdminController::getReligionsSelect');
 // For Positions
@@ -198,3 +203,10 @@ $routes->get('admin/fetch-consumables', 'AdminController::fetchConsumables');
 $routes->get('/admin/fetch-distributions', 'AdminController::fetchDistributions');
 $routes->get('admin/fetch-distributions', 'AdminController::fetchDistributions');
 
+$routes->get('admin/generate-doc-number', 'AdminController::generateDocNumber');
+$routes->post('admin/reset-password-via-admin', 'AdminController::resetPassword');
+
+$routes->post('admin/reset-password-via-admin', 'AdminController::resetPasswordViaAdmin');
+$routes->post('/admin/reset-user-pw','AdminController::resetUserPw');
+
+$routes->get('admin/get-relationship-select', 'AdminController::getRelationshipSelect');
